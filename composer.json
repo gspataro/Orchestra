@@ -1,6 +1,6 @@
 {
-    "name": "gspataro/solista",
-    "description": "Static website builder",
+    "name": "gspataro/orchestra",
+    "description": "The framework behind Solista",
     "license": "MIT",
     "authors": [
         {
