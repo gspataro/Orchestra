@@ -1,9 +1,0 @@
-services:
-  web:
-    build:
-        dockerfile: Dockerfile
-    hostname: gspataro.test
-    ports:
-      - "8080:80"
-    volumes:
-      - ./output:/var/www/html

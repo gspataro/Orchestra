@@ -2,10 +2,10 @@
 <?php
 
 /**
- * Personal Portfolio
+ * Solista - Static website builder
  *
  * @author Giuseppe Spataro <https://github.com/gspataro>
- * @version 2.2.0
+ * @version 1.0.0
  */
 
 require_once __DIR__ . "/source/bootstrap.php";
