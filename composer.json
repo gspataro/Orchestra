@@ -2,9 +2,6 @@
     "name": "gspataro/solista",
     "description": "Static website builder",
     "license": "MIT",
-    "config": {
-        "vendor-dir": "source/vendor"
-    },
     "authors": [
         {
             "name": "Giuseppe Spataro",
@@ -29,8 +26,5 @@
             "GSpataro\\Application\\": "source/application"
         },
         "files": ["source/functions.php"]
-    },
-    "scripts": {
-        "build": "npm run build && ./gspataro.php build"
     }
 }

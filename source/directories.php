@@ -16,7 +16,7 @@ define("DIR_SOURCE", DIR_ROOT . "/source");
  * Third party: /source/vendor
  */
 
-define("DIR_VENDOR", DIR_SOURCE . "/vendor");
+define("DIR_VENDOR", DIR_ROOT . "/vendor");
 
 /**
  * Output dir: /output
