@@ -1,0 +1,38 @@
+{%set page = {
+    'title': project.frontmatter.name,
+    'layout': {
+        'contain': true,
+        'breadcrumb': {
+            'index': 'Home',
+            'projects.page-1': 'Progetti',
+            '': project.frontmatter.name
+        }
+    },
+    'meta': {
+        'description': project.frontmatter.description,
+        'keywords': project.frontmatter.keywords
+    }
+}%}
+{%extends "./layout/default.html"%}
+{%block main%}
+    {%set category%}
+        <span class="inline px-3xs border border-thunder-darkest rounded-full font-normal lowercase">
+            {{project_cats[project.frontmatter.category].label ?? project.frontmatter.category}}
+        </span>
+    {%endset%}
+    <article class="max-w-[800px] mx-auto">
+        <header class="mb-lg tablet-v:w-2/3 tablet-h:w-1/2">
+            <div class="flex items-center mb-md">
+                <h1 class="flex-1">{{project.frontmatter.name}}</h1>
+            </div>
+            {%include './components/post/meta.html' with {'meta': {
+                "Cliente": project.frontmatter.client,
+                "Servizi": project.frontmatter.services,
+                "Categoria": category
+            }} only%}
+        </header>
+        <div class="prose">
+            {{include(template_from_string(project.content))}}
+        </div>
+    </article>
+{%endblock%}

@@ -1,0 +1,67 @@
+{%from './components/icon.html' import icon%}
+<div class="swiper slider-blog {{class}}">
+    <div class="flex items-center mb-sm">
+        <{{title_tag ?? 'h2'}}>
+            {{title}}
+        </{{title_tag ?? 'h2'}}>
+        <div class="flex-1"></div>
+        <div class="flex gap-3xs">
+            <button class="
+                swiper-button-prev
+                inline-flex
+                justify-center
+                items-center
+                w-11
+                h-11
+                border-thunder-darkest
+                border-2
+                rounded-full
+                transition-all
+                duration-300
+                hover:bg-thunder-darkest
+                hover:text-ivory-lightest
+                disabled:opacity-60
+                disabled:hover:bg-transparent
+                disabled:hover:text-thunder-darkest
+                group-data-[style=fortepiano]/body:border-ivory-lightest
+                group-data-[style=fortepiano]/body:hover:bg-ivory-lightest
+                group-data-[style=fortepiano]/body:hover:text-thunder-darkest
+                group-data-[style=fortepiano]/body:disabled:hover:text-ivory-lightest">
+                {{icon('arrow-left', label: 'Slide successiva')}}
+            </button>
+            <button class="
+                swiper-button-next
+                inline-flex
+                justify-center
+                items-center
+                w-11
+                h-11
+                border-thunder-darkest
+                border-2
+                rounded-full
+                transition-all
+                duration-300
+                hover:bg-thunder-darkest
+                hover:text-ivory-lightest
+                disabled:opacity-60
+                disabled:hover:bg-transparent
+                disabled:hover:text-thunder-darkest
+                group-data-[style=fortepiano]/body:border-ivory-lightest
+                group-data-[style=fortepiano]/body:hover:bg-ivory-lightest
+                group-data-[style=fortepiano]/body:hover:text-thunder-darkest
+                group-data-[style=fortepiano]/body:disabled:hover:text-ivory-lightest">
+                {{icon('arrow-right', label: 'Slide precedente')}}
+            </button>
+        </div>
+    </div>
+    <div class="swiper-wrapper">
+        {%for id, article in articles%}
+            {%include './components/article/card.html' with {
+                'id': id,
+                'article': article,
+                'articles_cats': articles_cats,
+                'class': 'swiper-slide'
+            } only%}
+        {%endfor%}
+    </div>
+</div>

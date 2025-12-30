@@ -1,0 +1,37 @@
+<div class="{{class}} group/experiences" id="experiences">
+    <{{title_tag ?? 'h2'}} class="leading-none mb-md">
+        Eventi preferiti
+    </{{title_tag ?? 'h2'}}>
+    {%for year, events in experiences%}
+        <div class="
+            grid
+            grid-cols-[auto_1fr]
+            mb-lg
+            gap-sm
+            items-start
+            last-of-type:mb-0
+            {%if loop.index > 2%}hidden{%endif%}
+            group-data-expanded/experiences:grid">
+            <h3 class="writing-v-lr rotate-180">{{year}}</h3>
+            <div class="grid gap-sm grid-cols-1 tablet-v:grid-cols-2 tablet-h:grid-cols-3">
+                {%for event in events%}
+                    <div>
+                        <h4 class="text-h6 mb-5xs">{{event.name}}</h4>
+                        <div class="mb-4xs">{{event.location|raw}}</div>
+                        <div class="text-thunder-lightest">{{event.description}}</div>
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+    {%endfor%}
+    <div>
+        <a href="#" class="cta cta-expand group-data-expanded/experiences:after:-rotate-90" id="experiences-more">
+            <span class="group-data-expanded/experiences:hidden">
+                Vedi di più
+            </span>
+            <span class="hidden group-data-expanded/experiences:inline">
+                Vedi di meno
+            </span>
+        </a>
+    </div>
+</div>

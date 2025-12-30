@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        {%include './components/head.html'%}
+    </head>
+
+    <body class="bg-thunder-darkest text-ivory-lightest">
+        <header class="
+            h-(--header-height)
+            sticky
+            top-0
+            left-0
+            right-0
+            z-40
+            bg-thunder-darkest">
+            <div class="flex items-center container h-full">
+                <a href="{{url('index')}}" class="text-ivory-lightest">
+                    {%include './components/logo.html' with {
+                        'width': 211,
+                        'height': 26,
+                        'attributes': {
+                            'class': 'h-[--spacing(6.5)] w-auto pointer-events-none tablet-v:h-7'
+                        }
+                    }%}
+                </a>
+            </div>
+        </header>
+        <main class="py-3xl">
+            <div class="container prose">
+                <div class="mb-4xl tablet-h:w-2/3">
+                    <h1>
+                        Benvenuto nella mia batcaverna!
+                    </h1>
+                    <p>
+                        In questa sezione voglio presentarti alcuni aspetti di me e
+                        di questo sito non proprio in ordine. Esprimerò di seguito alcuni concetti casuali.
+                    </p>
+                    <p>
+                        Pronto per una sorta di "sputo fatti"?
+                    </p>
+                </div>
+                <div class="mb-4xl tablet-h:w-2/3 tablet-h:ml-auto">
+                    <h2>
+                        La privacy prima di tutto
+                    </h2>
+                    <p>
+                        Come indicato nel footer, questo sito non fa uso di cookies o sistemi di tracciamento.
+                        Per analizzare il traffico faccio uso di <a href="https://www.simpleanalytics.com/" target="_blank">simpleanalytics</a>, un servizio
+                        che non traccia l'utente e mi fornisce solo alcune informazioni sul numero di visitatori in forma totalmente anonima.
+                    </p>
+                    <p>
+                        Credo che il web dovrebbe essere un posto più libero, dove l'utente può navigare senza che nessuno
+                        conosca la sua cronologia all'infuori di lui. Per questo ho deciso di rinunciare al potenziale del marketing
+                        delle grandi piattaforme in favore di più privacy.
+                    </p>
+                </div>
+                <div class="mb-4xl tablet-h:w-2/3">
+                    <h2>
+                        Ho costruito questo sito web da solo
+                    </h2>
+                    <p>
+                        Come ho scritto nella sezione <a href="{{url('about')}}">chi sono</a>, nel tempo libero sono uno sviluppatore web.
+                        In realtà ho anche lavorato come sviluppatore per qualche anno, questo mi ha permesso di apprendere tante cose,
+                        e sono felice di aver avuto quest'opportunità.
+                    </p>
+                    <p>
+                        Ho provato inizialmente a conciliare le attività di musicista e sviluppatore, tuttavia il tempo scarseggia
+                        e penso di avere una missione da portare avanti come musicista. Non dispiace però l'idea di creare qualche sito web
+                        di tanto in tanto per gli altri musicisti.
+                    </p>
+                </div>
+                <div class="mb-4xl tablet-h:w-2/3 tablet-h:ml-auto">
+                    <h2>Amo il cibo</h2>
+                    <p>
+                        Sembra la classica frase "mi piace mangiare", "sono una buona forchetta". È un po' vero, mi piace mangiare, ma amo anche cucinare.
+                        Ho questa sorta di fissazione per cui ogni piatto che cucino deve diventare quasi perfetto. E quindi mi cimento in pizze, hamburger,
+                        pasta cacio e pepe, scacce modicane e molto altro.
+                    </p>
+                    <p>
+                        Ti è venuta fame? Anche a me.
+                    </p>
+                </div>
+                <div class="tablet-h:w-2/3">
+                    <h2>Per ora è tutto</h2>
+                    <p>
+                        Magari in futuro espanderò questa sezione con altre informazioni che mi passano per la testa.
+                        Nel frattempo, perché non dai un'occhiata al resto del sito?
+                    </p>
+                    <p>
+                        <a href="{{url('index')}}" class="cta text-inherit">Vai alla home</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+        {%include './components/foot.html'%}
+    </body>
+</html>

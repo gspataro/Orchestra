@@ -1,0 +1,53 @@
+{%from './components/icon.html' import icon%}
+{%extends "./layout/default.html"%}
+{%block main%}
+        <div class="flex flex-col gap-sm mb-3xl tablet-v:flex-row tablet-v:gap-lg">
+            <figure aria-label="Foto di Giuseppe Spataro" class="max-w-[200px] mx-auto tablet-v:mx-[unset] tablet-v:max-w-[230px] tablet-v:w-1/3">
+                <img src="{{media('about-photo.jpg', 'thumbnail')}}" class="aspect-square object-top object-cover rounded-full border-thunder-darkest border-4" alt="Foto di Giuseppe Spataro" width="400" height="420">
+            </figure>
+            <div class="prose tablet-v:w-2/3 tablet-h:w-1/2">
+                <h1>
+                    Mi presento
+                </h1>
+                <p>
+                    Mi chiamo Giuseppe Spataro, sono un pianista, compositore e insegnante di pianoforte. Ho intrapreso lo studio dello strumento all'età di cinque anni, sviluppando fin da subito una forte dedizione per la musica, che mi ha condotto al conseguimento della laurea magistrale in pianoforte presso il conservatorio.
+                </p>
+            </div>
+        </div>
+        {%include './components/slider-services.html' with {
+            'title': 'Cosa faccio',
+            'class': 'mb-3xl'
+        }%}
+        <div class="prose mb-3xl tablet-h:w-2/3">
+            <h2>
+                Esperienze
+            </h2>
+            <p>
+                Nel corso della mia formazione ho partecipato a numerose masterclass con pianisti di rilievo internazionale, approfondendo repertori e approcci interpretativi. Ho preso parte a concorsi nazionali e ho maturato un'ampia esperienza concertistica, sia come solista che come pianista accompagnatore.
+            </p>
+            <p>
+                Negli ultimi anni ho affiancato all'attività performativa l'insegnamento strumentale e la composizione, dedicandomi in particolare alla creazione di contenuti musicali per il branding aziendale e la comunicazione sonora.
+            </p>
+        </div>
+        {%include './components/experiences.html' with {
+            'class': 'mb-3xl'
+        }%}
+        <div class="bg-brass-lightest flex flex-col-reverse gap-3xs p-sm rounded-3xl tablet-v:p-lg tablet-v:justify-between tablet-v:flex-row tablet-v:items-center">
+            <div class="prose tablet-v:w-2/3 tablet-h:w-1/2">
+                <h2>Side project</h2>
+                <p class="text-sm">
+                    Sono appassianato di tecnologia e da anni mi occupo di sviluppo web. Ho realizzato numerosi progetti e mi piace cimentarmi
+                    nell'apprendimento di nuovi concetti legati alla programmazione.
+                </p>
+                <a href="{{url('webdev@index')}}" class="cta text-inherit">
+                    Scopri di più
+                </a>
+            </div>
+            <div class="text-thunder-darkest/10">
+                {{icon('dev', 120, attributes: {
+                    'class': 'w-14 h-14 tablet-v:w-auto tablet-v:h-auto',
+                    'aria-hidden': 'true'
+                })}}
+            </div>
+        </div>
+{%endblock%}

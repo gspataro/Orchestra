@@ -1,0 +1,154 @@
+{%from './components/icon.html' import icon%}
+{%set keys = [
+    {
+        'name': 'C4',
+        'frequency': '261.63',
+        'shortcut': 'a',
+        'sharp': {
+            'name': 'C#4',
+            'frequency': '277.18',
+            'shortcut': 'w'
+        }
+    },
+    {
+        'name': 'D4',
+        'frequency': '293.66',
+        'shortcut': 's',
+        'sharp': {
+            'name': 'D#4',
+            'frequency': '311.13',
+            'shortcut': 'e'
+        }
+    },
+    {
+        'name': 'E4',
+        'frequency': '329.63',
+        'shortcut': 'd'
+    },
+    {
+        'name': 'F4',
+        'frequency': '349.23',
+        'shortcut': 'f',
+        'sharp': {
+            'name': 'F#4',
+            'frequency': '369.99',
+            'shortcut': 't'
+        }
+    },
+    {
+        'name': 'G4',
+        'frequency': '392.00',
+        'shortcut': 'g',
+        'sharp': {
+            'name': 'G#4',
+            'frequency': '415.30',
+            'shortcut': 'y'
+        }
+    },
+    {
+        'name': 'A4',
+        'frequency': '440.00',
+        'shortcut': 'h',
+        'sharp': {
+            'name': 'A#4',
+            'frequency': '466.16',
+            'shortcut': 'u'
+        }
+    },
+    {
+        'name': 'B4',
+        'frequency': '493.88',
+        'shortcut': 'j'
+    },
+    {
+        'name': 'C5',
+        'frequency': '523.26',
+        'shortcut': 'k'
+    }
+]%}
+<div class="flex-1 flex tablet-h:flex-col tablet-h:grow-0">
+    <!-- CONTROLS -->
+    <div class="
+        bg-thunder-darkest
+        flex
+        flex-col-reverse
+        items-center
+        justify-between
+        rounded-l-xl
+        px-2xs
+        py-sm
+        tablet-h:px-sm
+        tablet-h:py-2xs
+        tablet-h:rounded-bl-none
+        tablet-h:rounded-t-xl
+        tablet-h:flex-row">
+        <a href="#" id="keyboard-mute" class="group text-ivory-lightest" data-muted="true">
+            {{icon('volume', '26', label: 'Attiva audio pianoforte', attributes: {
+                'class': 'group-data-[muted=true]:hidden'
+            })}}
+            {{icon('mute', '26', label: 'Disattiva audio pianoforte', attributes: {
+                'class': 'group-data-[muted=false]:hidden'
+            })}}
+        </a>
+        <a href="#" id="hero-keyboard-close" class="text-ivory-lightest">
+            {{icon('close', '26', label: 'Chiudi pianoforte virtuale')}}
+        </a>
+    </div>
+    <!-- END CONTROLS -->
+    <div id="keyboard" class="
+        flex-1
+        flex
+        flex-col-reverse
+        select-none
+        tablet-h:flex-row
+        tablet-h:w-full
+        tablet-h:min-h-[450px]
+        laptop-sm:min-h-[550px]">
+        <!-- KEYS -->
+        {%for key in keys%}
+        <!-- WHITE KEY {{key.name}} -->
+        <div class="
+            flex-1
+            bg-ivory-lightest
+            border-ivory-dark
+            border-b
+            border-r
+            first:rounded-br-3xl
+            last:rounded-tr-3xl
+            last:border-t
+            relative
+            tablet-h:first:border-l
+            tablet-h:first:rounded-br-none
+            tablet-h:first:rounded-bl-2xl
+            tablet-h:last:rounded-tr-none
+            tablet-h:last:rounded-br-2xl
+            data-[pressed=true]:bg-ivory
+            key" data-name="{{key.name}}" data-frequency="{{key.frequency}}" data-shortcut="{{key.shortcut}}">
+            {%if key.sharp%}
+                <!-- BLACK KEY {{key.sharp.name}} -->
+                <div class="
+                    bg-thunder-dark
+                    rounded-r-lg
+                    w-2/3
+                    h-1/2
+                    absolute
+                    left-0
+                    -top-[calc(25%+0.5px)]
+                    z-10
+                    tablet-h:rounded-t-none
+                    tablet-h:rounded-b-lg
+                    tablet-h:w-1/2
+                    tablet-h:h-2/3
+                    tablet-h:top-0
+                    tablet-h:-right-[calc(25%+0.5px)]
+                    tablet-h:left-auto
+                    data-[pressed=true]:bg-thunder
+                    key" data-name="{{key.sharp.name}}" data-frequency="{{key.sharp.frequency}}" data-shortcut="{{key.sharp.shortcut}}"></div>
+                <!-- END BLACK KEY {{key.sharp.name}} -->
+            {%endif%}
+        </div>
+        <!-- END WHITE KEY {{key.name}} -->
+        {%endfor%}
+        <!-- END KEYS-->
+    </div>
+</div>

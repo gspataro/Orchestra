@@ -1,0 +1,17 @@
+{%macro icon(name, width = null, height = null, label = null, attributes = {})%}
+    {%set rawSvg = source('@assets/images/icons/' ~ name ~ '.svg')%}
+    {%set viewBox = rawSvg|preg_match('/viewBox="(.*?)"/')[1]%}
+    {%set innerSvg = rawSvg|preg_match('!<svg[^>]*>(.*?)</svg>!s')[1]%}
+    <svg
+        width="{{width ?? height ?? '24'}}"
+        height="{{height ?? width ?? '24'}}"
+        {%if label%}aria-label="{{label}}"{%endif%}
+        {%if attributes%}
+            {%for key, value in attributes%}
+                {{key}}="{{value}}"
+            {%endfor%}
+        {%endif%}
+        viewBox="{{viewBox}}">
+        {{innerSvg|raw}}
+    </svg>
+{%endmacro%}

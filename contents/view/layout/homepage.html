@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        {%include './components/head.html'%}
+    </head>
+
+    <body class="
+        group/body
+        overflow-y-auto
+        transition-colors
+        duration-200
+        data-[style=fortepiano]:bg-thunder-darkest
+        data-[style=fortepiano]:text-ivory-lightest" data-style="pianoforte">
+        <div id="main-wrapper" class="min-h-screen tablet-h:flex">
+            {%include './components/header.html' with {'class': 'w-screen tablet-h:col-start-1 tablet-h:row-span-2'}%}
+            <main id="main" class="flex items-start min-h-[calc(100vh-var(--header-height))] h-[inherit] snap-mandatory snap-x overflow-x-scroll overflow-y-hidden scrollbar-hide">
+                {%block main%}
+                {%endblock%}
+            </main>
+        </div>
+        {%include './components/footer.html'%}
+        {%include './components/foot.html'%}
+    </body>
+</html>

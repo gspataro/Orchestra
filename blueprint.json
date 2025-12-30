@@ -1,0 +1,139 @@
+{
+    "website": {
+        "name": "Giuseppe Spataro",
+        "description": "Giuseppe Spataro, pianista e compositore siciliano",
+        "author": "Giuseppe Spataro",
+        "keywords": "pianista, musicista, sicilia",
+        "email": "info@giuseppespataro.it",
+        "friendly_urls": true
+    },
+    "languages": ["it"],
+    "default_language": "it",
+    "contents": {
+        "articles": "markdown:articles/*.md",
+        "articles_cats": "json:articles_categories.json",
+        "projects": "markdown:projects/*.md",
+        "projects_cats": "json:projects_categories.json",
+        "webdev_projects": "markdown:webdev_projects/*.md",
+        "webdev_projects_cats": "json:webdev_projects_categories.json",
+        "services": "json:services.json",
+        "experiences": "json:experiences.json"
+    },
+    "schemas": {
+        "index": {
+            "contents": [
+                {
+                    "group": "articles",
+                    "limit": 5,
+                    "orderBy": "frontmatter.published",
+                    "order": "desc"
+                },
+                "articles_cats",
+                "services"
+            ],
+            "template": "index",
+            "builder": "simple",
+            "slug": "/index",
+            "generate": "once"
+        },
+        "404": {
+            "template": "404",
+            "builder": "simple",
+            "slug": "/404",
+            "generate": "once"
+        },
+        "darkside": {
+            "template": "darkside",
+            "builder": "simple",
+            "slug": "/darkside",
+            "generate": "once"
+        },
+        "webdev@index": {
+            "contents": [
+                {
+                    "group": "webdev_projects",
+                    "orderBy": "frontmatter.published",
+                    "order": "desc"
+                }
+            ],
+            "template": "webdev",
+            "builder": "simple",
+            "slug": "/webdev/index",
+            "generate": "once"
+        },
+        "about": {
+            "contents": [
+                "services",
+                "experiences"
+            ],
+            "template": "about",
+            "builder": "simple",
+            "slug": "/chi-sono",
+            "generate": "once"
+        },
+        "article": {
+            "contents": [
+                "articles",
+                "articles_cats"
+            ],
+            "template": "article",
+            "builder": "post",
+            "slug": "/articolo",
+            "generate": "loop:articles"
+        },
+        "webdev_project": {
+            "contents": [
+                "webdev_projects",
+                "webdev_projects_cats"
+            ],
+            "template": "webdev_project",
+            "builder": "post",
+            "slug": "/webdev",
+            "generate": "loop:webdev_projects"
+        },
+        "blog": {
+            "contents": [
+                {
+                    "group": "articles",
+                    "orderBy": "frontmatter.published",
+                    "order": "desc"
+                },
+                "articles_cats"
+            ],
+            "template": "blog",
+            "builder": "archive",
+            "slug": "/blog",
+            "generate": "paginate:articles",
+            "options": {
+                "per_page": 12
+            }
+        },
+        "project": {
+            "contents": [
+                "projects",
+                "projects_cats"
+            ],
+            "template": "project",
+            "builder": "post",
+            "slug": "/progetto",
+            "generate": "loop:projects"
+        },
+        "projects": {
+            "contents": [
+                {
+                    "group": "projects",
+                    "orderBy": "frontmatter.published",
+                    "order": "desc"
+                },
+                "projects_cats"
+            ],
+            "template": "projects",
+            "builder": "archive",
+            "slug": "/progetti",
+            "generate": "paginate:projects",
+            "options": {
+                "per_page": 12
+            }
+        }
+    }
+}

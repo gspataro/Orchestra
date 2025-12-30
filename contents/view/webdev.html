@@ -1,0 +1,57 @@
+{%extends "./layout/default.html"%}
+{%block main%}
+    <div class="prose mb-2xl tablet-v:w-2/3 tablet-h:w-1/2">
+        <h1>Creo siti web</h1>
+        <p class="text-sm">
+            Come sviluppatore web full stack, mi occupo dell'intero processo di creazione,
+            dallo sviluppo del frontend all'implementazione del backend, garantendo soluzioni complete e funzionali.
+        </p>
+    </div>
+    <div class="mb-3xl">
+        <h2 class="mb-md">Conoscenze</h2>
+        <div class="grid grid-cols-1 gap-xs items-start laptop-sm:grid-cols-[auto_1fr] laptop-sm:items-center">
+            <h3>Backend</h3>
+            <ul class="flex-1 flex flex-wrap items-start gap-3xs font-normal">
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">PHP</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">MySQL</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Laravel</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Wordpress</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Woocommerce</li>
+            </ul>
+            <h3>Frontend</h3>
+            <ul class="flex-1 flex flex-wrap items-start gap-3xs font-normal">
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">HTML</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">CSS</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Javascript</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">SASS/SCSS</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">JQuery</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">TailwindCSS</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Bootstrap</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Webpack</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Vite</li>
+            </ul>
+            <h3>Altro</h3>
+            <ul class="flex-1 flex flex-wrap items-start gap-3xs font-normal">
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Git</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">UI/UX</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">Accessibilità</li>
+                <li class="bg-brass/20 px-3xs py-5xs rounded-lg">SEO</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bg-thunder-darkest rounded-3xl text-ivory-lightest p-sm mb-3xl tablet-v:p-lg">
+        <h2 class="mb-5xs">Costruiamo qualcosa insieme</h2>
+        <p class="text-sm mb-xs">Fammi sapere se hai un'idea che vorresti realizzare o se hai bisogno di un confronto, sarò felice di risponderti.</p>
+        <a href="mailto:{{website.email}}" class="btn text-ivory-lightest">Contattami</a>
+    </div>
+    <div>
+        <h2 class="leading-none mb-sm">Progetti</h2>
+        <div class="grid tablet-v:grid-cols-2 desktop:grid-cols-3 gap-md">
+            {%for id, project in webdev_projects%}
+                {%include('./components/webdev_project/card.html') with {
+                    webdev_project: project
+                }%}
+            {%endfor%}
+        </div>
+    </div>
+{%endblock%}

@@ -1,0 +1,30 @@
+<article class="
+    flex
+    flex-col
+    border-thunder-darkest
+    rounded-3xl
+    border-2
+    p-sm
+    data-[style=fortepiano]:bg-thunder-dark
+    data-[style=fortepiano]:border-thunder
+    group
+    {{class}}" data-style="{{style ?? 'pianoforte'}}">
+    <header class="mb-3xs">
+        <{{heading_type ?? 'h5'}}>
+            <a href="{{url('webdev_project.' ~ id)}}" class="text-thunder-darkest no-underline group-data-[style=fortepiano]:text-ivory-lightest">
+                {{webdev_project.frontmatter.name}}
+            </a>
+        </{{heading_type ?? 'h5'}}>
+    </header>
+    <p class="mb-xs group-data-[style=fortepiano]:text-ivory-lightest">
+        {{webdev_project.frontmatter.description}}
+    </p>
+    <div class="flex-1"></div>
+    <div class="flex items-center gap-3xs">
+        {%include './components/webdev_project/links.html'%}
+        <div class="flex-1"></div>
+        <a href="{{url('webdev_project.' ~ id)}}" class="cta group-data-[style=fortepiano]:text-ivory-lightest">
+            Scopri
+        </a>
+    </div>
+</article>

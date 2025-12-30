@@ -1,0 +1,74 @@
+{
+    "2024": [
+        {
+            "name": "Pianoforte Brillante",
+            "location": "Teatro Donnafugata &bullet; Ragusa Ibla (RG)",
+            "description": "Pianoforte a quattro mani"
+        }
+    ],
+    "2022": [
+        {
+            "name": "Laurea magistrale",
+            "location": "Conservatorio V. Bellini &bullet; Catania (CT)",
+            "description": "Diploma accademico di secondo livello in pianoforte conseguito con 110 e lode"
+        }
+    ],
+    "2021": [
+        {
+            "name": "Premio Giovani Eccellenze",
+            "location": "Teatro Perracchio &bullet; Ragusa (RG)",
+            "description": "Pianista solista"
+        }
+    ],
+    "2019": [
+        {
+            "name": "Musica da Metro",
+            "location": "Metro Piazza Stesicoro &bullet; Catania (CT)",
+            "description": "Pianista solista"
+        },
+        {
+            "name": "Laurea triennale",
+            "location": "Conservatorio V. Bellini &bullet; Catania (CT)",
+            "description": "Diploma accademico di primo livello in pianoforte conseguito con 110 e lode"
+        },
+        {
+            "name": "Masterclass",
+            "location": "Conservatorio V. Bellini &bullet; Catania (CT)",
+            "description": "Masterclass con il M° Joaquin Achùcarro"
+        },
+        {
+            "name": "XVII Concorso Nazionale “Alfio Pulvirenti”",
+            "location": "Comiso (RG)",
+            "description": "Primo premio con voto 96/100"
+        },
+        {
+            "name": "XI Festival Concorso Nazionale “Giovani Musicisti in Orchestra”",
+            "location": "Modica (RG)",
+            "description": "Primo premio con voto 98/100."
+        }
+    ],
+    "2018": [
+        {
+            "name": "Apertura di concerto",
+            "location": "Teatro donnafugata &bullet; Ragusa Ibla (RG)",
+            "description": "Pianista solista"
+        },
+        {
+            "name": "Masterclass",
+            "location": "Rachmaninov Academy &bullet; Catania (CT)",
+            "description": "Masterclass con la M° Violetta Egorova"
+        },
+        {
+            "name": "XVI Concorso Nazionale “Alfio Pulvirenti”",
+            "location": "Comiso (RG)",
+            "description": "Primo premio con voto 97/100."
+        }
+    ],
+    "2017": [
+        {
+            "name": "Masterclass",
+            "location": "Rachmaninov Academy &bullet; Catania (CT)",
+            "description": "Masterclass con la M° Violetta Egorova"
+        }
+    ]
+}

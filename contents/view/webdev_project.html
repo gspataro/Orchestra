@@ -1,0 +1,34 @@
+{%set page = {
+    'title': webdev_project.frontmatter.name,
+    'layout': {
+        'contain': true,
+        'breadcrumb': {
+            'index': 'Home',
+            'webdev_projects.page-1': 'Progetti',
+            '': webdev_project.frontmatter.name
+        }
+    },
+    'meta': {
+        'description': webdev_project.frontmatter.description,
+        'keywords': webdev_project.frontmatter.keywords
+    }
+}%}
+{%extends "./layout/default.html"%}
+{%block main%}
+    <article class="max-w-[800px] mx-auto">
+        <header class="mb-lg tablet-v:w-2/3 tablet-h:w-1/2">
+            <div class="flex items-center mb-md">
+                <h1 class="flex-1">{{webdev_project.frontmatter.name}}</h1>
+            </div>
+            {%include './components/post/meta.html' with {'meta': {
+                "Categoria": webdev_projects_cats[webdev_project.frontmatter.category].label,
+                "Tecnologie": webdev_project.frontmatter.technologies|join(', '),
+                "Versione": webdev_project.frontmatter.version,
+                "Links": include('./components/webdev_project/links.html')
+            }} only%}
+        </header>
+        <div class="prose">
+            {{include(template_from_string(webdev_project.content))}}
+        </div>
+    </article>
+{%endblock%}

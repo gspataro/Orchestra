@@ -1,0 +1,18 @@
+<ul id="accordion_{{id}}">
+    {%for i, item in items%}
+        <li class="border-b border-thunder first:border-t group/item">
+            <input type="radio" id="accordion_{{id}}_{{i}}" name="accordion_{{id}}" class="hidden peer" {%if i == 0%}checked{%endif%}>
+            <label class="flex items-center gap-xs py-xs h4 peer-checked:pb-3xs" for="accordion_{{id}}_{{i}}">
+                <svg class="rotate-0 transform-all duration-400 group-has-checked/item:rotate-180" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="3 0.98 10.02 5.53">
+                    <path fill="currentColor" d="M8 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71s.51-.2.71 0l4.15 4.15l4.14-4.14c.2-.2.51-.2.71 0s.2.51 0 .71l-4.5 4.5c-.1.1-.23.15-.35.15Z"></path>
+                </svg>
+                <span>
+                    {{item.title}}
+                </span>
+            </label>
+            <div class="hidden pl-[calc(var(--spacing-xs)+24px)] pb-xs peer-checked:block">
+                {{item.description}}
+            </div>
+        </li>
+    {%endfor%}
+</ul>

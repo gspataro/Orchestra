@@ -1,0 +1,6 @@
+<section {%if id%}id="{{id}}"{%endif%} class="{%if viewport%}min-h-[calc(100vh-var(--header-outer-height))]{%endif%} py-lg {{class}}">
+    {%if not nocontainer%}<div class="container">{%endif%}
+        {%block content%}
+        {%endblock%}
+    {%if not nocontainer%}</div>{%endif%}
+</section>

@@ -1,0 +1,9 @@
+<meta charset="utf-8">
+<meta name="robots" content="{{page.meta.robots ?? 'index, follow'}}">
+<meta name="description" content="{{page.meta.description ?? website.description}}">
+<meta name="keywords" content="{{page.meta.keywords ?? website.keywords}}">
+<meta name="author" content="{{website.author}}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{(page.title ? page.title ~ " - ")|raw}}{{website.name}}</title>
+<link rel="icon" type="image/png" href="{{website.url}}/favicon.png">
+{{vite.css()|raw}}

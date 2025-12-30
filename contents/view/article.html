@@ -1,0 +1,68 @@
+{%set page = {
+    'title': article.frontmatter.title,
+    'layout': {
+        'contain': true,
+        'footer': {
+            'contacts': {
+                'title': 'Lascia un commento',
+                'description': 'Se hai notato un errore o vuoi condividere con me la tua opinione, contattami, sarò felice di risponderti.'
+            }
+        }
+    },
+    'meta': {
+        'description': article.frontmatter.description,
+        'keywords': article.frontmatter.keywords
+    }
+}%}
+{%extends "./layout/default.html"%}
+{%block main%}
+    <article class="max-w-[800px] mx-auto">
+        <header class="mb-sm">
+            {%if article.frontmatter.categories%}
+                <div class="flex items-center gap-2xs mb-2xs">
+                    <a href="{{url('blog.page-1')}}" class="cta cta-inverted cta-inline">
+                        Blog
+                    </a>
+                    <div class="font-normal">
+                        /
+                    </div>
+                    <div class="font-normal">
+                        <time datetime="{{article.frontmatter.published|date('Y-m-d')}}" class="block">
+                            {{article.frontmatter.published|format_date('long', locale: 'it')}}
+                        </time>
+                    </div>
+                    <div class="font-normal">
+                        /
+                    </div>
+                    {%include './components/article/categories.html' with {
+                        categories: article.frontmatter.categories
+                    }%}
+                </div>
+            {%endif%}
+            <div class="flex items-center">
+                <h1 class="flex-1">{{article.frontmatter.title}}</h1>
+            </div>
+        </header>
+        {%if article.frontmatter.thumbnail%}
+            <figure class="mb-lg">
+                <img src="{{media(article.frontmatter.thumbnail.src, 'large')}}" alt="{{article.frontmatter.thumbnail.alt}}" class="max-w-full">
+                {%if article.frontmatter.thumbnail.caption%}
+                    <figcaption class="mt-3xs">
+                        {{article.frontmatter.thumbnail.caption|raw}}
+                    </figcaption>
+                {%endif%}
+            </figure>
+        {%endif%}
+        <div class="prose mb-xl">
+            {{include(template_from_string(article.content))}}
+        </div>
+        <div class="flex items-center gap-xs">
+            <div class="font-normal">
+                CONDIVIDI
+            </div>
+            {%include './components/share.html' with {
+                'url': url('article.' ~ article.id)
+            }%}
+        </div>
+    </article>
+{%endblock%}

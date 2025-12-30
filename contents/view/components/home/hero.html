@@ -1,0 +1,56 @@
+{%embed './components/home/section.html' with {
+    'label': '',
+    'next_text': 'Chi sono',
+    'id': 'benvenuto',
+    'fullscreen': true
+}%}
+    {%from './components/icon.html' import icon%}
+    {%block content%}
+        <div id="hero-welcome" class="flex-1 h-full flex items-center justify-center">
+            <div class="relative text-center">
+                <div class="
+                    block
+                    w-3/4
+                    aspect-square
+                    bg-white
+                    mix-blend-difference
+                    absolute
+                    z-10
+                    top-1/2
+                    -translate-y-1/2
+                    left-1/2
+                    -translate-x-1/2
+                    animate-blob-morph">
+                </div>
+                <h2 class="uppercase text-lg font-normal font-oswald tablet-v:text-2xl">
+                    Giuseppe Spataro
+                </h2>
+                <p class="text-sm uppercase" role="doc-subtitle">
+                    Pianista &bullet; Compositore &bullet; Insegnante
+                </p>
+                <div class="mt-xl relative z-20">
+                    <a href="#" id="hero-welcome-play" class="
+                        relative
+                        inline-flex
+                        w-lg
+                        h-lg
+                        items-center
+                        justify-center
+                        border-2
+                        border-ivory-lightest
+                        rounded-full
+                        no-underline
+                        text-ivory-lightest
+                        text-md
+                        group-data-[style=fortepiano]/body:border-thunder-darkest
+                        group-data-[style=fortepiano]/body:text-thunder-darkest">
+                        {{icon('play', '32', label: 'Apri pianoforte virtuale')}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="hero-keyboard" class="flex-1 flex flex-col justify-center data-[hidden=true]:hidden" data-hidden="true">
+            {%include './components/keyboard.html'%}
+        </div>
+    {%endblock%}
+{%endembed%}

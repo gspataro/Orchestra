@@ -1,0 +1,15 @@
+{%set rawSvg = source('@assets/images/logo.svg')%}
+{%set viewBox = rawSvg|preg_match('/viewBox="(.*?)"/')[1]%}
+{%set innerSvg = rawSvg|preg_match('!<svg[^>]*>(.*?)</svg>!s')[1]%}
+<svg
+    width="{{width ?? height ?? '24'}}"
+    height="{{height ?? width ?? '24'}}"
+    aria-label="Giuseppe Spataro"
+    {%if attributes%}
+        {%for key, value in attributes%}
+            {{key}}="{{value}}"
+        {%endfor%}
+    {%endif%}
+    viewBox="{{viewBox}}">
+    {{innerSvg|raw}}
+</svg>

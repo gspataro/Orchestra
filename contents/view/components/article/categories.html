@@ -1,0 +1,7 @@
+<ul class="flex">
+    {%for category in categories%}
+        <li class="inline px-3xs border border-current rounded-full font-normal lowercase">
+            {{articles_cats[category].label ?? category}}
+        </li>
+    {%endfor%}
+</ul>

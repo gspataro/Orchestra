@@ -1,0 +1,44 @@
+{%set page = {
+    'title': 'Progetti',
+    'id': 'projects',
+    'layout': {
+        'fluid': false,
+        'breadcrumb': {
+            'index': 'Home',
+            '': 'Progetti'
+        }
+    }
+}%}
+{%extends "./layout/default.html"%}
+{%block main%}
+    <div class="prose mb-2xl tablet-v:w-2/3 tablet-h:w-1/2">
+        <h1>
+            Progetti
+        </h1>
+        <p>
+            Una raccolta dei miei progetti musicali: composizioni originali, idee in evoluzione e percorsi di ricerca sonora e artistica personale, tra sperimentazione e identità.
+        </p>
+    </div>
+    <div class="grid grid-cols-1 gap-lg tablet-v:gap-xs tablet-v:grid-cols-2 tablet-h:grid-cols-3 laptop-sm:gap-lg">
+        {%for id, project in projects%}
+            {%include './components/project/card.html' with {
+                'project': project
+            }%}
+        {%endfor%}
+    </div>
+    {%if pagination.prev or pagination.next%}
+        <div class="flex mt-lg">
+            {%if pagination.prev%}
+                <a href="{{url('projects.page-' ~ pagination.prev)}}" class="cta cta-inverted">
+                    PRECEDENTE
+                </a>
+            {%endif%}
+            <div class="flex-1"></div>
+            {%if pagination.next%}
+                <a href="{{url('projects.page-' ~ pagination.next)}}" class="cta">
+                    SUCCESSIVO
+                </a>
+            {%endif%}
+        </div>
+    {%endif%}
+{%endblock%}

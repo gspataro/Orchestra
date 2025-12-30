@@ -1,0 +1,14 @@
+{
+    "misc": {
+        "label": "Generali"
+    },
+    "dev": {
+        "label": "Sviluppo"
+    },
+    "sound": {
+        "label": "Sound"
+    },
+    "music": {
+        "label": "Musica"
+    }
+}

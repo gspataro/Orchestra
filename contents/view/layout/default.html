@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        {%include './components/head.html'%}
+    </head>
+
+    <body class="tablet-h:overflow-y-auto! group/body" data-style="pianoforte">
+        <div class="tablet-h:grid tablet-h:grid-cols-[auto_1fr] tablet-h:grid-rows-1">
+            {%include './components/header.html' with {'class': 'tablet-v:col-start-1 tablet-v:row-span-2'}%}
+            <div class="flex overflow-y-hidden flex-col tablet-v:col-start-2">
+                <main {%if page.layout.screen%}class="min-h-screen"{%endif%}>
+                    <div class="{%if not page.layout.fluid%}container py-(--container-padding-y){%endif%} {%if page.layout.screen%}min-h-[calc(100vh-(var(--container-padding-y)*2))]{%endif%}">
+                        {%block main%}
+                        {%endblock%}
+                    </div>
+                </main>
+            </div>
+        </div>
+        {%include './components/footer.html'%}
+        {%include './components/foot.html'%}
+    </body>
+</html>
