@@ -27,6 +27,10 @@ final class LocalizationComponent extends Component
         $blueprint = $this->container->get('project.blueprint');
         $locales = $this->container->get('locales');
 
+        if (!$blueprint->get('languages')) {
+            return;
+        }
+
         foreach ($blueprint->get('languages') as $langKey) {
             $locales->addLanguage(
                 $this->container->get('lang', [

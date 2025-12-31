@@ -1,22 +1,20 @@
 <?php
 
 /**
+ * @todo This is a temporary solution, need to change it
+ */
+
+/**
  * Root dir: /
  */
 
-define("DIR_ROOT", dirname(__DIR__));
+define("DIR_ROOT", getcwd());
 
 /**
  * Source dir: /source
  */
 
 define("DIR_SOURCE", DIR_ROOT . "/source");
-
-/**
- * Third party: /source/vendor
- */
-
-define("DIR_VENDOR", DIR_ROOT . "/vendor");
 
 /**
  * Output dir: /output
@@ -48,13 +46,19 @@ define("DIR_LANGS", DIR_CONTENTS . "/languages");
 define('DIR_MEDIA', DIR_CONTENTS . '/media');
 
 /**
- * View dir: /contents/view
+ * Resources dir: /resources
  */
 
-define("DIR_VIEW", DIR_CONTENTS . "/view");
+define('DIR_RESOURCES', DIR_ROOT . '/resources');
 
 /**
- * Assets dir: /contents/view/assets
+ * View dir: /resources/view
  */
 
-define("DIR_ASSETS", DIR_CONTENTS . '/assets');
+define("DIR_VIEW", DIR_RESOURCES . "/view");
+
+/**
+ * Assets dir: /resources/assets
+ */
+
+define("DIR_ASSETS", DIR_RESOURCES . '/assets');

@@ -128,3 +128,27 @@ function addSuffixToFilename(string $filename, string $suffix): string
     $extensionPosition = strrpos($filename, '.');
     return substr($filename, 0, $extensionPosition) . $suffix . substr($filename, $extensionPosition);
 }
+
+/**
+ * Get path to a system directory
+ *
+ * @param string $label
+ * @return string
+ */
+
+function getPath(string $label): void
+{
+    /**
+     * @todo This needs to be improved, this hardcoded solution is temporary
+     */
+
+    $directories = [];
+
+    $directories['app.root'] = getcwd();
+
+    $directories['app.output'] = $directories['app.root'] . '/public';
+
+    $directories['app.resources'] = $directories['app.root'] . '/resources';
+    $directories['app.view'] = $directories['app.resources'] . '/view';
+    $directories['app.assets'] = $directories['app.assets'];
+}
