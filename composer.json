@@ -25,6 +25,9 @@
             "GSpataro\\": "source/components/",
             "GSpataro\\Application\\": "source/application"
         },
-        "files": ["source/functions.php"]
+        "files": [
+            "source/directories.php",
+            "source/functions.php"
+        ]
     }
 }

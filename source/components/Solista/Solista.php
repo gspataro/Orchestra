@@ -13,8 +13,6 @@ class Solista
     {
         $app = new self();
 
-        require_once getcwd() . '/source/directories.php';
-
         $app->loadContainer();
         $app->boot();
 
