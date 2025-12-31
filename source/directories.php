@@ -20,7 +20,7 @@ define("DIR_SOURCE", DIR_ROOT . "/source");
  * Output dir: /output
  */
 
-define("DIR_OUTPUT", DIR_ROOT . "/output");
+define("DIR_OUTPUT", DIR_ROOT . "/public");
 
 /**
  * Contents dir: /contents
