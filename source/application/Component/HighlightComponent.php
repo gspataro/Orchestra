@@ -2,19 +2,20 @@
 
 namespace GSpataro\Application\Component;
 
+use GSpataro\DependencyInjection\Container;
+use GSpataro\Solista\Component;
 use Tempest\Highlight\Highlighter;
-use GSpataro\DependencyInjection\Component;
 
 final class HighlightComponent extends Component
 {
-    public function register(): void
+    public function register(Container $container): void
     {
-        $this->container->add('tempest.highlight', function ($container, $args): object {
+        $container->add('tempest.highlight', function ($container, $args): object {
             return new Highlighter();
         }, false);
     }
 
-    public function boot(): void
+    public function boot(Container $container): void
     {
     }
 }

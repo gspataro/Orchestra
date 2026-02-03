@@ -2,8 +2,9 @@
 
 namespace GSpataro\Application\Component;
 
+use GSpataro\DependencyInjection\Container;
+use GSpataro\Solista\Component;
 use League\CommonMark\MarkdownConverter;
-use GSpataro\DependencyInjection\Component;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -12,22 +13,22 @@ use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 
 final class MarkdownComponent extends Component
 {
-    public function register(): void
+    public function register(Container $container): void
     {
-        $this->container->add('markdown.environment', function ($container, $args): object {
+        $container->add('markdown.environment', function ($container, $args): object {
             return new Environment($args['options'] ?? []);
         });
 
-        $this->container->add('markdown.converter', function ($container, $args): object {
+        $container->add('markdown.converter', function ($container, $args): object {
             return new MarkdownConverter(
                 $container->get('markdown.environment')
             );
         });
     }
 
-    public function boot(): void
+    public function boot(Container $container): void
     {
-        $environment = $this->container->get('markdown.environment', [
+        $environment = $container->get('markdown.environment', [
             'options' => [
                 'safe' => false,
                 'heading_permalink' => [

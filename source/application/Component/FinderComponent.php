@@ -2,21 +2,22 @@
 
 namespace GSpataro\Application\Component;
 
-use GSpataro\DependencyInjection\Component;
+use GSpataro\DependencyInjection\Container;
 use GSpataro\Finder\Researcher;
+use GSpataro\Solista\Component;
 
 final class FinderComponent extends Component
 {
-    public function register(): void
+    public function register(Container $container): void
     {
-        $this->container->add('finder.researcher', function ($container, $args): object {
+        $container->add('finder.researcher', function ($container, $args): object {
             return new Researcher(
                 $container->get('library.archive')
             );
         });
     }
 
-    public function boot(): void
+    public function boot(Container $container): void
     {
     }
 }

@@ -4,33 +4,34 @@ namespace GSpataro\Application\Component;
 
 use GSpataro\Contractor\Builder\ArchiveBuilder;
 use GSpataro\Contractor\BuildersCollection;
-use GSpataro\DependencyInjection\Component;
 use GSpataro\Contractor\Builder\PostBuilder;
 use GSpataro\Contractor\Builder\SimpleBuilder;
+use GSpataro\DependencyInjection\Container;
+use GSpataro\Solista\Component;
 
 final class ContractorComponent extends Component
 {
-    public function register(): void
+    public function register(Container $container): void
     {
-        $this->container->add('contractor.builders', function ($container, $args): object {
+        $container->add('contractor.builders', function ($container, $args): object {
             return new BuildersCollection();
         });
     }
 
-    public function boot(): void
+    public function boot(Container $container): void
     {
-        $buildersCollection = $this->container->get('contractor.builders');
+        $buildersCollection = $container->get('contractor.builders');
 
         $buildersCollection->add('simple', new SimpleBuilder(
-            $this->container->get('twig')
+            $container->get('twig')
         ));
 
         $buildersCollection->add('post', new PostBuilder(
-            $this->container->get('twig')
+            $container->get('twig')
         ));
 
         $buildersCollection->add('archive', new ArchiveBuilder(
-            $this->container->get('twig')
+            $container->get('twig')
         ));
     }
 }

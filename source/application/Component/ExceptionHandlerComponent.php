@@ -2,21 +2,22 @@
 
 namespace GSpataro\Application\Component;
 
-use GSpataro\DependencyInjection\Component;
+use GSpataro\DependencyInjection\Container;
+use GSpataro\Solista\Component;
 use NunoMaduro\Collision\Provider;
 
 class ExceptionHandlerComponent extends Component
 {
-    public function register(): void
+    public function register(Container $container): void
     {
-        $this->container->add('exception.provider', function ($container, $args): object {
+        $container->add('exception.provider', function ($container, $args): object {
             return new Provider();
         });
     }
 
-    public function boot(): void
+    public function boot(Container $container): void
     {
-        $provider = $this->container->get('exception.provider');
+        $provider = $container->get('exception.provider');
         $provider->register();
     }
 }

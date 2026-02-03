@@ -6,32 +6,33 @@ use GSpataro\CLI\Handler;
 use GSpataro\Application\Command;
 use GSpataro\CLI\Helper\Stopwatch;
 use GSpataro\CLI\CommandsCollection;
-use GSpataro\DependencyInjection\Component;
+use GSpataro\DependencyInjection\Container;
+use GSpataro\Solista\Component as SolistaComponent;
 
-final class CLIComponent extends Component
+final class CLIComponent extends SolistaComponent
 {
-    public function register(): void
+    public function register(Container $container): void
     {
-        $this->container->add('cli.commands', fn(): object => new CommandsCollection());
+        $container->add('cli.commands', fn(): object => new CommandsCollection());
 
-        $this->container->add('cli', function ($container, $args): object {
+        $container->add('cli', function ($container, $args): object {
             return new Handler(
                 $container->get('cli.commands')
             );
         });
 
-        $this->container->add('cli.stopwatch', function ($container, $args): object {
+        $container->add('cli.stopwatch', function ($container, $args): object {
             return new Stopwatch();
         });
     }
 
-    public function boot(): void
+    public function boot(Container $container): void
     {
-        $cli = $this->container->get('cli');
-        $commands = $this->container->get('cli.commands');
+        $cli = $container->get('cli');
+        $commands = $container->get('cli.commands');
 
         $commands->register(
-            new Command\BuildCommand($this->container)
+            new Command\BuildCommand($container)
         );
 
         $cli->deploy();

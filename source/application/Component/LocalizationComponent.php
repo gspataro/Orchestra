@@ -2,19 +2,20 @@
 
 namespace GSpataro\Application\Component;
 
+use GSpataro\DependencyInjection\Container;
 use GSpataro\Localization\Locales;
 use GSpataro\Localization\Language;
-use GSpataro\DependencyInjection\Component;
+use GSpataro\Solista\Component;
 
 final class LocalizationComponent extends Component
 {
-    public function register(): void
+    public function register(Container $container): void
     {
-        $this->container->variable('langsPath', DIR_LANGS);
+        $container->variable('langsPath', DIR_LANGS);
 
-        $this->container->add('locales', fn(): object => new Locales());
+        $container->add('locales', fn(): object => new Locales());
 
-        $this->container->add('lang', function ($container, $args): object {
+        $container->add('lang', function ($container, $args): object {
             return new Language(
                 $args['langKey'],
                 $container->variable('langsPath') . '/' . $args['langKey']
@@ -22,10 +23,10 @@ final class LocalizationComponent extends Component
         }, false);
     }
 
-    public function boot(): void
+    public function boot(Container $container): void
     {
-        $blueprint = $this->container->get('project.blueprint');
-        $locales = $this->container->get('locales');
+        $blueprint = $container->get('project.blueprint');
+        $locales = $container->get('locales');
 
         if (!$blueprint->get('languages')) {
             return;
@@ -33,7 +34,7 @@ final class LocalizationComponent extends Component
 
         foreach ($blueprint->get('languages') as $langKey) {
             $locales->addLanguage(
-                $this->container->get('lang', [
+                $container->get('lang', [
                     'langKey' => $langKey
                 ])
             );
