@@ -29,5 +29,16 @@
             "source/directories.php",
             "source/functions.php"
         ]
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.36"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/pest"
     }
 }
