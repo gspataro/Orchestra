@@ -8,8 +8,9 @@
  * @version 1.0.0
  */
 
-use GSpataro\Solista\Solista;
+use GSpataro\Solista\Kernel\ApplicationKernel;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-Solista::run();
+$app = new ApplicationKernel();
+$app->boot();
