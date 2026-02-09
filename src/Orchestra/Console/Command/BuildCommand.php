@@ -7,6 +7,7 @@ use Orchestra\Pages\Pages;
 use Orchestra\Project\Prototype;
 use Orchestra\Finder\Researcher;
 use Orchestra\Assets\Media;
+use Orchestra\Console\Runtime\RuntimeBlueprint;
 use Orchestra\Library\ReadersCollection;
 use Orchestra\Pages\GeneratorsCollection;
 use Orchestra\Contractor\BuildersCollection;
@@ -17,6 +18,8 @@ use Orchestra\Console\Runtime\RuntimeMedia;
 use Orchestra\Console\Runtime\RuntimePages;
 use Orchestra\Console\Runtime\RuntimeSchemas;
 use Orchestra\Console\Runtime\RuntimeSitemap;
+use Orchestra\Pipeline\BuildContext;
+use Orchestra\Project\Blueprint;
 
 final class BuildCommand extends BaseCommand
 {
@@ -27,6 +30,8 @@ final class BuildCommand extends BaseCommand
     private readonly Media $media;
     private readonly Sitemap $sitemap;
     private readonly Stopwatch $stopwatch;
+    private readonly BuildContext $context;
+    private readonly Blueprint $blueprint;
     private readonly Prototype $prototype;
     private readonly Researcher $researcher;
     private readonly ReadersCollection $readers;
@@ -52,17 +57,38 @@ final class BuildCommand extends BaseCommand
     {
         $this->output->print('{bold}Running the building process{nl}');
 
+        $this->context = $this->app->get('pipeline.context');
+        $this->blueprint = $this->app->get('project.blueprint');
+        $this->sitemap = $this->app->get('project.sitemap');
+        $this->stopwatch = $this->app->get('cli.stopwatch');
+
+        $this->stopwatch->start();
+
+        $blueprintResult = $this->runProcess(
+            new RuntimeBlueprint(
+                $this->context,
+                $this->blueprint
+            )
+        );
+
+        if (!$blueprintResult) {
+            exit(0);
+        }
+
         $this->prototype = $this->app->get('project.prototype');
+
+        $this->context->setContext(
+            $this->blueprint,
+            $this->prototype,
+            $this->sitemap
+        );
+
         $this->generators = $this->app->get('pages.generators');
         $this->readers = $this->app->get('library.readers');
         $this->builders = $this->app->get('contractor.builders');
         $this->pages = $this->app->get('pages.collection');
         $this->media = $this->app->get('assets.media');
-        $this->stopwatch = $this->app->get('cli.stopwatch');
         $this->researcher = $this->app->get('finder.researcher');
-        $this->sitemap = $this->app->get('project.sitemap');
-
-        $this->stopwatch->start();
 
         $this->runProcess(
             new RuntimeContents(

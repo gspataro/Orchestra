@@ -8,9 +8,14 @@ use Orchestra\Project\Sitemap;
 
 final class BuildContext
 {
-    public Blueprint $blueprint;
-    public Prototype $prototype;
-    public Sitemap $sitemap;
+    public readonly Blueprint $blueprint;
+    public readonly Prototype $prototype;
+    public readonly Sitemap $sitemap;
+
+    public function __construct(
+        public readonly string $root
+    ) {
+    }
 
     public function setContext(Blueprint $blueprint, Prototype $prototype, Sitemap $sitemap): void
     {

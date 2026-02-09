@@ -20,6 +20,11 @@ final class Prototype extends DotNavigator
         $this->readSchemas();
     }
 
+    public function getAll()
+    {
+        return $this->data;
+    }
+
     /**
      * Read contents from blueprint
      *

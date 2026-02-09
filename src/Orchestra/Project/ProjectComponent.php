@@ -12,12 +12,8 @@ final class ProjectComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->variable('blueprintPath', DIR_ROOT . '/blueprint.json');
-
         $container->add('project.blueprint', function ($container, $args): object {
-            return new Blueprint(
-                $container->variable('blueprintPath')
-            );
+            return new Blueprint();
         });
 
         $container->add('project.prototype', function ($container, $args): object {
