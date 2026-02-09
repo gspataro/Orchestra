@@ -4,13 +4,11 @@ namespace Orchestra\Console\Runtime;
 
 use DirectoryIterator;
 use Orchestra\Pipeline\BuildContext;
-use Orchestra\Project\Sitemap;
 
 class RuntimeCleanup extends Runtime
 {
     public function __construct(
-        private readonly BuildContext $context,
-        private readonly Sitemap $sitemap
+        private readonly BuildContext $context
     ) {
     }
 
@@ -20,7 +18,7 @@ class RuntimeCleanup extends Runtime
             $this->output->print('{bold}Cleaning up');
         }
 
-        $sitemap = array_values($this->sitemap->getAll());
+        $sitemap = array_values($this->context->sitemap->getAll());
         $outputDirectory = new DirectoryIterator($directory);
         $excluded = ['.vite', 'assets', '.htaccess', 'sitemap.xml', 'favicon.png', 'favicon-dark.png', 'media'];
 

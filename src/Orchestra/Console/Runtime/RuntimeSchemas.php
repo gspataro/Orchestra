@@ -4,12 +4,12 @@ namespace Orchestra\Console\Runtime;
 
 use Orchestra\Finder\Researcher;
 use Orchestra\Pages\GeneratorsCollection;
-use Orchestra\Project\Prototype;
+use Orchestra\Pipeline\BuildContext;
 
 class RuntimeSchemas extends Runtime
 {
     public function __construct(
-        private Prototype $prototype,
+        private BuildContext $context,
         private GeneratorsCollection $generators,
         private Researcher $researcher
     ) {
@@ -68,7 +68,7 @@ class RuntimeSchemas extends Runtime
     {
         $this->output->print('{bold}Processing schemas');
 
-        foreach ($this->prototype->get('schemas') as $tag => $schema) {
+        foreach ($this->context->prototype->get('schemas') as $tag => $schema) {
             $this->output->print("Working on schema '{$tag}'");
 
             $schema['contents'] = $this->processSchemaContents($schema['contents']);

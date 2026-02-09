@@ -3,12 +3,12 @@
 namespace Orchestra\Console\Runtime;
 
 use Orchestra\Library\ReadersCollection;
-use Orchestra\Project\Prototype;
+use Orchestra\Pipeline\BuildContext;
 
 final class RuntimeContents extends Runtime
 {
     public function __construct(
-        private Prototype $prototype,
+        private BuildContext $context,
         private ReadersCollection $readers
     ) {
     }
@@ -17,7 +17,7 @@ final class RuntimeContents extends Runtime
     {
         $this->output->print('{bold}Processing contents');
 
-        foreach ($this->prototype->get('contents') as $group => $source) {
+        foreach ($this->context->prototype->get('contents') as $group => $source) {
             $this->output->print("Working on content group '{$group}'");
 
             $reader = $this->readers->get($source['reader']);

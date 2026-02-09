@@ -9,8 +9,7 @@ use SimpleXMLElement;
 class RuntimeSitemap extends Runtime
 {
     public function __construct(
-        private readonly BuildContext $context,
-        private readonly Sitemap $sitemap
+        private readonly BuildContext $context
     ) {
     }
 
@@ -23,7 +22,7 @@ class RuntimeSitemap extends Runtime
 
         $excluded = ['/404', '/darkside'];
 
-        foreach ($this->sitemap->getAll() as $url) {
+        foreach ($this->context->sitemap->getAll() as $url) {
             if (str_ends_with($url, '/index')) {
                 $url = substr($url, 0, strlen('index') * -1);
             }
