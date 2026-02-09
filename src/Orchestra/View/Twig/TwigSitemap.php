@@ -2,24 +2,22 @@
 
 namespace Orchestra\View\Twig;
 
+use Orchestra\Pipeline\BuildContext;
 use Twig\TwigFunction;
-use Orchestra\Project\Sitemap;
-use Orchestra\Project\Blueprint;
 use Twig\Extension\AbstractExtension;
 
 final class TwigSitemap extends AbstractExtension
 {
     public function __construct(
-        private readonly Blueprint $blueprint,
-        private readonly Sitemap $sitemap
+        private readonly BuildContext $context,
     ) {
     }
 
     public function url($tag)
     {
         $url = $_ENV['WEBSITE_URL'] ?? '';
-        $friendlyUrls = $this->blueprint->get('website.friendly_urls');
-        $path = $this->sitemap->get($tag);
+        $friendlyUrls = $this->context->blueprint->get('website.friendly_urls');
+        $path = $this->context->sitemap->get($tag);
         $separator = null;
         $suffix = $friendlyUrls ? null : '.html';
 

@@ -2,14 +2,14 @@
 
 namespace Orchestra\View\Twig;
 
-use Orchestra\Project\Blueprint;
+use Orchestra\Pipeline\BuildContext;
 use Twig\Extension\GlobalsInterface;
 use Twig\Extension\AbstractExtension;
 
 final class TwigBlueprint extends AbstractExtension implements GlobalsInterface
 {
     public function __construct(
-        private readonly Blueprint $blueprint
+        private readonly BuildContext $context
     ) {
     }
 
@@ -17,7 +17,7 @@ final class TwigBlueprint extends AbstractExtension implements GlobalsInterface
     {
         $globals = [];
 
-        $globals['website'] = $this->blueprint->get('website');
+        $globals['website'] = $this->context->blueprint->get('website');
 
         return $globals;
     }

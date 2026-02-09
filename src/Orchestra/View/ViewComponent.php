@@ -46,11 +46,10 @@ final class ViewComponent extends Component
             $container->get('tempest.highlight')
         ));
         $twig->addExtension(new TwigBlueprint(
-            $container->get('project.blueprint')
+            $container->get('pipeline.context')
         ));
         $twig->addExtension(new TwigSitemap(
-            $container->get('project.blueprint'),
-            $container->get('project.sitemap')
+            $container->get('pipeline.context')
         ));
     }
 }

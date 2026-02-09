@@ -18,6 +18,7 @@ use Orchestra\Application\Component\HighlightComponent;
 use Orchestra\Application\Component\MarkdownComponent;
 use Orchestra\Application\Exception\InvalidComponentException;
 use Orchestra\Application\Kernel;
+use Orchestra\Pipeline\PipelineComponent;
 use Orchestra\View\ViewComponent;
 
 final class ApplicationKernel extends Kernel
@@ -28,6 +29,7 @@ final class ApplicationKernel extends Kernel
     private array $components = [
         ExceptionHandlerComponent::class,
         DotenvComponent::class,
+        PipelineComponent::class,
         LocalizationComponent::class,
         ProjectComponent::class,
         HighlightComponent::class,
