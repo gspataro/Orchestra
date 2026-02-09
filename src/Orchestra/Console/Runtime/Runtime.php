@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\CLI\Runtime;
+namespace Orchestra\Console\Runtime;
 
 use GSpataro\CLI\Interface\InputInterface;
 use GSpataro\CLI\Interface\OutputInterface;

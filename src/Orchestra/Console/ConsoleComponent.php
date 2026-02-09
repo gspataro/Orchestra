@@ -1,15 +1,15 @@
 <?php
 
-namespace Orchestra\CLI;
+namespace Orchestra\Console;
 
 use GSpataro\CLI\Handler;
 use GSpataro\CLI\Helper\Stopwatch;
 use GSpataro\CLI\CommandsCollection;
 use GSpataro\DependencyInjection\Container;
-use Orchestra\CLI\Command\BuildCommand;
+use Orchestra\Console\Command\BuildCommand;
 use Orchestra\Application\Component;
 
-final class CLIComponent extends Component
+final class ConsoleComponent extends Component
 {
     public function register(Container $container): void
     {

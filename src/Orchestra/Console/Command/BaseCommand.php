@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\CLI\Command;
+namespace Orchestra\Console\Command;
 
-use Orchestra\CLI\Runtime\Runtime;
+use Orchestra\Console\Runtime\Runtime;
 use GSpataro\CLI\Command;
 use GSpataro\DependencyInjection\Container;
 

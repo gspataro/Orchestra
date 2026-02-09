@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\CLI\Runtime;
+namespace Orchestra\Console\Runtime;
 
 use Orchestra\Library\ReadersCollection;
 use Orchestra\Project\Prototype;

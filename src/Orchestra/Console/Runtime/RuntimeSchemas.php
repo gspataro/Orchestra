@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\CLI\Runtime;
+namespace Orchestra\Console\Runtime;
 
 use Orchestra\Finder\Researcher;
 use Orchestra\Pages\GeneratorsCollection;

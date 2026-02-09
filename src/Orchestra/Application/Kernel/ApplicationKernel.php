@@ -4,7 +4,7 @@ namespace Orchestra\Application\Kernel;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Assets\AssetsComponent;
-use Orchestra\CLI\CLIComponent;
+use Orchestra\Console\ConsoleComponent;
 use Orchestra\Contractor\ContractorComponent;
 use Orchestra\Finder\FinderComponent;
 use Orchestra\Library\LibraryComponent;
@@ -38,7 +38,7 @@ final class ApplicationKernel extends Kernel
         FinderComponent::class,
         PagesComponent::class,
         ContractorComponent::class,
-        CLIComponent::class
+        ConsoleComponent::class
     ];
 
     private function loadComponents(): void

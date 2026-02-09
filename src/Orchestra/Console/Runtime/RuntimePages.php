@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\CLI\Runtime;
+namespace Orchestra\Console\Runtime;
 
 use Orchestra\Contractor\BuildersCollection;
 use Orchestra\Pages\Pages;

@@ -1,22 +1,22 @@
 <?php
 
-namespace Orchestra\CLI\Command;
+namespace Orchestra\Console\Command;
 
 use GSpataro\CLI\Helper\Stopwatch;
 use Orchestra\Pages\Pages;
 use Orchestra\Project\Prototype;
 use Orchestra\Finder\Researcher;
 use Orchestra\Assets\Media;
-use Orchestra\CLI\Runtime\RuntimeCleanup;
-use Orchestra\CLI\Runtime\RuntimeContents;
 use Orchestra\Library\ReadersCollection;
 use Orchestra\Pages\GeneratorsCollection;
 use Orchestra\Contractor\BuildersCollection;
 use Orchestra\Project\Sitemap;
-use Orchestra\CLI\Runtime\RuntimeMedia;
-use Orchestra\CLI\Runtime\RuntimePages;
-use Orchestra\CLI\Runtime\RuntimeSchemas;
-use Orchestra\CLI\Runtime\RuntimeSitemap;
+use Orchestra\Console\Runtime\RuntimeCleanup;
+use Orchestra\Console\Runtime\RuntimeContents;
+use Orchestra\Console\Runtime\RuntimeMedia;
+use Orchestra\Console\Runtime\RuntimePages;
+use Orchestra\Console\Runtime\RuntimeSchemas;
+use Orchestra\Console\Runtime\RuntimeSitemap;
 
 final class BuildCommand extends BaseCommand
 {
