@@ -14,7 +14,10 @@ class DotenvComponent extends Component
 
     public function boot(Container $container): void
     {
-        $dotenv = Dotenv::createImmutable(DIR_ROOT);
-        $dotenv->load();
+        /** @var \Orchestra\Pipeline\BuildContext */
+        $context = $container->get('pipeline.context');
+
+        $dotenv = Dotenv::createImmutable($context->root);
+        $dotenv->safeLoad();
     }
 }
