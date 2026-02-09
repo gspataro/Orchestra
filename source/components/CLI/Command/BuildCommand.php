@@ -7,16 +7,16 @@ use GSpataro\Project\Prototype;
 use GSpataro\Finder\Researcher;
 use GSpataro\CLI\Helper\Stopwatch;
 use GSpataro\Assets\Media;
+use GSpataro\CLI\Runtime\RuntimeCleanup;
+use GSpataro\CLI\Runtime\RuntimeContents;
 use GSpataro\Library\ReadersCollection;
 use GSpataro\Pages\GeneratorsCollection;
 use GSpataro\Contractor\BuildersCollection;
 use GSpataro\Project\Sitemap;
-use GSpataro\Application\Process\ProcessCleanup;
-use GSpataro\Application\Process\ProcessContents;
-use GSpataro\Application\Process\ProcessMedia;
-use GSpataro\Application\Process\ProcessPages;
-use GSpataro\Application\Process\ProcessSchemas;
-use GSpataro\Application\Process\ProcessSitemap;
+use GSpataro\CLI\Runtime\RuntimeMedia;
+use GSpataro\CLI\Runtime\RuntimePages;
+use GSpataro\CLI\Runtime\RuntimeSchemas;
+use GSpataro\CLI\Runtime\RuntimeSitemap;
 
 final class BuildCommand extends BaseCommand
 {
@@ -65,14 +65,14 @@ final class BuildCommand extends BaseCommand
         $this->stopwatch->start();
 
         $this->runProcess(
-            new ProcessContents(
+            new RuntimeContents(
                 $this->prototype,
                 $this->readers
             )
         );
 
         $this->runProcess(
-            new ProcessSchemas(
+            new RuntimeSchemas(
                 $this->prototype,
                 $this->generators,
                 $this->researcher
@@ -81,7 +81,7 @@ final class BuildCommand extends BaseCommand
 
         if ($this->argument('cleanup-only') !== false) {
             $this->runProcess(
-                new ProcessPages(
+                new RuntimePages(
                     $this->pages,
                     $this->builders
                 )
@@ -90,7 +90,7 @@ final class BuildCommand extends BaseCommand
 
         if ($this->argument('view-only') !== false && $this->argument('cleanup-only') !== false) {
             $this->runProcess(
-                new ProcessMedia(
+                new RuntimeMedia(
                     $this->media
                 )
             );
@@ -98,13 +98,13 @@ final class BuildCommand extends BaseCommand
 
 
         $this->runProcess(
-            new ProcessSitemap(
+            new RuntimeSitemap(
                 $this->sitemap
             )
         );
 
         $this->runProcess(
-            new ProcessCleanup(
+            new RuntimeCleanup(
                 $this->sitemap
             )
         );

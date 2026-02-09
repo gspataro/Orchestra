@@ -1,12 +1,11 @@
 <?php
 
-namespace GSpataro\Application\Process;
+namespace GSpataro\CLI\Runtime;
 
 use GSpataro\CLI\Interface\InputInterface;
 use GSpataro\CLI\Interface\OutputInterface;
-use GSpataro\DependencyInjection\Container;
 
-abstract class Process
+abstract class Runtime
 {
     protected InputInterface $input;
     protected OutputInterface $output;

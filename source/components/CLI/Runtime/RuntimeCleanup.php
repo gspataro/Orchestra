@@ -1,11 +1,11 @@
 <?php
 
-namespace GSpataro\Application\Process;
+namespace GSpataro\CLI\Runtime;
 
 use DirectoryIterator;
 use GSpataro\Project\Sitemap;
 
-class ProcessCleanup extends Process
+class RuntimeCleanup extends Runtime
 {
     public function __construct(
         private readonly Sitemap $sitemap

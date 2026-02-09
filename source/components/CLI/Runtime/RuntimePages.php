@@ -1,11 +1,11 @@
 <?php
 
-namespace GSpataro\Application\Process;
+namespace GSpataro\CLI\Runtime;
 
 use GSpataro\Contractor\BuildersCollection;
 use GSpataro\Pages\Pages;
 
-class ProcessPages extends Process
+class RuntimePages extends Runtime
 {
     public function __construct(
         private Pages $pages,

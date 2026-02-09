@@ -1,11 +1,11 @@
 <?php
 
-namespace GSpataro\Application\Process;
+namespace GSpataro\CLI\Runtime;
 
 use GSpataro\Library\ReadersCollection;
 use GSpataro\Project\Prototype;
 
-final class ProcessContents extends Process
+final class RuntimeContents extends Runtime
 {
     public function __construct(
         private Prototype $prototype,

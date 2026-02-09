@@ -2,7 +2,7 @@
 
 namespace GSpataro\CLI\Command;
 
-use GSpataro\Application\Process\Process;
+use GSpataro\CLI\Runtime\Runtime;
 use GSpataro\CLI\Command;
 use GSpataro\DependencyInjection\Container;
 
@@ -13,7 +13,7 @@ class BaseCommand extends Command
     ) {
     }
 
-    protected function runProcess(Process $process): mixed
+    protected function runProcess(Runtime $process): mixed
     {
         return $process->run(
             $this->input,

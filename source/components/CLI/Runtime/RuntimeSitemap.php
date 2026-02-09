@@ -1,11 +1,11 @@
 <?php
 
-namespace GSpataro\Application\Process;
+namespace GSpataro\CLI\Runtime;
 
 use GSpataro\Project\Sitemap;
 use SimpleXMLElement;
 
-class ProcessSitemap extends Process
+class RuntimeSitemap extends Runtime
 {
     public function __construct(
         private readonly Sitemap $sitemap
