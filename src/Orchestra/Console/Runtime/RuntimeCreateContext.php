@@ -8,17 +8,11 @@ use Orchestra\Project\Blueprint;
 use Orchestra\Project\Prototype;
 use Orchestra\Project\Sitemap;
 
-class RuntimeCreateContext extends Runtime
+final class RuntimeCreateContext extends Runtime
 {
     private Blueprint $blueprint;
     private Prototype $prototype;
     private Sitemap $sitemap;
-
-    public function __construct(
-        private readonly BuildContext $context,
-        private readonly Container $container
-    ) {
-    }
 
     public function loadBlueprint(): bool
     {

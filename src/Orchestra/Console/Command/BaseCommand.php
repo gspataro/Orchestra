@@ -9,12 +9,19 @@ use GSpataro\DependencyInjection\Container;
 class BaseCommand extends Command
 {
     public function __construct(
-        protected Container $app
+        protected Container $container
     ) {
     }
 
-    protected function runProcess(Runtime $process): mixed
+    protected function runProcess(string|Runtime $process): mixed
     {
+        if (!is_object($process)) {
+            $process = new $process(
+                $this->container,
+                $this->container->get('pipeline.context')
+            );
+        }
+
         return $process->run(
             $this->input,
             $this->output

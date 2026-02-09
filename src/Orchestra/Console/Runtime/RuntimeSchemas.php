@@ -4,16 +4,11 @@ namespace Orchestra\Console\Runtime;
 
 use Orchestra\Finder\Researcher;
 use Orchestra\Pages\GeneratorsCollection;
-use Orchestra\Pipeline\BuildContext;
 
-class RuntimeSchemas extends Runtime
+final class RuntimeSchemas extends Runtime
 {
-    public function __construct(
-        private BuildContext $context,
-        private GeneratorsCollection $generators,
-        private Researcher $researcher
-    ) {
-    }
+    private readonly GeneratorsCollection $generators;
+    private readonly Researcher $researcher;
 
     /**
      * Process schema contents
@@ -66,6 +61,9 @@ class RuntimeSchemas extends Runtime
 
     protected function main(): mixed
     {
+        $this->generators = $this->container->get('pages.generators');
+        $this->researcher = $this->container->get('finder.researcher');
+
         $this->output->print('{bold}Processing schemas');
 
         foreach ($this->context->prototype->get('schemas') as $tag => $schema) {

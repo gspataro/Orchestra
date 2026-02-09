@@ -3,15 +3,9 @@
 namespace Orchestra\Console\Runtime;
 
 use DirectoryIterator;
-use Orchestra\Pipeline\BuildContext;
 
-class RuntimeCleanup extends Runtime
+final class RuntimeCleanup extends Runtime
 {
-    public function __construct(
-        private readonly BuildContext $context
-    ) {
-    }
-
     private function cleanup(string $directory): void
     {
         if ($directory === $this->context->paths->output()) {

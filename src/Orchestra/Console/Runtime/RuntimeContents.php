@@ -7,14 +7,12 @@ use Orchestra\Pipeline\BuildContext;
 
 final class RuntimeContents extends Runtime
 {
-    public function __construct(
-        private BuildContext $context,
-        private ReadersCollection $readers
-    ) {
-    }
+    private readonly ReadersCollection $readers;
 
     protected function main(): mixed
     {
+        $this->readers = $this->container->get('library.readers');
+
         $this->output->print('{bold}Processing contents');
 
         foreach ($this->context->prototype->get('contents') as $group => $source) {

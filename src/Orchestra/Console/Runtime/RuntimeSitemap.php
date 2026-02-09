@@ -3,16 +3,10 @@
 namespace Orchestra\Console\Runtime;
 
 use Orchestra\Pipeline\BuildContext;
-use Orchestra\Project\Sitemap;
 use SimpleXMLElement;
 
-class RuntimeSitemap extends Runtime
+final class RuntimeSitemap extends Runtime
 {
-    public function __construct(
-        private readonly BuildContext $context
-    ) {
-    }
-
     public function main(): mixed
     {
         $this->output->print('{bold}Generating sitemap.xml');
