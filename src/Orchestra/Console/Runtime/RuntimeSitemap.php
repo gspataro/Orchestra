@@ -2,12 +2,14 @@
 
 namespace Orchestra\Console\Runtime;
 
+use Orchestra\Pipeline\BuildContext;
 use Orchestra\Project\Sitemap;
 use SimpleXMLElement;
 
 class RuntimeSitemap extends Runtime
 {
     public function __construct(
+        private readonly BuildContext $context,
         private readonly Sitemap $sitemap
     ) {
     }
@@ -35,7 +37,7 @@ class RuntimeSitemap extends Runtime
             $urlElement->addChild('lastmod', date('c'));
         }
 
-        $xml->asXml(DIR_OUTPUT . '/sitemap.xml');
+        $xml->asXml($this->context->paths->output('sitemap.xml'));
 
         return true;
     }

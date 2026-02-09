@@ -23,9 +23,12 @@ final class AssetsComponent extends Component
 
     public function boot(Container $container): void
     {
+        /** @var \Orchestra\Pipeline\BuildContext */
+        $context = $container->get('pipeline.context');
+
         /** @var Vite */
         $vite = $container->get('assets.vite', [
-            'manifestPath' => DIR_OUTPUT . '/assets/.vite/manifest.json',
+            'manifestPath' => $context->paths->output('/assets/.vite/manifest.json'),
             'outputPath' => '/assets/'
         ]);
         $vite->loadManifest();

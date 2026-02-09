@@ -10,7 +10,11 @@ final class PipelineComponent extends Component
     public function register(Container $container): void
     {
         $container->add('pipeline.context', function ($c, $a): object {
-            return new BuildContext($a['root'] ?? getcwd());
+            return new BuildContext($a['paths'] ?? null);
+        });
+
+        $container->add('pipeline.paths', function ($c, $a): object {
+            return new Paths($a['root'] ?? getcwd());
         });
     }
 

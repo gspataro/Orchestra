@@ -117,6 +117,7 @@ final class BuildCommand extends BaseCommand
         if ($this->argument('view-only') !== false && $this->argument('cleanup-only') !== false) {
             $this->runProcess(
                 new RuntimeMedia(
+                    $this->context,
                     $this->media
                 )
             );
@@ -125,12 +126,14 @@ final class BuildCommand extends BaseCommand
 
         $this->runProcess(
             new RuntimeSitemap(
+                $this->context,
                 $this->sitemap
             )
         );
 
         $this->runProcess(
             new RuntimeCleanup(
+                $this->context,
                 $this->sitemap
             )
         );

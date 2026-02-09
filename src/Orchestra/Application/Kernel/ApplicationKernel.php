@@ -30,7 +30,7 @@ final class ApplicationKernel extends Kernel
         ExceptionHandlerComponent::class,
         DotenvComponent::class,
         PipelineComponent::class,
-        LocalizationComponent::class,
+        //LocalizationComponent::class,
         ProjectComponent::class,
         HighlightComponent::class,
         AssetsComponent::class,

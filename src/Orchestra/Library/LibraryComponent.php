@@ -28,15 +28,18 @@ final class LibraryComponent extends Component
         $readersCollection = $container->get('library.readers');
 
         $readersCollection->add('text', new TextReader(
+            $container->get('pipeline.context'),
             $container->get('library.archive')
         ));
 
         $readersCollection->add('markdown', new MarkdownReader(
+            $container->get('pipeline.context'),
             $container->get('library.archive'),
             $container->get('markdown.converter')
         ));
 
         $readersCollection->add('json', new JsonReader(
+            $container->get('pipeline.context'),
             $container->get('library.archive')
         ));
     }

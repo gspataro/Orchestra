@@ -104,7 +104,7 @@ function pathJoin(string $base, string $path): string
 {
     $separator = null;
 
-    if (!str_ends_with($base, '/') && !str_starts_with($path, '/')) {
+    if ($path && !str_ends_with($base, '/') && !str_starts_with($path, '/')) {
         $separator = DIRECTORY_SEPARATOR;
     }
 

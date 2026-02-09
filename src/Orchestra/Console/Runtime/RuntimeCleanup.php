@@ -3,18 +3,20 @@
 namespace Orchestra\Console\Runtime;
 
 use DirectoryIterator;
+use Orchestra\Pipeline\BuildContext;
 use Orchestra\Project\Sitemap;
 
 class RuntimeCleanup extends Runtime
 {
     public function __construct(
+        private readonly BuildContext $context,
         private readonly Sitemap $sitemap
     ) {
     }
 
-    private function cleanup($directory = DIR_OUTPUT): void
+    private function cleanup(string $directory): void
     {
-        if ($directory === DIR_OUTPUT) {
+        if ($directory === $this->context->paths->output()) {
             $this->output->print('{bold}Cleaning up');
         }
 
@@ -32,8 +34,8 @@ class RuntimeCleanup extends Runtime
             }
 
             $itemPath = $item->isFile()
-                ? substr($item->getPathname(), strlen(DIR_OUTPUT), strlen('.html') * -1)
-                : substr($item->getPathname(), strlen(DIR_OUTPUT));
+                ? substr($item->getPathname(), strlen($this->context->paths->output()), strlen('.html') * -1)
+                : substr($item->getPathname(), strlen($this->context->paths->output()));
 
             if ($item->isFile() && !in_array($itemPath, $sitemap)) {
                 unlink($item->getPathname());
@@ -48,7 +50,7 @@ class RuntimeCleanup extends Runtime
 
     public function main(): mixed
     {
-        $this->cleanup();
+        $this->cleanup($this->context->paths->output());
 
         return true;
     }

@@ -31,16 +31,18 @@ final class ViewComponent extends Component
 
     public function boot(Container $container): void
     {
+        /** @var \Orchestra\Pipeline\BuildContext */
+        $context = $container->get('pipeline.context');
 
         /** @var FilesystemLoader */
         $twigLoader = $container->get('twig.loader');
 
-        if (is_dir(DIR_VIEW)) {
-            $twigLoader->addPath(DIR_VIEW);
+        if (is_dir($context->paths->views())) {
+            $twigLoader->addPath($context->paths->views());
         }
 
-        if (is_dir(DIR_ASSETS)) {
-            $twigLoader->addPath(DIR_ASSETS, 'assets');
+        if (is_dir($context->paths->assets())) {
+            $twigLoader->addPath($context->paths->assets(), 'assets');
         }
 
         /** @var TwigEnvironment */

@@ -15,7 +15,7 @@ class RuntimeBlueprint extends Runtime
 
     public function main(): bool
     {
-        $blueprintFile = $this->context->root . '/blueprint.json';
+        $blueprintFile = $this->context->paths->root('blueprint.json');
 
         if (!is_file($blueprintFile)) {
             $this->output->print('{bold}{fg_red}Blueprint file not found in project root.');

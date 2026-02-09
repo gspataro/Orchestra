@@ -17,7 +17,7 @@ class DotenvComponent extends Component
         /** @var \Orchestra\Pipeline\BuildContext */
         $context = $container->get('pipeline.context');
 
-        $dotenv = Dotenv::createImmutable($context->root);
+        $dotenv = Dotenv::createImmutable($context->paths->root());
         $dotenv->safeLoad();
     }
 }

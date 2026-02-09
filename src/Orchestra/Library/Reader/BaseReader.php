@@ -5,6 +5,7 @@ namespace Orchestra\Library\Reader;
 use Orchestra\Library\Archive;
 use Orchestra\Library\ErrorEnum;
 use Orchestra\Library\Interface\ReaderInterface;
+use Orchestra\Pipeline\BuildContext;
 
 abstract class BaseReader implements ReaderInterface
 {
@@ -39,6 +40,7 @@ abstract class BaseReader implements ReaderInterface
      */
 
     public function __construct(
+        protected readonly BuildContext $context,
         protected readonly Archive $archive
     ) {
     }
@@ -52,7 +54,7 @@ abstract class BaseReader implements ReaderInterface
 
     protected function getPath(string $source): string
     {
-        if (str_starts_with($source, DIR_DATA)) {
+        if (str_starts_with($source, $this->context->paths->data())) {
             return $source;
         }
 
@@ -60,7 +62,7 @@ abstract class BaseReader implements ReaderInterface
             $source = substr($source, 1);
         }
 
-        return DIR_DATA . DIRECTORY_SEPARATOR . $source;
+        return $this->context->paths->data($source);
     }
 
     /**

@@ -23,14 +23,17 @@ final class ContractorComponent extends Component
         $buildersCollection = $container->get('contractor.builders');
 
         $buildersCollection->add('simple', new SimpleBuilder(
+            $container->get('pipeline.context'),
             $container->get('twig')
         ));
 
         $buildersCollection->add('post', new PostBuilder(
+            $container->get('pipeline.context'),
             $container->get('twig')
         ));
 
         $buildersCollection->add('archive', new ArchiveBuilder(
+            $container->get('pipeline.context'),
             $container->get('twig')
         ));
     }

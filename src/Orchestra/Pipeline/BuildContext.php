@@ -8,13 +8,20 @@ use Orchestra\Project\Sitemap;
 
 final class BuildContext
 {
+    public readonly Paths $paths;
     public readonly Blueprint $blueprint;
     public readonly Prototype $prototype;
     public readonly Sitemap $sitemap;
 
-    public function __construct(
-        public readonly string $root
-    ) {
+    public function __construct(?Paths $paths = null)
+    {
+        if ($paths) {
+            $this->paths = $paths;
+            return;
+        }
+
+        $this->paths = new Paths(getcwd());
+        $this->paths->setDefaults();
     }
 
     public function setContext(Blueprint $blueprint, Prototype $prototype, Sitemap $sitemap): void

@@ -11,7 +11,7 @@ final class LocalizationComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->variable('langsPath', DIR_LANGS);
+        $container->variable('langsPath', '');
 
         $container->add('locales', fn(): object => new Locales());
 

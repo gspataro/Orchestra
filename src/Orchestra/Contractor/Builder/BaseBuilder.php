@@ -4,6 +4,7 @@ namespace Orchestra\Contractor\Builder;
 
 use Twig\Environment as TwigEnvironment;
 use Orchestra\Contractor\Interface\BuilderInterface;
+use Orchestra\Pipeline\BuildContext;
 
 abstract class BaseBuilder implements BuilderInterface
 {
@@ -14,6 +15,7 @@ abstract class BaseBuilder implements BuilderInterface
      */
 
     public function __construct(
+        protected readonly BuildContext $context,
         protected readonly TwigEnvironment $twig
     ) {
     }
@@ -27,7 +29,7 @@ abstract class BaseBuilder implements BuilderInterface
 
     protected function getOutputPath(string $path): string
     {
-        $outputPath = pathJoin(DIR_OUTPUT, $path) . '.html';
+        $outputPath = $this->context->paths->output($path . '.html');
         $outputDir = pathinfo($outputPath, PATHINFO_DIRNAME);
 
         if (!is_dir($outputDir)) {

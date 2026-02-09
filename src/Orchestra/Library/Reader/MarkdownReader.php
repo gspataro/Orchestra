@@ -5,6 +5,7 @@ namespace Orchestra\Library\Reader;
 use Orchestra\Library\Archive;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
+use Orchestra\Pipeline\BuildContext;
 
 final class MarkdownReader extends BaseReader
 {
@@ -16,6 +17,7 @@ final class MarkdownReader extends BaseReader
      */
 
     public function __construct(
+        protected readonly BuildContext $context,
         protected readonly Archive $archive,
         protected readonly ConverterInterface $markdown
     ) {

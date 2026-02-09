@@ -37,12 +37,12 @@ final class Media
      * Resize a media in all available sizes
      *
      * @param string $filePath
+     * @param string $baseOutputPath
      * @return void
      */
 
-    public function resizeMedia(string $filePath): void
+    public function resizeMedia(string $filePath, string $baseOutputPath): void
     {
-        $baseOutputPath = pathJoin(DIR_OUTPUT, 'media');
         $fileName = pathinfo($filePath, PATHINFO_BASENAME);
 
         if (!is_dir($baseOutputPath)) {

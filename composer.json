@@ -25,7 +25,6 @@
             "Orchestra\\": "src/Orchestra/"
         },
         "files": [
-            "src/directories.php",
             "src/functions.php"
         ]
     },
