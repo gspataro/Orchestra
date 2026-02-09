@@ -18,10 +18,8 @@ final class ViewComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->variable('twig.viewsPath', DIR_VIEW);
-
         $container->add('twig.loader', function ($container, $args): object {
-            return new FilesystemLoader($container->variable('twig.viewsPath'));
+            return new FilesystemLoader();
         });
 
         $container->add('twig', function ($container, $args): object {
@@ -33,7 +31,19 @@ final class ViewComponent extends Component
 
     public function boot(Container $container): void
     {
-        $container->get('twig.loader')->addPath(DIR_ASSETS, 'assets');
+
+        /** @var FilesystemLoader */
+        $twigLoader = $container->get('twig.loader');
+
+        if (is_dir(DIR_VIEW)) {
+            $twigLoader->addPath(DIR_VIEW);
+        }
+
+        if (is_dir(DIR_ASSETS)) {
+            $twigLoader->addPath(DIR_ASSETS, 'assets');
+        }
+
+        /** @var TwigEnvironment */
         $twig = $container->get('twig');
 
         $twig->addExtension(new StringExtension());
