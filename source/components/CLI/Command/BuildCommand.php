@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\Application\Command;
+namespace GSpataro\CLI\Command;
 
 use GSpataro\Pages\Pages;
 use GSpataro\Project\Prototype;

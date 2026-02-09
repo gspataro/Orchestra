@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\Application\Command;
+namespace GSpataro\CLI\Command;
 
 use GSpataro\Application\Process\Process;
 use GSpataro\CLI\Command;

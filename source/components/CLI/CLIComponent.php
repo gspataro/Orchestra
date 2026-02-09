@@ -1,15 +1,15 @@
 <?php
 
-namespace GSpataro\Solista\Component;
+namespace GSpataro\CLI;
 
 use GSpataro\CLI\Handler;
-use GSpataro\Application\Command;
+use GSpataro\CLI\Command\BuildCommand;
 use GSpataro\CLI\Helper\Stopwatch;
 use GSpataro\CLI\CommandsCollection;
 use GSpataro\DependencyInjection\Container;
-use GSpataro\Solista\Component as SolistaComponent;
+use GSpataro\Solista\Component;
 
-final class CLIComponent extends SolistaComponent
+final class CLIComponent extends Component
 {
     public function register(Container $container): void
     {
@@ -32,7 +32,7 @@ final class CLIComponent extends SolistaComponent
         $commands = $container->get('cli.commands');
 
         $commands->register(
-            new Command\BuildCommand($container)
+            new BuildCommand($container)
         );
 
         $cli->deploy();

@@ -3,6 +3,7 @@
 namespace GSpataro\Solista\Kernel;
 
 use GSpataro\Assets\AssetsComponent;
+use GSpataro\CLI\CLIComponent;
 use GSpataro\Contractor\ContractorComponent;
 use GSpataro\DependencyInjection\Container;
 use GSpataro\Finder\FinderComponent;
@@ -11,7 +12,6 @@ use GSpataro\Localization\LocalizationComponent;
 use GSpataro\Pages\PagesComponent;
 use GSpataro\Project\ProjectComponent;
 use GSpataro\Solista\Component;
-use GSpataro\Solista\Component\CLIComponent;
 use GSpataro\Solista\Component\DotenvComponent;
 use GSpataro\Solista\Component\ExceptionHandlerComponent;
 use GSpataro\Solista\Component\HighlightComponent;
