@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\Application\Component;
+namespace GSpataro\Contractor;
 
 use GSpataro\Contractor\Builder\ArchiveBuilder;
 use GSpataro\Contractor\BuildersCollection;

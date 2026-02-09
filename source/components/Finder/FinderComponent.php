@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\Application\Component;
+namespace GSpataro\Finder;
 
 use GSpataro\DependencyInjection\Container;
 use GSpataro\Finder\Researcher;

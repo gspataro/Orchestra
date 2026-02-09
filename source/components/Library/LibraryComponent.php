@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\Application\Component;
+namespace GSpataro\Library;
 
 use GSpataro\DependencyInjection\Container;
 use GSpataro\Library\Archive;

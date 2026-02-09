@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\Application\Component;
+namespace GSpataro\Solista\Component;
 
 use GSpataro\CLI\Handler;
 use GSpataro\Application\Command;

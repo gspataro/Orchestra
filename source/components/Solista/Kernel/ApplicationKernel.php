@@ -2,11 +2,23 @@
 
 namespace GSpataro\Solista\Kernel;
 
+use GSpataro\Assets\AssetsComponent;
+use GSpataro\Contractor\ContractorComponent;
 use GSpataro\DependencyInjection\Container;
+use GSpataro\Finder\FinderComponent;
+use GSpataro\Library\LibraryComponent;
+use GSpataro\Localization\LocalizationComponent;
+use GSpataro\Pages\PagesComponent;
+use GSpataro\Project\ProjectComponent;
 use GSpataro\Solista\Component;
+use GSpataro\Solista\Component\CLIComponent;
+use GSpataro\Solista\Component\DotenvComponent;
+use GSpataro\Solista\Component\ExceptionHandlerComponent;
+use GSpataro\Solista\Component\HighlightComponent;
+use GSpataro\Solista\Component\MarkdownComponent;
 use GSpataro\Solista\Exception\InvalidComponentException;
 use GSpataro\Solista\Kernel;
-use GSpataro\Application\Component as AppComponent;
+use GSpataro\View\ViewComponent;
 
 final class ApplicationKernel extends Kernel
 {
@@ -14,19 +26,19 @@ final class ApplicationKernel extends Kernel
 
     /** @var Component[] */
     private array $components = [
-        AppComponent\ExceptionHandlerComponent::class,
-        AppComponent\DotenvComponent::class,
-        AppComponent\LocalizationComponent::class,
-        AppComponent\ProjectComponent::class,
-        AppComponent\HighlightComponent::class,
-        AppComponent\AssetsComponent::class,
-        AppComponent\TwigComponent::class,
-        AppComponent\MarkdownComponent::class,
-        AppComponent\LibraryComponent::class,
-        AppComponent\FinderComponent::class,
-        AppComponent\PagesComponent::class,
-        AppComponent\ContractorComponent::class,
-        AppComponent\CLIComponent::class
+        ExceptionHandlerComponent::class,
+        DotenvComponent::class,
+        LocalizationComponent::class,
+        ProjectComponent::class,
+        HighlightComponent::class,
+        AssetsComponent::class,
+        ViewComponent::class,
+        MarkdownComponent::class,
+        LibraryComponent::class,
+        FinderComponent::class,
+        PagesComponent::class,
+        ContractorComponent::class,
+        CLIComponent::class
     ];
 
     private function loadComponents(): void

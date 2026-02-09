@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\View;
+namespace GSpataro\View\Twig;
 
 use GSpataro\Assets\Vite;
 use Twig\TwigFilter;

@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\Application\Component;
+namespace GSpataro\Project;
 
 use GSpataro\DependencyInjection\Container;
 use GSpataro\Project\Blueprint;

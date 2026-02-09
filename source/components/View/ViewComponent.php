@@ -1,20 +1,20 @@
 <?php
 
-namespace GSpataro\Application\Component;
+namespace GSpataro\View;
 
 use GSpataro\DependencyInjection\Container;
 use GSpataro\Solista\Component;
 use Twig\Environment;
-use GSpataro\View\TwigSitemap;
-use GSpataro\View\TwigBlueprint;
-use GSpataro\View\TwigHighlighter;
+use GSpataro\View\Twig\TwigSitemap;
+use GSpataro\View\Twig\TwigBlueprint;
+use GSpataro\View\Twig\TwigHighlighter;
+use GSpataro\View\Twig\TwigGenerics;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extra\String\StringExtension;
-use GSpataro\View\TwigGenerics;
 use Twig\Extension\StringLoaderExtension;
 use Twig\Extra\Intl\IntlExtension;
 
-final class TwigComponent extends Component
+final class ViewComponent extends Component
 {
     public function register(Container $container): void
     {

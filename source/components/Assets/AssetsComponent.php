@@ -1,6 +1,6 @@
 <?php
 
-namespace GSpataro\Application\Component;
+namespace GSpataro\Assets;
 
 use GSpataro\Assets\Media;
 use GSpataro\Assets\Vite;
