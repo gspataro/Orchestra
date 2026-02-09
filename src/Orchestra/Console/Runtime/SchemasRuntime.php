@@ -5,7 +5,7 @@ namespace Orchestra\Console\Runtime;
 use Orchestra\Finder\Researcher;
 use Orchestra\Pages\GeneratorsCollection;
 
-final class RuntimeSchemas extends Runtime
+final class SchemasRuntime extends Runtime
 {
     private readonly GeneratorsCollection $generators;
     private readonly Researcher $researcher;

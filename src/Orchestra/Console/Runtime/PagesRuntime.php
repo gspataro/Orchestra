@@ -5,7 +5,7 @@ namespace Orchestra\Console\Runtime;
 use Orchestra\Contractor\BuildersCollection;
 use Orchestra\Pages\Pages;
 
-final class RuntimePages extends Runtime
+final class PagesRuntime extends Runtime
 {
     private readonly Pages $pages;
     private readonly BuildersCollection $builders;

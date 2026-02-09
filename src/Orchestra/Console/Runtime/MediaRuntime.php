@@ -5,7 +5,7 @@ namespace Orchestra\Console\Runtime;
 use Orchestra\Assets\Media;
 use Orchestra\Pipeline\BuildContext;
 
-final class RuntimeMedia extends Runtime
+final class MediaRuntime extends Runtime
 {
     private readonly Media $media;
 

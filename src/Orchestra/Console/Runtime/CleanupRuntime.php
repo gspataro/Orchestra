@@ -4,7 +4,7 @@ namespace Orchestra\Console\Runtime;
 
 use DirectoryIterator;
 
-final class RuntimeCleanup extends Runtime
+final class CleanupRuntime extends Runtime
 {
     private function cleanup(string $directory): void
     {

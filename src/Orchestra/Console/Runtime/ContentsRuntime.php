@@ -5,7 +5,7 @@ namespace Orchestra\Console\Runtime;
 use Orchestra\Library\ReadersCollection;
 use Orchestra\Pipeline\BuildContext;
 
-final class RuntimeContents extends Runtime
+final class ContentsRuntime extends Runtime
 {
     private readonly ReadersCollection $readers;
 

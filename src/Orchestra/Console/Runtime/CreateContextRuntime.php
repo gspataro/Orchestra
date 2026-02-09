@@ -8,7 +8,7 @@ use Orchestra\Project\Blueprint;
 use Orchestra\Project\Prototype;
 use Orchestra\Project\Sitemap;
 
-final class RuntimeCreateContext extends Runtime
+final class CreateContextRuntime extends Runtime
 {
     private Blueprint $blueprint;
     private Prototype $prototype;

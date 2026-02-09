@@ -5,7 +5,7 @@ namespace Orchestra\Console\Runtime;
 use Orchestra\Pipeline\BuildContext;
 use SimpleXMLElement;
 
-final class RuntimeSitemap extends Runtime
+final class SitemapRuntime extends Runtime
 {
     public function main(): mixed
     {
