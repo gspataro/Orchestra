@@ -5,7 +5,7 @@ namespace Orchestra\Localization;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Localization\Locales;
 use Orchestra\Localization\Language;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 
 final class LocalizationComponent extends Component
 {

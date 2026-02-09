@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Solista\Kernel;
+namespace Orchestra\Application\Kernel;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Assets\AssetsComponent;
@@ -11,13 +11,13 @@ use Orchestra\Library\LibraryComponent;
 use Orchestra\Localization\LocalizationComponent;
 use Orchestra\Pages\PagesComponent;
 use Orchestra\Project\ProjectComponent;
-use Orchestra\Solista\Component;
-use Orchestra\Solista\Component\DotenvComponent;
-use Orchestra\Solista\Component\ExceptionHandlerComponent;
-use Orchestra\Solista\Component\HighlightComponent;
-use Orchestra\Solista\Component\MarkdownComponent;
-use Orchestra\Solista\Exception\InvalidComponentException;
-use Orchestra\Solista\Kernel;
+use Orchestra\Application\Component;
+use Orchestra\Application\Component\DotenvComponent;
+use Orchestra\Application\Component\ExceptionHandlerComponent;
+use Orchestra\Application\Component\HighlightComponent;
+use Orchestra\Application\Component\MarkdownComponent;
+use Orchestra\Application\Exception\InvalidComponentException;
+use Orchestra\Application\Kernel;
 use Orchestra\View\ViewComponent;
 
 final class ApplicationKernel extends Kernel

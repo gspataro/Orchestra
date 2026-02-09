@@ -7,7 +7,7 @@ use Orchestra\Contractor\BuildersCollection;
 use Orchestra\Contractor\Builder\PostBuilder;
 use Orchestra\Contractor\Builder\SimpleBuilder;
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 
 final class ContractorComponent extends Component
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Solista\Exception;
+namespace Orchestra\Application\Exception;
 
 use Exception;
 

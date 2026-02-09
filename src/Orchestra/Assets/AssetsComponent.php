@@ -3,7 +3,7 @@
 namespace Orchestra\Assets;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 
 final class AssetsComponent extends Component
 {

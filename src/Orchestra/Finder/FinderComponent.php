@@ -4,7 +4,7 @@ namespace Orchestra\Finder;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Finder\Researcher;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 
 final class FinderComponent extends Component
 {

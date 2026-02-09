@@ -8,7 +8,7 @@ use Orchestra\Library\Reader\JsonReader;
 use Orchestra\Library\ReadersCollection;
 use Orchestra\Library\Reader\TextReader;
 use Orchestra\Library\Reader\MarkdownReader;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 
 final class LibraryComponent extends Component
 {

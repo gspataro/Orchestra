@@ -7,7 +7,7 @@ use GSpataro\CLI\Helper\Stopwatch;
 use GSpataro\CLI\CommandsCollection;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\CLI\Command\BuildCommand;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 
 final class CLIComponent extends Component
 {

@@ -8,7 +8,7 @@ use Orchestra\Pages\GeneratorsCollection;
 use Orchestra\Pages\Generator\OnceGenerator;
 use Orchestra\Pages\Generator\PaginateGenerator;
 use Orchestra\Pages\Generator\LoopGenerator;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 
 final class PagesComponent extends Component
 {

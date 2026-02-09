@@ -1,10 +1,10 @@
 <?php
 
-namespace Orchestra\Solista\Component;
+namespace Orchestra\Application\Component;
 
 use Dotenv\Dotenv;
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 
 class DotenvComponent extends Component
 {

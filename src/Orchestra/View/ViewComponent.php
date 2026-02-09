@@ -3,7 +3,7 @@
 namespace Orchestra\View;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 use Twig\Environment;
 use Orchestra\View\Twig\TwigSitemap;
 use Orchestra\View\Twig\TwigBlueprint;

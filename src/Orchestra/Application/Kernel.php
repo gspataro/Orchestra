@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Solista;
+namespace Orchestra\Application;
 
 abstract class Kernel
 {

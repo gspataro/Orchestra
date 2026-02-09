@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Solista;
+namespace Orchestra\Application;
 
 use GSpataro\DependencyInjection\Container;
 

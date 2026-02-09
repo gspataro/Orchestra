@@ -1,9 +1,9 @@
 <?php
 
-namespace Orchestra\Solista\Component;
+namespace Orchestra\Application\Component;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Solista\Component;
+use Orchestra\Application\Component;
 use League\CommonMark\MarkdownConverter;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;

@@ -8,7 +8,7 @@
  * @version 1.0.0
  */
 
-use Orchestra\Solista\Kernel\ApplicationKernel;
+use Orchestra\Application\Kernel\ApplicationKernel;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
