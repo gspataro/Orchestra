@@ -23,9 +23,8 @@ class Vite
     public function loadManifest(): void
     {
         if (!is_file($this->manifestPath)) {
-            throw new InvalidViteManifestException(
-                "Vite manifest not found: {$this->manifestPath}"
-            );
+            $this->manifest = [];
+            return;
         }
 
         $manifest = file_get_contents($this->manifestPath);
@@ -45,8 +44,12 @@ class Vite
      * @return string
      */
 
-    public function css()
+    public function css(): string
     {
+        if (empty($this->manifest)) {
+            return '';
+        }
+
         $tags = [];
 
         foreach ($this->manifest as $input => $chunk) {
@@ -72,8 +75,12 @@ class Vite
      * @return string
      */
 
-    public function js()
+    public function js(): string
     {
+        if (empty($this->manifest)) {
+            return '';
+        }
+
         $tags = [];
 
         foreach ($this->manifest as $input => $chunk) {

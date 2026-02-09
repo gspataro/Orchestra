@@ -23,6 +23,7 @@ final class AssetsComponent extends Component
 
     public function boot(Container $container): void
     {
+        /** @var Vite */
         $vite = $container->get('assets.vite', [
             'manifestPath' => DIR_OUTPUT . '/assets/.vite/manifest.json',
             'outputPath' => '/assets/'
