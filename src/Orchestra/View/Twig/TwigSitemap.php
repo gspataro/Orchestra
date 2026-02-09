@@ -15,7 +15,7 @@ final class TwigSitemap extends AbstractExtension
 
     public function url($tag)
     {
-        $url = $_ENV['WEBSITE_URL'] ?? '';
+        $url = getenv('WEBSITE_URL') ?: '';
         $friendlyUrls = $this->context->blueprint->get('website.friendly_urls');
         $path = $this->context->sitemap->get($tag);
         $separator = null;
@@ -42,7 +42,7 @@ final class TwigSitemap extends AbstractExtension
 
     public function media($file, $size)
     {
-        $url = $_ENV['WEBSITE_URL'] ?? '';
+        $url = getenv('WEBSITE_URL') ?: '';
         return $url . '/media/' . $size . '/' . $file;
     }
 
