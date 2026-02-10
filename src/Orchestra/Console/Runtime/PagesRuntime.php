@@ -12,10 +12,10 @@ final class PagesRuntime extends Runtime
 
     protected function main(): mixed
     {
+        $this->output->print('{bold}Building pages');
+
         $this->pages = $this->container->get('pages.collection');
         $this->builders = $this->container->get('contractor.builders');
-
-        $this->output->print('{bold}Building pages');
 
         foreach ($this->pages as $page) {
             $builder = $this->builders->get($page->schema->builder);
