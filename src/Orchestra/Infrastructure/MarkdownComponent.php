@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Application\Component;
+namespace Orchestra\Infrastructure;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;

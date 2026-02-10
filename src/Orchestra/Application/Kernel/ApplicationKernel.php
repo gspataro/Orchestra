@@ -12,12 +12,12 @@ use Orchestra\Localization\LocalizationComponent;
 use Orchestra\Pages\PagesComponent;
 use Orchestra\Project\ProjectComponent;
 use Orchestra\Application\Component;
-use Orchestra\Application\Component\DotenvComponent;
-use Orchestra\Application\Component\ExceptionHandlerComponent;
-use Orchestra\Application\Component\HighlightComponent;
-use Orchestra\Application\Component\MarkdownComponent;
 use Orchestra\Application\Exception\InvalidComponentException;
 use Orchestra\Application\Kernel;
+use Orchestra\Infrastructure\DotenvComponent;
+use Orchestra\Infrastructure\ExceptionHandlerComponent;
+use Orchestra\Infrastructure\HighlightComponent;
+use Orchestra\Infrastructure\MarkdownComponent;
 use Orchestra\Pipeline\PipelineComponent;
 use Orchestra\View\ViewComponent;
 
