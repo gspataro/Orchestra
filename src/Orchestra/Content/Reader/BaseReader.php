@@ -3,36 +3,11 @@
 namespace Orchestra\Content\Reader;
 
 use Orchestra\Content\Archive;
-use Orchestra\Content\ErrorEnum;
 use Orchestra\Content\ReaderInterface;
 use Orchestra\Pipeline\BuildContext;
 
 abstract class BaseReader implements ReaderInterface
 {
-    /**
-     * Store error
-     *
-     * @var ErrorEnum
-     */
-
-    private ErrorEnum $error;
-
-    /**
-     * Store failed status
-     *
-     * @var bool
-     */
-
-    private bool $failed = false;
-
-    /**
-     * Store failed source
-     *
-     * @var string
-     */
-
-    private string $failedSource;
-
     /**
      * Initialize reader
      *
@@ -103,7 +78,6 @@ abstract class BaseReader implements ReaderInterface
         }
 
         if (str_contains($source, ' ')) {
-            $this->fail(ErrorEnum::SpacesInFilename, $source);
             return [];
         }
 
@@ -133,10 +107,6 @@ abstract class BaseReader implements ReaderInterface
             $tag = $this->fileToTag($filename);
 
             $results[$tag] = $this->handleOne($group, $source, true);
-
-            if ($this->failed()) {
-                return [];
-            }
         }
 
         return $results;
@@ -163,10 +133,6 @@ abstract class BaseReader implements ReaderInterface
             $tag = $this->fileToTag($filename);
 
             $results[$tag] = $this->handleOne($group, $file, true);
-
-            if ($this->failed()) {
-                return [];
-            }
         }
 
         return $results;
@@ -193,53 +159,5 @@ abstract class BaseReader implements ReaderInterface
         }
 
         return $this->handlePattern($group, $source);
-    }
-
-    /**
-     * Set failed status to true, stop the reading process and set the error code
-     *
-     * @param ErrorEnum $code
-     * @param string $source;
-     * @return void
-     */
-
-    protected function fail(ErrorEnum $code, string $source): void
-    {
-        $this->failed = true;
-        $this->error = $code;
-        $this->failedSource = $source;
-    }
-
-    /**
-     * Get failed status
-     *
-     * @return bool
-     */
-
-    public function failed(): bool
-    {
-        return $this->failed;
-    }
-
-    /**
-     * Get error
-     *
-     * @return array
-     */
-
-    public function getError(): ErrorEnum
-    {
-        return $this->error;
-    }
-
-    /**
-     * Get failed source
-     *
-     * @return string
-     */
-
-    public function getFailedSource(): string
-    {
-        return $this->failedSource;
     }
 }

@@ -19,14 +19,6 @@ final class ContentsRuntime extends Runtime
 
             $reader = $this->readers->get($source->reader);
             $reader->compile($source->group, $source->path);
-
-            if ($reader->failed()) {
-                $error = $reader->getError();
-                $this->output->error("Contents processing failed on group '{$source->group}'.");
-                $this->output->print('Error: {clear}' . $error->value);
-                $this->output->print('Source: {clear}' . $reader->getFailedSource());
-                exit(1);
-            }
         }
 
         return true;
