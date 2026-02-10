@@ -9,30 +9,23 @@ final class LoopGenerator extends BaseGenerator
     public function generate(ResolvedSchema $schema): void
     {
         $contents = $schema->contents;
-        $basedOn = $this->archive->get($schema->source);
+        $source = $contents[$schema->source] ?? [];
 
-        if (empty($basedOn)) {
+        if (empty($source)) {
             return;
         }
 
         unset($contents[$schema->source]);
 
-        $this->createCollection(
-            $schema->tag,
-            $schema->template,
-            $schema->builder,
-            $contents
-        );
-
-        foreach ($basedOn as $contentTag => $content) {
+        foreach ($source as $contentTag => $content) {
             $tag = $schema->tag . '.' . $contentTag;
             $content['id'] = $contentTag;
 
-            $this->addPageToCollection(
+            $this->createPage(
                 $schema->tag,
-                $contentTag,
                 $this->sitemap->add($tag, $schema->slug . '/' . $contentTag),
-                [$schema->tag => $content]
+                [$schema->tag => $content],
+                $schema
             );
         }
     }

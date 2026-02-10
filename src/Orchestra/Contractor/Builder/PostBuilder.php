@@ -2,21 +2,12 @@
 
 namespace Orchestra\Contractor\Builder;
 
+use Orchestra\Pages\Page\Page;
+
 final class PostBuilder extends BaseBuilder
 {
-    /**
-     * Compile post
-     *
-     * @param array $page
-     * @return mixed
-     */
-
-    public function compile(array $page): void
+    public function compile(Page $page): void
     {
-        if (!$page['collection']) {
-            return;
-        }
-
         foreach ($page['collection'] as $post) {
             $outputPath = $this->getOutputPath($post['permalink']);
             $compiled = $this->twig->render(

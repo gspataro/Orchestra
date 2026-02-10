@@ -2,19 +2,14 @@
 
 namespace Orchestra\Contractor\Builder;
 
+use Orchestra\Pages\Page\Page;
+
 final class SimpleBuilder extends BaseBuilder
 {
-    /**
-     * Compile a page
-     *
-     * @param array $page
-     * @return mixed
-     */
-
-    public function compile(array $page): void
+    public function compile(Page $page): void
     {
-        $outputPath = $this->getOutputPath($page['permalink']);
-        $compiled = $this->twig->render($page['template'] . '.html', $page['contents']);
+        $outputPath = $this->getOutputPath($page->permalink);
+        $compiled = $this->twig->render($page->schema->template . '.html', $page->contents);
 
         file_put_contents($outputPath, $compiled);
     }

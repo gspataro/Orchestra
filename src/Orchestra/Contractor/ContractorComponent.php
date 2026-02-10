@@ -27,7 +27,7 @@ final class ContractorComponent extends Component
             $container->get('twig')
         ));
 
-        $buildersCollection->add('post', new PostBuilder(
+        /*$buildersCollection->add('post', new PostBuilder(
             $container->get('pipeline.context'),
             $container->get('twig')
         ));
@@ -35,6 +35,6 @@ final class ContractorComponent extends Component
         $buildersCollection->add('archive', new ArchiveBuilder(
             $container->get('pipeline.context'),
             $container->get('twig')
-        ));
+        ));*/
     }
 }

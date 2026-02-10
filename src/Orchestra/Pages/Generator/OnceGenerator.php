@@ -11,9 +11,8 @@ final class OnceGenerator extends BaseGenerator
         $this->createPage(
             $schema->tag,
             $this->sitemap->add($schema->tag, $schema->slug),
-            $schema->template,
-            $schema->builder,
-            $schema->contents
+            $schema->contents,
+            $schema
         );
     }
 }

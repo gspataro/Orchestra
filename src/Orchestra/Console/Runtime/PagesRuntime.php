@@ -3,11 +3,11 @@
 namespace Orchestra\Console\Runtime;
 
 use Orchestra\Contractor\BuildersCollection;
-use Orchestra\Pages\Pages;
+use Orchestra\Pages\Page\PageCollection;
 
 final class PagesRuntime extends Runtime
 {
-    private readonly Pages $pages;
+    private readonly PageCollection $pages;
     private readonly BuildersCollection $builders;
 
     protected function main(): mixed
@@ -17,8 +17,8 @@ final class PagesRuntime extends Runtime
 
         $this->output->print('{bold}Building pages');
 
-        foreach ($this->pages->getAll() as $page) {
-            $builder = $this->builders->get($page['builder']);
+        foreach ($this->pages as $page) {
+            $builder = $this->builders->get($page->schema->builder);
             $builder->compile($page);
         }
 

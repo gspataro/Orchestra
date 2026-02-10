@@ -2,14 +2,9 @@
 
 namespace Orchestra\Contractor\Interface;
 
+use Orchestra\Pages\Page\Page;
+
 interface BuilderInterface
 {
-    /**
-     * Execute build
-     *
-     * @param array $page
-     * @return void
-     */
-
-    public function compile(array $page): void;
+    public function compile(Page $page): void;
 }
