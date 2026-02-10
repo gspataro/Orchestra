@@ -5,7 +5,7 @@ namespace Orchestra\Contractor;
 use Orchestra\Contractor\Builder\ArchiveBuilder;
 use Orchestra\Contractor\BuildersCollection;
 use Orchestra\Contractor\Builder\PostBuilder;
-use Orchestra\Contractor\Builder\SimpleBuilder;
+use Orchestra\Contractor\Builder\TwigBuilder;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
 
@@ -22,19 +22,9 @@ final class ContractorComponent extends Component
     {
         $buildersCollection = $container->get('contractor.builders');
 
-        $buildersCollection->add('simple', new SimpleBuilder(
+        $buildersCollection->add('twig', new TwigBuilder(
             $container->get('pipeline.context'),
             $container->get('twig')
         ));
-
-        /*$buildersCollection->add('post', new PostBuilder(
-            $container->get('pipeline.context'),
-            $container->get('twig')
-        ));
-
-        $buildersCollection->add('archive', new ArchiveBuilder(
-            $container->get('pipeline.context'),
-            $container->get('twig')
-        ));*/
     }
 }
