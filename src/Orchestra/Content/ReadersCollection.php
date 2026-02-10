@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Library;
+namespace Orchestra\Content;
 
-use Orchestra\Library\Interface\ReaderInterface;
+use Orchestra\Content\Interface\ReaderInterface;
 
 final class ReadersCollection
 {

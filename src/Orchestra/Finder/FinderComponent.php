@@ -12,7 +12,7 @@ final class FinderComponent extends Component
     {
         $container->add('finder.researcher', function ($container, $args): object {
             return new Researcher(
-                $container->get('library.archive')
+                $container->get('content.archive')
             );
         });
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Library\Reader;
+namespace Orchestra\Content\Reader;
 
-use Orchestra\Library\Archive;
+use Orchestra\Content\Archive;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
 use Orchestra\Pipeline\BuildContext;

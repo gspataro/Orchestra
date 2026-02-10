@@ -2,7 +2,7 @@
 
 namespace Orchestra\Finder;
 
-use Orchestra\Library\Archive;
+use Orchestra\Content\Archive;
 use Orchestra\Finder\Exception\InvalidResearchContent;
 
 final class Researcher

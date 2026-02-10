@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Library\Exception;
+namespace Orchestra\Content\Exception;
 
 use Exception;
 

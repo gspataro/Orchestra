@@ -7,7 +7,7 @@ use Orchestra\Assets\AssetsComponent;
 use Orchestra\Console\ConsoleComponent;
 use Orchestra\Contractor\ContractorComponent;
 use Orchestra\Finder\FinderComponent;
-use Orchestra\Library\LibraryComponent;
+use Orchestra\Content\ContentComponent;
 use Orchestra\Localization\LocalizationComponent;
 use Orchestra\Pages\PagesComponent;
 use Orchestra\Project\ProjectComponent;
@@ -36,7 +36,7 @@ final class ApplicationKernel extends Kernel
         AssetsComponent::class,
         ViewComponent::class,
         MarkdownComponent::class,
-        LibraryComponent::class,
+        ContentComponent::class,
         FinderComponent::class,
         PagesComponent::class,
         ContractorComponent::class,

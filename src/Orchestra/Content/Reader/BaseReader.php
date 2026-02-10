@@ -1,10 +1,10 @@
 <?php
 
-namespace Orchestra\Library\Reader;
+namespace Orchestra\Content\Reader;
 
-use Orchestra\Library\Archive;
-use Orchestra\Library\ErrorEnum;
-use Orchestra\Library\Interface\ReaderInterface;
+use Orchestra\Content\Archive;
+use Orchestra\Content\ErrorEnum;
+use Orchestra\Content\Interface\ReaderInterface;
 use Orchestra\Pipeline\BuildContext;
 
 abstract class BaseReader implements ReaderInterface

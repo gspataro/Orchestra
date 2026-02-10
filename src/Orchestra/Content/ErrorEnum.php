@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Library;
+namespace Orchestra\Content;
 
 enum ErrorEnum: string
 {

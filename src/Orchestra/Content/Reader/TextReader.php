@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Library\Reader;
+namespace Orchestra\Content\Reader;
 
 final class TextReader extends BaseReader
 {

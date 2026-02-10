@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Library\Interface;
+namespace Orchestra\Content\Interface;
 
-use Orchestra\Library\ErrorEnum;
+use Orchestra\Content\ErrorEnum;
 
 interface ReaderInterface
 {

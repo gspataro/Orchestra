@@ -2,7 +2,7 @@
 
 namespace Orchestra\Pipeline\Runtime;
 
-use Orchestra\Library\ReadersCollection;
+use Orchestra\Content\ReadersCollection;
 
 final class ContentsRuntime extends Runtime
 {
@@ -10,7 +10,7 @@ final class ContentsRuntime extends Runtime
 
     public function run(array $options = []): bool
     {
-        $this->readers = $this->container->get('library.readers');
+        $this->readers = $this->container->get('content.readers');
 
         $this->output->info('Processing contents');
 
