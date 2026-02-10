@@ -65,12 +65,6 @@ final class BlueprintCompiler
                 );
             }
 
-            if (!isset($schema['builder'])) {
-                throw new InvalidBlueprintException(
-                    "You must provide a builder for schema '{$tag}'."
-                );
-            }
-
             if (!isset($schema['generate'])) {
                 throw new InvalidItemException(
                     "You must provide a generator for schema '{$tag}'."
@@ -128,7 +122,7 @@ final class BlueprintCompiler
                 $schema['template'],
                 $generator ?? $schema['generate'],
                 $schema['generate_based_on'],
-                $schema['builder'],
+                $schema['builder'] ?? 'twig',
                 $schema['slug'],
                 $schema['options'] ?? []
             );
