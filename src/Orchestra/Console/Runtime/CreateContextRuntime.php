@@ -2,16 +2,14 @@
 
 namespace Orchestra\Console\Runtime;
 
-use GSpataro\DependencyInjection\Container;
-use Orchestra\Pipeline\BuildContext;
 use Orchestra\Project\Blueprint;
-use Orchestra\Project\Prototype;
+use Orchestra\Project\BlueprintCompiler;
 use Orchestra\Project\Sitemap;
 
 final class CreateContextRuntime extends Runtime
 {
     private Blueprint $blueprint;
-    private Prototype $prototype;
+    private BlueprintCompiler $compiler;
     private Sitemap $sitemap;
 
     public function loadBlueprint(): bool
@@ -39,12 +37,15 @@ final class CreateContextRuntime extends Runtime
 
     public function createContext(): bool
     {
-        $this->prototype = $this->container->get('project.prototype');
+        /** @var BlueprintCompiler */
+        $this->compiler = $this->container->get('project.compiler');
+
+        /** @var Sitemap */
         $this->sitemap = $this->container->get('project.sitemap');
 
         $this->context->setContext(
             $this->blueprint,
-            $this->prototype,
+            $this->compiler->compile(),
             $this->sitemap
         );
 

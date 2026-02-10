@@ -16,8 +16,8 @@ final class ProjectComponent extends Component
             return new Blueprint();
         });
 
-        $container->add('project.prototype', function ($container, $args): object {
-            return new Prototype(
+        $container->add('project.compiler', function ($container, $args): object {
+            return new BlueprintCompiler(
                 $container->get('project.blueprint')
             );
         });
