@@ -2,7 +2,7 @@
 
 namespace Orchestra\Pipeline\Runtime;
 
-use Orchestra\Contractor\BuildersCollection;
+use Orchestra\Publisher\BuildersCollection;
 use Orchestra\Pages\Page\PageCollection;
 
 final class PagesRuntime extends Runtime
@@ -19,7 +19,7 @@ final class PagesRuntime extends Runtime
         $this->output->info('Building pages');
 
         $this->pages = $this->container->get('pages.collection');
-        $this->builders = $this->container->get('contractor.builders');
+        $this->builders = $this->container->get('publisher.builders');
 
         foreach ($this->pages as $page) {
             $builder = $this->builders->get($page->schema->builder);

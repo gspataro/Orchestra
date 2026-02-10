@@ -5,7 +5,7 @@ namespace Orchestra\Application\Kernel;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Assets\AssetsComponent;
 use Orchestra\Console\ConsoleComponent;
-use Orchestra\Contractor\ContractorComponent;
+use Orchestra\Publisher\PublisherComponent;
 use Orchestra\Finder\FinderComponent;
 use Orchestra\Content\ContentComponent;
 use Orchestra\Localization\LocalizationComponent;
@@ -39,7 +39,7 @@ final class ApplicationKernel extends Kernel
         ContentComponent::class,
         FinderComponent::class,
         PagesComponent::class,
-        ContractorComponent::class,
+        PublisherComponent::class,
         ConsoleComponent::class
     ];
 

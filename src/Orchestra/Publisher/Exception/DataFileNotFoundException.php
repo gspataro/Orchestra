@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Contractor\Exception;
+namespace Orchestra\Publisher\Exception;
 
 use Exception;
 

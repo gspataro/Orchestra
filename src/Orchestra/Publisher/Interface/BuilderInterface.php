@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Contractor\Interface;
+namespace Orchestra\Publisher\Interface;
 
 use Orchestra\Pages\Page\Page;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Orchestra\Contractor\Builder;
+namespace Orchestra\Publisher\Builder;
 
 use Twig\Environment as TwigEnvironment;
-use Orchestra\Contractor\Interface\BuilderInterface;
+use Orchestra\Publisher\Interface\BuilderInterface;
 use Orchestra\Pipeline\BuildContext;
 
 abstract class BaseBuilder implements BuilderInterface

@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Contractor;
+namespace Orchestra\Publisher;
 
-use Orchestra\Contractor\Interface\BuilderInterface;
+use Orchestra\Publisher\Interface\BuilderInterface;
 
 final class BuildersCollection
 {
