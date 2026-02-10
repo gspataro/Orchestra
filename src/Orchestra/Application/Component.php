@@ -1,0 +1,11 @@
+<?php
+
+namespace Orchestra\Application;
+
+use GSpataro\DependencyInjection\Container;
+
+abstract class Component
+{
+    abstract public function register(Container $container): void;
+    abstract public function boot(Container $container): void;
+}

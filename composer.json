@@ -5,7 +5,7 @@
     "authors": [
         {
             "name": "Giuseppe Spataro",
-            "homepage": "https://github.com/gspataro"
+            "homepage": "https://giuseppespataro.it"
         }
     ],
     "require": {
@@ -22,12 +22,21 @@
     },
     "autoload": {
         "psr-4": {
-            "GSpataro\\": "source/components/",
-            "GSpataro\\Application\\": "source/application"
+            "Orchestra\\": "src/Orchestra/"
         },
         "files": [
-            "source/directories.php",
-            "source/functions.php"
+            "src/functions.php"
         ]
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.36"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/pest"
     }
 }
