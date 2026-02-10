@@ -2,12 +2,18 @@
 
 namespace Orchestra\Project;
 
+use Orchestra\Project\Content\Content;
+use Orchestra\Project\Content\ContentCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidItemException;
+use Orchestra\Project\Schema\Schema;
+use Orchestra\Project\Schema\SchemaCollection;
 
 final class BlueprintCompiler
 {
+    /** @var Content[] */
     private array $contents = [];
+
     private array $schemas = [];
 
     public function __construct(
@@ -36,10 +42,7 @@ final class BlueprintCompiler
 
             [$reader, $path] = explode(':', $source, 2);
 
-            $this->contents[$group] = [
-                'reader' => $reader,
-                'path' => $path
-            ];
+            $this->contents[$group] = new Content($group, $reader, $path);
         }
     }
 
@@ -119,7 +122,16 @@ final class BlueprintCompiler
             $schema['generate_based_on'] = $generateBasedOn ?? '';
             $schema['options'] ??= [];
 
-            $this->schemas[$tag] = $schema;
+            $this->schemas[$tag] = new Schema(
+                $tag,
+                $contents,
+                $schema['template'],
+                $generator ?? $schema['generate'],
+                $schema['generate_based_on'],
+                $schema['builder'],
+                $schema['slug'],
+                $schema['options'] ?? []
+            );
         }
     }
 
@@ -128,9 +140,12 @@ final class BlueprintCompiler
         $this->readContents();
         $this->readSchemas();
 
+        $contentCollection = new ContentCollection($this->contents);
+        $schemaCollection = new SchemaCollection($this->schemas);
+
         return new Prototype(
-            $this->contents,
-            $this->schemas
+            $contentCollection,
+            $schemaCollection
         );
     }
 }

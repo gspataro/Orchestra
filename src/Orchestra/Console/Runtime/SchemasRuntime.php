@@ -66,13 +66,13 @@ final class SchemasRuntime extends Runtime
 
         $this->output->print('{bold}Processing schemas');
 
-        foreach ($this->context->prototype->get('schemas') as $tag => $schema) {
-            $this->output->print("Working on schema '{$tag}'");
+        foreach ($this->context->prototype->get('schemas') as $schema) {
+            $this->output->print("Working on schema '{$schema->tag}'");
 
-            $schema['contents'] = $this->processSchemaContents($schema['contents']);
+            $resolvedSchema = $schema->withResolvedContents($this->processSchemaContents($schema->contentsReferences));
 
-            $generator = $this->generators->get($schema['generator']);
-            $generator->generate($schema);
+            $generator = $this->generators->get($schema->generator);
+            $generator->generate($resolvedSchema);
         }
 
         return true;

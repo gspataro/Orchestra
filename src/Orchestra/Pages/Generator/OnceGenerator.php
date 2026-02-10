@@ -2,23 +2,18 @@
 
 namespace Orchestra\Pages\Generator;
 
+use Orchestra\Project\Schema\ResolvedSchema;
+
 final class OnceGenerator extends BaseGenerator
 {
-    /**
-     * Generate pages based on schema
-     *
-     * @param array $schema
-     * @return void
-     */
-
-    public function generate(array $schema): void
+    public function generate(ResolvedSchema $schema): void
     {
         $this->createPage(
-            $schema['tag'],
-            $this->sitemap->add($schema['tag'], $schema['slug']),
-            $schema['template'],
-            $schema['builder'],
-            $schema['contents']
+            $schema->tag,
+            $this->sitemap->add($schema->tag, $schema->slug),
+            $schema->template,
+            $schema->builder,
+            $schema->contents
         );
     }
 }

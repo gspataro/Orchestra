@@ -2,14 +2,9 @@
 
 namespace Orchestra\Pages\Interface;
 
+use Orchestra\Project\Schema\ResolvedSchema;
+
 interface GeneratorInterface
 {
-    /**
-     * Generate pages based on schema
-     *
-     * @param array $schema
-     * @return void
-     */
-
-    public function generate(array $schema): void;
+    public function generate(ResolvedSchema $schema): void;
 }

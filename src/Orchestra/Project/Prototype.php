@@ -2,6 +2,8 @@
 
 namespace Orchestra\Project;
 
+use Orchestra\Project\Content\ContentCollection;
+use Orchestra\Project\Schema\SchemaCollection;
 use Orchestra\Utilities\DotNavigator;
 
 final class Prototype extends DotNavigator
@@ -15,8 +17,8 @@ final class Prototype extends DotNavigator
      */
 
     public function __construct(
-        private array $contents,
-        private array $schemas
+        private ContentCollection $contents,
+        private SchemaCollection $schemas
     ) {
         $this->fill([
             'contents' => $contents,

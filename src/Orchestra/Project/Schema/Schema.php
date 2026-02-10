@@ -1,0 +1,34 @@
+<?php
+
+namespace Orchestra\Project\Schema;
+
+final readonly class Schema
+{
+    public array $contents;
+
+    public function __construct(
+        public string $tag,
+        public array $contentsReferences,
+        public string $template,
+        public string $generator,
+        public string $source,
+        public string $builder,
+        public string $slug,
+        public array $options
+    ) {
+    }
+
+    public function withResolvedContents(array $contents)
+    {
+        return new ResolvedSchema(
+            $this->tag,
+            $contents,
+            $this->template,
+            $this->generator,
+            $this->source,
+            $this->builder,
+            $this->slug,
+            $this->options
+        );
+    }
+}

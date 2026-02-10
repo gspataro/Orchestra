@@ -2,33 +2,28 @@
 
 namespace Orchestra\Pages\Generator;
 
+use Orchestra\Project\Schema\ResolvedSchema;
+
 final class PaginateGenerator extends BaseGenerator
 {
-    /**
-     * Generate pages based on schema
-     *
-     * @param array $schema
-     * @return void
-     */
-
-    public function generate(array $schema): void
+    public function generate(ResolvedSchema $schema): void
     {
-        $contents = $schema['contents'];
-        $basedOn = $contents[$schema['generate_based_on']];
+        $contents = $schema->contents;
+        $basedOn = $contents[$schema->source];
 
         if (empty($basedOn)) {
             return;
         }
 
-        unset($contents[$schema['generate_based_on']]);
+        unset($contents[$schema->source]);
 
-        $perPage = $schema['options']['per_page'] ?? 12;
+        $perPage = $schema->options['per_page'] ?? 12;
         $totalPages = ceil(count($basedOn) / $perPage);
 
         $this->createCollection(
-            $schema['tag'],
-            $schema['template'],
-            $schema['builder'],
+            $schema->tag,
+            $schema->template,
+            $schema->builder,
             $contents
         );
 
@@ -38,14 +33,14 @@ final class PaginateGenerator extends BaseGenerator
             $slice = array_slice($basedOn, $i * $perPage, $perPage);
 
             $this->addPageToCollection(
-                $schema['tag'],
+                $schema->tag,
                 'page-' . $currentPage,
                 $this->sitemap->add(
-                    $schema['tag'] . '.page-' . $currentPage,
-                    $schema['slug'] . '/' . $currentSlug
+                    $schema->tag . '.page-' . $currentPage,
+                    $schema->slug . '/' . $currentSlug
                 ),
                 [
-                    $schema['tag'] => $slice,
+                    $schema->tag => $slice,
                     'pagination' => [
                         'current' => $currentPage,
                         'next' => $currentPage < $totalPages ? $currentPage + 1 : null,
