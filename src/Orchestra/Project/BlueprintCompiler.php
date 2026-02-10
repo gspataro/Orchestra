@@ -22,12 +22,6 @@ final class BlueprintCompiler
     ) {
     }
 
-    /**
-     * Read contents from blueprint
-     *
-     * @return void
-     */
-
     private function readContents(): void
     {
         if (empty($this->blueprint->get('contents'))) {
@@ -47,11 +41,35 @@ final class BlueprintCompiler
         }
     }
 
-    /**
-     * Read schemas from blueprint
-     *
-     * @return void
-     */
+    private function validateSchema(string $tag, array $schema): void
+    {
+        if (!isset($schema['template'])) {
+            throw new InvalidBlueprintException(
+                "You must provide a template for schema '{$tag}'."
+            );
+        }
+
+        if (!isset($schema['generate'])) {
+            throw new InvalidItemException(
+                "You must provide a generator for schema '{$tag}'."
+            );
+        }
+
+        if (!isset($schema['slug'])) {
+            throw new InvalidBlueprintException(
+                "You must provide a slug for schema '{$tag}'."
+            );
+        }
+    }
+
+    private function sanitizeSchemaSlug(string $slug): string
+    {
+        if (!str_starts_with($slug, '/')) {
+            $slug = '/' . $slug;
+        }
+
+        return $slug;
+    }
 
     private function readSchemas(): void
     {
@@ -60,31 +78,7 @@ final class BlueprintCompiler
         }
 
         foreach ($this->blueprint->get('schemas') as $tag => $schema) {
-            if (!isset($schema['template'])) {
-                throw new InvalidBlueprintException(
-                    "You must provide a template for schema '{$tag}'."
-                );
-            }
-
-            if (!isset($schema['generate'])) {
-                throw new InvalidItemException(
-                    "You must provide a generator for schema '{$tag}'."
-                );
-            }
-
-            if (!isset($schema['slug'])) {
-                throw new InvalidBlueprintException(
-                    "You must provide a slug for schema '{$tag}'."
-                );
-            }
-
-            if (!str_starts_with($schema['slug'], '/')) {
-                $schema['slug'] = '/' . $schema['slug'];
-            }
-
-            if (str_contains($schema['generate'], ':')) {
-                [$generator, $generateBasedOn] = explode(':', $schema['generate'], 2);
-            }
+            $this->validateSchema($tag, $schema);
 
             $contents = [];
 
@@ -111,20 +105,14 @@ final class BlueprintCompiler
                 }
             }
 
-            $schema['tag'] = $tag;
-            $schema['contents'] = $contents;
-            $schema['generator'] = $generator ?? $schema['generate'];
-            $schema['generate_based_on'] = $generateBasedOn ?? '';
-            $schema['options'] ??= [];
-
-            $this->schemas[$tag] = new Schema(
+            $this->schemas[] = new Schema(
                 $tag,
                 $contents,
                 $schema['template'],
-                $generator ?? $schema['generate'],
-                $schema['generate_based_on'],
+                $schema['generate'],
+                $schema['source'] ?? '',
                 $schema['builder'] ?? 'twig',
-                $schema['slug'],
+                $this->sanitizeSchemaSlug($schema['slug']),
                 $schema['options'] ?? []
             );
         }
