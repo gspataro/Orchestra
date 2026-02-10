@@ -5,7 +5,7 @@ namespace Orchestra\Project;
 use Orchestra\Project\Content\Content;
 use Orchestra\Project\Content\ContentCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
-use Orchestra\Project\Exception\InvalidItemException;
+use Orchestra\Project\Exception\InvalidSchemaException;
 use Orchestra\Project\Schema\Schema;
 use Orchestra\Project\Schema\SchemaCollection;
 
@@ -50,7 +50,7 @@ final class BlueprintCompiler
         }
 
         if (!isset($schema['generate'])) {
-            throw new InvalidItemException(
+            throw new InvalidSchemaException(
                 "You must provide a generator for schema '{$tag}'."
             );
         }

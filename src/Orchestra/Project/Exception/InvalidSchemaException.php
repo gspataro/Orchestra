@@ -4,6 +4,6 @@ namespace Orchestra\Project\Exception;
 
 use Exception;
 
-class SchemaFoundException extends Exception
+class InvalidSchemaException extends Exception
 {
 }
