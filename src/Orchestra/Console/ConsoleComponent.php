@@ -13,23 +13,23 @@ final class ConsoleComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->add('cli.commands', fn(): object => new CommandsCollection());
+        $container->add('console.commands', fn(): object => new CommandsCollection());
 
-        $container->add('cli', function ($container, $args): object {
+        $container->add('console', function ($container, $args): object {
             return new Handler(
-                $container->get('cli.commands')
+                $container->get('console.commands')
             );
         });
 
-        $container->add('cli.stopwatch', function ($container, $args): object {
+        $container->add('console.stopwatch', function ($container, $args): object {
             return new Stopwatch();
         });
     }
 
     public function boot(Container $container): void
     {
-        $cli = $container->get('cli');
-        $commands = $container->get('cli.commands');
+        $cli = $container->get('console');
+        $commands = $container->get('console.commands');
 
         $commands->register(
             new BuildCommand($container)
