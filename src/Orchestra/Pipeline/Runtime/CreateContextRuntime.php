@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Console\Runtime;
+namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Project\Blueprint;
 use Orchestra\Project\BlueprintCompiler;
@@ -18,14 +18,14 @@ final class CreateContextRuntime extends Runtime
         $blueprintFile = $this->context->paths->root('blueprint.json');
 
         if (!is_file($blueprintFile)) {
-            $this->output->print('{bold}{fg_red}Blueprint file not found in project root.');
+            $this->output->error('Blueprint file not found in project root.');
             return false;
         }
 
         $rawBlueprint = file_get_contents($blueprintFile);
 
         if (!json_validate($rawBlueprint)) {
-            $this->output->print('{bold}{fg_red}Invalid blueprint. A valid blueprint must be a JSON object.');
+            $this->output->error('Invalid blueprint. A valid blueprint must be a JSON object.');
             return false;
         }
 
@@ -52,7 +52,7 @@ final class CreateContextRuntime extends Runtime
         return true;
     }
 
-    public function main(): bool
+    public function run(array $options = []): bool
     {
         return $this->loadBlueprint() && $this->createContext();
     }

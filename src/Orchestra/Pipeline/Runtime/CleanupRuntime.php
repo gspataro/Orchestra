@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Console\Runtime;
+namespace Orchestra\Pipeline\Runtime;
 
 use DirectoryIterator;
 
@@ -9,7 +9,7 @@ final class CleanupRuntime extends Runtime
     private function cleanup(string $directory): void
     {
         if ($directory === $this->context->paths->output()) {
-            $this->output->print('{bold}Cleaning up');
+            $this->output->info('Cleaning up');
         }
 
         $sitemap = array_values($this->context->sitemap->getAll());
@@ -40,7 +40,7 @@ final class CleanupRuntime extends Runtime
         }
     }
 
-    public function main(): mixed
+    public function run(array $options = []): bool
     {
         $this->cleanup($this->context->paths->output());
 

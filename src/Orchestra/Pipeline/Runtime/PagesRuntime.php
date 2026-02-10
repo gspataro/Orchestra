@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Console\Runtime;
+namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Contractor\BuildersCollection;
 use Orchestra\Pages\Page\PageCollection;
@@ -10,9 +10,13 @@ final class PagesRuntime extends Runtime
     private readonly PageCollection $pages;
     private readonly BuildersCollection $builders;
 
-    protected function main(): mixed
+    public function run(array $options = []): bool
     {
-        $this->output->print('{bold}Building pages');
+        if ($options['cleanup-only'] !== null) {
+            return true;
+        }
+
+        $this->output->info('Building pages');
 
         $this->pages = $this->container->get('pages.collection');
         $this->builders = $this->container->get('contractor.builders');

@@ -1,15 +1,14 @@
 <?php
 
-namespace Orchestra\Console\Runtime;
+namespace Orchestra\Pipeline\Runtime;
 
-use Orchestra\Pipeline\BuildContext;
 use SimpleXMLElement;
 
 final class SitemapRuntime extends Runtime
 {
-    public function main(): mixed
+    public function run(array $options = []): bool
     {
-        $this->output->print('{bold}Generating sitemap.xml');
+        $this->output->info('Generating sitemap.xml');
 
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
         $xml->addAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');

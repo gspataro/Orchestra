@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Console\Runtime;
+namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Finder\Researcher;
 use Orchestra\Pages\GeneratorsCollection;
@@ -59,12 +59,12 @@ final class SchemasRuntime extends Runtime
         return $output;
     }
 
-    protected function main(): mixed
+    public function run(array $options = []): bool
     {
         $this->generators = $this->container->get('pages.generators');
         $this->researcher = $this->container->get('finder.researcher');
 
-        $this->output->print('{bold}Processing schemas');
+        $this->output->info('Processing schemas');
 
         foreach ($this->context->prototype->get('schemas') as $schema) {
             $this->output->print("Working on schema '{$schema->tag}'");

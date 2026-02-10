@@ -16,6 +16,14 @@ final class PipelineComponent extends Component
         $container->add('pipeline.paths', function ($c, $a): object {
             return new Paths($a['root'] ?? getcwd());
         });
+
+        $container->add('pipeline', function ($c, $a): object {
+            return new Pipeline(
+                $c,
+                $c->get('pipeline.context'),
+                $a['output.adapter']
+            );
+        });
     }
 
     public function boot(Container $container): void

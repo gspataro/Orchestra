@@ -1,19 +1,18 @@
 <?php
 
-namespace Orchestra\Console\Runtime;
+namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Library\ReadersCollection;
-use Orchestra\Pipeline\BuildContext;
 
 final class ContentsRuntime extends Runtime
 {
     private readonly ReadersCollection $readers;
 
-    protected function main(): mixed
+    public function run(array $options = []): bool
     {
         $this->readers = $this->container->get('library.readers');
 
-        $this->output->print('{bold}Processing contents');
+        $this->output->info('Processing contents');
 
         foreach ($this->context->prototype->get('contents') as $content) {
             $this->output->print("Working on content group '{$content->group}'");
@@ -23,9 +22,9 @@ final class ContentsRuntime extends Runtime
 
             if ($reader->failed()) {
                 $error = $reader->getError();
-                $this->output->print("{bold}{fg_red}Contents processing failed on group '{$content->group}'.");
-                $this->output->print('{bold}Error: {clear}' . $error->value);
-                $this->output->print('{bold}Source: {clear}' . $reader->getFailedSource());
+                $this->output->error("Contents processing failed on group '{$content->group}'.");
+                $this->output->print('Error: {clear}' . $error->value);
+                $this->output->print('Source: {clear}' . $reader->getFailedSource());
                 exit(1);
             }
         }

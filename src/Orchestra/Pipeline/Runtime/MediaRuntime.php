@@ -1,19 +1,22 @@
 <?php
 
-namespace Orchestra\Console\Runtime;
+namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Assets\Media;
-use Orchestra\Pipeline\BuildContext;
 
 final class MediaRuntime extends Runtime
 {
     private readonly Media $media;
 
-    public function main(): mixed
+    public function run(array $options = []): bool
     {
-        $this->media = $this->container->get('assets.media');
+        if ($options['view-only'] !== null) {
+            return true;
+        }
 
-        $this->output->print('{bold}Generating media');
+        $this->output->info('Generating media');
+
+        $this->media = $this->container->get('assets.media');
 
         $mediaFiles = glob($this->context->paths->media('*.{jpg,jpeg,png}'), GLOB_BRACE);
 
