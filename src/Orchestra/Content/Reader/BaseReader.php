@@ -4,7 +4,7 @@ namespace Orchestra\Content\Reader;
 
 use Orchestra\Content\Archive;
 use Orchestra\Content\ErrorEnum;
-use Orchestra\Content\Interface\ReaderInterface;
+use Orchestra\Content\ReaderInterface;
 use Orchestra\Pipeline\BuildContext;
 
 abstract class BaseReader implements ReaderInterface

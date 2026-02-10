@@ -2,8 +2,6 @@
 
 namespace Orchestra\Content;
 
-use Orchestra\Content\Interface\ReaderInterface;
-
 final class ReadersCollection
 {
     /**

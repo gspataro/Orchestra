@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Content\Interface;
+namespace Orchestra\Content;
 
 use Orchestra\Content\ErrorEnum;
 
