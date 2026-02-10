@@ -4,30 +4,22 @@ namespace Orchestra\Project;
 
 use Orchestra\Project\Source\SourceCollection;
 use Orchestra\Project\Schema\SchemaCollection;
-use Orchestra\Utilities\DotNavigator;
 
-final class Prototype extends DotNavigator
+final class Prototype
 {
-    protected bool $readOnly = true;
-
-    /**
-     * Initialize prototype
-     *
-     * @param Blueprint $blueprint
-     */
-
     public function __construct(
-        private SourceCollection $contents,
-        private SchemaCollection $schemas
+        private readonly SourceCollection $sources,
+        private readonly SchemaCollection $schemas
     ) {
-        $this->fill([
-            'contents' => $contents,
-            'schemas' => $schemas
-        ]);
     }
 
-    public function getAll()
+    public function getSources(): SourceCollection
     {
-        return $this->data;
+        return $this->sources;
+    }
+
+    public function getSchemas(): SchemaCollection
+    {
+        return $this->schemas;
     }
 }
