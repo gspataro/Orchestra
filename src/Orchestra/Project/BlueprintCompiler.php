@@ -14,6 +14,7 @@ final class BlueprintCompiler
     /** @var Content[] */
     private array $contents = [];
 
+    /** @var Schema[] */
     private array $schemas = [];
 
     public function __construct(
