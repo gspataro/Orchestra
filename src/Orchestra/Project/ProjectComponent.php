@@ -4,7 +4,6 @@ namespace Orchestra\Project;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Project\Blueprint;
-use Orchestra\Project\Prototype;
 use Orchestra\Project\Sitemap;
 use Orchestra\Application\Component;
 
