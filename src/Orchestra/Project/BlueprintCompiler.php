@@ -2,8 +2,8 @@
 
 namespace Orchestra\Project;
 
-use Orchestra\Project\Content\Content;
-use Orchestra\Project\Content\ContentCollection;
+use Orchestra\Project\Source\Source;
+use Orchestra\Project\Source\SourceCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidSchemaException;
 use Orchestra\Project\Schema\Schema;
@@ -37,7 +37,7 @@ final class BlueprintCompiler
 
             [$reader, $path] = explode(':', $source, 2);
 
-            $this->contents[$group] = new Content($group, $reader, $path);
+            $this->contents[$group] = new Source($group, $reader, $path);
         }
     }
 
@@ -123,7 +123,7 @@ final class BlueprintCompiler
         $this->readContents();
         $this->readSchemas();
 
-        $contentCollection = new ContentCollection($this->contents);
+        $contentCollection = new SourceCollection($this->contents);
         $schemaCollection = new SchemaCollection($this->schemas);
 
         return new Prototype(

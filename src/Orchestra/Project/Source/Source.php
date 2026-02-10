@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Project\Content;
+namespace Orchestra\Project\Source;
 
-final readonly class Content
+final readonly class Source
 {
     public function __construct(
         public string $group,

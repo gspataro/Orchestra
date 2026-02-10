@@ -1,28 +1,28 @@
 <?php
 
-namespace Orchestra\Project\Content;
+namespace Orchestra\Project\Source;
 
 use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
-final class ContentCollection implements IteratorAggregate
+final class SourceCollection implements IteratorAggregate
 {
     /**
-     * @param Content[] $items
+     * @param Source[] $items
      */
     public function __construct(
         private array $items
     ) {
     }
 
-    public function get(string $group): ?Content
+    public function get(string $group): ?Source
     {
         return $this->items[$group] ?? null;
     }
 
     /**
-     * @return Content[]
+     * @return Source[]
      */
     public function getIterator(): Traversable
     {
