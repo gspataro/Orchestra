@@ -12,6 +12,15 @@ final class PaginateGenerator extends BaseGenerator
         $source = $contents[$schema->source] ?? [];
 
         if (empty($source)) {
+            $this->createPage(
+                $schema->tag,
+                $this->sitemap->add(
+                    $schema->tag . '.page-1',
+                    $schema->slug . '/index'
+                ),
+                [],
+                $schema
+            );
             return;
         }
 
