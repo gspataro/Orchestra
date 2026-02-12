@@ -87,7 +87,6 @@ final class ContentQuery
 
         if ($this->orderField !== null) {
             usort($this->result, function (Content $a, Content $b) {
-                $orderField = $this->orderField;
                 $valueA = $a->get($this->orderField);
                 $valueB = $b->get($this->orderField);
 
