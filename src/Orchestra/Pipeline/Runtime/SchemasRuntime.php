@@ -29,8 +29,8 @@ final class SchemasRuntime extends Runtime
             $contentQuery = $this->contents->group($query['group'])->query();
 
             if (!empty($query['where'])) {
-                $field = array_key_first($query['where']);
-                $value = $query['where'][$field];
+                $field = $query['where']['field'];
+                $value = $query['where']['value'];
                 $contentQuery->where($field, $value);
             }
 
