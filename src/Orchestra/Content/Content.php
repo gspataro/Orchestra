@@ -2,17 +2,27 @@
 
 namespace Orchestra\Content;
 
-use Orchestra\Project\Source\ResolvedSource;
+use Orchestra\Utilities\DotNavigator;
 
-final readonly class Content
+final class Content extends DotNavigator
 {
+    protected bool $readOnly = true;
+
     public function __construct(
-        public string $id,
-        public string $tag,
-        public string $group,
-        public string $path,
-        public mixed $body,
-        public array $metadata = []
+        public readonly string $id,
+        public readonly string $tag,
+        public readonly string $group,
+        public readonly string $path,
+        public readonly mixed $body,
+        public readonly array $metadata = []
     ) {
+        $this->fill([
+            'id' => $this->id,
+            'tag' => $this->tag,
+            'group' => $this->group,
+            'path' => $this->path,
+            'body' => $this->body,
+            'metadata' => $this->metadata
+        ]);
     }
 }
