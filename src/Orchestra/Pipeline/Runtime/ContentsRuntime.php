@@ -41,8 +41,6 @@ final class ContentsRuntime extends Runtime
             }
         }
 
-        $resolved = array_unique($resolved);
-
         return count($resolved) > 1 ? $resolved : $resolved[0];
     }
 
