@@ -2,17 +2,13 @@
 
 namespace Orchestra\Content;
 
-use Orchestra\Content\ErrorEnum;
+use Orchestra\Project\Source\ResolvedSource;
 
 interface ReaderInterface
 {
     /**
-     * Compile and return the given data
-     *
-     * @param string $group
-     * @param string $source
-     * @return mixed
+     * @param ResolvedSource|ResolvedSource[] $source
+     * @return Content|Content[]
      */
-
-    public function compile(string $group, string $source): mixed;
+    public function compile(ResolvedSource|array $source): Content|array;
 }

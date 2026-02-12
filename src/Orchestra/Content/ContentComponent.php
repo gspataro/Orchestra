@@ -18,8 +18,8 @@ final class ContentComponent extends Component
             return new ReadersCollection();
         });
 
-        $container->add('content.archive', function ($container, $args): object {
-            return new Archive();
+        $container->add('content.repository', function ($container, $args): object {
+            return new ContentRepository();
         });
     }
 
@@ -27,20 +27,12 @@ final class ContentComponent extends Component
     {
         $readersCollection = $container->get('content.readers');
 
-        $readersCollection->add('text', new TextReader(
-            $container->get('pipeline.context'),
-            $container->get('content.archive')
-        ));
+        $readersCollection->add('text', new TextReader());
 
         $readersCollection->add('markdown', new MarkdownReader(
-            $container->get('pipeline.context'),
-            $container->get('content.archive'),
             $container->get('markdown.converter')
         ));
 
-        $readersCollection->add('json', new JsonReader(
-            $container->get('pipeline.context'),
-            $container->get('content.archive')
-        ));
+        $readersCollection->add('json', new JsonReader());
     }
 }

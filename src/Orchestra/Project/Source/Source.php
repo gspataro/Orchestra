@@ -10,4 +10,14 @@ final readonly class Source
         public string $path
     ) {
     }
+
+    public function withResolvedPaths(string $path, string $relativePath): ResolvedSource
+    {
+        return new ResolvedSource(
+            $this->group,
+            $this->reader,
+            $path,
+            $relativePath
+        );
+    }
 }

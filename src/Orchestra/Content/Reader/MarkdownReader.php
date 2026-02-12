@@ -5,44 +5,34 @@ namespace Orchestra\Content\Reader;
 use Orchestra\Content\Archive;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
+use Orchestra\Content\Content;
 use Orchestra\Pipeline\BuildContext;
+use Orchestra\Project\Source\ResolvedSource;
 
 final class MarkdownReader extends BaseReader
 {
-    /**
-     * Initialize Markdown reader
-     *
-     * @param Archive $archive
-     * @param ConverterInterface $markdown
-     */
-
     public function __construct(
-        protected readonly BuildContext $context,
-        protected readonly Archive $archive,
         protected readonly ConverterInterface $markdown
     ) {
     }
 
-    /**
-     * Handle a single file
-     *
-     * @param string $source
-     * @return mixed
-     */
-
-    protected function compiler(string $source): mixed
+    protected function compiler(ResolvedSource $source): Content
     {
-        $result = $this->markdown->convert(
-            file_get_contents($this->getPath($source))
+        $body = $this->markdown->convert(
+            file_get_contents($source->path)
         );
 
-        if ($result instanceof RenderedContentWithFrontMatter) {
-            return [
-                'frontmatter' => $result->getFrontMatter(),
-                'content' => $result->getContent()
-            ];
+        if ($body instanceof RenderedContentWithFrontMatter) {
+            return $this->contentFromSource(
+                $source,
+                $body->getContent(),
+                $body->getFrontMatter()
+            );
         }
 
-        return $result->getContent();
+        return $this->contentFromSource(
+            $source,
+            $body->getContent()
+        );
     }
 }

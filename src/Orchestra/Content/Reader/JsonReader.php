@@ -2,17 +2,18 @@
 
 namespace Orchestra\Content\Reader;
 
+use Orchestra\Content\Content;
+use Orchestra\Project\Source\ResolvedSource;
+
 final class JsonReader extends BaseReader
 {
-    /**
-     * Handle a single file
-     *
-     * @param string $source
-     * @return mixed
-     */
-
-    protected function compiler(string $source): mixed
+    protected function compiler(ResolvedSource $source): Content
     {
-        return json_decode(file_get_contents($source), true);
+        $body = json_decode(file_get_contents($source->path), true);
+
+        return $this->contentFromSource(
+            $source,
+            $body
+        );
     }
 }

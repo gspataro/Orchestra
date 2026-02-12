@@ -17,14 +17,13 @@ final class LoopGenerator extends BaseGenerator
 
         unset($contents[$schema->source]);
 
-        foreach ($source as $contentTag => $content) {
-            $tag = $schema->tag . '.' . $contentTag;
-            $content['id'] = $contentTag;
+        foreach ($source as $content) {
+            $contentTag = pathinfo($content->path, PATHINFO_FILENAME);
 
             $this->createPage(
                 $schema->tag,
-                $this->sitemap->add($tag, $schema->slug . '/' . $contentTag),
-                [$schema->tag => $content],
+                $this->sitemap->add($content->id, $schema->slug . '/' . $contentTag),
+                ['post' => $content],
                 $schema
             );
         }

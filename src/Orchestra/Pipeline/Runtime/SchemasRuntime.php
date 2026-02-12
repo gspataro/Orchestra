@@ -2,13 +2,13 @@
 
 namespace Orchestra\Pipeline\Runtime;
 
-use Orchestra\Finder\Researcher;
+use Orchestra\Content\ContentRepository;
 use Orchestra\Pages\GeneratorsCollection;
 
 final class SchemasRuntime extends Runtime
 {
     private readonly GeneratorsCollection $generators;
-    private readonly Researcher $researcher;
+    private readonly ContentRepository $contents;
 
     /**
      * Process schema contents
@@ -26,34 +26,31 @@ final class SchemasRuntime extends Runtime
         }
 
         foreach ($contents as $label => $query) {
-            $research = $this->researcher->start($label, $query['group']);
-
-            if (isset($query['select'])) {
-                $research->select($query['select']);
-            }
+            //$research = $this->researcher->start($label, $query['group']);
+            $contentQuery = $this->contents->group($query['group'])->query();
 
             if (!empty($query['where'])) {
                 $field = array_key_first($query['where']);
                 $value = $query['where'][$field];
-                $research->where($field, $value);
+                $contentQuery->where($field, $value);
             }
 
             if (isset($query['skip'])) {
-                $research->select($query['skip']);
+                $contentQuery->skip($query['skip']);
             }
 
             if (isset($query['limit'])) {
-                $research->limit($query['limit']);
+                $contentQuery->limit($query['limit']);
             }
 
             if (isset($query['orderBy'])) {
-                $research->orderBy(
+                $contentQuery->orderBy(
                     $query['orderBy'],
                     $query['order'] ?? 'asc'
                 );
             }
 
-            $output[$label] = $research->fetch();
+            $output[$label] = $contentQuery->get();
         }
 
         return $output;
@@ -62,7 +59,7 @@ final class SchemasRuntime extends Runtime
     public function run(array $options = []): bool
     {
         $this->generators = $this->container->get('pages.generators');
-        $this->researcher = $this->container->get('finder.researcher');
+        $this->contents = $this->container->get('content.repository');
 
         $this->output->info('Processing schemas');
 

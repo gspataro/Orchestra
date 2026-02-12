@@ -6,7 +6,6 @@ use GSpataro\DependencyInjection\Container;
 use Orchestra\Assets\AssetsComponent;
 use Orchestra\Console\ConsoleComponent;
 use Orchestra\Publisher\PublisherComponent;
-use Orchestra\Finder\FinderComponent;
 use Orchestra\Content\ContentComponent;
 use Orchestra\Localization\LocalizationComponent;
 use Orchestra\Pages\PagesComponent;
@@ -37,7 +36,6 @@ final class ApplicationKernel extends Kernel
         ViewComponent::class,
         MarkdownComponent::class,
         ContentComponent::class,
-        FinderComponent::class,
         PagesComponent::class,
         PublisherComponent::class,
         ConsoleComponent::class
