@@ -22,13 +22,13 @@ final class ContentQuery
 
     public function where(string $field, mixed $value): self
     {
-        $this->filters[] = fn(Content $c) => $c->$field == $value;
+        $this->filters[] = fn(Content $c) => $c->get($field) == $value;
         return $this;
     }
 
     public function whereIn(string $field, array $values): self
     {
-        $this->filters[] = fn(Content $c) => in_array($c->$field, $values, true);
+        $this->filters[] = fn(Content $c) => in_array($c->get($field), $values, true);
         return $this;
     }
 
@@ -87,8 +87,9 @@ final class ContentQuery
 
         if ($this->orderField !== null) {
             usort($this->result, function (Content $a, Content $b) {
-                $valueA = $a->$this->orderField;
-                $valueB = $b->$this->orderField;
+                $orderField = $this->orderField;
+                $valueA = $a->get($this->orderField);
+                $valueB = $b->get($this->orderField);
 
                 return $this->orderDirection === SORT_ASC
                     ? $valueA <=> $valueB
