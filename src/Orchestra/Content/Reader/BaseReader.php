@@ -41,14 +41,14 @@ abstract class BaseReader implements ReaderInterface
      */
     public function compile(ResolvedSource|array $source): array|Content
     {
-        if (!is_array($source->path)) {
-            return $this->compiler($source, $source->path);
+        if (!is_array($source)) {
+            return $this->compiler($source);
         }
 
         $contents = [];
 
-        foreach ($source->path as $path) {
-            $contents[] = $this->compiler($source, $path);
+        foreach ($source as $singleSource) {
+            $contents[] = $this->compiler($singleSource);
         }
 
         return $contents;
