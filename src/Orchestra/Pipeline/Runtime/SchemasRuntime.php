@@ -26,7 +26,6 @@ final class SchemasRuntime extends Runtime
         }
 
         foreach ($contents as $label => $query) {
-            //$research = $this->researcher->start($label, $query['group']);
             $contentQuery = $this->contents->group($query['group'])->query();
 
             if (!empty($query['where'])) {
