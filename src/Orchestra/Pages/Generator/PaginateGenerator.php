@@ -41,10 +41,12 @@ final class PaginateGenerator extends BaseGenerator
                     $schema->slug . '/' . $currentSlug
                 ),
                 [
-                    $schema->tag => $slice,
-                    'pagination' => [
-                        'next' => $currentPage < $totalPages ? $currentPage + 1 : null,
-                        'prev' => $currentPage > 1 ? $currentPage - 1 : null
+                    'archive' => [
+                        'loop' => $slice,
+                        'pagination' => [
+                            'next' => $currentPage < $totalPages ? $currentPage + 1 : null,
+                            'prev' => $currentPage > 1 ? $currentPage - 1 : null
+                        ]
                     ]
                 ],
                 $schema
