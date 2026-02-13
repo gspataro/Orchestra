@@ -9,21 +9,28 @@ final class CollectionGenerator extends BaseGenerator
     public function generate(ResolvedSchema $schema): void
     {
         $contents = $schema->contents;
+        $relationshipOptions = $schema->options['relationship'];
 
         /** @var \Orchestra\Content\ContentCollection */
         $source = $contents[$schema->source] ?? [];
 
         /** @var \Orchestra\Content\ContentCollection */
-        $relationship = $contents[$schema->options['relationship']] ?? [];
-
-        unset($contents[$schema->source], $contents[$schema->options['relationship']]);
+        $relationship = $contents[$relationshipOptions['with']] ?? [];
 
         foreach ($source as $collection) {
             $relationshipContents = $relationship->query()
-                ->where('metadata.categories', 'containsAny', [$collection->get('body.slug')]);
+                ->where(
+                    $relationshipOptions['field'],
+                    $relationshipOptions['operator'],
+                    [$collection->get($relationshipOptions['value'])]
+                );
             $perPage = $schema->options['per_page'] ?? 12;
             $totalPages = ceil($relationshipContents->count() / $perPage);
             $pages = $relationshipContents->paginate($perPage);
+
+            if (empty($pages)) {
+                $pages = [0 => []];
+            }
 
             for ($i = 0; $i < count($pages); $i++) {
                 $currentPage = $i + 1;
@@ -32,8 +39,8 @@ final class CollectionGenerator extends BaseGenerator
                 $this->createPage(
                     $schema->tag,
                     $this->sitemap->add(
-                        $schema->tag . '.' . $collection->get('body.slug') . '.page-' . $currentPage,
-                        $schema->slug . '/' . $collection->get('body.slug') . '/' . $currentSlug
+                        $schema->tag . '.' . $collection->get($relationshipOptions['value']) . '.page-' . $currentPage,
+                        $schema->slug . '/' . $collection->get($relationshipOptions['value']) . '/' . $currentSlug
                     ),
                     [
                         'archive' => [
