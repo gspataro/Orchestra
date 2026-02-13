@@ -9,6 +9,7 @@ use Orchestra\Pages\Generator\OnceGenerator;
 use Orchestra\Pages\Generator\PaginateGenerator;
 use Orchestra\Pages\Generator\LoopGenerator;
 use Orchestra\Application\Component;
+use Orchestra\Pages\Generator\CollectionGenerator;
 
 final class PagesComponent extends Component
 {
@@ -38,6 +39,11 @@ final class PagesComponent extends Component
         ));
 
         $generatorsCollection->add('paginate', new PaginateGenerator(
+            $container->get('pages.collection'),
+            $container->get('project.sitemap')
+        ));
+
+        $generatorsCollection->add('collection', new CollectionGenerator(
             $container->get('pages.collection'),
             $container->get('project.sitemap')
         ));
