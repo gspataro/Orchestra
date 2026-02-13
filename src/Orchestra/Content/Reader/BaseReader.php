@@ -10,7 +10,11 @@ use Orchestra\Project\Source\ResolvedSource;
 
 abstract class BaseReader implements ReaderInterface
 {
-    abstract protected function compiler(ResolvedSource $source): Content;
+    /**
+     * @param ResolvedSource $source
+     * @return Content|Content[]
+     */
+    abstract protected function compiler(ResolvedSource $source): Content|array;
 
     protected function generateContentId(ResolvedSource $source): mixed
     {
@@ -48,7 +52,16 @@ abstract class BaseReader implements ReaderInterface
         $contents = [];
 
         foreach ($source as $singleSource) {
-            $contents[] = $this->compiler($singleSource);
+            $results = $this->compiler($singleSource);
+
+            if (!is_array($results)) {
+                $contents[] = $results;
+                continue;
+            }
+
+            foreach ($results as $result) {
+                $contents[] = $result;
+            }
         }
 
         return $contents;
