@@ -68,6 +68,8 @@ final class ContentQuery
             '<=' => $a <= $b,
             'in' => in_array($a, (array) $b, true),
             'contains' => is_string($a) && str_contains($a, (string) $b),
+            'containsAny' => is_array($a) && is_array($b) && count(array_intersect($a, $b)) > 0,
+            'containsAll' => is_array($a) && is_array($b) && empty(array_diff($a, $b)) === true,
             default => false
         };
     }
