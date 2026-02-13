@@ -4,7 +4,7 @@ namespace Orchestra\Pages\Generator;
 
 use Orchestra\Project\Schema\ResolvedSchema;
 
-final class PaginateGenerator extends BaseGenerator
+final class ArchiveGenerator extends BaseGenerator
 {
     public function generate(ResolvedSchema $schema): void
     {

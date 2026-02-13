@@ -6,7 +6,7 @@ use GSpataro\DependencyInjection\Container;
 use Orchestra\Pages\Page\PageCollection;
 use Orchestra\Pages\GeneratorsCollection;
 use Orchestra\Pages\Generator\OnceGenerator;
-use Orchestra\Pages\Generator\PaginateGenerator;
+use Orchestra\Pages\Generator\ArchiveGenerator;
 use Orchestra\Pages\Generator\LoopGenerator;
 use Orchestra\Application\Component;
 use Orchestra\Pages\Generator\CollectionGenerator;
@@ -38,7 +38,7 @@ final class PagesComponent extends Component
             $container->get('project.sitemap')
         ));
 
-        $generatorsCollection->add('paginate', new PaginateGenerator(
+        $generatorsCollection->add('archive', new ArchiveGenerator(
             $container->get('pages.collection'),
             $container->get('project.sitemap')
         ));
