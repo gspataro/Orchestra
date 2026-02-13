@@ -4,6 +4,16 @@ namespace Orchestra\Project\Schema;
 
 final class ResolvedSchema
 {
+    /**
+     * @param string $tag
+     * @param Content[] $contents
+     * @param string $template
+     * @param string $generator
+     * @param string $source
+     * @param string $builder
+     * @param string $slug
+     * @param array $options
+     */
     public function __construct(
         public string $tag,
         public array $contents,

@@ -9,6 +9,8 @@ final class PaginateGenerator extends BaseGenerator
     public function generate(ResolvedSchema $schema): void
     {
         $contents = $schema->contents;
+
+        /** @var Content[] */
         $source = $contents[$schema->source] ?? [];
 
         if (empty($source)) {
