@@ -2,11 +2,13 @@
 
 namespace Orchestra\Project\Schema;
 
+use Orchestra\Content\ContentCollection;
+
 final class ResolvedSchema
 {
     /**
      * @param string $tag
-     * @param Content[] $contents
+     * @param ContentCollection|Content[] $contents
      * @param string $template
      * @param string $generator
      * @param string $source
@@ -16,7 +18,7 @@ final class ResolvedSchema
      */
     public function __construct(
         public string $tag,
-        public array $contents,
+        public ContentCollection|array $contents,
         public string $template,
         public string $generator,
         public string $source,

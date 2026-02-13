@@ -12,8 +12,7 @@ final class ContentQuery
     private ?string $orderField = null;
     private int $orderDirection = SORT_ASC;
 
-    /** @var Content[] */
-    private array $result;
+    private ContentCollection $result;
 
     public function __construct(
         private readonly ContentCollection $collection
@@ -114,9 +113,9 @@ final class ContentQuery
     }
 
     /**
-     * @return Content[]
+     * @return ContentCollection
      */
-    public function get(): array
+    public function get(): ContentCollection
     {
         return $this->apply();
     }
@@ -131,20 +130,35 @@ final class ContentQuery
         return count($this->apply());
     }
 
-    private function apply(): array
+    /**
+     * @param integer $perPage
+     * @return ContentCollection[]
+     */
+    public function paginate(int $perPage): array
+    {
+        $all = $this->get();
+        $chunks = array_chunk($all->toArray(), $perPage);
+
+        return array_map(
+            fn(array $items) => new ContentCollection($items),
+            $chunks
+        );
+    }
+
+    private function apply(): ContentCollection
     {
         if (isset($this->result)) {
             return $this->result;
         }
 
-        $this->result = $this->collection->toArray();
+        $contents = $this->collection->toArray();
 
         foreach ($this->filters as $filter) {
-            $this->result = array_filter($this->result, $filter);
+            $contents = array_filter($contents, $filter);
         }
 
         if ($this->orderField !== null) {
-            usort($this->result, function (Content $a, Content $b) {
+            usort($contents, function (Content $a, Content $b) {
                 $valueA = $a->get($this->orderField);
                 $valueB = $b->get($this->orderField);
 
@@ -155,9 +169,10 @@ final class ContentQuery
         }
 
         if ($this->skip > 0 || $this->limit !== null) {
-            $this->result = array_slice($this->result, $this->skip, $this->limit);
+            $contents = array_slice($contents, $this->skip, $this->limit);
         }
 
+        $this->result = new ContentCollection($contents);
         return $this->result;
     }
 }

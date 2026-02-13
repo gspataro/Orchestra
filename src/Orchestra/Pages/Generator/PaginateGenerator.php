@@ -10,7 +10,7 @@ final class PaginateGenerator extends BaseGenerator
     {
         $contents = $schema->contents;
 
-        /** @var Content[] */
+        /** @var \Orchestra\Content\ContentCollection */
         $source = $contents[$schema->source] ?? [];
 
         if (empty($source)) {
@@ -30,11 +30,11 @@ final class PaginateGenerator extends BaseGenerator
 
         $perPage = $schema->options['per_page'] ?? 12;
         $totalPages = ceil(count($source) / $perPage);
+        $pages = $source->query()->paginate($perPage);
 
-        for ($i = 0; $i < $totalPages; $i++) {
+        for ($i = 0; $i < count($pages); $i++) {
             $currentPage = $i + 1;
             $currentSlug = $currentPage > 1 ? $currentPage : 'index';
-            $slice = array_slice($source, $i * $perPage, $perPage);
 
             $this->createPage(
                 $schema->tag,
@@ -44,7 +44,7 @@ final class PaginateGenerator extends BaseGenerator
                 ),
                 [
                     'archive' => [
-                        'loop' => $slice,
+                        'loop' => $pages[$i],
                         'pagination' => [
                             'next' => $currentPage < $totalPages ? $currentPage + 1 : null,
                             'prev' => $currentPage > 1 ? $currentPage - 1 : null

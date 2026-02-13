@@ -5,8 +5,9 @@ namespace Orchestra\Content;
 use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
+use Countable;
 
-final class ContentCollection implements IteratorAggregate
+final class ContentCollection implements IteratorAggregate, Countable
 {
     /**
      * @param Content[] $contents
@@ -36,6 +37,11 @@ final class ContentCollection implements IteratorAggregate
     public function toArray(): array
     {
         return $this->contents;
+    }
+
+    public function count(): int
+    {
+        return count($this->contents);
     }
 
     public function query(): ContentQuery
