@@ -20,15 +20,77 @@ final class ContentQuery
     ) {
     }
 
-    public function where(string $field, mixed $value): self
+    public function fromDefinition(ContentQueryDefinition $definition): self
     {
-        $this->filters[] = fn(Content $c) => $c->get($field) == $value;
+        if (!empty($definition->wheres)) {
+            foreach ($definition->wheres as [$field, $operator, $value]) {
+                $this->where($field, $operator, $value);
+            }
+        }
+
+        if ($definition->skip) {
+            $this->skip($definition->skip);
+        }
+
+        if ($definition->limit) {
+            $this->limit($definition->limit);
+        }
+
+        if ($definition->orderField) {
+            $this->orderBy($definition->orderField, $definition->sortDirection);
+        }
+
+        return $this;
+    }
+
+    private function normalizeForComparison(mixed $a, mixed $b): mixed
+    {
+        if (is_int($a) && is_string($b)) {
+            $time = strtotime($b);
+
+            if ($time !== false) {
+                return $time;
+            }
+        }
+
+        return $b;
+    }
+
+    private function compare(mixed $a, string $operator, mixed $b): bool
+    {
+        $b = $this->normalizeForComparison($a, $b);
+
+        return match ($operator) {
+            '=', '==' => $a == $b,
+            '!=', '<>' => $a != $b,
+            '>' => $a > $b,
+            '>=' => $a >= $b,
+            '<' => $a < $b,
+            '<=' => $a <= $b,
+            'in' => in_array($a, (array) $b, true),
+            'contains' => is_string($a) && str_contains($a, (string) $b),
+            default => false
+        };
+    }
+
+    public function where(string $field, string $operator, mixed $value): self
+    {
+        $this->filters[] = function (Content $c) use ($field, $operator, $value) {
+            return $this->compare($c->get($field), $operator, $value);
+        };
+
         return $this;
     }
 
     public function whereIn(string $field, array $values): self
     {
-        $this->filters[] = fn(Content $c) => in_array($c->get($field), $values, true);
+        $this->where($field, 'in', $values);
+        return $this;
+    }
+
+    public function whereContains(string $field, string $value): self
+    {
+        $this->where($field, 'contains', $value);
         return $this;
     }
 
@@ -38,20 +100,16 @@ final class ContentQuery
         return $this;
     }
 
-    public function limit(int $offset): static
+    public function limit(?int $offset): static
     {
         $this->limit = $offset;
         return $this;
     }
 
-    public function orderBy(string $field, string|int $order = 'asc'): static
+    public function orderBy(?string $field, int $order): static
     {
         $this->orderField = $field;
-        $this->orderDirection = match ($order) {
-            'asc' => SORT_ASC,
-            'desc' => SORT_DESC,
-            default => $order
-        };
+        $this->orderDirection = $order;
         return $this;
     }
 

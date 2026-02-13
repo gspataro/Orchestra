@@ -2,6 +2,7 @@
 
 namespace Orchestra\Project;
 
+use Orchestra\Content\ContentQueryDefinition;
 use Orchestra\Project\Source\Source;
 use Orchestra\Project\Source\SourceCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
@@ -71,6 +72,37 @@ final class BlueprintCompiler
         return $slug;
     }
 
+    /**
+     * @param array $contents
+     * @return ContentQueryDefinition[]
+     */
+    private function buildContentQueries(array $contents = []): array
+    {
+        $contentQueries = [];
+
+        foreach ($contents as $query) {
+            if (!is_array($query)) {
+                $contentQueries[] = new ContentQueryDefinition($query);
+                continue;
+            }
+
+            $contentQueries[] = new ContentQueryDefinition(
+                $query['group'],
+                $query['where'] ?? [],
+                $query['skip'] ?? 0,
+                $query['limit'] ?? null,
+                $query['order']['by'] ?? null,
+                match ($query['order']['direction'] ?? 'asc') {
+                    'asc' => SORT_ASC,
+                    'desc' => SORT_DESC,
+                    default => SORT_ASC
+                }
+            );
+        }
+
+        return $contentQueries;
+    }
+
     private function readSchemas(): void
     {
         if (empty($this->blueprint->get('schemas'))) {
@@ -80,34 +112,9 @@ final class BlueprintCompiler
         foreach ($this->blueprint->get('schemas') as $tag => $schema) {
             $this->validateSchema($tag, $schema);
 
-            $contents = [];
-
-            if (isset($schema['contents'])) {
-                foreach ($schema['contents'] as $query) {
-                    if (!is_array($query)) {
-                        $contents[$query] = [
-                            'group' => $query
-                        ];
-                        continue;
-                    }
-
-                    if (!isset($query['group'])) {
-                        throw new InvalidBlueprintException(
-                            "Invalid content query for schema '{$tag}'. A content group must be provided."
-                        );
-                    }
-
-                    $queryLabel = $query['label'] ?? $query['group'];
-
-                    $contents = array_merge($contents, [
-                        $queryLabel => $query
-                    ]);
-                }
-            }
-
             $this->schemas[] = new Schema(
                 $tag,
-                $contents,
+                $this->buildContentQueries($schema['contents'] ?? []),
                 $schema['template'],
                 $schema['generate'],
                 $schema['source'] ?? '',

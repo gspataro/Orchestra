@@ -28,4 +28,11 @@ final class ContentRepository
     {
         return new ContentCollection($this->byId);
     }
+
+    public function query(ContentQueryDefinition $definition): ContentQuery
+    {
+        /** @var ContentCollection */
+        $contents = $this->group($definition->group);
+        return $contents->query()->fromDefinition($definition);
+    }
 }

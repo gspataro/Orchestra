@@ -38,7 +38,7 @@ final class ContentCollection implements IteratorAggregate
         return $this->contents;
     }
 
-    public function query(): ContentQUery
+    public function query(): ContentQuery
     {
         return new ContentQuery($this);
     }

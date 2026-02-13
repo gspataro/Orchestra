@@ -25,8 +25,9 @@ final class SchemasRuntime extends Runtime
             return $output;
         }
 
-        foreach ($contents as $label => $query) {
-            $contentQuery = $this->contents->group($query['group'])->query();
+        foreach ($contents as $label => $queryDefinition) {
+            $output[$queryDefinition->group] = $this->contents->query($queryDefinition)->get();
+            continue;
 
             if (!empty($query['where'])) {
                 $field = $query['where']['field'];
