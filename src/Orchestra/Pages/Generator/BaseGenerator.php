@@ -2,6 +2,7 @@
 
 namespace Orchestra\Pages\Generator;
 
+use Orchestra\Content\ContentCollection;
 use Orchestra\Project\Sitemap;
 use Orchestra\Pages\Interface\GeneratorInterface;
 use Orchestra\Pages\Page\Page;
@@ -16,10 +17,17 @@ abstract class BaseGenerator implements GeneratorInterface
     ) {
     }
 
+    /**
+     * @param string $tag
+     * @param string $permalink
+     * @param ContentCollection|Content[] $contents
+     * @param ResolvedSchema $schema
+     * @return void
+     */
     protected function createPage(
         string $tag,
         string $permalink,
-        array $contents,
+        ContentCollection|array $contents,
         ResolvedSchema $schema
     ): void {
         $this->pages->add(new Page(
