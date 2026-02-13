@@ -13,24 +13,13 @@ final class ArchiveGenerator extends BaseGenerator
         /** @var \Orchestra\Content\ContentCollection */
         $source = $contents[$schema->source] ?? [];
 
-        if (empty($source)) {
-            $this->createPage(
-                $schema->tag,
-                $this->sitemap->add(
-                    $schema->tag . '.page-1',
-                    $schema->slug . '/index'
-                ),
-                [],
-                $schema
-            );
-            return;
-        }
-
-        unset($contents[$schema->source]);
-
         $perPage = $schema->options['per_page'] ?? 12;
         $totalPages = ceil(count($source) / $perPage);
         $pages = $source->query()->paginate($perPage);
+
+        if (empty($pages)) {
+            $pages = [0 => []];
+        }
 
         for ($i = 0; $i < count($pages); $i++) {
             $currentPage = $i + 1;
