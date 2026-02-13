@@ -9,6 +9,7 @@ use Orchestra\Content\ReadersCollection;
 use Orchestra\Content\Reader\TextReader;
 use Orchestra\Content\Reader\MarkdownReader;
 use Orchestra\Application\Component;
+use Orchestra\Content\Reader\JsonCollectionReader;
 
 final class ContentComponent extends Component
 {
@@ -34,5 +35,6 @@ final class ContentComponent extends Component
         ));
 
         $readersCollection->add('json', new JsonReader());
+        $readersCollection->add('json_collection', new JsonCollectionReader());
     }
 }
