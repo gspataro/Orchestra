@@ -2,11 +2,13 @@
 
 namespace Orchestra\Pipeline\Runtime;
 
-use Orchestra\Assets\Media;
+use Orchestra\Media\MediaRepository;
+use Orchestra\Media\AdapterCollection;
 
 final class MediaRuntime extends Runtime
 {
-    private readonly Media $media;
+    private readonly MediaRepository $media;
+    private readonly AdapterCollection $adapters;
 
     public function run(array $options = []): bool
     {
@@ -16,12 +18,28 @@ final class MediaRuntime extends Runtime
 
         $this->output->info('Generating media');
 
-        $this->media = $this->container->get('assets.media');
+        /** @var MediaRepository */
+        $this->media = $this->container->get('media.repository');
 
-        $mediaFiles = glob($this->context->paths->media('*.{jpg,jpeg,png}'), GLOB_BRACE);
+        /** @var AdapterCollection */
+        $this->adapters = $this->container->get('media.adapters');
 
-        foreach ($mediaFiles as $mediaFile) {
-            $this->media->resizeMedia($mediaFile, $this->context->paths->output('media'));
+        foreach ($this->media->all() as $media) {
+            $mimeType = mime_content_type($media->path);
+
+            if (!$mimeType) {
+                continue;
+            }
+
+            $adapter = $this->adapters->getFor($mimeType);
+
+            if (!$media->hasVariants()) {
+                $adapter->process($media);
+            }
+
+            foreach ($media->getVariants() as $variant) {
+                $adapter->process($media, $variant);
+            }
         }
 
         return true;
