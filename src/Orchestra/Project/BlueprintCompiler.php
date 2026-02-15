@@ -132,28 +132,26 @@ final class BlueprintCompiler
 
     private function readMediaImages(array $images): void
     {
-        if (empty($images) || empty($image['sizes'])) {
+        if (empty($images) || empty($images['sizes'])) {
             return;
         }
 
         $format = $images['optimize']['strategy'] ?? null;
 
-        foreach ($image['sizes'] as $size => $options) {
+        foreach ($images['sizes'] as $size => $options) {
             $this->mediaVariants['image'][$size] = new ImageMediaVariant(
+                $size,
                 $options['width'] ?? null,
                 $options['height'] ?? null,
                 $format ?? null,
-                $options['quality'] ?? null
+                $options['quality'] ?? null,
+                $options['crop'] ?? false
             );
         }
     }
 
     private function readMedia(): void
     {
-        if (empty($this->blueprint->get('media'))) {
-            return;
-        }
-
         $this->readMediaImages($this->blueprint->get('media.images') ?? [
             'optimize' => 'webp',
             'sizes' => [

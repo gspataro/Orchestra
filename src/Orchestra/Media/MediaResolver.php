@@ -20,7 +20,7 @@ final class MediaResolver
 
         $extension = $variant->format ?? pathinfo($media->publicPath, PATHINFO_EXTENSION);
 
-        return pathJoin($dirname, $filename . '-' . $variant->name . '-' . $extension);
+        return pathJoin($dirname, $filename . '-' . $variant->name . '.' . $extension);
     }
 
     public function resolve(string $relativePath, ?string $variant = null): ?string
@@ -50,13 +50,18 @@ final class MediaResolver
         }
 
         if ($variant) {
-            $variant = $this->context->prototype->getMediaVariants()->get(strtok($mimeType, '/'), $variant);
-            $media->addTransformation($variant->toTransformation(
-                $variant->name,
-                $this->variantPublicPath($media, $variant)
+            $mediaVariant = $this->context->prototype->getMediaVariants()->get(strtok($media->mimeType, '/'), $variant);
+
+            if (!$mediaVariant) {
+                return null;
+            }
+
+            $media->addTransformation($mediaVariant->toTransformation(
+                $mediaVariant->name,
+                $this->variantPublicPath($media, $mediaVariant)
             ));
         }
 
-        return $publicPath;
+        return $media->publicPath;
     }
 }
