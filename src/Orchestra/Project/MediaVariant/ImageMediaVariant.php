@@ -1,10 +1,11 @@
 <?php
 
-namespace Orchestra\Media\Variant;
+namespace Orchestra\Project\MediaVariant;
 
-final readonly class ImageVariant extends Variant
+final readonly class ImageMediaVariant extends MediaVariant
 {
     public function __construct(
+        public string $name,
         public int $width,
         public int $height,
         public string $format,

@@ -17,6 +17,7 @@ use Orchestra\Infrastructure\DotenvComponent;
 use Orchestra\Infrastructure\ExceptionHandlerComponent;
 use Orchestra\Infrastructure\HighlightComponent;
 use Orchestra\Infrastructure\MarkdownComponent;
+use Orchestra\Media\MediaComponent;
 use Orchestra\Pipeline\PipelineComponent;
 use Orchestra\View\ViewComponent;
 
@@ -38,6 +39,7 @@ final class ApplicationKernel extends Kernel
         ContentComponent::class,
         PagesComponent::class,
         PublisherComponent::class,
+        MediaComponent::class,
         ConsoleComponent::class
     ];
 

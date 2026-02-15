@@ -7,6 +7,8 @@ use Orchestra\Project\Source\Source;
 use Orchestra\Project\Source\SourceCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidSchemaException;
+use Orchestra\Project\MediaVariant\ImageMediaVariant;
+use Orchestra\Project\MediaVariant\MediaVariantCollection;
 use Orchestra\Project\Schema\Schema;
 use Orchestra\Project\Schema\SchemaCollection;
 
@@ -17,6 +19,9 @@ final class BlueprintCompiler
 
     /** @var Schema[] */
     private array $schemas = [];
+
+    /** @var MediaVariant[] */
+    private array $mediaVariants = [];
 
     public function __construct(
         private readonly Blueprint $blueprint
@@ -125,17 +130,55 @@ final class BlueprintCompiler
         }
     }
 
+    private function readMediaImages(array $images): void
+    {
+        if (empty($images) || empty($image['sizes'])) {
+            return;
+        }
+
+        $format = $images['optimize']['strategy'] ?? null;
+
+        foreach ($image['sizes'] as $size => $options) {
+            $this->mediaVariants['image'][$size] = new ImageMediaVariant(
+                $options['width'] ?? null,
+                $options['height'] ?? null,
+                $format ?? null,
+                $options['quality'] ?? null
+            );
+        }
+    }
+
+    private function readMedia(): void
+    {
+        if (empty($this->blueprint->get('media'))) {
+            return;
+        }
+
+        $this->readMediaImages($this->blueprint->get('media.images') ?? [
+            'optimize' => 'webp',
+            'sizes' => [
+                'thumbnail' => ['width' => 200, 'height' => 200, 'resize' => true],
+                'medium' => ['width' => 400, 'height' => 400],
+                'large' => ['width' => 1024, 'height' => 1024],
+                'original' => []
+            ]
+        ]);
+    }
+
     public function compile(): Prototype
     {
         $this->readContents();
         $this->readSchemas();
+        $this->readMedia();
 
         $contentCollection = new SourceCollection($this->contents);
         $schemaCollection = new SchemaCollection($this->schemas);
+        $mediaVariants = new MediaVariantCollection($this->mediaVariants);
 
         return new Prototype(
             $contentCollection,
-            $schemaCollection
+            $schemaCollection,
+            $mediaVariants
         );
     }
 }

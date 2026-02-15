@@ -37,8 +37,8 @@ final class AdapterCollection
             return $this->adapters[$this->map[$mimeType]];
         }
 
-        if (isset($this->map['fallback'])) {
-            return $this->adapters[$this->map['fallback']];
+        if (isset($this->map['default'])) {
+            return $this->adapters[$this->map['default']];
         }
 
         return null;

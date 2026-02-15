@@ -24,20 +24,22 @@ final class MediaRuntime extends Runtime
         /** @var AdapterCollection */
         $this->adapters = $this->container->get('media.adapters');
 
-        foreach ($this->media->all() as $media) {
-            $mimeType = mime_content_type($media->path);
+        if (empty($this->media->all())) {
+            return true;
+        }
 
-            if (!$mimeType) {
+        foreach ($this->media->all() as $media) {
+            $adapter = $this->adapters->getFor($media->mimeType ?? 'default');
+
+            if (!$adapter) {
                 continue;
             }
 
-            $adapter = $this->adapters->getFor($mimeType);
-
-            if (!$media->hasVariants()) {
+            if (!$media->hasTransformations()) {
                 $adapter->process($media);
             }
 
-            foreach ($media->getVariants() as $variant) {
+            foreach ($media->getTransformations() as $variant) {
                 $adapter->process($media, $variant);
             }
         }

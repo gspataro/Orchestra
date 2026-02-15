@@ -3,38 +3,59 @@
 namespace Orchestra\Media;
 
 use Orchestra\Pipeline\BuildContext;
+use Orchestra\Project\MediaVariant\MediaVariant;
 
 final class MediaResolver
 {
     public function __construct(
         private readonly BuildContext $context,
-        private readonly MediaRepository $repository,
-        private readonly VariantCollection $variants
+        private readonly MediaRepository $repository
     ) {
+    }
+
+    private function variantPublicPath(Media $media, MediaVariant $variant): string
+    {
+        $dirname = pathinfo($media->publicPath, PATHINFO_DIRNAME);
+        $filename = pathinfo($media->publicPath, PATHINFO_FILENAME);
+
+        $extension = $variant->format ?? pathinfo($media->publicPath, PATHINFO_EXTENSION);
+
+        return pathJoin($dirname, $filename . '-' . $variant->name . '-' . $extension);
     }
 
     public function resolve(string $relativePath, ?string $variant = null): ?string
     {
-        $file = $this->context->paths->media($relativePath);
+        if (!$this->repository->has($relativePath)) {
+            $file = $this->context->paths->media($relativePath);
 
-        if (!is_file($file)) {
+            if (!is_file($file)) {
+                return null;
+            }
+
+            $publicPath = $this->context->paths->output(pathJoin('media', $relativePath));
+            $mimeType = mime_content_type($file);
+
+            $this->repository->add(new Media(
+                $relativePath,
+                $file,
+                $publicPath,
+                $mimeType
+            ));
+        }
+
+        $media = $this->repository->get($relativePath);
+
+        if (!$media) {
             return null;
         }
 
-        $publicPath = $this->context->paths->output(pathJoin('media', $relativePath));
-        $mimeType = mime_content_type($file);
-
-        $media = new Media(
-            $relativePath,
-            $file,
-            $publicPath,
-            $mimeType
-        );
-
-        $variant = $this->variants->get(strtok($mimeType, '/'), $variant);
-        $media->addVariant($variant);
-
-        $this->repository->add($media);
+        if ($variant) {
+            $variant = $this->context->prototype->getMediaVariants()->get(strtok($mimeType, '/'), $variant);
+            $media->addTransformation($variant->toTransformation(
+                $variant->name,
+                $this->variantPublicPath($media, $variant)
+            ));
+        }
 
         return $publicPath;
     }

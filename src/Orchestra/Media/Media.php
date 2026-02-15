@@ -2,12 +2,12 @@
 
 namespace Orchestra\Media;
 
-use Orchestra\Media\Variant\Variant;
+use Orchestra\Project\MediaVariant\MediaTransformation;
 
 final class Media
 {
-    /** @var Variant[] */
-    private array $variants = [];
+    /** @var MediaTransformation[] */
+    private array $transformations = [];
 
     public function __construct(
         public readonly string $relativePath,
@@ -17,25 +17,25 @@ final class Media
     ) {
     }
 
-    public function addVariant(Variant $variant): void
+    public function addTransformation(MediaTransformation $transformation): void
     {
-        if (in_array($variant, $this->variants)) {
+        if (in_array($transformation, $this->transformations)) {
             return;
         }
 
-        $this->variants[] = $variant;
+        $this->transformations[] = $transformation;
     }
 
     /**
-     * @return Variant[]
+     * @return MediaTransformation[]
      */
-    public function getVariants(): array
+    public function getTransformations(): array
     {
-        return $this->variants;
+        return $this->transformations;
     }
 
-    public function hasVariants(): bool
+    public function hasTransformations(): bool
     {
-        return empty($this->variants);
+        return !empty($this->transformations);
     }
 }
