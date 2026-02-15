@@ -9,6 +9,7 @@ use Orchestra\View\Twig\TwigSitemap;
 use Orchestra\View\Twig\TwigBlueprint;
 use Orchestra\View\Twig\TwigHighlighter;
 use Orchestra\View\Twig\TwigGenerics;
+use Orchestra\View\Twig\TwigMedia;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extra\String\StringExtension;
 use Twig\Extension\StringLoaderExtension;
@@ -62,6 +63,9 @@ final class ViewComponent extends Component
         ));
         $twig->addExtension(new TwigSitemap(
             $container->get('pipeline.context')
+        ));
+        $twig->addExtension(new TwigMedia(
+            $container->get('media.resolver')
         ));
     }
 }
