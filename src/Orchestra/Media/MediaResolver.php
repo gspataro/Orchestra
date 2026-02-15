@@ -13,12 +13,12 @@ final class MediaResolver
     ) {
     }
 
-    private function variantPublicPath(Media $media, MediaVariant $variant): string
+    private function variantRelativePath(Media $media, MediaVariant $variant): string
     {
-        $dirname = pathinfo($media->publicPath, PATHINFO_DIRNAME);
-        $filename = pathinfo($media->publicPath, PATHINFO_FILENAME);
+        $dirname = pathinfo($media->relativePath, PATHINFO_DIRNAME);
+        $filename = pathinfo($media->relativePath, PATHINFO_FILENAME);
 
-        $extension = $variant->format ?? pathinfo($media->publicPath, PATHINFO_EXTENSION);
+        $extension = $variant->format ?? pathinfo($media->relativePath, PATHINFO_EXTENSION);
 
         return pathJoin($dirname, $filename . '-' . $variant->name . '.' . $extension);
     }
@@ -56,12 +56,16 @@ final class MediaResolver
                 return null;
             }
 
+            $variantRelativePath = $this->variantRelativePath($media, $mediaVariant);
+
             $media->addTransformation($mediaVariant->toTransformation(
                 $mediaVariant->name,
-                $this->variantPublicPath($media, $mediaVariant)
+                $this->context->paths->output(pathJoin('media', $variantRelativePath))
             ));
+
+            return $variantRelativePath;
         }
 
-        return $media->publicPath;
+        return $media->relativePath;
     }
 }
