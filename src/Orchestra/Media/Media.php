@@ -10,8 +10,8 @@ final class Media
     private array $transformations = [];
 
     public function __construct(
-        public readonly string $relativePath,
         public readonly string $path,
+        public readonly string $relativePath,
         public readonly string $publicPath,
         public readonly string|false $mimeType
     ) {
@@ -23,7 +23,12 @@ final class Media
             return;
         }
 
-        $this->transformations[] = $transformation;
+        $this->transformations[$transformation->name] = $transformation;
+    }
+
+    public function getTransformation(string $name): ?MediaTransformation
+    {
+        return $this->transformations[$name] ?? null;
     }
 
     /**

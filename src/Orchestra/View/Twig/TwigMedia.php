@@ -24,9 +24,35 @@ final class TwigMedia extends AbstractExtension
 
     public function image(string $relativePath, ?string $variant = null): string
     {
-        $mediaUrl = $this->media($relativePath, $variant);
+        $url = getenv('WEBSITE_URL') ?: '';
+        $image = $this->resolver->resolveImage($relativePath, $variant);
 
-        return '<img src="' . $mediaUrl . '">';
+        $srcset = null;
+
+        if ($image['srcset']) {
+            $srcset = ' srcset="';
+            $comma = '';
+
+            foreach ($image['srcset'] as $size => $src) {
+                $srcset .= $comma . "{$url}/media{$src} {$size}w";
+                $comma = ', ';
+            }
+
+            $srcset .= '"';
+        }
+
+        $sizes = null;
+
+        if ($image['sizes']) {
+            $sizes = " sizes=\"(max-width: {$image['sizes']}px) 100vw, {$image['sizes']}px\"";
+        }
+
+        return sprintf(
+            '<img src="%s"%s%s>',
+            $url . '/media' . $image['src'],
+            $srcset,
+            $sizes
+        );
     }
 
     public function getFunctions()
