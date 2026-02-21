@@ -31,7 +31,7 @@ final class Pipeline
     ) {
     }
 
-    public function run(array $options = []): bool
+    public function run(BuildOptions $options): bool
     {
         foreach ($this->runtimes as $runtime) {
             $runtime = new $runtime($this->container, $this->context, $this->output);

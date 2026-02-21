@@ -4,15 +4,17 @@ namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Media\MediaRepository;
 use Orchestra\Media\AdapterCollection;
+use Orchestra\Pipeline\BuildOptions;
 
 final class MediaRuntime extends Runtime
 {
     private readonly MediaRepository $media;
     private readonly AdapterCollection $adapters;
 
-    public function run(array $options = []): bool
+    public function run(BuildOptions $options): bool
     {
-        if ($options['view-only'] !== null) {
+        if ($options->skipMedia) {
+            $this->output->warning('Skipping media generation');
             return true;
         }
 

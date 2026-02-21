@@ -24,6 +24,13 @@ final class PipelineComponent extends Component
                 $a['output.adapter']
             );
         });
+
+        $container->add('pipeline.options', function ($c, $a): object {
+            return new BuildOptions(
+                $a['skipMedia'] ?? false,
+                $a['cleanupOnly'] ?? false
+            );
+        });
     }
 
     public function boot(Container $container): void

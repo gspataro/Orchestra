@@ -4,15 +4,17 @@ namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Publisher\BuildersCollection;
 use Orchestra\Pages\Page\PageCollection;
+use Orchestra\Pipeline\BuildOptions;
 
 final class PagesRuntime extends Runtime
 {
     private readonly PageCollection $pages;
     private readonly BuildersCollection $builders;
 
-    public function run(array $options = []): bool
+    public function run(BuildOptions $options): bool
     {
-        if ($options['cleanup-only'] !== null) {
+        if ($options->cleanupOnly) {
+            $this->output->warning('Skipping pages build');
             return true;
         }
 

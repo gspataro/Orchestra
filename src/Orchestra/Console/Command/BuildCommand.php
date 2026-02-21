@@ -17,7 +17,7 @@ final class BuildCommand extends BaseCommand
     {
         $options = [];
 
-        $options['view-only'] = [
+        $options['skip-media'] = [
             'type' => 'toggle'
         ];
 
@@ -41,10 +41,13 @@ final class BuildCommand extends BaseCommand
             'output.adapter' => new ConsoleOutputAdapter($this->output)
         ]);
 
-        $result = $pipeline->run([
-            'view-only' => $this->argument('view-only'),
-            'cleanup-only' => $this->argument('cleanup-only')
+        /** @var \Orchestra\Pipeline\BuildOptions */
+        $buildOptions = $this->container->get('pipeline.options', [
+            'skipMedia' => $this->argument('skip-media') !== null,
+            'cleanupOnly' => $this->argument('cleanup-only') !== null
         ]);
+
+        $result = $pipeline->run($buildOptions);
 
         if (!$result) {
             exit(0);

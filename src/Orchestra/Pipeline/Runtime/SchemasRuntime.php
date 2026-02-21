@@ -4,6 +4,7 @@ namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Content\ContentRepository;
 use Orchestra\Pages\GeneratorsCollection;
+use Orchestra\Pipeline\BuildOptions;
 
 final class SchemasRuntime extends Runtime
 {
@@ -56,7 +57,7 @@ final class SchemasRuntime extends Runtime
         return $output;
     }
 
-    public function run(array $options = []): bool
+    public function run(BuildOptions $options): bool
     {
         $this->generators = $this->container->get('pages.generators');
         $this->contents = $this->container->get('content.repository');

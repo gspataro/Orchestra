@@ -4,6 +4,7 @@ namespace Orchestra\Pipeline\Runtime;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Pipeline\BuildContext;
+use Orchestra\Pipeline\BuildOptions;
 use Orchestra\Pipeline\BuildOutputInterface;
 
 abstract class Runtime
@@ -15,5 +16,5 @@ abstract class Runtime
     ) {
     }
 
-    abstract public function run(array $options = []): bool;
+    abstract public function run(BuildOptions $options): bool;
 }

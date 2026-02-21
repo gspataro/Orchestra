@@ -2,6 +2,7 @@
 
 namespace Orchestra\Pipeline\Runtime;
 
+use Orchestra\Pipeline\BuildOptions;
 use Orchestra\Project\Blueprint;
 use Orchestra\Project\BlueprintCompiler;
 use Orchestra\Project\Sitemap;
@@ -52,7 +53,7 @@ final class CreateContextRuntime extends Runtime
         return true;
     }
 
-    public function run(array $options = []): bool
+    public function run(BuildOptions $options): bool
     {
         return $this->loadBlueprint() && $this->createContext();
     }

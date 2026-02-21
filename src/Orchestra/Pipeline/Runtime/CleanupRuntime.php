@@ -3,6 +3,7 @@
 namespace Orchestra\Pipeline\Runtime;
 
 use DirectoryIterator;
+use Orchestra\Pipeline\BuildOptions;
 
 final class CleanupRuntime extends Runtime
 {
@@ -40,7 +41,7 @@ final class CleanupRuntime extends Runtime
         }
     }
 
-    public function run(array $options = []): bool
+    public function run(BuildOptions $options): bool
     {
         $this->cleanup($this->context->paths->output());
 

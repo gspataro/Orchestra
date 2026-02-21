@@ -4,6 +4,7 @@ namespace Orchestra\Pipeline\Runtime;
 
 use Orchestra\Content\ContentRepository;
 use Orchestra\Content\ReadersCollection;
+use Orchestra\Pipeline\BuildOptions;
 use Orchestra\Project\Source\ResolvedSource;
 use Orchestra\Project\Source\Source;
 
@@ -44,7 +45,7 @@ final class ContentsRuntime extends Runtime
         return count($resolved) > 1 ? $resolved : $resolved[0];
     }
 
-    public function run(array $options = []): bool
+    public function run(BuildOptions $options): bool
     {
         /** @var ReadersCollection */
         $this->readers = $this->container->get('content.readers');

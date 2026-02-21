@@ -24,7 +24,7 @@ final class ConsoleOutputAdapter implements BuildOutputInterface
 
     public function warning(string $message): void
     {
-        $this->output->print("{bold}{fg_orange}{$message}");
+        $this->output->print("{bold}{fg_yellow}{$message}");
     }
 
     public function error(string $message): void

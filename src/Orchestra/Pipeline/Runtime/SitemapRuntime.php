@@ -2,11 +2,12 @@
 
 namespace Orchestra\Pipeline\Runtime;
 
+use Orchestra\Pipeline\BuildOptions;
 use SimpleXMLElement;
 
 final class SitemapRuntime extends Runtime
 {
-    public function run(array $options = []): bool
+    public function run(BuildOptions $options): bool
     {
         $this->output->info('Generating sitemap.xml');
 
