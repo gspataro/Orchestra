@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Infrastructure;
+namespace Orchestra\Markdown;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
@@ -10,6 +10,7 @@ use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
+use Orchestra\Markdown\CommonMark\MediaExtension\MediaExtension;
 
 final class MarkdownComponent extends Component
 {
@@ -46,5 +47,6 @@ final class MarkdownComponent extends Component
         $environment->addExtension(new FrontMatterExtension());
         $environment->addExtension(new HeadingPermalinkExtension());
         $environment->addExtension(new TableOfContentsExtension());
+        $environment->addExtension(new MediaExtension($container->get('media.resolver')));
     }
 }

@@ -16,7 +16,7 @@ use Orchestra\Application\Kernel;
 use Orchestra\Infrastructure\DotenvComponent;
 use Orchestra\Infrastructure\ExceptionHandlerComponent;
 use Orchestra\Infrastructure\HighlightComponent;
-use Orchestra\Infrastructure\MarkdownComponent;
+use Orchestra\Markdown\MarkdownComponent;
 use Orchestra\Media\MediaComponent;
 use Orchestra\Pipeline\PipelineComponent;
 use Orchestra\View\ViewComponent;
