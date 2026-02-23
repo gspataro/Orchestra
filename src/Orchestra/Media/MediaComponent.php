@@ -42,11 +42,7 @@ final class MediaComponent extends Component
         /** @var AdapterCollection */
         $adapters = $container->get('media.adapters');
 
-        $adapters->add([
-            'image/jpeg',
-            'image/png'
-        ], new ImageAdapter());
-
-        $adapters->add('default', new CopyAdapter());
+        $adapters->add(new ImageAdapter());
+        $adapters->add(new CopyAdapter());
     }
 }
