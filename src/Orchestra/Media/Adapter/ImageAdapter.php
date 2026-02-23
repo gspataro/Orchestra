@@ -8,6 +8,11 @@ use Orchestra\Project\MediaVariant\MediaTransformation;
 
 final class ImageAdapter extends BaseAdapter
 {
+    protected array $supports = [
+        'image/jpeg',
+        'image/png'
+    ];
+
     private function processImagick(Media $media, MediaTransformation $transformation): void
     {
         $image = new Imagick($media->path);

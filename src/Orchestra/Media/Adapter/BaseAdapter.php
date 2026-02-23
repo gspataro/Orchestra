@@ -8,6 +8,17 @@ use Orchestra\Project\MediaVariant\MediaTransformation;
 
 abstract class BaseAdapter implements AdapterInterface
 {
+    /** @var string[] */
+    protected array $supports = [];
+
+    /**
+     * @return string[]
+     */
+    public function supports(): array
+    {
+        return $this->supports;
+    }
+
     abstract public function handler(Media $media, ?MediaTransformation $transformation): void;
 
     public function process(Media $media, ?MediaTransformation $transformation = null): void

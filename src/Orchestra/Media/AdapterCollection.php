@@ -15,19 +15,14 @@ final class AdapterCollection
         return isset($this->adapters[$tag]);
     }
 
-    public function add(array|string $mimeType, AdapterInterface $adapter): void
+    public function add(AdapterInterface $adapter): void
     {
         if (!isset($this->adapters[$adapter::class])) {
             $this->adapters[$adapter::class] = $adapter;
         }
 
-        if (!is_array($mimeType)) {
+        foreach ($adapter->supports() as $mimeType) {
             $this->map[$mimeType] = $adapter::class;
-            return;
-        }
-
-        foreach ($mimeType as $mime) {
-            $this->map[$mime] = $adapter::class;
         }
     }
 
@@ -37,8 +32,8 @@ final class AdapterCollection
             return $this->adapters[$this->map[$mimeType]];
         }
 
-        if (isset($this->map['default'])) {
-            return $this->adapters[$this->map['default']];
+        if (isset($this->map['fallback'])) {
+            return $this->adapters[$this->map['fallback']];
         }
 
         return null;
