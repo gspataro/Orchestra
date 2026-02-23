@@ -9,7 +9,8 @@ final class MediaResolver
 {
     public function __construct(
         private readonly BuildContext $context,
-        private readonly MediaRepository $repository
+        private readonly MediaRepository $repository,
+        private readonly MediaTransformer $transformer
     ) {
     }
 
@@ -46,17 +47,7 @@ final class MediaResolver
         $media = $this->repository->get($relativePath);
 
         if ($variant) {
-            $mediaVariant = $this->context->prototype->getMediaVariants()->get(strtok($media->mimeType, '/'), $variant);
-
-            if ($mediaVariant) {
-                $variantRelativePath = $this->variantRelativePath($media, $mediaVariant);
-
-                $media->addTransformation($mediaVariant->toTransformation(
-                    $mediaVariant->name,
-                    $variantRelativePath,
-                    $this->context->paths->output(pathJoin('media', $variantRelativePath))
-                ));
-            }
+            $this->transformer->transform($media, $variant);
         }
 
         return $media;

@@ -6,7 +6,7 @@ use Orchestra\Project\MediaVariant\MediaVariant;
 
 final class MediaVariantCollection
 {
-    /** @var \Orchestra\Project\MediaVariant\ImageMediaVariant[] */
+    /** @var MediaVariant[] */
     private array $image = [];
 
     /** @var MediaVariant[] */
