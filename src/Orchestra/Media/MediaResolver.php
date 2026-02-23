@@ -3,7 +3,6 @@
 namespace Orchestra\Media;
 
 use Orchestra\Pipeline\BuildContext;
-use Orchestra\Project\MediaVariant\MediaVariant;
 
 final class MediaResolver
 {
