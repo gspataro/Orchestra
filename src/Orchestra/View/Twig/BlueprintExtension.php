@@ -6,7 +6,7 @@ use Orchestra\Pipeline\BuildContext;
 use Twig\Extension\GlobalsInterface;
 use Twig\Extension\AbstractExtension;
 
-final class TwigBlueprint extends AbstractExtension implements GlobalsInterface
+final class BlueprintExtension extends AbstractExtension implements GlobalsInterface
 {
     public function __construct(
         private readonly BuildContext $context

@@ -6,11 +6,11 @@ use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
 use Orchestra\View\Elements\Image\ImageElement;
 use Twig\Environment;
-use Orchestra\View\Twig\TwigSitemap;
-use Orchestra\View\Twig\TwigBlueprint;
-use Orchestra\View\Twig\TwigHighlighter;
-use Orchestra\View\Twig\TwigGenerics;
-use Orchestra\View\Twig\TwigMedia;
+use Orchestra\View\Twig\SitemapExtension;
+use Orchestra\View\Twig\BlueprintExtension;
+use Orchestra\View\Twig\HighlighterExtension;
+use Orchestra\View\Twig\GenericsExtension;
+use Orchestra\View\Twig\MediaExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extra\String\StringExtension;
 use Twig\Extension\StringLoaderExtension;
@@ -70,19 +70,19 @@ final class ViewComponent extends Component
         $twig->addExtension(new StringExtension());
         $twig->addExtension(new IntlExtension());
         $twig->addExtension(new StringLoaderExtension());
-        $twig->addExtension(new TwigGenerics(
+        $twig->addExtension(new GenericsExtension(
             $container->get('assets.vite')
         ));
-        $twig->addExtension(new TwigHighlighter(
+        $twig->addExtension(new HighlighterExtension(
             $container->get('tempest.highlight')
         ));
-        $twig->addExtension(new TwigBlueprint(
+        $twig->addExtension(new BlueprintExtension(
             $container->get('pipeline.context')
         ));
-        $twig->addExtension(new TwigSitemap(
+        $twig->addExtension(new SitemapExtension(
             $container->get('pipeline.context')
         ));
-        $twig->addExtension(new TwigMedia(
+        $twig->addExtension(new MediaExtension(
             $container->get('media.resolver'),
             $container->get('view.elements')
         ));

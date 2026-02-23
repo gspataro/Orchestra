@@ -6,7 +6,7 @@ use Twig\TwigFilter;
 use Tempest\Highlight\Highlighter;
 use Twig\Extension\AbstractExtension;
 
-final class TwigHighlighter extends AbstractExtension
+final class HighlighterExtension extends AbstractExtension
 {
     public function __construct(
         private readonly Highlighter $highlighter,

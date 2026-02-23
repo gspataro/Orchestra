@@ -8,7 +8,7 @@ use Orchestra\View\ElementCollection;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
-final class TwigMedia extends AbstractExtension
+final class MediaExtension extends AbstractExtension
 {
     public function __construct(
         private readonly MediaResolver $resolver,

@@ -6,7 +6,7 @@ use Orchestra\Pipeline\BuildContext;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
-final class TwigSitemap extends AbstractExtension
+final class SitemapExtension extends AbstractExtension
 {
     public function __construct(
         private readonly BuildContext $context,

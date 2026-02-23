@@ -7,7 +7,7 @@ use Twig\TwigFilter;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
-class TwigGenerics extends AbstractExtension implements GlobalsInterface
+class GenericsExtension extends AbstractExtension implements GlobalsInterface
 {
     public function __construct(
         private readonly Vite $vite
