@@ -9,15 +9,13 @@ use League\CommonMark\Node\NodeIterator;
 use League\CommonMark\Node\StringContainerInterface;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
-use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
-use Orchestra\Media\MediaResolver;
-use Stringable;
+use Orchestra\View\ElementCollection;
 
 final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
     public function __construct(
-        private readonly MediaResolver $resolver
+        private readonly ElementCollection $elements
     ) {
     }
 
@@ -25,34 +23,21 @@ final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInter
      * @param Image $node
      * @param ChildNodeRendererInterface $childRenderer
      */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): Stringable
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        $attributes = $node->data->get('attributes', []);
+        //$attributes = $node->data->get('attributes', []);
 
         $urlParts = parse_url($node->getUrl());
         parse_str($urlParts['query'], $query);
-        $relativePath = $urlParts['path'];
+        $relativePath = $urlParts['path'] ?? '';
         $variant = $query['variant'] ?? null;
 
-        $url = getenv('WEBSITE_URL') ?: '';
-        $image = $this->resolver->request($relativePath, $variant);
-        $attributes = [];
-
-        $attributes['src'] = "{$url}/media{$image->getTransformation($variant)->relativePath}";
-        $attributes['srcset'] = [];
-
-        foreach ($image->getTransformations() as $transformation) {
-            $width = $transformation->variant->option('width');
-
-            if ($width) {
-                $attributes['srcset'][] = "{$url}/media{$transformation->relativePath} {$width}w";
-            }
-        }
-
-        $width = $image->getTransformation($variant)->variant->option('width');
-        $attributes['sizes'] = "(max-width: {$width}px) 100vw, {$width}px";
-
-        return new HtmlElement('img', $attributes, selfClosing: true);
+        return $this->elements->get('image')->render([
+            'relativePath' => $relativePath,
+            'variant' => $variant,
+            'altText' => $this->getAltText($node),
+            'title' => $node->getTitle()
+        ]);
     }
 
     public function getXmlTagName(Node $node): string
