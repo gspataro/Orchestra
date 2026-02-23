@@ -7,7 +7,6 @@ use Orchestra\Project\Source\Source;
 use Orchestra\Project\Source\SourceCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidSchemaException;
-use Orchestra\Project\MediaVariant\ImageMediaVariant;
 use Orchestra\Project\MediaVariant\MediaVariant;
 use Orchestra\Project\MediaVariant\MediaVariantCollection;
 use Orchestra\Project\Schema\Schema;
@@ -24,8 +23,12 @@ final class BlueprintCompiler
     /** @var MediaVariant[] */
     private array $mediaVariants = [];
 
+    /** @var ConfigInterface[] */
+    private array $configs = [];
+
     public function __construct(
-        private readonly Blueprint $blueprint
+        private readonly Blueprint $blueprint,
+        private readonly DefinitionCollection $configDefinitions
     ) {
     }
 
@@ -166,20 +169,38 @@ final class BlueprintCompiler
         ]);
     }
 
+    private function readConfigs(): void
+    {
+        foreach ($this->configDefinitions->all() as $namespace => $definition) {
+            if (!$this->blueprint->has($namespace)) {
+                continue;
+            }
+
+            $this->configs[$namespace] = $definition->build($this->blueprint->get($namespace));
+        }
+    }
+
     public function compile(): Prototype
     {
         $this->readContents();
         $this->readSchemas();
         $this->readMediaOptions();
+        $this->readConfigs();
 
         $contentCollection = new SourceCollection($this->contents);
         $schemaCollection = new SchemaCollection($this->schemas);
         $mediaVariants = new MediaVariantCollection($this->mediaVariants);
 
-        return new Prototype(
+        $prototype = new Prototype(
             $contentCollection,
             $schemaCollection,
             $mediaVariants
         );
+
+        foreach ($this->configs as $namespace => $configs) {
+            $prototype->add($namespace, $configs);
+        }
+
+        return $prototype;
     }
 }
