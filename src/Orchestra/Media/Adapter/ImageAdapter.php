@@ -13,14 +13,14 @@ final class ImageAdapter extends BaseAdapter
         $image = new Imagick($media->path);
         $imageGeometry = $image->getImageGeometry();
 
-        /** @var \Orchestra\Project\MediaVariant\ImageMediaVariant */
+        /** @var \Orchestra\Project\MediaVariant\MediaVariant */
         $variant = $transformation->variant;
 
-        $width = $variant->width;
-        $height = $variant->height;
-        $crop = $variant->crop;
+        $width = $variant->option('width');
+        $height = $variant->option('height');
+        $crop = $variant->option('crop');
         $format = $variant->format;
-        $quality = $variant->quality;
+        $quality = $variant->option('quality');
 
         if (
             $imageGeometry['width'] <= $width && $imageGeometry['height'] <= $height
@@ -61,11 +61,11 @@ final class ImageAdapter extends BaseAdapter
         /** @var \Orchestra\Project\MediaVariant\ImageMediaVariant */
         $variant = $transformation->variant;
 
-        $width = $variant->width;
-        $height = $variant->height;
-        $crop = $variant->crop;
+        $width = $variant->option('width');
+        $height = $variant->option('height');
+        $crop = $variant->option('crop');
         $format = $variant->format ?? image_type_to_extension($imageType);
-        $quality = $variant->quality ?? 100;
+        $quality = $variant->option('quality') ?? 100;
 
         if (!$width && !$height) {
             $newWidth = $imageWidth;

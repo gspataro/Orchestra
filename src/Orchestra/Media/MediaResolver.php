@@ -112,7 +112,7 @@ final class MediaResolver
         $imageVariant = $transformation ? $transformation->variant : null;
 
         $images['src'] = $srcRelativePath;
-        $images['sizes'] = $imageVariant ? $imageVariant->width : null;
+        $images['sizes'] = $imageVariant ? $imageVariant->option('width') : null;
 
         $responsiveVariants = $this->context->blueprint->get('media.images.responsive');
 
@@ -127,7 +127,7 @@ final class MediaResolver
             if ($responsiveTransformation) {
                 /** @var \Orchestra\Project\MediaVariant\ImageMediaVariant */
                 $originalVariant = $responsiveTransformation->variant;
-                $images['srcset'][$originalVariant->width] = $responsiveTransformation->relativePath;
+                $images['srcset'][$originalVariant->option('width')] = $responsiveTransformation->relativePath;
             }
         }
 

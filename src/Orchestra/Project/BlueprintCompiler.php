@@ -8,6 +8,7 @@ use Orchestra\Project\Source\SourceCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidSchemaException;
 use Orchestra\Project\MediaVariant\ImageMediaVariant;
+use Orchestra\Project\MediaVariant\MediaVariant;
 use Orchestra\Project\MediaVariant\MediaVariantCollection;
 use Orchestra\Project\Schema\Schema;
 use Orchestra\Project\Schema\SchemaCollection;
@@ -139,18 +140,20 @@ final class BlueprintCompiler
         $format = $images['optimize']['strategy'] ?? null;
 
         foreach ($images['sizes'] as $size => $options) {
-            $this->mediaVariants['image'][$size] = new ImageMediaVariant(
+            $this->mediaVariants['image'][$size] = new MediaVariant(
                 $size,
-                $options['width'] ?? null,
-                $options['height'] ?? null,
                 $format ?? null,
-                $options['quality'] ?? null,
-                $options['crop'] ?? false
+                [
+                    'width' => $options['width'] ?? null,
+                    'height' => $options['height'] ?? null,
+                    'quality' => $options['quality'] ?? null,
+                    'crop' => $options['crop'] ?? null
+                ]
             );
         }
     }
 
-    private function readMedia(): void
+    private function readMediaOptions(): void
     {
         $this->readMediaImages($this->blueprint->get('media.images') ?? [
             'optimize' => 'webp',
@@ -167,7 +170,7 @@ final class BlueprintCompiler
     {
         $this->readContents();
         $this->readSchemas();
-        $this->readMedia();
+        $this->readMediaOptions();
 
         $contentCollection = new SourceCollection($this->contents);
         $schemaCollection = new SchemaCollection($this->schemas);
