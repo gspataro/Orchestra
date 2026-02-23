@@ -29,10 +29,4 @@ class WebsiteDefinition extends Definition
             ]
         ];
     }
-
-    public function build(array $configs): WebsiteConfig
-    {
-        $configs = $this->validate($configs);
-        return new WebsiteConfig($configs);
-    }
 }

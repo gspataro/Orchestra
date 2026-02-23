@@ -55,7 +55,7 @@ final class ContentsRuntime extends Runtime
 
         $this->output->info('Processing contents');
 
-        foreach ($this->context->prototype->getSources() as $source) {
+        foreach ($this->context->prototype->sources() as $source) {
             $this->output->print("Working on content group '{$source->group}'");
 
             $resolvedSources = $this->resolveSourcePath($source);

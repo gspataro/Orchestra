@@ -64,7 +64,7 @@ final class SchemasRuntime extends Runtime
 
         $this->output->info('Processing schemas');
 
-        foreach ($this->context->prototype->getSchemas() as $schema) {
+        foreach ($this->context->prototype->schemas() as $schema) {
             $this->output->print("Working on schema '{$schema->tag}'");
 
             $resolvedSchema = $schema->withResolvedContents($this->processSchemaContents($schema->contentsReferences));

@@ -8,36 +8,30 @@ use Orchestra\Project\MediaVariant\MediaVariantCollection;
 
 final class Prototype
 {
-    private array $configs = [];
-
     public function __construct(
         private readonly SourceCollection $sources,
         private readonly SchemaCollection $schemas,
-        private readonly MediaVariantCollection $mediaVariants
+        private readonly MediaVariantCollection $mediaVariants,
+        private readonly Config $configs
     ) {
     }
 
-    public function add(string $namespace, ConfigInterface $config): void
+    public function configs(): Config
     {
-        $this->configs[$namespace] = $config;
+        return $this->configs;
     }
 
-    public function get(string $namespace): ?ConfigInterface
-    {
-        return $this->configs[$namespace] ?? null;
-    }
-
-    public function getSources(): SourceCollection
+    public function sources(): SourceCollection
     {
         return $this->sources;
     }
 
-    public function getSchemas(): SchemaCollection
+    public function schemas(): SchemaCollection
     {
         return $this->schemas;
     }
 
-    public function getMediaVariants(): MediaVariantCollection
+    public function mediaVariants(): MediaVariantCollection
     {
         return $this->mediaVariants;
     }

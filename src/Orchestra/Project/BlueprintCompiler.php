@@ -23,7 +23,6 @@ final class BlueprintCompiler
     /** @var MediaVariant[] */
     private array $mediaVariants = [];
 
-    /** @var ConfigInterface[] */
     private array $configs = [];
 
     public function __construct(
@@ -176,7 +175,7 @@ final class BlueprintCompiler
                 continue;
             }
 
-            $this->configs[$namespace] = $definition->build($this->blueprint->get($namespace));
+            $this->configs[$namespace] = $definition->validate($this->blueprint->get($namespace));
         }
     }
 
@@ -190,17 +189,13 @@ final class BlueprintCompiler
         $contentCollection = new SourceCollection($this->contents);
         $schemaCollection = new SchemaCollection($this->schemas);
         $mediaVariants = new MediaVariantCollection($this->mediaVariants);
+        $configs = new Config($this->configs);
 
-        $prototype = new Prototype(
+        return new Prototype(
             $contentCollection,
             $schemaCollection,
-            $mediaVariants
+            $mediaVariants,
+            $configs
         );
-
-        foreach ($this->configs as $namespace => $configs) {
-            $prototype->add($namespace, $configs);
-        }
-
-        return $prototype;
     }
 }
