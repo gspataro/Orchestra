@@ -8,6 +8,7 @@ use Orchestra\View\Elements\Image\ImageElement;
 use Twig\Environment;
 use Orchestra\View\Twig\SitemapExtension;
 use Orchestra\View\Twig\BlueprintExtension;
+use Orchestra\View\Twig\ElementsExtension;
 use Orchestra\View\Twig\HighlighterExtension;
 use Orchestra\View\Twig\GenericsExtension;
 use Orchestra\View\Twig\MediaExtension;
@@ -59,7 +60,7 @@ final class ViewComponent extends Component
         $coreLoader->addPath(__DIR__ . '/Elements', 'orchestra-elements');
 
         /** @var FilesystemLoader */
-        $twigLoader = $container->get('twig.loader', [
+        $container->get('twig.loader', [
             $themeLoader,
             $coreLoader
         ]);
@@ -84,6 +85,9 @@ final class ViewComponent extends Component
         ));
         $twig->addExtension(new MediaExtension(
             $container->get('media.resolver'),
+            $container->get('view.elements')
+        ));
+        $twig->addExtension(new ElementsExtension(
             $container->get('view.elements')
         ));
 
