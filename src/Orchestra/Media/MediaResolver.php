@@ -14,16 +14,6 @@ final class MediaResolver
     ) {
     }
 
-    private function variantRelativePath(Media $media, MediaVariant $variant): string
-    {
-        $dirname = pathinfo($media->relativePath, PATHINFO_DIRNAME);
-        $filename = pathinfo($media->relativePath, PATHINFO_FILENAME);
-
-        $extension = $variant->format ?? pathinfo($media->relativePath, PATHINFO_EXTENSION);
-
-        return pathJoin($dirname, $filename . '-' . $variant->name . '.' . $extension);
-    }
-
     public function request(string $relativePath, ?string $variant = null): ?Media
     {
         if (!$this->repository->has($relativePath)) {
