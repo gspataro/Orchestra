@@ -35,23 +35,22 @@ final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInter
         $variant = $query['variant'] ?? null;
 
         $url = getenv('WEBSITE_URL') ?: '';
-        $image = $this->resolver->resolveImage($relativePath, $variant);
+        $image = $this->resolver->request($relativePath, $variant);
+        $attributes = [];
 
-        $attributes['src'] = $url . '/media' . $image['src'];
-        $attributes['srcset'] = '';
-        $attributes['sizes'] = "(max-width: {$image['sizes']}px) 100vw, {$image['sizes']}px";
+        $attributes['src'] = "{$url}/media{$image->getTransformation($variant)->relativePath}";
+        $attributes['srcset'] = [];
 
-        if ($image['srcset']) {
-            $comma = '';
+        foreach ($image->getTransformations() as $transformation) {
+            $width = $transformation->variant->option('width');
 
-            foreach ($image['srcset'] as $size => $src) {
-                $attributes['srcset'] .= $comma . "{$url}/media{$src} {$size}w";
-                $comma = ', ';
+            if ($width) {
+                $attributes['srcset'][] = "{$url}/media{$transformation->relativePath} {$width}w";
             }
         }
 
-        $attributes['title'] = $node->getTitle() ?? '';
-        $attributes['alt'] = $this->getAltText($node);
+        $width = $image->getTransformation($variant)->variant->option('width');
+        $attributes['sizes'] = "(max-width: {$width}px) 100vw, {$width}px";
 
         return new HtmlElement('img', $attributes, selfClosing: true);
     }

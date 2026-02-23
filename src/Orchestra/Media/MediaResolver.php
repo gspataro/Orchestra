@@ -9,7 +9,8 @@ final class MediaResolver
     public function __construct(
         private readonly BuildContext $context,
         private readonly MediaRepository $repository,
-        private readonly MediaTransformer $transformer
+        private readonly MediaTransformer $transformer,
+        private readonly PolicyCollection $policies
     ) {
     }
 
@@ -39,6 +40,12 @@ final class MediaResolver
             $this->transformer->transform($media, $variant);
         }
 
+        $policy = $this->policies->getFor(strtok($media->mimeType, '/'));
+
+        if ($policy) {
+            $policy->apply($media, $this->transformer, $this->context);
+        }
+
         return $media;
     }
 
@@ -61,56 +68,5 @@ final class MediaResolver
         }
 
         return $media->relativePath;
-    }
-
-    /**
-     * @param string $relativePath
-     * @param string|null $variant
-     * @return array{
-     *      src: string,
-     *      srcset: string[],
-     *      sizes: string
-     * }
-     */
-    public function resolveImage(string $relativePath, ?string $variant = null): array
-    {
-        $images = [
-            'src' => null,
-            'srcset' => [],
-            'sizes' => null
-        ];
-        $media = $this->request($relativePath, $variant);
-
-        if (!$media) {
-            return $images;
-        }
-
-        $transformation = $variant ? $media->getTransformation($variant) : null;
-        $srcRelativePath = $transformation ? $transformation->relativePath : $media->relativePath;
-
-        /** @var \Orchestra\Project\MediaVariant\ImageMediaVariant */
-        $imageVariant = $transformation ? $transformation->variant : null;
-
-        $images['src'] = $srcRelativePath;
-        $images['sizes'] = $imageVariant ? $imageVariant->option('width') : null;
-
-        $responsiveVariants = $this->context->blueprint->get('media.images.responsive');
-
-        if (!$responsiveVariants || empty($responsiveVariants)) {
-            return $images;
-        }
-
-        foreach ($responsiveVariants as $responsiveVariant) {
-            $responsiveImage = $this->request($relativePath, $responsiveVariant);
-            $responsiveTransformation = $responsiveImage->getTransformation($responsiveVariant);
-
-            if ($responsiveTransformation) {
-                /** @var \Orchestra\Project\MediaVariant\ImageMediaVariant */
-                $originalVariant = $responsiveTransformation->variant;
-                $images['srcset'][$originalVariant->option('width')] = $responsiveTransformation->relativePath;
-            }
-        }
-
-        return $images;
     }
 }

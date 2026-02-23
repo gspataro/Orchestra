@@ -2,6 +2,7 @@
 
 namespace Orchestra\View\Twig;
 
+use Dom\HTMLElement;
 use Orchestra\Media\MediaResolver;
 use Orchestra\Pipeline\BuildContext;
 use Twig\TwigFunction;
@@ -25,34 +26,25 @@ final class TwigMedia extends AbstractExtension
     public function image(string $relativePath, ?string $variant = null): string
     {
         $url = getenv('WEBSITE_URL') ?: '';
-        $image = $this->resolver->resolveImage($relativePath, $variant);
+        $image = $this->resolver->request($relativePath, $variant);
+        $attributes = [];
 
-        $srcset = null;
+        $attributes['src'] = "{$url}/media{$image->getTransformation($variant)->relativePath}";
+        $attributes['srcset'] = [];
 
-        if ($image['srcset']) {
-            $srcset = ' srcset="';
-            $comma = '';
+        foreach ($image->getTransformations() as $transformation) {
+            $width = $transformation->variant->option('width');
 
-            foreach ($image['srcset'] as $size => $src) {
-                $srcset .= $comma . "{$url}/media{$src} {$size}w";
-                $comma = ', ';
+            if ($width) {
+                $attributes['srcset'][] = "{$url}/media{$transformation->relativePath} {$width}w";
             }
-
-            $srcset .= '"';
         }
 
-        $sizes = null;
+        $width = $image->getTransformation($variant)->variant->option('width');
+        $attributes['sizes'] = "(max-width: {$width}px) 100vw, {$width}px";
+        $srcset = implode(', ', $attributes['srcset']);
 
-        if ($image['sizes']) {
-            $sizes = " sizes=\"(max-width: {$image['sizes']}px) 100vw, {$image['sizes']}px\"";
-        }
-
-        return sprintf(
-            '<img src="%s"%s%s>',
-            $url . '/media' . $image['src'],
-            $srcset,
-            $sizes
-        );
+        return "<img src=\"{$attributes['src']}\" srcset=\"{$srcset}\" sizes=\"{$attributes['sizes']}\">";
     }
 
     public function getFunctions()
