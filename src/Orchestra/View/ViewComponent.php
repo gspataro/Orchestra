@@ -4,6 +4,7 @@ namespace Orchestra\View;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
+use Orchestra\View\Elements\Image\ImageElement;
 use Twig\Environment;
 use Orchestra\View\Twig\TwigSitemap;
 use Orchestra\View\Twig\TwigBlueprint;
@@ -14,19 +15,24 @@ use Twig\Loader\FilesystemLoader;
 use Twig\Extra\String\StringExtension;
 use Twig\Extension\StringLoaderExtension;
 use Twig\Extra\Intl\IntlExtension;
+use Twig\Loader\ChainLoader;
 
 final class ViewComponent extends Component
 {
     public function register(Container $container): void
     {
         $container->add('twig.loader', function ($container, $args): object {
-            return new FilesystemLoader();
+            return new ChainLoader($args);
         });
 
         $container->add('twig', function ($container, $args): object {
             return new Environment(
                 $container->get('twig.loader')
             );
+        });
+
+        $container->add('view.elements', function ($c, $a): object {
+            return new ElementCollection();
         });
     }
 
@@ -35,18 +41,30 @@ final class ViewComponent extends Component
         /** @var \Orchestra\Pipeline\BuildContext */
         $context = $container->get('pipeline.context');
 
-        /** @var FilesystemLoader */
-        $twigLoader = $container->get('twig.loader');
+        $themeLoader = new FilesystemLoader();
 
         if (is_dir($context->paths->views())) {
-            $twigLoader->addPath($context->paths->views());
+            $themeLoader->addPath($context->paths->views());
         }
 
         if (is_dir($context->paths->assets())) {
-            $twigLoader->addPath($context->paths->assets(), 'assets');
+            $themeLoader->addPath($context->paths->assets(), 'assets');
         }
 
-        /** @var TwigEnvironment */
+        if (is_dir($context->paths->views('elements'))) {
+            $themeLoader->addPath($context->paths->views('elements'), 'orchestra-elements');
+        }
+
+        $coreLoader = new FilesystemLoader();
+        $coreLoader->addPath(__DIR__ . '/Elements', 'orchestra-elements');
+
+        /** @var FilesystemLoader */
+        $twigLoader = $container->get('twig.loader', [
+            $themeLoader,
+            $coreLoader
+        ]);
+
+        /** @var Environment */
         $twig = $container->get('twig');
 
         $twig->addExtension(new StringExtension());
@@ -65,6 +83,16 @@ final class ViewComponent extends Component
             $container->get('pipeline.context')
         ));
         $twig->addExtension(new TwigMedia(
+            $container->get('media.resolver'),
+            $container->get('view.elements')
+        ));
+
+        /** @var ElementCollection */
+        $elements = $container->get('view.elements');
+
+        $elements->add(new ImageElement(
+            $twig,
+            $container->get('content.repository'),
             $container->get('media.resolver')
         ));
     }

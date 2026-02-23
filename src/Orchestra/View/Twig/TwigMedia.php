@@ -2,16 +2,17 @@
 
 namespace Orchestra\View\Twig;
 
-use Dom\HTMLElement;
 use Orchestra\Media\MediaResolver;
 use Orchestra\Pipeline\BuildContext;
+use Orchestra\View\ElementCollection;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
 final class TwigMedia extends AbstractExtension
 {
     public function __construct(
-        private readonly MediaResolver $resolver
+        private readonly MediaResolver $resolver,
+        private readonly ElementCollection $elements
     ) {
     }
 
@@ -23,28 +24,18 @@ final class TwigMedia extends AbstractExtension
         return $url . '/media' . $relativePath;
     }
 
-    public function image(string $relativePath, ?string $variant = null): string
-    {
-        $url = getenv('WEBSITE_URL') ?: '';
-        $image = $this->resolver->request($relativePath, $variant);
-        $attributes = [];
-
-        $attributes['src'] = "{$url}/media{$image->getTransformation($variant)->relativePath}";
-        $attributes['srcset'] = [];
-
-        foreach ($image->getTransformations() as $transformation) {
-            $width = $transformation->variant->option('width');
-
-            if ($width) {
-                $attributes['srcset'][] = "{$url}/media{$transformation->relativePath} {$width}w";
-            }
-        }
-
-        $width = $image->getTransformation($variant)->variant->option('width');
-        $attributes['sizes'] = "(max-width: {$width}px) 100vw, {$width}px";
-        $srcset = implode(', ', $attributes['srcset']);
-
-        return "<img src=\"{$attributes['src']}\" srcset=\"{$srcset}\" sizes=\"{$attributes['sizes']}\">";
+    public function image(
+        string $relativePath,
+        ?string $variant = null,
+        ?string $altText = null,
+        ?string $title = null
+    ): string {
+        return $this->elements->get('image')->render([
+            'relativePath' => $relativePath,
+            'variant' => $variant,
+            'altText' => $altText,
+            'title' => $title
+        ]);
     }
 
     public function getFunctions()
