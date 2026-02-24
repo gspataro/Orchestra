@@ -7,7 +7,6 @@ use Orchestra\Assets\AssetsComponent;
 use Orchestra\Console\ConsoleComponent;
 use Orchestra\Publisher\PublisherComponent;
 use Orchestra\Content\ContentComponent;
-use Orchestra\Localization\LocalizationComponent;
 use Orchestra\Pages\PagesComponent;
 use Orchestra\Project\ProjectComponent;
 use Orchestra\Application\Component;
@@ -30,7 +29,6 @@ final class ApplicationKernel extends Kernel
         ExceptionHandlerComponent::class,
         DotenvComponent::class,
         CompilerComponent::class,
-        //LocalizationComponent::class,
         ProjectComponent::class,
         HighlightComponent::class,
         AssetsComponent::class,
