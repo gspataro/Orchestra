@@ -4,6 +4,7 @@ namespace Orchestra\Compiler;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
+use Orchestra\Compiler\Pipeline\BuildPipeline;
 
 final class CompilerComponent extends Component
 {
@@ -18,11 +19,12 @@ final class CompilerComponent extends Component
         });
 
         $container->add('compiler.pipeline', function ($c, $a): object {
-            return new Pipeline(
+            /*return new Pipeline(
                 $c,
                 $c->get('compiler.context'),
                 $a['output.adapter']
-            );
+            );*/
+            return new PipelineCollection();
         });
 
         $container->add('compiler.options', function ($c, $a): object {
@@ -35,5 +37,12 @@ final class CompilerComponent extends Component
 
     public function boot(Container $container): void
     {
+        /** @var PipelineCollection */
+        $pipeline = $container->get('compiler.pipeline');
+
+        $pipeline->add('build', new BuildPipeline(
+            $container,
+            $container->get('compiler.context')
+        ));
     }
 }

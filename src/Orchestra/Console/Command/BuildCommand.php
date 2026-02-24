@@ -36,20 +36,20 @@ final class BuildCommand extends BaseCommand
         $this->stopwatch = $this->container->get('console.stopwatch');
         $this->stopwatch->start();
 
-        /** @var Pipeline */
-        $pipeline = $this->container->get('compiler.pipeline', [
-            'output.adapter' => new ConsoleOutputAdapter($this->output)
-        ]);
+        /** @var \Orchestra\Compiler\PipelineCollection */
+        $pipeline = $this->container->get('compiler.pipeline');
 
-        /** @var \Orchestra\Pipeline\BuildOptions */
+        /** @var \Orchestra\Compiler\BuildOptions */
         $buildOptions = $this->container->get('compiler.options', [
             'skipMedia' => $this->argument('skip-media') !== null,
             'cleanupOnly' => $this->argument('cleanup-only') !== null
         ]);
 
-        $result = $pipeline->run($buildOptions);
-
-        if (!$result) {
+        if (
+            !$pipeline->get('build')
+                ->setOutputAdapter(new ConsoleOutputAdapter($this->output))
+                ->run($buildOptions)
+        ) {
             exit(0);
         }
 
