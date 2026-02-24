@@ -42,10 +42,11 @@ function recursiveCopy(string $from, string $to, array $exclude = []): void
  * Recursively delete a directory and its content
  *
  * @param string $path
+ * @param bool $onlyContent
  * @return void
  */
 
-function recursiveDelete(string $path): void
+function recursiveDelete(string $path, bool $onlyContent = false): void
 {
     if (!is_dir($path)) {
         return;
@@ -66,7 +67,9 @@ function recursiveDelete(string $path): void
         recursiveDelete($item->getPathname());
     }
 
-    rmdir($path);
+    if (!$onlyContent) {
+        rmdir($path);
+    }
 }
 
 /**
