@@ -9,6 +9,7 @@ class Paths
     public readonly string $media;
     public readonly string $views;
     public readonly string $assets;
+    public readonly string $themes;
 
     public function __construct(
         public readonly string $root
@@ -22,6 +23,7 @@ class Paths
         $this->media = $this->root  . '/contents/media';
         $this->views = $this->root . '/resources/view';
         $this->assets = $this->root . '/resources/assets';
+        $this->themes = $this->root . '/resources/themes';
     }
 
     public function root(string $path = ''): string
@@ -52,5 +54,10 @@ class Paths
     public function assets(string $path = ''): string
     {
         return pathJoin($this->assets, $path);
+    }
+
+    public function themes(string $path = ''): string
+    {
+        return pathJoin($this->themes, $path);
     }
 }

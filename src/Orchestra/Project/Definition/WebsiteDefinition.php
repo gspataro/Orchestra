@@ -23,6 +23,11 @@ class WebsiteDefinition extends Definition
                 'type' => 'string',
                 'default' => 'PHP static website builder'
             ],
+            'theme' => [
+                'type' => 'string',
+                'default' => 'pianoforte',
+                'required' => true
+            ],
             'friendly_urls' => [
                 'type' => 'bool',
                 'default' => true

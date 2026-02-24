@@ -18,6 +18,7 @@ use Orchestra\Infrastructure\HighlightComponent;
 use Orchestra\Markdown\MarkdownComponent;
 use Orchestra\Media\MediaComponent;
 use Orchestra\Compiler\CompilerComponent;
+use Orchestra\Theme\ThemeComponent;
 use Orchestra\View\ViewComponent;
 
 final class ApplicationKernel extends Kernel
@@ -32,6 +33,7 @@ final class ApplicationKernel extends Kernel
         ProjectComponent::class,
         HighlightComponent::class,
         AssetsComponent::class,
+        ThemeComponent::class,
         ViewComponent::class,
         MarkdownComponent::class,
         ContentComponent::class,

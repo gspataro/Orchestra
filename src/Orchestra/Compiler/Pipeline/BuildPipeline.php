@@ -14,6 +14,7 @@ use Orchestra\Compiler\Runtime\CreateContextRuntime;
 use Orchestra\Compiler\Runtime\MediaRuntime;
 use Orchestra\Compiler\Runtime\PagesRuntime;
 use Orchestra\Compiler\Runtime\SchemasRuntime;
+use Orchestra\Compiler\Runtime\ThemeRuntime;
 
 final class BuildPipeline implements PipelineInterface
 {
@@ -22,6 +23,7 @@ final class BuildPipeline implements PipelineInterface
     /** @var Runtime[] */
     private array $runtimes = [
         CreateContextRuntime::class,
+        ThemeRuntime::class,
         ContentsRuntime::class,
         SchemasRuntime::class,
         PagesRuntime::class,
