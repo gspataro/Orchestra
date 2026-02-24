@@ -3,14 +3,18 @@
 namespace Orchestra\Publisher\Builder;
 
 use Orchestra\Pages\Page\Page;
+use Orchestra\Publisher\BuilderInterface;
+use Twig\Environment;
 
-final class TwigBuilder extends BaseBuilder
+final class TwigBuilder implements BuilderInterface
 {
-    public function compile(Page $page): void
-    {
-        $outputPath = $this->getOutputPath($page->permalink);
-        $compiled = $this->twig->render($page->schema->template . '.html', (array) $page->contents);
+    public function __construct(
+        private readonly Environment $twig
+    ) {
+    }
 
-        file_put_contents($outputPath, $compiled);
+    public function compile(Page $page): string
+    {
+        return $this->twig->render($page->schema->template . '.html', (array) $page->contents);
     }
 }

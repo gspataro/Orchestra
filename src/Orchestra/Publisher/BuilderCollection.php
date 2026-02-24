@@ -2,9 +2,9 @@
 
 namespace Orchestra\Publisher;
 
-use Orchestra\Publisher\Interface\BuilderInterface;
+use Orchestra\Publisher\BuilderInterface;
 
-final class BuildersCollection
+final class BuilderCollection
 {
     /**
      * Store builders

@@ -1,0 +1,25 @@
+<?php
+
+namespace Orchestra\Publisher;
+
+use Orchestra\Pipeline\BuildContext;
+
+final class Publisher
+{
+    public function __construct(
+        private readonly BuildContext $context
+    ) {
+    }
+
+    public function publish(string $path, mixed $content): void
+    {
+        $outputPath = $this->context->paths->output($path . '.html');
+        $outputDir = pathinfo($outputPath, PATHINFO_DIRNAME);
+
+        if (!is_dir($outputDir)) {
+            mkdir($outputDir, 0777, true);
+        }
+
+        file_put_contents($outputPath, $content);
+    }
+}
