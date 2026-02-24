@@ -7,6 +7,7 @@ use Orchestra\Compiler\BuildContext;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Compiler\BuildOutputInterface;
 use Orchestra\Compiler\PipelineInterface;
+use Orchestra\Compiler\Runtime\AssetsRuntime;
 use Orchestra\Compiler\Runtime\CleanupRuntime;
 use Orchestra\Compiler\Runtime\SitemapRuntime;
 use Orchestra\Compiler\Runtime\ContentsRuntime;
@@ -26,6 +27,7 @@ final class BuildPipeline implements PipelineInterface
         ThemeRuntime::class,
         ContentsRuntime::class,
         SchemasRuntime::class,
+        AssetsRuntime::class,
         PagesRuntime::class,
         MediaRuntime::class,
         SitemapRuntime::class,

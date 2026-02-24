@@ -33,7 +33,12 @@ final class ThemeLoader
 
         return new Theme(
             $data['name'] ?? '',
-            $themeDirectory
+            $themeDirectory,
+            new ThemeAssets(
+                $data['assets']['driver'] ?? 'static',
+                $data['assets']['dir'] ?? 'assets',
+                $data['assets']['entries'] ?? []
+            )
         );
     }
 }

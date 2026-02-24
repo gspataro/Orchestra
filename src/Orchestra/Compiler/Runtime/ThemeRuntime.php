@@ -22,10 +22,6 @@ final class ThemeRuntime extends Runtime
         $themeLoader = new FilesystemLoader();
         $themeLoader->addPath($theme->path);
 
-        if (is_dir($theme->assets())) {
-            $themeLoader->addPath($theme->assets(), 'assets');
-        }
-
         if (is_dir($theme->elements())) {
             $themeLoader->addPath($theme->elements(), 'orchestra-elements');
         }

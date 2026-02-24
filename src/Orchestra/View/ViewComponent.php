@@ -12,6 +12,7 @@ use Orchestra\View\Twig\ElementsExtension;
 use Orchestra\View\Twig\HighlighterExtension;
 use Orchestra\View\Twig\GenericsExtension;
 use Orchestra\View\Twig\MediaExtension;
+use Orchestra\View\Twig\ThemeExtension;
 use Twig\Extra\String\StringExtension;
 use Twig\Extension\StringLoaderExtension;
 use Twig\Extra\Intl\IntlExtension;
@@ -62,6 +63,9 @@ final class ViewComponent extends Component
         ));
         $twig->addExtension(new ElementsExtension(
             $container->get('view.elements')
+        ));
+        $twig->addExtension(new ThemeExtension(
+            $container->get('theme.assets')
         ));
 
         /** @var ElementCollection */
