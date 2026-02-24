@@ -4,7 +4,6 @@ namespace Orchestra\Console\Command;
 
 use GSpataro\CLI\Helper\Stopwatch;
 use Orchestra\Console\ConsoleOutputAdapter;
-use Orchestra\Compiler\Pipeline;
 
 final class BuildCommand extends BaseCommand
 {
