@@ -22,11 +22,10 @@ final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInter
     /**
      * @param Image $node
      * @param ChildNodeRendererInterface $childRenderer
+     * @return string
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        //$attributes = $node->data->get('attributes', []);
-
         $urlParts = parse_url($node->getUrl());
         parse_str($urlParts['query'], $query);
         $relativePath = $urlParts['path'] ?? '';

@@ -10,6 +10,7 @@ use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
+use Orchestra\Markdown\CommonMark\ElementsExtension\ElementsExtension;
 use Orchestra\Markdown\CommonMark\MediaExtension\MediaExtension;
 
 final class MarkdownComponent extends Component
@@ -48,5 +49,6 @@ final class MarkdownComponent extends Component
         $environment->addExtension(new HeadingPermalinkExtension());
         $environment->addExtension(new TableOfContentsExtension());
         $environment->addExtension(new MediaExtension($container->get('view.elements')));
+        $environment->addExtension(new ElementsExtension($container->get('view.elements')));
     }
 }
