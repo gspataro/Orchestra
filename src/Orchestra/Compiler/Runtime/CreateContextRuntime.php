@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Pipeline\Runtime;
+namespace Orchestra\Compiler\Runtime;
 
-use Orchestra\Pipeline\BuildOptions;
+use Orchestra\Compiler\BuildOptions;
 use Orchestra\Project\Blueprint;
 use Orchestra\Project\BlueprintCompiler;
 use Orchestra\Project\Sitemap;

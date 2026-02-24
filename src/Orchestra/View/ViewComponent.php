@@ -40,7 +40,7 @@ final class ViewComponent extends Component
     public function boot(Container $container): void
     {
         /** @var \Orchestra\Pipeline\BuildContext */
-        $context = $container->get('pipeline.context');
+        $context = $container->get('compiler.context');
 
         $themeLoader = new FilesystemLoader();
 
@@ -78,10 +78,10 @@ final class ViewComponent extends Component
             $container->get('tempest.highlight')
         ));
         $twig->addExtension(new BlueprintExtension(
-            $container->get('pipeline.context')
+            $container->get('compiler.context')
         ));
         $twig->addExtension(new SitemapExtension(
-            $container->get('pipeline.context')
+            $container->get('compiler.context')
         ));
         $twig->addExtension(new MediaExtension(
             $container->get('media.resolver'),

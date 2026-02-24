@@ -1,9 +1,9 @@
 <?php
 
-namespace Orchestra\Pipeline\Runtime;
+namespace Orchestra\Compiler\Runtime;
 
 use DirectoryIterator;
-use Orchestra\Pipeline\BuildOptions;
+use Orchestra\Compiler\BuildOptions;
 
 final class CleanupRuntime extends Runtime
 {

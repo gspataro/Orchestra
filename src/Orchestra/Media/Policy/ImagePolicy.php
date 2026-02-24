@@ -5,7 +5,7 @@ namespace Orchestra\Media\Policy;
 use Orchestra\Media\Media;
 use Orchestra\Media\MediaTransformer;
 use Orchestra\Media\PolicyInterface;
-use Orchestra\Pipeline\BuildContext;
+use Orchestra\Compiler\BuildContext;
 
 final class ImagePolicy implements PolicyInterface
 {

@@ -3,7 +3,7 @@
 namespace Orchestra\View\Twig;
 
 use Orchestra\Media\MediaResolver;
-use Orchestra\Pipeline\BuildContext;
+use Orchestra\Compiler\BuildContext;
 use Orchestra\View\ElementCollection;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;

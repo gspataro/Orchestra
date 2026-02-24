@@ -2,7 +2,7 @@
 
 namespace Orchestra\Media;
 
-use Orchestra\Pipeline\BuildContext;
+use Orchestra\Compiler\BuildContext;
 use Orchestra\Project\MediaVariant\MediaVariant;
 
 final class MediaTransformer

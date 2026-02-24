@@ -20,7 +20,7 @@ final class AssetsComponent extends Component
     public function boot(Container $container): void
     {
         /** @var \Orchestra\Pipeline\BuildContext */
-        $context = $container->get('pipeline.context');
+        $context = $container->get('compiler.context');
 
         /** @var Vite */
         $vite = $container->get('assets.vite', [

@@ -18,7 +18,7 @@ use Orchestra\Infrastructure\ExceptionHandlerComponent;
 use Orchestra\Infrastructure\HighlightComponent;
 use Orchestra\Markdown\MarkdownComponent;
 use Orchestra\Media\MediaComponent;
-use Orchestra\Pipeline\PipelineComponent;
+use Orchestra\Compiler\CompilerComponent;
 use Orchestra\View\ViewComponent;
 
 final class ApplicationKernel extends Kernel
@@ -29,7 +29,7 @@ final class ApplicationKernel extends Kernel
     private array $components = [
         ExceptionHandlerComponent::class,
         DotenvComponent::class,
-        PipelineComponent::class,
+        CompilerComponent::class,
         //LocalizationComponent::class,
         ProjectComponent::class,
         HighlightComponent::class,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Pipeline;
+namespace Orchestra\Compiler;
 
 class Paths
 {

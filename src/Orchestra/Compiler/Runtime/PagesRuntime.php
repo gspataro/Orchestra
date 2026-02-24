@@ -1,10 +1,10 @@
 <?php
 
-namespace Orchestra\Pipeline\Runtime;
+namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Publisher\BuilderCollection;
 use Orchestra\Pages\Page\PageCollection;
-use Orchestra\Pipeline\BuildOptions;
+use Orchestra\Compiler\BuildOptions;
 use Orchestra\Publisher\Publisher;
 
 final class PagesRuntime extends Runtime

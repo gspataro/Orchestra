@@ -18,7 +18,7 @@ class BaseCommand extends Command
         if (!is_object($process)) {
             $process = new $process(
                 $this->container,
-                $this->container->get('pipeline.context')
+                $this->container->get('compiler.context')
             );
         }
 

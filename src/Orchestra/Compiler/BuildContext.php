@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Pipeline;
+namespace Orchestra\Compiler;
 
 use Orchestra\Project\Blueprint;
 use Orchestra\Project\Prototype;

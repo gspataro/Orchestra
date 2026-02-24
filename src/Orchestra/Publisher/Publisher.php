@@ -2,7 +2,7 @@
 
 namespace Orchestra\Publisher;
 
-use Orchestra\Pipeline\BuildContext;
+use Orchestra\Compiler\BuildContext;
 
 final class Publisher
 {

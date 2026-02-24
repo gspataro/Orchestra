@@ -4,7 +4,7 @@ namespace Orchestra\Console\Command;
 
 use GSpataro\CLI\Helper\Stopwatch;
 use Orchestra\Console\ConsoleOutputAdapter;
-use Orchestra\Pipeline\Pipeline;
+use Orchestra\Compiler\Pipeline;
 
 final class BuildCommand extends BaseCommand
 {
@@ -37,12 +37,12 @@ final class BuildCommand extends BaseCommand
         $this->stopwatch->start();
 
         /** @var Pipeline */
-        $pipeline = $this->container->get('pipeline', [
+        $pipeline = $this->container->get('compiler.pipeline', [
             'output.adapter' => new ConsoleOutputAdapter($this->output)
         ]);
 
         /** @var \Orchestra\Pipeline\BuildOptions */
-        $buildOptions = $this->container->get('pipeline.options', [
+        $buildOptions = $this->container->get('compiler.options', [
             'skipMedia' => $this->argument('skip-media') !== null,
             'cleanupOnly' => $this->argument('cleanup-only') !== null
         ]);

@@ -29,13 +29,13 @@ final class MediaComponent extends Component
 
         $container->add('media.transformer', function ($c, $a): object {
             return new MediaTransformer(
-                $c->get('pipeline.context')
+                $c->get('compiler.context')
             );
         });
 
         $container->add('media.resolver', function ($c, $a): object {
             return new MediaResolver(
-                $c->get('pipeline.context'),
+                $c->get('compiler.context'),
                 $c->get('media.repository'),
                 $c->get('media.transformer'),
                 $c->get('media.policies')

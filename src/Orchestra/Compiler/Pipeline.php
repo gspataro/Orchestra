@@ -1,15 +1,15 @@
 <?php
 
-namespace Orchestra\Pipeline;
+namespace Orchestra\Compiler;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Pipeline\Runtime\CleanupRuntime;
-use Orchestra\Pipeline\Runtime\SitemapRuntime;
-use Orchestra\Pipeline\Runtime\ContentsRuntime;
-use Orchestra\Pipeline\Runtime\CreateContextRuntime;
-use Orchestra\Pipeline\Runtime\MediaRuntime;
-use Orchestra\Pipeline\Runtime\PagesRuntime;
-use Orchestra\Pipeline\Runtime\SchemasRuntime;
+use Orchestra\Compiler\Runtime\CleanupRuntime;
+use Orchestra\Compiler\Runtime\SitemapRuntime;
+use Orchestra\Compiler\Runtime\ContentsRuntime;
+use Orchestra\Compiler\Runtime\CreateContextRuntime;
+use Orchestra\Compiler\Runtime\MediaRuntime;
+use Orchestra\Compiler\Runtime\PagesRuntime;
+use Orchestra\Compiler\Runtime\SchemasRuntime;
 
 final class Pipeline
 {

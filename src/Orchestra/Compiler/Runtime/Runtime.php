@@ -1,11 +1,11 @@
 <?php
 
-namespace Orchestra\Pipeline\Runtime;
+namespace Orchestra\Compiler\Runtime;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Pipeline\BuildContext;
-use Orchestra\Pipeline\BuildOptions;
-use Orchestra\Pipeline\BuildOutputInterface;
+use Orchestra\Compiler\BuildContext;
+use Orchestra\Compiler\BuildOptions;
+use Orchestra\Compiler\BuildOutputInterface;
 
 abstract class Runtime
 {

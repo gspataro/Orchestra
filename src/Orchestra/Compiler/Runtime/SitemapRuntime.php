@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Pipeline\Runtime;
+namespace Orchestra\Compiler\Runtime;
 
-use Orchestra\Pipeline\BuildOptions;
+use Orchestra\Compiler\BuildOptions;
 use SimpleXMLElement;
 
 final class SitemapRuntime extends Runtime

@@ -2,7 +2,7 @@
 
 namespace Orchestra\View\Twig;
 
-use Orchestra\Pipeline\BuildContext;
+use Orchestra\Compiler\BuildContext;
 use Twig\Extension\GlobalsInterface;
 use Twig\Extension\AbstractExtension;
 

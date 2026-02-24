@@ -2,7 +2,7 @@
 
 namespace Orchestra\Media;
 
-use Orchestra\Pipeline\BuildContext;
+use Orchestra\Compiler\BuildContext;
 
 interface PolicyInterface
 {

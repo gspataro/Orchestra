@@ -3,7 +3,7 @@
 namespace Orchestra\Console;
 
 use GSpataro\CLI\Interface\OutputInterface;
-use Orchestra\Pipeline\BuildOutputInterface;
+use Orchestra\Compiler\BuildOutputInterface;
 
 final class ConsoleOutputAdapter implements BuildOutputInterface
 {

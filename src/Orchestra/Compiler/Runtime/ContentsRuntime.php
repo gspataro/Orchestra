@@ -1,10 +1,10 @@
 <?php
 
-namespace Orchestra\Pipeline\Runtime;
+namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Content\ContentRepository;
 use Orchestra\Content\ReadersCollection;
-use Orchestra\Pipeline\BuildOptions;
+use Orchestra\Compiler\BuildOptions;
 use Orchestra\Project\Source\ResolvedSource;
 use Orchestra\Project\Source\Source;
 

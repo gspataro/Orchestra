@@ -5,7 +5,7 @@ namespace Orchestra\Content\Reader;
 use Orchestra\Content\Archive;
 use Orchestra\Content\Content;
 use Orchestra\Content\ReaderInterface;
-use Orchestra\Pipeline\BuildContext;
+use Orchestra\Compiler\BuildContext;
 use Orchestra\Project\Source\ResolvedSource;
 
 abstract class BaseReader implements ReaderInterface

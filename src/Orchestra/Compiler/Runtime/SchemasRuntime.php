@@ -1,10 +1,10 @@
 <?php
 
-namespace Orchestra\Pipeline\Runtime;
+namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Content\ContentRepository;
 use Orchestra\Pages\GeneratorsCollection;
-use Orchestra\Pipeline\BuildOptions;
+use Orchestra\Compiler\BuildOptions;
 
 final class SchemasRuntime extends Runtime
 {

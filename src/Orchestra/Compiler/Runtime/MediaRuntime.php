@@ -1,10 +1,10 @@
 <?php
 
-namespace Orchestra\Pipeline\Runtime;
+namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Media\MediaRepository;
 use Orchestra\Media\AdapterCollection;
-use Orchestra\Pipeline\BuildOptions;
+use Orchestra\Compiler\BuildOptions;
 
 final class MediaRuntime extends Runtime
 {
