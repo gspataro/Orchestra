@@ -3,7 +3,6 @@
 namespace Orchestra\Application\Kernel;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Assets\AssetsComponent;
 use Orchestra\Console\ConsoleComponent;
 use Orchestra\Publisher\PublisherComponent;
 use Orchestra\Content\ContentComponent;
@@ -32,7 +31,6 @@ final class ApplicationKernel extends Kernel
         CompilerComponent::class,
         ProjectComponent::class,
         HighlightComponent::class,
-        AssetsComponent::class,
         ThemeComponent::class,
         ViewComponent::class,
         MarkdownComponent::class,

@@ -2,18 +2,11 @@
 
 namespace Orchestra\View\Twig;
 
-use Orchestra\Assets\Vite;
 use Twig\TwigFilter;
 use Twig\Extension\AbstractExtension;
-use Twig\Extension\GlobalsInterface;
 
-class GenericsExtension extends AbstractExtension implements GlobalsInterface
+class GenericsExtension extends AbstractExtension
 {
-    public function __construct(
-        private readonly Vite $vite
-    ) {
-    }
-
     public function pregMatch($subject, $pattern)
     {
         $matches = [];
@@ -35,12 +28,5 @@ class GenericsExtension extends AbstractExtension implements GlobalsInterface
         $filters[] = new TwigFilter('preg_replace', [$this, 'pregReplace']);
 
         return $filters;
-    }
-
-    public function getGlobals(): array
-    {
-        return [
-            'vite' => $this->vite
-        ];
     }
 }

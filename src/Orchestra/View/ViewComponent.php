@@ -45,9 +45,7 @@ final class ViewComponent extends Component
         $twig->addExtension(new StringExtension());
         $twig->addExtension(new IntlExtension());
         $twig->addExtension(new StringLoaderExtension());
-        $twig->addExtension(new GenericsExtension(
-            $container->get('assets.vite')
-        ));
+        $twig->addExtension(new GenericsExtension());
         $twig->addExtension(new HighlighterExtension(
             $container->get('tempest.highlight')
         ));
