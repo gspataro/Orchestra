@@ -16,18 +16,17 @@ final class ContentsRuntime extends Runtime
 
     /**
      * @param Source $source
-     * @return ResolvedSource|ResolvedSource[]
+     * @return ResolvedSource[]
      */
-    private function resolveSourcePath(Source $source): ResolvedSource|array
+    private function resolveSourcePath(Source $source): iterable
     {
-        $resolved = [];
         $paths = explode(';', $source->path);
 
         foreach ($paths as $path) {
             $fullPath = $this->context->paths->data($path);
 
             if (is_file($fullPath)) {
-                $resolved[] = $source->withResolvedPaths($fullPath, $path);
+                yield $source->withResolvedPaths($fullPath, $path);
                 continue;
             }
 
@@ -37,13 +36,11 @@ final class ContentsRuntime extends Runtime
                 if ($matches !== false) {
                     foreach ($matches as $match) {
                         $relativePath = substr($match, strlen($this->context->paths->data()));
-                        $resolved[] = $source->withResolvedPaths($match, $relativePath);
+                        yield $source->withResolvedPaths($match, $relativePath);
                     }
                 }
             }
         }
-
-        return count($resolved) > 1 ? $resolved : $resolved[0];
     }
 
     public function run(BuildOptions $options): bool
@@ -62,18 +59,18 @@ final class ContentsRuntime extends Runtime
         foreach ($this->context->prototype->sources() as $source) {
             $this->output->print("Working on content group '{$source->group}'");
 
-            $resolvedSources = $this->resolveSourcePath($source);
+            foreach ($this->resolveSourcePath($source) as $resolvedSource) {
+                $reader = $this->readers->get($source->reader);
+                $payload = $reader->compile($resolvedSource);
 
-            $reader = $this->readers->get($source->reader);
-            $payload = $reader->compile($resolvedSources);
+                if (!is_array($payload)) {
+                    $this->contents->add($contentFactory->fromPayload($payload));
+                    continue;
+                }
 
-            if (!is_array($payload)) {
-                $this->contents->add($contentFactory->fromPayload($payload));
-                continue;
-            }
-
-            foreach ($payload as $single) {
-                $this->contents->add($contentFactory->fromPayload($single));
+                foreach ($payload as $single) {
+                    $this->contents->add($contentFactory->fromPayload($single));
+                }
             }
         }
 
