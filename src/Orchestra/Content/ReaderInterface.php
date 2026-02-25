@@ -7,8 +7,8 @@ use Orchestra\Project\Source\ResolvedSource;
 interface ReaderInterface
 {
     /**
-     * @param ResolvedSource|ResolvedSource[] $source
+     * @param ResolvedSource $source
      * @return ContentPayload|ContentPayload[]
      */
-    public function compile(ResolvedSource|array $source): ContentPayload|array;
+    public function compile(ResolvedSource $source): ContentPayload|array;
 }

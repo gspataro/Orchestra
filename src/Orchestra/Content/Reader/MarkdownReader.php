@@ -14,7 +14,7 @@ final class MarkdownReader extends BaseReader
     ) {
     }
 
-    protected function compiler(ResolvedSource $source): ContentPayload
+    public function compile(ResolvedSource $source): ContentPayload
     {
         $body = $this->markdown->convert(
             file_get_contents($source->path)
