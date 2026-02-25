@@ -6,6 +6,7 @@ use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
 use Orchestra\Theme\Assets\AssetRepository;
 use Orchestra\Theme\Assets\Driver\StaticDriver;
+use Orchestra\Theme\Assets\Driver\ViteDriver;
 use Orchestra\Theme\Assets\DriverCollection;
 use Orchestra\Theme\ThemeLoader;
 
@@ -34,5 +35,6 @@ final class ThemeComponent extends Component
         $drivers = $container->get('theme.assets.drivers');
 
         $drivers->add('static', new StaticDriver());
+        $drivers->add('vite', new ViteDriver());
     }
 }
