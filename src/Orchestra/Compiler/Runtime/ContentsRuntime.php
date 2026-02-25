@@ -61,15 +61,9 @@ final class ContentsRuntime extends Runtime
 
             foreach ($this->resolveSourcePath($source) as $resolvedSource) {
                 $reader = $this->readers->get($source->reader);
-                $payload = $reader->compile($resolvedSource);
 
-                if (!is_array($payload)) {
+                foreach ($reader->compile($resolvedSource) as $payload) {
                     $this->contents->add($contentFactory->fromPayload($payload));
-                    continue;
-                }
-
-                foreach ($payload as $single) {
-                    $this->contents->add($contentFactory->fromPayload($single));
                 }
             }
         }

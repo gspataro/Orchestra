@@ -7,18 +7,15 @@ use Orchestra\Project\Source\ResolvedSource;
 
 final class JsonCollectionReader extends BaseReader
 {
-    public function compile(ResolvedSource $source): ContentPayload|array
+    public function compile(ResolvedSource $source): iterable
     {
-        $contents = [];
         $data = json_decode(file_get_contents($source->path), true);
 
         foreach ($data as $body) {
-            $contents[] = $this->contentFromSource(
+            yield $this->contentFromSource(
                 $source,
                 $body
             );
         }
-
-        return $contents;
     }
 }

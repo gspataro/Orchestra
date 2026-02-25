@@ -7,10 +7,10 @@ use Orchestra\Project\Source\ResolvedSource;
 
 final class TextReader extends BaseReader
 {
-    public function compile(ResolvedSource $source): ContentPayload
+    public function compile(ResolvedSource $source): iterable
     {
         $body = file_get_contents($source->path);
 
-        return $this->contentFromSource($source, $body);
+        yield $this->contentFromSource($source, $body);
     }
 }

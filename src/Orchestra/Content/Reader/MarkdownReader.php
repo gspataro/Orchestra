@@ -14,21 +14,22 @@ final class MarkdownReader extends BaseReader
     ) {
     }
 
-    public function compile(ResolvedSource $source): ContentPayload
+    public function compile(ResolvedSource $source): iterable
     {
         $body = $this->markdown->convert(
             file_get_contents($source->path)
         );
 
         if ($body instanceof RenderedContentWithFrontMatter) {
-            return $this->contentFromSource(
+            yield $this->contentFromSource(
                 $source,
                 $body->getContent(),
                 $body->getFrontMatter()
             );
+            return;
         }
 
-        return $this->contentFromSource(
+        yield $this->contentFromSource(
             $source,
             $body->getContent()
         );
