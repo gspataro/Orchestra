@@ -2,11 +2,9 @@
 
 namespace Orchestra\Content\Reader;
 
-use Orchestra\Content\Archive;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
-use Orchestra\Content\Content;
-use Orchestra\Compiler\BuildContext;
+use Orchestra\Content\ContentPayload;
 use Orchestra\Project\Source\ResolvedSource;
 
 final class MarkdownReader extends BaseReader
@@ -16,7 +14,7 @@ final class MarkdownReader extends BaseReader
     ) {
     }
 
-    protected function compiler(ResolvedSource $source): Content
+    protected function compiler(ResolvedSource $source): ContentPayload
     {
         $body = $this->markdown->convert(
             file_get_contents($source->path)

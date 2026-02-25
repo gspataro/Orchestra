@@ -8,7 +8,7 @@ interface ReaderInterface
 {
     /**
      * @param ResolvedSource|ResolvedSource[] $source
-     * @return Content|Content[]
+     * @return ContentPayload|ContentPayload[]
      */
-    public function compile(ResolvedSource|array $source): Content|array;
+    public function compile(ResolvedSource|array $source): ContentPayload|array;
 }

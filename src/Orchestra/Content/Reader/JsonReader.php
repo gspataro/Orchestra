@@ -2,12 +2,12 @@
 
 namespace Orchestra\Content\Reader;
 
-use Orchestra\Content\Content;
+use Orchestra\Content\ContentPayload;
 use Orchestra\Project\Source\ResolvedSource;
 
 final class JsonReader extends BaseReader
 {
-    protected function compiler(ResolvedSource $source): Content
+    protected function compiler(ResolvedSource $source): ContentPayload
     {
         $body = json_decode(file_get_contents($source->path), true);
 

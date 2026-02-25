@@ -2,19 +2,17 @@
 
 namespace Orchestra\Content\Reader;
 
-use Orchestra\Content\Archive;
-use Orchestra\Content\Content;
 use Orchestra\Content\ReaderInterface;
-use Orchestra\Compiler\BuildContext;
+use Orchestra\Content\ContentPayload;
 use Orchestra\Project\Source\ResolvedSource;
 
 abstract class BaseReader implements ReaderInterface
 {
     /**
      * @param ResolvedSource $source
-     * @return Content|Content[]
+     * @return ContentPayload|ContentPayload[]
      */
-    abstract protected function compiler(ResolvedSource $source): Content|array;
+    abstract protected function compiler(ResolvedSource $source): ContentPayload|array;
 
     protected function generateContentId(ResolvedSource $source): mixed
     {
@@ -27,9 +25,9 @@ abstract class BaseReader implements ReaderInterface
         return $source->group . '.' . $fileName;
     }
 
-    protected function contentFromSource(ResolvedSource $source, mixed $body, array $metadata = []): Content
+    protected function contentFromSource(ResolvedSource $source, mixed $body, array $metadata = []): ContentPayload
     {
-        return new Content(
+        return new ContentPayload(
             $this->generateContentId($source),
             $this->generateContentTag($source),
             $source->group,
@@ -41,9 +39,9 @@ abstract class BaseReader implements ReaderInterface
 
     /**
      * @param ResolvedSource|ResolvedSource[] $source
-     * @return Content[]|Content
+     * @return ContentPayload|ContentPayload[]
      */
-    public function compile(ResolvedSource|array $source): array|Content
+    public function compile(ResolvedSource|array $source): ContentPayload|array
     {
         if (!is_array($source)) {
             return $this->compiler($source);

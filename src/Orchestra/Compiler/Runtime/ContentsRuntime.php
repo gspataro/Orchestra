@@ -5,6 +5,7 @@ namespace Orchestra\Compiler\Runtime;
 use Orchestra\Content\ContentRepository;
 use Orchestra\Content\ReadersCollection;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Content\Factory\ContentFactory;
 use Orchestra\Project\Source\ResolvedSource;
 use Orchestra\Project\Source\Source;
 
@@ -53,6 +54,9 @@ final class ContentsRuntime extends Runtime
         /** @var ContentRepository */
         $this->contents = $this->container->get('content.repository');
 
+        /** @var ContentFactory */
+        $contentFactory = new ContentFactory();
+
         $this->output->info('Processing contents');
 
         foreach ($this->context->prototype->sources() as $source) {
@@ -61,15 +65,15 @@ final class ContentsRuntime extends Runtime
             $resolvedSources = $this->resolveSourcePath($source);
 
             $reader = $this->readers->get($source->reader);
-            $content = $reader->compile($resolvedSources);
+            $payload = $reader->compile($resolvedSources);
 
-            if (!is_array($content)) {
-                $this->contents->add($content);
+            if (!is_array($payload)) {
+                $this->contents->add($contentFactory->fromPayload($payload));
                 continue;
             }
 
-            foreach ($content as $single) {
-                $this->contents->add($single);
+            foreach ($payload as $single) {
+                $this->contents->add($contentFactory->fromPayload($single));
             }
         }
 
