@@ -2,6 +2,8 @@
 
 namespace Orchestra\Content;
 
+use Orchestra\Project\Definition\Query\QueryDefinition;
+
 final class ContentRepository
 {
     /** @var Content[] */
@@ -29,7 +31,7 @@ final class ContentRepository
         return new ContentCollection($this->byId);
     }
 
-    public function query(ContentQueryDefinition $definition): ContentQuery
+    public function query(QueryDefinition $definition): ContentQuery
     {
         /** @var ContentCollection */
         $contents = $this->group($definition->group);

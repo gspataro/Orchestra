@@ -2,6 +2,8 @@
 
 namespace Orchestra\Content;
 
+use Orchestra\Project\Definition\Query\QueryDefinition;
+
 final class ContentQuery
 {
     private array $filters = [];
@@ -19,7 +21,7 @@ final class ContentQuery
     ) {
     }
 
-    public function fromDefinition(ContentQueryDefinition $definition): self
+    public function fromDefinition(QueryDefinition $definition): self
     {
         if (!empty($definition->wheres)) {
             foreach ($definition->wheres as [$field, $operator, $value]) {

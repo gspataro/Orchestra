@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Content;
+namespace Orchestra\Project\Definition\Query;
 
-final readonly class ContentQueryDefinition
+final readonly class QueryDefinition
 {
     public function __construct(
         public string $group,

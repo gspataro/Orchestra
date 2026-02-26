@@ -2,9 +2,9 @@
 
 namespace Orchestra\Project\Interpreter;
 
-use Orchestra\Content\ContentQueryDefinition;
 use Orchestra\Project\Blueprint;
 use Orchestra\Project\CompilerContext;
+use Orchestra\Project\Definition\Query\QueryDefinition;
 use Orchestra\Project\Definition\Schema\Schema;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidSchemaException;
@@ -39,11 +39,11 @@ final class SchemaInterpreter implements InterpreterInterface
 
         foreach ($queries as $query) {
             if (!is_array($query)) {
-                $contentQueries[] = new ContentQueryDefinition($query);
+                $contentQueries[] = new QueryDefinition($query);
                 continue;
             }
 
-            $contentQueries[] = new ContentQueryDefinition(
+            $contentQueries[] = new QueryDefinition(
                 $query['group'],
                 $query['where'] ?? [],
                 $query['skip'] ?? 0,
