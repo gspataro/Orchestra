@@ -9,8 +9,8 @@ use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidSchemaException;
 use Orchestra\Project\Definition\MediaVariant\MediaVariant;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
-use Orchestra\Project\Schema\Schema;
-use Orchestra\Project\Schema\SchemaCollection;
+use Orchestra\Project\Definition\Schema\Schema;
+use Orchestra\Project\Definition\Schema\SchemaCollection;
 
 final class BlueprintCompiler
 {

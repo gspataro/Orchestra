@@ -2,7 +2,7 @@
 
 namespace Orchestra\Page;
 
-use Orchestra\Project\Schema\ResolvedSchema;
+use Orchestra\Project\Definition\Schema\ResolvedSchema;
 
 interface GeneratorInterface
 {

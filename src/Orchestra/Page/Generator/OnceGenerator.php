@@ -2,7 +2,7 @@
 
 namespace Orchestra\Page\Generator;
 
-use Orchestra\Project\Schema\ResolvedSchema;
+use Orchestra\Project\Definition\Schema\ResolvedSchema;
 
 final class OnceGenerator extends BaseGenerator
 {

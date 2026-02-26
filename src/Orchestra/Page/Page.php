@@ -3,7 +3,7 @@
 namespace Orchestra\Page;
 
 use Orchestra\Content\ContentCollection;
-use Orchestra\Project\Schema\ResolvedSchema;
+use Orchestra\Project\Definition\Schema\ResolvedSchema;
 
 final readonly class Page
 {

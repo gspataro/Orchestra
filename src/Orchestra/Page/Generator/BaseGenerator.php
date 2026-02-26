@@ -7,7 +7,7 @@ use Orchestra\Project\Sitemap;
 use Orchestra\Page\GeneratorInterface;
 use Orchestra\Page\Page;
 use Orchestra\Page\PagePayload;
-use Orchestra\Project\Schema\ResolvedSchema;
+use Orchestra\Project\Definition\Schema\ResolvedSchema;
 
 abstract class BaseGenerator implements GeneratorInterface
 {

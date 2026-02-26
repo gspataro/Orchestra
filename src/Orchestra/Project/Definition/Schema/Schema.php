@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Project\Schema;
+namespace Orchestra\Project\Definition\Schema;
 
 final readonly class Schema
 {
