@@ -20,14 +20,14 @@ abstract class BaseGenerator implements GeneratorInterface
     /**
      * @param string $tag
      * @param string $permalink
-     * @param ContentCollection|Content[] $contents
+     * @param ContentCollection[] $contents
      * @param ResolvedSchema $schema
      * @return void
      */
     protected function createPage(
         string $tag,
         string $permalink,
-        ContentCollection|array $contents,
+        array $contents,
         ResolvedSchema $schema
     ): void {
         $this->pages->add(new Page(

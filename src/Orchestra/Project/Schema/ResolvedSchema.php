@@ -8,7 +8,7 @@ final class ResolvedSchema
 {
     /**
      * @param string $tag
-     * @param ContentCollection|Content[] $contents
+     * @param ContentCollection[] $contents
      * @param string $template
      * @param string $generator
      * @param string $source
@@ -18,7 +18,7 @@ final class ResolvedSchema
      */
     public function __construct(
         public string $tag,
-        public ContentCollection|array $contents,
+        public array $contents,
         public string $template,
         public string $generator,
         public string $source,
