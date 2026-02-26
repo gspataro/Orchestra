@@ -8,7 +8,7 @@ interface ReaderInterface
 {
     /**
      * @param ResolvedSource $source
-     * @return ContentPayload[]
+     * @return iterable<ContentPayload>
      */
     public function compile(ResolvedSource $source): iterable;
 }
