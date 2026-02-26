@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Pages;
+namespace Orchestra\Page;
 
-use Orchestra\Pages\GeneratorInterface;
+use Orchestra\Page\GeneratorInterface;
 
 final class GeneratorCollection
 {

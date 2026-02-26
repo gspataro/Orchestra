@@ -3,11 +3,11 @@
 namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Content\ContentRepository;
-use Orchestra\Pages\GeneratorCollection;
+use Orchestra\Page\GeneratorCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Content\ContentCollection;
-use Orchestra\Pages\Factory\PageFactory;
-use Orchestra\Pages\PageCollection;
+use Orchestra\Page\Factory\PageFactory;
+use Orchestra\Page\PageCollection;
 
 final class SchemasRuntime extends Runtime
 {

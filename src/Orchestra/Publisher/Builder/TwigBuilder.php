@@ -2,7 +2,7 @@
 
 namespace Orchestra\Publisher\Builder;
 
-use Orchestra\Pages\Page;
+use Orchestra\Page\Page;
 use Orchestra\Publisher\BuilderInterface;
 use Twig\Environment;
 

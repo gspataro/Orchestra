@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Pages\Generator;
+namespace Orchestra\Page\Generator;
 
 use Orchestra\Project\Schema\ResolvedSchema;
 

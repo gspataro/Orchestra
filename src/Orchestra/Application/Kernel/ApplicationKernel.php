@@ -6,7 +6,7 @@ use GSpataro\DependencyInjection\Container;
 use Orchestra\Console\ConsoleComponent;
 use Orchestra\Publisher\PublisherComponent;
 use Orchestra\Content\ContentComponent;
-use Orchestra\Pages\PagesComponent;
+use Orchestra\Page\PagesComponent;
 use Orchestra\Project\ProjectComponent;
 use Orchestra\Application\Component;
 use Orchestra\Application\Exception\InvalidComponentException;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Orchestra\Pages\Factory;
+namespace Orchestra\Page\Factory;
 
-use Orchestra\Pages\Page;
-use Orchestra\Pages\PagePayload;
+use Orchestra\Page\Page;
+use Orchestra\Page\PagePayload;
 use Orchestra\Project\Sitemap;
 
 final class PageFactory

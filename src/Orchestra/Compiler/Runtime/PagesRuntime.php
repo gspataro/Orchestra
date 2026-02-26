@@ -3,7 +3,7 @@
 namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Publisher\BuilderCollection;
-use Orchestra\Pages\PageCollection;
+use Orchestra\Page\PageCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Publisher\Publisher;
 

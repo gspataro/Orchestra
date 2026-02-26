@@ -1,10 +1,11 @@
 <?php
 
-namespace Orchestra\Pages;
+namespace Orchestra\Page;
 
+use Orchestra\Content\ContentCollection;
 use Orchestra\Project\Schema\ResolvedSchema;
 
-final readonly class PagePayload
+final readonly class Page
 {
     /**
      * @param string $tag

@@ -1,12 +1,12 @@
 <?php
 
-namespace Orchestra\Pages\Generator;
+namespace Orchestra\Page\Generator;
 
 use Orchestra\Content\ContentCollection;
 use Orchestra\Project\Sitemap;
-use Orchestra\Pages\GeneratorInterface;
-use Orchestra\Pages\Page;
-use Orchestra\Pages\PagePayload;
+use Orchestra\Page\GeneratorInterface;
+use Orchestra\Page\Page;
+use Orchestra\Page\PagePayload;
 use Orchestra\Project\Schema\ResolvedSchema;
 
 abstract class BaseGenerator implements GeneratorInterface

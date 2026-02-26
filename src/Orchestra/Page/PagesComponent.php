@@ -1,16 +1,16 @@
 <?php
 
-namespace Orchestra\Pages;
+namespace Orchestra\Page;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Pages\PageCollection;
-use Orchestra\Pages\GeneratorCollection;
-use Orchestra\Pages\Generator\OnceGenerator;
-use Orchestra\Pages\Generator\ArchiveGenerator;
-use Orchestra\Pages\Generator\LoopGenerator;
+use Orchestra\Page\PageCollection;
+use Orchestra\Page\GeneratorCollection;
+use Orchestra\Page\Generator\OnceGenerator;
+use Orchestra\Page\Generator\ArchiveGenerator;
+use Orchestra\Page\Generator\LoopGenerator;
 use Orchestra\Application\Component;
-use Orchestra\Pages\Factory\PageFactory;
-use Orchestra\Pages\Generator\CollectionGenerator;
+use Orchestra\Page\Factory\PageFactory;
+use Orchestra\Page\Generator\CollectionGenerator;
 
 final class PagesComponent extends Component
 {
