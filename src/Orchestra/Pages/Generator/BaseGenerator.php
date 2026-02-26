@@ -4,7 +4,7 @@ namespace Orchestra\Pages\Generator;
 
 use Orchestra\Content\ContentCollection;
 use Orchestra\Project\Sitemap;
-use Orchestra\Pages\Interface\GeneratorInterface;
+use Orchestra\Pages\GeneratorInterface;
 use Orchestra\Pages\Page\Page;
 use Orchestra\Pages\Page\PageCollection;
 use Orchestra\Project\Schema\ResolvedSchema;

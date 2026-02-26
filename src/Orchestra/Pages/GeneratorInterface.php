@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Pages\Interface;
+namespace Orchestra\Pages;
 
 use Orchestra\Project\Schema\ResolvedSchema;
 

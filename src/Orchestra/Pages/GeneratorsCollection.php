@@ -2,7 +2,7 @@
 
 namespace Orchestra\Pages;
 
-use Orchestra\Pages\Interface\GeneratorInterface;
+use Orchestra\Pages\GeneratorInterface;
 
 final class GeneratorsCollection
 {
