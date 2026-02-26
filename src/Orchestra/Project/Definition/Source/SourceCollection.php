@@ -11,9 +11,11 @@ final class SourceCollection implements IteratorAggregate
     /**
      * @param Source[] $items
      */
-    public function __construct(
-        private array $items
-    ) {
+    private array $items = [];
+
+    public function add(Source $source): void
+    {
+        $this->items[] = $source;
     }
 
     public function get(string $group): ?Source

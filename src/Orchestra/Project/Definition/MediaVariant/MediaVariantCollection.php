@@ -12,12 +12,6 @@ final class MediaVariantCollection
     /** @var MediaVariant[] */
     private array $generic = [];
 
-    public function __construct(array $variants)
-    {
-        $this->image = $variants['image'] ?? [];
-        $this->generic = $variants['generic'] ?? [];
-    }
-
     public function add(string $type, string $tag, MediaVariant $variant): void
     {
         if ($type === 'image') {

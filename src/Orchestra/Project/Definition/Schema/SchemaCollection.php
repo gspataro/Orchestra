@@ -11,9 +11,11 @@ final class SchemaCollection implements IteratorAggregate
     /**
      * @param Schema[] $items
      */
-    public function __construct(
-        private array $items
-    ) {
+    private array $items = [];
+
+    public function add(Schema $schema): void
+    {
+        $this->items[] = $schema;
     }
 
     public function get(string $group): ?Schema
