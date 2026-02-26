@@ -3,24 +3,28 @@
 namespace Orchestra\Content;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Content\Archive;
 use Orchestra\Content\Reader\JsonReader;
 use Orchestra\Content\ReadersCollection;
 use Orchestra\Content\Reader\TextReader;
 use Orchestra\Content\Reader\MarkdownReader;
 use Orchestra\Application\Component;
+use Orchestra\Content\Factory\ContentFactory;
 use Orchestra\Content\Reader\JsonCollectionReader;
 
 final class ContentComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->add('content.readers', function ($container, $args): object {
+        $container->add('content.readers', function ($c, $a): object {
             return new ReadersCollection();
         });
 
-        $container->add('content.repository', function ($container, $args): object {
+        $container->add('content.repository', function ($c, $a): object {
             return new ContentRepository();
+        });
+
+        $container->add('content.factory', function ($c, $a): object {
+            return new ContentFactory();
         });
     }
 

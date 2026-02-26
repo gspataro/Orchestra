@@ -13,6 +13,7 @@ final class ContentsRuntime extends Runtime
 {
     private readonly ReadersCollection $readers;
     private readonly ContentRepository $contents;
+    private readonly ContentFactory $contentFactory;
 
     /**
      * @param Source $source
@@ -45,14 +46,9 @@ final class ContentsRuntime extends Runtime
 
     public function run(BuildOptions $options): bool
     {
-        /** @var ReadersCollection */
         $this->readers = $this->container->get('content.readers');
-
-        /** @var ContentRepository */
         $this->contents = $this->container->get('content.repository');
-
-        /** @var ContentFactory */
-        $contentFactory = new ContentFactory();
+        $this->contentFactory = $this->container->get('content.factory');
 
         $this->output->info('Processing contents');
 
@@ -63,7 +59,7 @@ final class ContentsRuntime extends Runtime
                 $reader = $this->readers->get($source->reader);
 
                 foreach ($reader->compile($resolvedSource) as $payload) {
-                    $this->contents->add($contentFactory->fromPayload($payload));
+                    $this->contents->add($this->contentFactory->fromPayload($payload));
                 }
             }
         }
