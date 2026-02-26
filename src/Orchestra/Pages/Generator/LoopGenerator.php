@@ -18,9 +18,9 @@ final class LoopGenerator extends BaseGenerator
         foreach ($source as $content) {
             $contentTag = pathinfo($content->path, PATHINFO_FILENAME);
 
-            yield $this->createPage(
-                $schema->tag,
-                $this->sitemap->add($content->id, $schema->slug . '/' . $contentTag),
+            yield $this->preparePayload(
+                $content->id,
+                $schema->slug . '/' . $contentTag,
                 ['post' => $content],
                 $schema
             );

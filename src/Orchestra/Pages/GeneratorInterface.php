@@ -8,7 +8,7 @@ interface GeneratorInterface
 {
     /**
      * @param ResolvedSchema $schema
-     * @return iterable<Page>
+     * @return iterable<PagePayload>
      */
     public function generate(ResolvedSchema $schema): iterable;
 }

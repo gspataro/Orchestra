@@ -2,10 +2,9 @@
 
 namespace Orchestra\Pages;
 
-use Orchestra\Content\ContentCollection;
 use Orchestra\Project\Schema\ResolvedSchema;
 
-final readonly class Page
+final readonly class PagePayload
 {
     /**
      * @param string $tag

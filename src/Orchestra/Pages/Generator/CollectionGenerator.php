@@ -36,12 +36,9 @@ final class CollectionGenerator extends BaseGenerator
                 $currentPage = $i + 1;
                 $currentSlug = $currentPage > 1 ? $currentPage : 'index';
 
-                yield $this->createPage(
-                    $schema->tag,
-                    $this->sitemap->add(
-                        $schema->tag . '.' . $collection->get($relationshipOptions['value']) . '.page-' . $currentPage,
-                        $schema->slug . '/' . $collection->get($relationshipOptions['value']) . '/' . $currentSlug
-                    ),
+                yield $this->preparePayload(
+                    $schema->tag . '.' . $collection->get($relationshipOptions['value']) . '.page-' . $currentPage,
+                    $schema->slug . '/' . $collection->get($relationshipOptions['value']) . '/' . $currentSlug,
                     [
                         'archive' => [
                             'loop' => $pages[$i],
@@ -55,30 +52,5 @@ final class CollectionGenerator extends BaseGenerator
                 );
             }
         }
-
-        /*$pages = $source->query()->paginate($perPage);
-
-        for ($i = 0; $i < count($pages); $i++) {
-            $currentPage = $i + 1;
-            $currentSlug = $currentPage > 1 ? $currentPage : 'index';
-
-            $this->createPage(
-                $schema->tag,
-                $this->sitemap->add(
-                    $schema->tag . '.page-' . $currentPage,
-                    $schema->slug . '/' . $currentSlug
-                ),
-                [
-                    'archive' => [
-                        'loop' => $pages[$i],
-                        'pagination' => [
-                            'next' => $currentPage < $totalPages ? $currentPage + 1 : null,
-                            'prev' => $currentPage > 1 ? $currentPage - 1 : null
-                        ]
-                    ]
-                ],
-                $schema
-            );
-        }*/
     }
 }

@@ -8,9 +8,9 @@ final class OnceGenerator extends BaseGenerator
 {
     public function generate(ResolvedSchema $schema): iterable
     {
-        yield $this->createPage(
+        yield $this->preparePayload(
             $schema->tag,
-            $this->sitemap->add($schema->tag, $schema->slug),
+            $schema->slug,
             $schema->contents,
             $schema
         );

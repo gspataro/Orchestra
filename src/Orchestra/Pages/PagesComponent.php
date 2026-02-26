@@ -9,18 +9,25 @@ use Orchestra\Pages\Generator\OnceGenerator;
 use Orchestra\Pages\Generator\ArchiveGenerator;
 use Orchestra\Pages\Generator\LoopGenerator;
 use Orchestra\Application\Component;
+use Orchestra\Pages\Factory\PageFactory;
 use Orchestra\Pages\Generator\CollectionGenerator;
 
 final class PagesComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->add('pages.collection', function ($container, $args): object {
+        $container->add('pages.collection', function ($c, $a): object {
             return new PageCollection();
         });
 
-        $container->add('pages.generators', function ($container, $args): object {
+        $container->add('pages.generators', function ($c, $a): object {
             return new GeneratorCollection();
+        });
+
+        $container->add('pages.factory', function ($c, $a): object {
+            return new PageFactory(
+                $c->get('project.sitemap')
+            );
         });
     }
 

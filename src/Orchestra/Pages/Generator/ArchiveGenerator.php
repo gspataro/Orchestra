@@ -25,12 +25,9 @@ final class ArchiveGenerator extends BaseGenerator
             $currentPage = $i + 1;
             $currentSlug = $currentPage > 1 ? $currentPage : 'index';
 
-            yield $this->createPage(
-                $schema->tag,
-                $this->sitemap->add(
-                    $schema->tag . '.page-' . $currentPage,
-                    $schema->slug . '/' . $currentSlug
-                ),
+            yield $this->preparePayload(
+                $schema->tag . '.page-' . $currentPage,
+                $schema->slug . '/' . $currentSlug,
                 [
                     'archive' => [
                         'loop' => $pages[$i],
