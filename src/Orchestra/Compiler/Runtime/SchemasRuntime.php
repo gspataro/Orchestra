@@ -5,6 +5,7 @@ namespace Orchestra\Compiler\Runtime;
 use Orchestra\Content\ContentRepository;
 use Orchestra\Pages\GeneratorsCollection;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Content\ContentCollection;
 
 final class SchemasRuntime extends Runtime
 {
@@ -15,7 +16,7 @@ final class SchemasRuntime extends Runtime
      * Process schema contents
      *
      * @param array $contents
-     * @return array
+     * @return ContentCollection[]
      */
 
     private function processSchemaContents(array $contents): array
@@ -26,32 +27,8 @@ final class SchemasRuntime extends Runtime
             return $output;
         }
 
-        foreach ($contents as $label => $queryDefinition) {
+        foreach ($contents as $queryDefinition) {
             $output[$queryDefinition->group] = $this->contents->query($queryDefinition)->get();
-            continue;
-
-            if (!empty($query['where'])) {
-                $field = $query['where']['field'];
-                $value = $query['where']['value'];
-                $contentQuery->where($field, $value);
-            }
-
-            if (isset($query['skip'])) {
-                $contentQuery->skip($query['skip']);
-            }
-
-            if (isset($query['limit'])) {
-                $contentQuery->limit($query['limit']);
-            }
-
-            if (isset($query['orderBy'])) {
-                $contentQuery->orderBy(
-                    $query['orderBy'],
-                    $query['order'] ?? 'asc'
-                );
-            }
-
-            $output[$label] = $contentQuery->get();
         }
 
         return $output;
