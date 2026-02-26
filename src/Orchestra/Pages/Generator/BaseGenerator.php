@@ -5,8 +5,8 @@ namespace Orchestra\Pages\Generator;
 use Orchestra\Content\ContentCollection;
 use Orchestra\Project\Sitemap;
 use Orchestra\Pages\GeneratorInterface;
-use Orchestra\Pages\Page\Page;
-use Orchestra\Pages\Page\PageCollection;
+use Orchestra\Pages\Page;
+use Orchestra\Pages\PageCollection;
 use Orchestra\Project\Schema\ResolvedSchema;
 
 abstract class BaseGenerator implements GeneratorInterface

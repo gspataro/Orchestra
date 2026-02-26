@@ -3,7 +3,7 @@
 namespace Orchestra\Pages;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Pages\Page\PageCollection;
+use Orchestra\Pages\PageCollection;
 use Orchestra\Pages\GeneratorsCollection;
 use Orchestra\Pages\Generator\OnceGenerator;
 use Orchestra\Pages\Generator\ArchiveGenerator;

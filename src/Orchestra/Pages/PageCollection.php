@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Pages\Page;
+namespace Orchestra\Pages;
 
 use ArrayIterator;
 use IteratorAggregate;

@@ -2,7 +2,7 @@
 
 namespace Orchestra\Publisher;
 
-use Orchestra\Pages\Page\Page;
+use Orchestra\Pages\Page;
 
 interface BuilderInterface
 {
