@@ -3,7 +3,7 @@
 namespace Orchestra\Media;
 
 use Orchestra\Compiler\BuildContext;
-use Orchestra\Project\MediaVariant\MediaVariant;
+use Orchestra\Project\Definition\MediaVariant\MediaVariant;
 
 final class MediaTransformer
 {

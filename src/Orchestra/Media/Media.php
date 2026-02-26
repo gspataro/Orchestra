@@ -2,7 +2,7 @@
 
 namespace Orchestra\Media;
 
-use Orchestra\Project\MediaVariant\MediaTransformation;
+use Orchestra\Project\Definition\MediaVariant\MediaTransformation;
 
 final class Media
 {

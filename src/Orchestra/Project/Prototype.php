@@ -4,7 +4,7 @@ namespace Orchestra\Project;
 
 use Orchestra\Project\Definition\Source\SourceCollection;
 use Orchestra\Project\Schema\SchemaCollection;
-use Orchestra\Project\MediaVariant\MediaVariantCollection;
+use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
 
 final class Prototype
 {

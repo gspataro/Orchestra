@@ -4,7 +4,7 @@ namespace Orchestra\Media\Adapter;
 
 use Orchestra\Media\Media;
 use Orchestra\Media\AdapterInterface;
-use Orchestra\Project\MediaVariant\MediaTransformation;
+use Orchestra\Project\Definition\MediaVariant\MediaTransformation;
 
 abstract class BaseAdapter implements AdapterInterface
 {

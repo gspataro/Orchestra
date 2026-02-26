@@ -7,8 +7,8 @@ use Orchestra\Project\Definition\Source\Source;
 use Orchestra\Project\Definition\Source\SourceCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidSchemaException;
-use Orchestra\Project\MediaVariant\MediaVariant;
-use Orchestra\Project\MediaVariant\MediaVariantCollection;
+use Orchestra\Project\Definition\MediaVariant\MediaVariant;
+use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
 use Orchestra\Project\Schema\Schema;
 use Orchestra\Project\Schema\SchemaCollection;
 

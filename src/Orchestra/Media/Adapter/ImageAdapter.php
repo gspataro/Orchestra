@@ -4,7 +4,7 @@ namespace Orchestra\Media\Adapter;
 
 use Imagick;
 use Orchestra\Media\Media;
-use Orchestra\Project\MediaVariant\MediaTransformation;
+use Orchestra\Project\Definition\MediaVariant\MediaTransformation;
 
 final class ImageAdapter extends BaseAdapter
 {
@@ -18,7 +18,7 @@ final class ImageAdapter extends BaseAdapter
         $image = new Imagick($media->path);
         $imageGeometry = $image->getImageGeometry();
 
-        /** @var \Orchestra\Project\MediaVariant\MediaVariant */
+        /** @var \Orchestra\Project\Definition\MediaVariant\MediaVariant */
         $variant = $transformation->variant;
 
         $width = $variant->option('width');
@@ -63,7 +63,7 @@ final class ImageAdapter extends BaseAdapter
             IMAGETYPE_PNG => imagecreatefrompng($media->path)
         };
 
-        /** @var \Orchestra\Project\MediaVariant\ImageMediaVariant */
+        /** @var \Orchestra\Project\Definition\MediaVariant\ImageMediaVariant */
         $variant = $transformation->variant;
 
         $width = $variant->option('width');

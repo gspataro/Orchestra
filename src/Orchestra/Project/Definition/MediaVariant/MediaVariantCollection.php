@@ -1,8 +1,8 @@
 <?php
 
-namespace Orchestra\Project\MediaVariant;
+namespace Orchestra\Project\Definition\MediaVariant;
 
-use Orchestra\Project\MediaVariant\MediaVariant;
+use Orchestra\Project\Definition\MediaVariant\MediaVariant;
 
 final class MediaVariantCollection
 {
