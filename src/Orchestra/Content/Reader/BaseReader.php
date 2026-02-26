@@ -22,12 +22,9 @@ abstract class BaseReader implements ReaderInterface
     protected function contentFromSource(ResolvedSource $source, mixed $body, array $metadata = []): ContentPayload
     {
         return new ContentPayload(
-            $this->generateContentId($source),
-            $this->generateContentTag($source),
-            $source->group,
-            $source->path,
             $body,
-            $metadata
+            $metadata,
+            $source
         );
     }
 }
