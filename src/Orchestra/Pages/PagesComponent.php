@@ -4,7 +4,7 @@ namespace Orchestra\Pages;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Pages\PageCollection;
-use Orchestra\Pages\GeneratorsCollection;
+use Orchestra\Pages\GeneratorCollection;
 use Orchestra\Pages\Generator\OnceGenerator;
 use Orchestra\Pages\Generator\ArchiveGenerator;
 use Orchestra\Pages\Generator\LoopGenerator;
@@ -20,7 +20,7 @@ final class PagesComponent extends Component
         });
 
         $container->add('pages.generators', function ($container, $args): object {
-            return new GeneratorsCollection();
+            return new GeneratorCollection();
         });
     }
 

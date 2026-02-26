@@ -3,13 +3,13 @@
 namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Content\ContentRepository;
-use Orchestra\Pages\GeneratorsCollection;
+use Orchestra\Pages\GeneratorCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Content\ContentCollection;
 
 final class SchemasRuntime extends Runtime
 {
-    private readonly GeneratorsCollection $generators;
+    private readonly GeneratorCollection $generators;
     private readonly ContentRepository $contents;
 
     /**

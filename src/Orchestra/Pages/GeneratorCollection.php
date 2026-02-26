@@ -4,35 +4,15 @@ namespace Orchestra\Pages;
 
 use Orchestra\Pages\GeneratorInterface;
 
-final class GeneratorsCollection
+final class GeneratorCollection
 {
-    /**
-     * Store generators
-     *
-     * @var array
-     */
-
+    /** @var GeneratorInterface[] */
     private array $generators = [];
-
-    /**
-     * Verify if a generator exists in the collection
-     *
-     * @param string $tag
-     * @return bool
-     */
 
     public function has(string $tag): bool
     {
         return isset($this->generators[$tag]);
     }
-
-    /**
-     * Add a generator to the collection
-     *
-     * @param string $tag
-     * @param GeneratorInterface $generator
-     * @return void
-     */
 
     public function add(string $tag, GeneratorInterface $generator): void
     {
@@ -44,13 +24,6 @@ final class GeneratorsCollection
 
         $this->generators[$tag] = $generator;
     }
-
-    /**
-     * Get a generator
-     *
-     * @param string $tag
-     * @return GeneratorInterface
-     */
 
     public function get(string $tag): GeneratorInterface
     {
