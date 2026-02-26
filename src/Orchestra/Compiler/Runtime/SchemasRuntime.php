@@ -6,11 +6,13 @@ use Orchestra\Content\ContentRepository;
 use Orchestra\Pages\GeneratorCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Content\ContentCollection;
+use Orchestra\Pages\PageCollection;
 
 final class SchemasRuntime extends Runtime
 {
     private readonly GeneratorCollection $generators;
     private readonly ContentRepository $contents;
+    private readonly PageCollection $pages;
 
     /**
      * Process schema contents
@@ -38,6 +40,7 @@ final class SchemasRuntime extends Runtime
     {
         $this->generators = $this->container->get('pages.generators');
         $this->contents = $this->container->get('content.repository');
+        $this->pages = $this->container->get('pages.collection');
 
         $this->output->info('Processing schemas');
 
@@ -47,7 +50,10 @@ final class SchemasRuntime extends Runtime
             $resolvedSchema = $schema->withResolvedContents($this->processSchemaContents($schema->contentsReferences));
 
             $generator = $this->generators->get($schema->generator);
-            $generator->generate($resolvedSchema);
+
+            foreach ($generator->generate($resolvedSchema) as $page) {
+                $this->pages->add($page);
+            }
         }
 
         return true;

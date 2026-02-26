@@ -6,7 +6,7 @@ use Orchestra\Project\Schema\ResolvedSchema;
 
 final class CollectionGenerator extends BaseGenerator
 {
-    public function generate(ResolvedSchema $schema): void
+    public function generate(ResolvedSchema $schema): iterable
     {
         $contents = $schema->contents;
         $relationshipOptions = $schema->options['relationship'];
@@ -36,7 +36,7 @@ final class CollectionGenerator extends BaseGenerator
                 $currentPage = $i + 1;
                 $currentSlug = $currentPage > 1 ? $currentPage : 'index';
 
-                $this->createPage(
+                yield $this->createPage(
                     $schema->tag,
                     $this->sitemap->add(
                         $schema->tag . '.' . $collection->get($relationshipOptions['value']) . '.page-' . $currentPage,

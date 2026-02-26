@@ -12,7 +12,6 @@ use Orchestra\Project\Schema\ResolvedSchema;
 abstract class BaseGenerator implements GeneratorInterface
 {
     public function __construct(
-        protected readonly PageCollection $pages,
         protected readonly Sitemap $sitemap
     ) {
     }
@@ -29,12 +28,12 @@ abstract class BaseGenerator implements GeneratorInterface
         string $permalink,
         array $contents,
         ResolvedSchema $schema
-    ): void {
-        $this->pages->add(new Page(
+    ): Page {
+        return new Page(
             $tag,
             $permalink,
             $contents,
             $schema
-        ));
+        );
     }
 }

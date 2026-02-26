@@ -6,5 +6,9 @@ use Orchestra\Project\Schema\ResolvedSchema;
 
 interface GeneratorInterface
 {
-    public function generate(ResolvedSchema $schema): void;
+    /**
+     * @param ResolvedSchema $schema
+     * @return iterable<Page>
+     */
+    public function generate(ResolvedSchema $schema): iterable;
 }

@@ -6,7 +6,7 @@ use Orchestra\Project\Schema\ResolvedSchema;
 
 final class ArchiveGenerator extends BaseGenerator
 {
-    public function generate(ResolvedSchema $schema): void
+    public function generate(ResolvedSchema $schema): iterable
     {
         $contents = $schema->contents;
 
@@ -25,7 +25,7 @@ final class ArchiveGenerator extends BaseGenerator
             $currentPage = $i + 1;
             $currentSlug = $currentPage > 1 ? $currentPage : 'index';
 
-            $this->createPage(
+            yield $this->createPage(
                 $schema->tag,
                 $this->sitemap->add(
                     $schema->tag . '.page-' . $currentPage,

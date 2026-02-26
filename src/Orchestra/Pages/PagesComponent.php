@@ -29,22 +29,18 @@ final class PagesComponent extends Component
         $generatorsCollection = $container->get('pages.generators');
 
         $generatorsCollection->add('once', new OnceGenerator(
-            $container->get('pages.collection'),
             $container->get('project.sitemap')
         ));
 
         $generatorsCollection->add('loop', new LoopGenerator(
-            $container->get('pages.collection'),
             $container->get('project.sitemap')
         ));
 
         $generatorsCollection->add('archive', new ArchiveGenerator(
-            $container->get('pages.collection'),
             $container->get('project.sitemap')
         ));
 
         $generatorsCollection->add('collection', new CollectionGenerator(
-            $container->get('pages.collection'),
             $container->get('project.sitemap')
         ));
     }

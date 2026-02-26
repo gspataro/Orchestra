@@ -6,9 +6,9 @@ use Orchestra\Project\Schema\ResolvedSchema;
 
 final class OnceGenerator extends BaseGenerator
 {
-    public function generate(ResolvedSchema $schema): void
+    public function generate(ResolvedSchema $schema): iterable
     {
-        $this->createPage(
+        yield $this->createPage(
             $schema->tag,
             $this->sitemap->add($schema->tag, $schema->slug),
             $schema->contents,
