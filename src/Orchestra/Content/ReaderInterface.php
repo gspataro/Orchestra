@@ -2,7 +2,7 @@
 
 namespace Orchestra\Content;
 
-use Orchestra\Project\Source\ResolvedSource;
+use Orchestra\Project\Definition\Source\ResolvedSource;
 
 interface ReaderInterface
 {

@@ -3,7 +3,7 @@
 namespace Orchestra\Content\Reader;
 
 use Orchestra\Content\ContentPayload;
-use Orchestra\Project\Source\ResolvedSource;
+use Orchestra\Project\Definition\Source\ResolvedSource;
 
 final class TextReader extends BaseReader
 {

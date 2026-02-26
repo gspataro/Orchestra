@@ -5,7 +5,7 @@ namespace Orchestra\Content\Reader;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
 use Orchestra\Content\ContentPayload;
-use Orchestra\Project\Source\ResolvedSource;
+use Orchestra\Project\Definition\Source\ResolvedSource;
 
 final class MarkdownReader extends BaseReader
 {

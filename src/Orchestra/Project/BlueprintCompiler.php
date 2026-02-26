@@ -3,8 +3,8 @@
 namespace Orchestra\Project;
 
 use Orchestra\Content\ContentQueryDefinition;
-use Orchestra\Project\Source\Source;
-use Orchestra\Project\Source\SourceCollection;
+use Orchestra\Project\Definition\Source\Source;
+use Orchestra\Project\Definition\Source\SourceCollection;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\Exception\InvalidSchemaException;
 use Orchestra\Project\MediaVariant\MediaVariant;
