@@ -8,6 +8,7 @@ use Orchestra\View\Elements\Image\ImageElement;
 use Twig\Environment;
 use Orchestra\View\Twig\SitemapExtension;
 use Orchestra\View\Twig\BlueprintExtension;
+use Orchestra\View\Twig\ConfigExtension;
 use Orchestra\View\Twig\ElementsExtension;
 use Orchestra\View\Twig\HighlighterExtension;
 use Orchestra\View\Twig\GenericsExtension;
@@ -46,6 +47,9 @@ final class ViewComponent extends Component
         $twig->addExtension(new StringExtension());
         $twig->addExtension(new IntlExtension());
         $twig->addExtension(new StringLoaderExtension());
+        $twig->addExtension(new ConfigExtension(
+            $container->get('compiler.context')
+        ));
         $twig->addExtension(new UrlExtension(
             $container->get('compiler.url')
         ));

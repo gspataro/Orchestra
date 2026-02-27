@@ -3,7 +3,6 @@
 namespace Orchestra\View\Twig;
 
 use Orchestra\Media\MediaResolver;
-use Orchestra\Compiler\BuildContext;
 use Orchestra\Compiler\UrlGenerator;
 use Orchestra\View\ElementCollection;
 use Twig\TwigFunction;
