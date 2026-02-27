@@ -7,7 +7,7 @@ use Orchestra\Project\Sitemap;
 use Orchestra\Page\GeneratorInterface;
 use Orchestra\Page\Page;
 use Orchestra\Page\PagePayload;
-use Orchestra\Project\Definition\Schema\ResolvedSchema;
+use Orchestra\Project\Definition\Schema\Schema;
 
 abstract class BaseGenerator implements GeneratorInterface
 {
@@ -15,14 +15,14 @@ abstract class BaseGenerator implements GeneratorInterface
      * @param string $tag
      * @param string $permalink
      * @param array $contents
-     * @param ResolvedSchema $schema
+     * @param Schema $schema
      * @return PagePayload
      */
     protected function preparePayload(
         string $tag,
         string $permalink,
         array $contents,
-        ResolvedSchema $schema
+        Schema $schema
     ): PagePayload {
         return new PagePayload(
             $tag,

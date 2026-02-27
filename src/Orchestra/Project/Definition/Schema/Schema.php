@@ -4,7 +4,7 @@ namespace Orchestra\Project\Definition\Schema;
 
 use Orchestra\Content\ContentCollection;
 
-final class ResolvedSchema
+final class Schema
 {
     /**
      * @param string $tag

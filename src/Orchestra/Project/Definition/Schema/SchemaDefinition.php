@@ -20,7 +20,7 @@ final readonly class SchemaDefinition
 
     public function withResolvedContents(array $contents)
     {
-        return new ResolvedSchema(
+        return new Schema(
             $this->tag,
             $contents,
             $this->template,

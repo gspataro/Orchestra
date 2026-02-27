@@ -2,13 +2,13 @@
 
 namespace Orchestra\Page;
 
-use Orchestra\Project\Definition\Schema\ResolvedSchema;
+use Orchestra\Project\Definition\Schema\Schema;
 
 interface GeneratorInterface
 {
     /**
-     * @param ResolvedSchema $schema
+     * @param Schema $schema
      * @return iterable<PagePayload>
      */
-    public function generate(ResolvedSchema $schema): iterable;
+    public function generate(Schema $schema): iterable;
 }
