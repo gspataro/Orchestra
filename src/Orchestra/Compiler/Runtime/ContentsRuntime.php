@@ -6,7 +6,7 @@ use Orchestra\Content\ContentRepository;
 use Orchestra\Content\ReadersCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Content\Factory\ContentFactory;
-use Orchestra\Project\Definition\Source\ResolvedSource;
+use Orchestra\Project\Definition\Source\Source;
 use Orchestra\Project\Definition\Source\SourceDefinition;
 
 final class ContentsRuntime extends Runtime

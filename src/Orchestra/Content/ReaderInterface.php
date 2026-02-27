@@ -2,7 +2,7 @@
 
 namespace Orchestra\Content;
 
-use Orchestra\Project\Definition\Source\ResolvedSource;
+use Orchestra\Project\Definition\Source\Source;
 
 interface ReaderInterface
 {
@@ -10,5 +10,5 @@ interface ReaderInterface
      * @param ResolvedSource $source
      * @return iterable<ContentPayload>
      */
-    public function compile(ResolvedSource $source): iterable;
+    public function compile(Source $source): iterable;
 }

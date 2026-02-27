@@ -11,9 +11,9 @@ final readonly class SourceDefinition
     ) {
     }
 
-    public function withResolvedPaths(string $path, string $relativePath): ResolvedSource
+    public function withResolvedPaths(string $path, string $relativePath): Source
     {
-        return new ResolvedSource(
+        return new Source(
             $this->group,
             $this->reader,
             $path,

@@ -5,7 +5,7 @@ namespace Orchestra\Content\Reader;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
 use Orchestra\Content\ContentPayload;
-use Orchestra\Project\Definition\Source\ResolvedSource;
+use Orchestra\Project\Definition\Source\Source;
 
 final class MarkdownReader extends BaseReader
 {
@@ -14,7 +14,7 @@ final class MarkdownReader extends BaseReader
     ) {
     }
 
-    public function compile(ResolvedSource $source): iterable
+    public function compile(Source $source): iterable
     {
         $body = $this->markdown->convert(
             file_get_contents($source->path)

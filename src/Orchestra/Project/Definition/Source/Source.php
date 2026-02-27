@@ -2,7 +2,7 @@
 
 namespace Orchestra\Project\Definition\Source;
 
-final readonly class ResolvedSource
+final readonly class Source
 {
     public function __construct(
         public string $group,
