@@ -2,7 +2,7 @@
 
 namespace Orchestra\Compiler;
 
-interface PipelineInterface
+interface RuntimeInterface
 {
     public function run(BuildOptions $options): bool;
 }

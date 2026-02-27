@@ -6,8 +6,9 @@ use GSpataro\DependencyInjection\Container;
 use Orchestra\Compiler\BuildContext;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Compiler\BuildOutputInterface;
+use Orchestra\Compiler\RuntimeInterface;
 
-abstract class Runtime
+abstract class Runtime implements RuntimeInterface
 {
     public function __construct(
         protected readonly Container $container,

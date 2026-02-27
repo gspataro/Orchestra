@@ -25,7 +25,7 @@ final class ApplicationKernel extends Kernel
 {
     private Container $container;
 
-    /** @var Component[] */
+    /** @var array<class-string<Component>|Component> */
     private array $components = [
         ExceptionHandlerComponent::class,
         CompilerComponent::class,

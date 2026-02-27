@@ -4,6 +4,7 @@ namespace Orchestra\Compiler;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
+use Orchestra\Compiler\Factory\PipelineFactory;
 use Orchestra\Compiler\Pipeline\BuildPipeline;
 
 final class CompilerComponent extends Component
@@ -18,8 +19,17 @@ final class CompilerComponent extends Component
             return new Paths($a['root'] ?? getcwd());
         });
 
+        $container->add('compiler.pipeline.factory', function ($c, $a): object {
+            return new PipelineFactory(
+                $c,
+                $c->get('compiler.context')
+            );
+        });
+
         $container->add('compiler.pipeline', function ($c, $a): object {
-            return new PipelineCollection();
+            return new PipelineCollection(
+                $c->get('compiler.pipeline.factory')
+            );
         });
 
         $container->add('compiler.options', function ($c, $a): object {
@@ -38,9 +48,6 @@ final class CompilerComponent extends Component
         /** @var PipelineCollection */
         $pipeline = $container->get('compiler.pipeline');
 
-        $pipeline->add('build', new BuildPipeline(
-            $container,
-            $container->get('compiler.context')
-        ));
+        $pipeline->add('build', BuildPipeline::class);
     }
 }

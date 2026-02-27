@@ -50,8 +50,7 @@ final class BuildCommand extends BaseCommand
         ]);
 
         if (
-            !$pipeline->get('build')
-                ->setOutputAdapter(new ConsoleOutputAdapter($this->output))
+            !$pipeline->get('build', new ConsoleOutputAdapter($this->output))
                 ->run($buildOptions)
         ) {
             exit(0);
