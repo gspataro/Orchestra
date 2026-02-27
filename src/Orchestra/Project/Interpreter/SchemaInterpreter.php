@@ -2,35 +2,17 @@
 
 namespace Orchestra\Project\Interpreter;
 
-use Orchestra\Blueprint\Blueprint;
+use Orchestra\Blueprint\NamespaceInterface;
 use Orchestra\Project\CompilerContext;
 use Orchestra\Project\Definition\Query\QueryDefinition;
 use Orchestra\Project\Definition\Schema\Schema;
-use Orchestra\Project\Exception\InvalidBlueprintException;
-use Orchestra\Project\Exception\InvalidSchemaException;
 use Orchestra\Project\InterpreterInterface;
 
 final class SchemaInterpreter implements InterpreterInterface
 {
-    private function validateSchema(string $tag, array $schema): void
+    public function namespace(): string
     {
-        if (!isset($schema['template'])) {
-            throw new InvalidBlueprintException(
-                "You must provide a template for schema '{$tag}'."
-            );
-        }
-
-        if (!isset($schema['generate'])) {
-            throw new InvalidSchemaException(
-                "You must provide a generator for schema '{$tag}'."
-            );
-        }
-
-        if (!isset($schema['slug'])) {
-            throw new InvalidBlueprintException(
-                "You must provide a slug for schema '{$tag}'."
-            );
-        }
+        return 'schemas';
     }
 
     private function buildQueries(array $queries): array
@@ -69,17 +51,15 @@ final class SchemaInterpreter implements InterpreterInterface
         return $slug;
     }
 
-    public function compile(Blueprint $blueprint, CompilerContext $context): void
+    public function compile(NamespaceInterface $schema, CompilerContext $context): void
     {
-        $schemas = $blueprint->get('schemas') ?? [];
+        $schemas = $schema->all();
 
         if (empty($schemas)) {
             return;
         }
 
         foreach ($schemas as $tag => $schema) {
-            $this->validateSchema($tag, $schema);
-
             $schema = new Schema(
                 $tag,
                 $this->buildQueries($schema['contents'] ?? []),

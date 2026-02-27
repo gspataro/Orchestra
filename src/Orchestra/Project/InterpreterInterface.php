@@ -2,9 +2,10 @@
 
 namespace Orchestra\Project;
 
-use Orchestra\Blueprint\Blueprint;
+use Orchestra\Blueprint\NamespaceInterface;
 
 interface InterpreterInterface
 {
-    public function compile(Blueprint $blueprint, CompilerContext $context): void;
+    public function namespace(): string;
+    public function compile(NamespaceInterface $namespace, CompilerContext $context): void;
 }

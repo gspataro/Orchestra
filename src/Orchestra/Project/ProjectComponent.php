@@ -3,7 +3,6 @@
 namespace Orchestra\Project;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Blueprint\Blueprint;
 use Orchestra\Project\Sitemap;
 use Orchestra\Application\Component;
 use Orchestra\Project\Factory\PrototypeFactory;
@@ -12,17 +11,12 @@ final class ProjectComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->add('project.blueprint', function ($c, $a): object {
-            return new Blueprint();
-        });
-
         $container->add('project.prototype.factory', function ($c, $a): object {
             return new PrototypeFactory();
         });
 
-        $container->add('project.compiler', function ($c, $a): object {
-            return new BlueprintCompiler(
-                $c->get('project.blueprint'),
+        $container->add('project.prototype.compiler', function ($c, $a): object {
+            return new PrototypeCompiler(
                 $c->get('project.prototype.factory')
             );
         });

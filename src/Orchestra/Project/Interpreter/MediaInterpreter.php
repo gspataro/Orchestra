@@ -2,20 +2,25 @@
 
 namespace Orchestra\Project\Interpreter;
 
-use Orchestra\Blueprint\Blueprint;
+use Orchestra\Blueprint\NamespaceInterface;
 use Orchestra\Project\CompilerContext;
 use Orchestra\Project\Definition\MediaVariant\MediaVariant;
 use Orchestra\Project\InterpreterInterface;
 
 final class MediaInterpreter implements InterpreterInterface
 {
+    public function namespace(): string
+    {
+        return 'media';
+    }
+
     private function readMediaImages(array $images, CompilerContext $context): void
     {
-        if (empty($images) || empty($images['sizes'])) {
+        if (empty($images['sizes'])) {
             return;
         }
 
-        $format = $images['optimize']['strategy'] ?? null;
+        $format = $images['optimize']['strategy'];
 
         foreach ($images['sizes'] as $size => $options) {
             $mediaVariant = new MediaVariant(
@@ -32,19 +37,11 @@ final class MediaInterpreter implements InterpreterInterface
             $context->mediaVariants->add('image', $size, $mediaVariant);
         }
 
-        $context->configs->set('media.image.responsive', $images['responsive'] ?? ['thumbnail, medium, large']);
+        $context->configs->set('media.image.responsive', $images['responsive']);
     }
 
-    public function compile(Blueprint $blueprint, CompilerContext $context): void
+    public function compile(NamespaceInterface $media, CompilerContext $context): void
     {
-        $this->readMediaImages($blueprint->get('media.images') ?? [
-            'optimize' => 'webp',
-            'sizes' => [
-                'thumbnail' => ['width' => 200, 'height' => 200, 'resize' => true],
-                'medium' => ['width' => 400, 'height' => 400],
-                'large' => ['width' => 1024, 'height' => 1024],
-                'original' => []
-            ]
-        ], $context);
+        $this->readMediaImages($media->get('images'), $context);
     }
 }

@@ -4,18 +4,20 @@ namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Blueprint\Blueprint;
-use Orchestra\Project\BlueprintCompiler;
+use Orchestra\Blueprint\BlueprintCompiler;
+use Orchestra\Project\PrototypeCompiler;
 use Orchestra\Project\Sitemap;
 
 final class CreateContextRuntime extends Runtime
 {
     private Blueprint $blueprint;
-    private BlueprintCompiler $compiler;
+    private BlueprintCompiler $blueprintCompiler;
+    private PrototypeCompiler $prototypeCompiler;
     private Sitemap $sitemap;
 
     public function loadBlueprint(): bool
     {
-        $this->blueprint = $this->container->get('project.blueprint');
+        $this->blueprint = $this->container->get('blueprint');
         $blueprintFile = $this->context->paths->root('blueprint.json');
 
         if (!is_file($blueprintFile)) {
@@ -38,15 +40,12 @@ final class CreateContextRuntime extends Runtime
 
     public function createContext(): bool
     {
-        /** @var BlueprintCompiler */
-        $this->compiler = $this->container->get('project.compiler');
-
-        /** @var Sitemap */
-        $this->sitemap = $this->container->get('project.sitemap');
+        $namespaces = $this->blueprintCompiler->compile($this->blueprint);
+        $prototype = $this->prototypeCompiler->compile($namespaces);
 
         $this->context->setContext(
             $this->blueprint,
-            $this->compiler->compile(),
+            $prototype,
             $this->sitemap
         );
 
@@ -55,6 +54,11 @@ final class CreateContextRuntime extends Runtime
 
     public function run(BuildOptions $options): bool
     {
+        $this->blueprint = $this->container->get('blueprint');
+        $this->blueprintCompiler = $this->container->get('blueprint.compiler');
+        $this->prototypeCompiler = $this->container->get('project.prototype.compiler');
+        $this->sitemap = $this->container->get('project.sitemap');
+
         return $this->loadBlueprint() && $this->createContext();
     }
 }

@@ -2,21 +2,19 @@
 
 namespace Orchestra\Project\Interpreter;
 
-use Orchestra\Blueprint\Blueprint;
+use Orchestra\Blueprint\NamespaceInterface;
 use Orchestra\Project\CompilerContext;
 use Orchestra\Project\InterpreterInterface;
 
 final class ConfigInterpreter implements InterpreterInterface
 {
-    public function compile(Blueprint $blueprint, CompilerContext $context): void
+    public function namespace(): string
     {
-        $website = $blueprint->get('website') ?? [];
+        return 'website';
+    }
 
-        $website['name'] ??= 'Solista';
-        $website['description'] ??= 'PHP static website builder';
-        $website['theme'] ??= 'pianoforte';
-        $website['friendly_urls'] ??= true;
-
-        $context->configs->set('website', $website);
+    public function compile(NamespaceInterface $config, CompilerContext $context): void
+    {
+        $context->configs->set('website', $config->all());
     }
 }

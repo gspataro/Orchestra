@@ -2,7 +2,7 @@
 
 namespace Orchestra\Project;
 
-use Orchestra\Blueprint\Blueprint;
+use Orchestra\Blueprint\NamespaceCollection;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
 use Orchestra\Project\Definition\Schema\SchemaCollection;
 use Orchestra\Project\Definition\Source\SourceCollection;
@@ -12,8 +12,9 @@ use Orchestra\Project\Interpreter\MediaInterpreter;
 use Orchestra\Project\Interpreter\SchemaInterpreter;
 use Orchestra\Project\Interpreter\SourceInterpreter;
 
-final class BlueprintCompiler
+final class PrototypeCompiler
 {
+    /** @var InterpreterInterface[] */
     private array $interpreters = [
         ConfigInterpreter::class,
         SourceInterpreter::class,
@@ -22,12 +23,11 @@ final class BlueprintCompiler
     ];
 
     public function __construct(
-        private readonly Blueprint $blueprint,
         private readonly PrototypeFactory $prototypeFactory
     ) {
     }
 
-    public function compile(): Prototype
+    public function compile(NamespaceCollection $namespaces): Prototype
     {
         $context = new CompilerContext(
             new SourceCollection(),
@@ -37,7 +37,8 @@ final class BlueprintCompiler
         );
 
         foreach ($this->interpreters as $interpreter) {
-            new $interpreter()->compile($this->blueprint, $context);
+            $interpreter = new $interpreter();
+            $interpreter->compile($namespaces->get($interpreter->namespace()), $context);
         }
 
         return $this->prototypeFactory->fromContext($context);

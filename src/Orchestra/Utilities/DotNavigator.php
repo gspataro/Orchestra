@@ -135,4 +135,9 @@ abstract class DotNavigator
 
         return false;
     }
+
+    public function all(): array
+    {
+        return $this->data;
+    }
 }
