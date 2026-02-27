@@ -9,22 +9,22 @@ use Traversable;
 final class SourceCollection implements IteratorAggregate
 {
     /**
-     * @param Source[] $items
+     * @param SourceDefinition[] $items
      */
     private array $items = [];
 
-    public function add(Source $source): void
+    public function add(SourceDefinition $source): void
     {
         $this->items[] = $source;
     }
 
-    public function get(string $group): ?Source
+    public function get(string $group): ?SourceDefinition
     {
         return $this->items[$group] ?? null;
     }
 
     /**
-     * @return Source[]
+     * @return SourceDefinition[]
      */
     public function getIterator(): Traversable
     {

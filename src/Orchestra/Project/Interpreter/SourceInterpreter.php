@@ -6,7 +6,7 @@ use Orchestra\Blueprint\Blueprint;
 use Orchestra\Blueprint\Namespace\ContentNamespace;
 use Orchestra\Blueprint\NamespaceInterface;
 use Orchestra\Project\CompilerContext;
-use Orchestra\Project\Definition\Source\Source;
+use Orchestra\Project\Definition\Source\SourceDefinition;
 use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\InterpreterInterface;
 
@@ -27,7 +27,7 @@ final class SourceInterpreter implements InterpreterInterface
 
         foreach ($sources as $group => $source) {
             [$reader, $path] = explode(':', $source, 2);
-            $context->sources->add(new Source($group, $reader, $path));
+            $context->sources->add(new SourceDefinition($group, $reader, $path));
         }
     }
 }

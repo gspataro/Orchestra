@@ -2,7 +2,7 @@
 
 namespace Orchestra\Project\Definition\Source;
 
-final readonly class Source
+final readonly class SourceDefinition
 {
     public function __construct(
         public string $group,

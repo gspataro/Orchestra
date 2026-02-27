@@ -7,7 +7,7 @@ use Orchestra\Content\ReadersCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Content\Factory\ContentFactory;
 use Orchestra\Project\Definition\Source\ResolvedSource;
-use Orchestra\Project\Definition\Source\Source;
+use Orchestra\Project\Definition\Source\SourceDefinition;
 
 final class ContentsRuntime extends Runtime
 {
@@ -16,10 +16,10 @@ final class ContentsRuntime extends Runtime
     private readonly ContentFactory $contentFactory;
 
     /**
-     * @param Source $source
+     * @param SourceDefinition $source
      * @return ResolvedSource[]
      */
-    private function resolveSourcePath(Source $source): iterable
+    private function resolveSourcePath(SourceDefinition $source): iterable
     {
         $paths = explode(';', $source->path);
 
