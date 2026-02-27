@@ -2,7 +2,7 @@
 
 namespace Orchestra\Page\Generator;
 
-use Orchestra\Project\Definition\Schema\Schema;
+use Orchestra\Page\Schema;
 
 final class LoopGenerator extends BaseGenerator
 {

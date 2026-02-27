@@ -2,8 +2,7 @@
 
 namespace Orchestra\Page;
 
-use Orchestra\Content\ContentCollection;
-use Orchestra\Project\Definition\Schema\Schema;
+use Orchestra\Page\Schema;
 
 final readonly class Page
 {

@@ -17,18 +17,4 @@ final readonly class SchemaDefinition
         public array $options
     ) {
     }
-
-    public function withResolvedContents(array $contents)
-    {
-        return new Schema(
-            $this->tag,
-            $contents,
-            $this->template,
-            $this->generator,
-            $this->source,
-            $this->builder,
-            $this->slug,
-            $this->options
-        );
-    }
 }

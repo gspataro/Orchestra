@@ -7,6 +7,7 @@ use Orchestra\Page\GeneratorCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Content\ContentCollection;
 use Orchestra\Page\Factory\PageFactory;
+use Orchestra\Page\Factory\SchemaFactory;
 use Orchestra\Page\PageCollection;
 
 final class SchemasRuntime extends Runtime
@@ -15,6 +16,7 @@ final class SchemasRuntime extends Runtime
     private readonly ContentRepository $contents;
     private readonly PageCollection $pages;
     private readonly PageFactory $pageFactory;
+    private readonly SchemaFactory $schemaFactory;
 
     /**
      * Process schema contents
@@ -44,16 +46,20 @@ final class SchemasRuntime extends Runtime
         $this->contents = $this->container->get('content.repository');
         $this->pages = $this->container->get('pages.collection');
         $this->pageFactory = $this->container->get('pages.factory');
+        $this->schemaFactory = $this->container->get('pages.schema.factory');
 
         $this->output->info('Processing schemas');
 
-        foreach ($this->context->prototype->schemas() as $schema) {
-            $this->output->print("Working on schema '{$schema->tag}'");
+        foreach ($this->context->prototype->schemas() as $definition) {
+            $this->output->print("Working on schema '{$definition->tag}'");
 
-            $resolvedSchema = $schema->withResolvedContents($this->processSchemaContents($schema->contentsReferences));
+            $schema = $this->schemaFactory->fromDefinition(
+                $definition,
+                $this->processSchemaContents($definition->contentsReferences)
+            );
             $generator = $this->generators->get($schema->generator);
 
-            foreach ($generator->generate($resolvedSchema) as $payload) {
+            foreach ($generator->generate($schema) as $payload) {
                 $this->pages->add($this->pageFactory->fromPayload($payload));
             }
         }

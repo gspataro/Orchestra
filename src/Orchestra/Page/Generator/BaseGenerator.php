@@ -2,12 +2,9 @@
 
 namespace Orchestra\Page\Generator;
 
-use Orchestra\Content\ContentCollection;
-use Orchestra\Project\Sitemap;
 use Orchestra\Page\GeneratorInterface;
-use Orchestra\Page\Page;
 use Orchestra\Page\PagePayload;
-use Orchestra\Project\Definition\Schema\Schema;
+use Orchestra\Page\Schema;
 
 abstract class BaseGenerator implements GeneratorInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Project\Definition\Schema;
+namespace Orchestra\Page;
 
 use Orchestra\Content\ContentCollection;
 

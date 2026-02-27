@@ -10,6 +10,7 @@ use Orchestra\Page\Generator\ArchiveGenerator;
 use Orchestra\Page\Generator\LoopGenerator;
 use Orchestra\Application\Component;
 use Orchestra\Page\Factory\PageFactory;
+use Orchestra\Page\Factory\SchemaFactory;
 use Orchestra\Page\Generator\CollectionGenerator;
 
 final class PagesComponent extends Component
@@ -28,6 +29,10 @@ final class PagesComponent extends Component
             return new PageFactory(
                 $c->get('project.sitemap')
             );
+        });
+
+        $container->add('pages.schema.factory', function ($c, $a): object {
+            return new SchemaFactory();
         });
     }
 

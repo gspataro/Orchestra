@@ -2,7 +2,7 @@
 
 namespace Orchestra\Page;
 
-use Orchestra\Project\Definition\Schema\Schema;
+use Orchestra\Page\Schema;
 
 final readonly class PagePayload
 {
