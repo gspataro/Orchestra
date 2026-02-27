@@ -2,7 +2,7 @@
 
 namespace Orchestra\Project\Interpreter;
 
-use Orchestra\Project\Blueprint;
+use Orchestra\Blueprint\Blueprint;
 use Orchestra\Project\CompilerContext;
 use Orchestra\Project\Definition\MediaVariant\MediaVariant;
 use Orchestra\Project\InterpreterInterface;

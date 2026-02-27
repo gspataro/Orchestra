@@ -3,7 +3,7 @@
 namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Compiler\BuildOptions;
-use Orchestra\Project\Blueprint;
+use Orchestra\Blueprint\Blueprint;
 use Orchestra\Project\BlueprintCompiler;
 use Orchestra\Project\Sitemap;
 

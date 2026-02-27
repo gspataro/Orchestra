@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Project;
+namespace Orchestra\Blueprint;
 
 use Orchestra\Utilities\DotNavigator;
 

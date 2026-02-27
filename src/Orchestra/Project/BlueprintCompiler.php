@@ -2,6 +2,7 @@
 
 namespace Orchestra\Project;
 
+use Orchestra\Blueprint\Blueprint;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
 use Orchestra\Project\Definition\Schema\SchemaCollection;
 use Orchestra\Project\Definition\Source\SourceCollection;

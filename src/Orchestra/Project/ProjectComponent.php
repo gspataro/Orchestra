@@ -3,7 +3,7 @@
 namespace Orchestra\Project;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Project\Blueprint;
+use Orchestra\Blueprint\Blueprint;
 use Orchestra\Project\Sitemap;
 use Orchestra\Application\Component;
 use Orchestra\Project\Factory\PrototypeFactory;

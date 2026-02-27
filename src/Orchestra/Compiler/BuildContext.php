@@ -2,7 +2,7 @@
 
 namespace Orchestra\Compiler;
 
-use Orchestra\Project\Blueprint;
+use Orchestra\Blueprint\Blueprint;
 use Orchestra\Project\Prototype;
 use Orchestra\Project\Sitemap;
 
