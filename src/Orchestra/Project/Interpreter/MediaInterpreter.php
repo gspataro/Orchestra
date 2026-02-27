@@ -4,7 +4,7 @@ namespace Orchestra\Project\Interpreter;
 
 use Orchestra\Blueprint\NamespaceInterface;
 use Orchestra\Project\CompilerContext;
-use Orchestra\Project\Definition\MediaVariant\MediaVariant;
+use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 use Orchestra\Project\InterpreterInterface;
 
 final class MediaInterpreter implements InterpreterInterface
@@ -23,7 +23,7 @@ final class MediaInterpreter implements InterpreterInterface
         $format = $images['optimize']['strategy'];
 
         foreach ($images['sizes'] as $size => $options) {
-            $mediaVariant = new MediaVariant(
+            $mediaVariant = new MediaVariantDefinition(
                 $size,
                 $format ?? null,
                 [

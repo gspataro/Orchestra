@@ -2,36 +2,24 @@
 
 namespace Orchestra\Project\Definition\MediaVariant;
 
-use Orchestra\Project\Definition\MediaVariant\MediaVariant;
+use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 
 final class MediaVariantCollection
 {
-    /** @var MediaVariant[] */
-    private array $image = [];
+    /** @var array<string,MediaVariantDefinition[]> */
+    private array $items = [];
 
-    /** @var MediaVariant[] */
-    private array $generic = [];
-
-    public function add(string $type, string $tag, MediaVariant $variant): void
+    public function add(string $type, string $tag, MediaVariantDefinition $variant): void
     {
-        if ($type === 'image') {
-            $this->image[$tag] = $variant;
-            return;
-        }
-
-        $this->generic[$tag] = $variant;
+        $this->items[$type][$tag] = $variant;
     }
 
-    public function get(string $type, string $tag): ?MediaVariant
+    public function get(string $type, string $tag): ?MediaVariantDefinition
     {
-        if ($type === 'image') {
-            return $this->image[$tag] ?? null;
-        }
-
-        return $this->generic[$tag] ?? null;
+        return $this->generic[$type][$tag] ?? null;
     }
 
-    public function image(string $tag): ?MediaVariant
+    public function image(string $tag): ?MediaVariantDefinition
     {
         return $this->get('image', $tag);
     }

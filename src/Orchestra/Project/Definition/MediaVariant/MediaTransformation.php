@@ -8,7 +8,7 @@ readonly class MediaTransformation
         public string $name,
         public string $relativePath,
         public string $publicPath,
-        public MediaVariant $variant
+        public MediaVariantDefinition $variant
     ) {
     }
 }

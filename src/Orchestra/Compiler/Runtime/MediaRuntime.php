@@ -20,15 +20,8 @@ final class MediaRuntime extends Runtime
 
         $this->output->info('Generating media');
 
-        /** @var MediaRepository */
         $this->media = $this->container->get('media.repository');
-
-        /** @var AdapterCollection */
         $this->adapters = $this->container->get('media.adapters');
-
-        if (empty($this->media->all())) {
-            return true;
-        }
 
         foreach ($this->media->all() as $media) {
             $adapter = $this->adapters->getFor($media->mimeType ?? 'default');

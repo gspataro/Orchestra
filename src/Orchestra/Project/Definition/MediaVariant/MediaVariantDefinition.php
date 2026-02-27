@@ -2,7 +2,7 @@
 
 namespace Orchestra\Project\Definition\MediaVariant;
 
-final readonly class MediaVariant
+final readonly class MediaVariantDefinition
 {
     /**
      * @param string $name

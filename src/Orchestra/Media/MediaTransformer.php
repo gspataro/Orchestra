@@ -3,7 +3,7 @@
 namespace Orchestra\Media;
 
 use Orchestra\Compiler\BuildContext;
-use Orchestra\Project\Definition\MediaVariant\MediaVariant;
+use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 
 final class MediaTransformer
 {
@@ -12,7 +12,7 @@ final class MediaTransformer
     ) {
     }
 
-    private function variantRelativePath(Media $media, MediaVariant $variant): string
+    private function variantRelativePath(Media $media, MediaVariantDefinition $variant): string
     {
         $dirname = pathinfo($media->relativePath, PATHINFO_DIRNAME);
         $filename = pathinfo($media->relativePath, PATHINFO_FILENAME);
