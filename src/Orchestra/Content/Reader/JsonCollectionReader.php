@@ -3,7 +3,7 @@
 namespace Orchestra\Content\Reader;
 
 use Orchestra\Content\ContentPayload;
-use Orchestra\Project\Definition\Source\Source;
+use Orchestra\Content\Source;
 
 final class JsonCollectionReader extends BaseReader
 {

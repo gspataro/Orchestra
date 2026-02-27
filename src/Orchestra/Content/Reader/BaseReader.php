@@ -4,7 +4,7 @@ namespace Orchestra\Content\Reader;
 
 use Orchestra\Content\ReaderInterface;
 use Orchestra\Content\ContentPayload;
-use Orchestra\Project\Definition\Source\Source;
+use Orchestra\Content\Source;
 
 abstract class BaseReader implements ReaderInterface
 {

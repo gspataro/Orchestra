@@ -2,7 +2,7 @@
 
 namespace Orchestra\Content;
 
-use Orchestra\Project\Definition\Source\Source;
+use Orchestra\Content\Source;
 
 final readonly class ContentPayload
 {

@@ -10,14 +10,4 @@ final readonly class SourceDefinition
         public string $path
     ) {
     }
-
-    public function withResolvedPaths(string $path, string $relativePath): Source
-    {
-        return new Source(
-            $this->group,
-            $this->reader,
-            $path,
-            $relativePath
-        );
-    }
 }

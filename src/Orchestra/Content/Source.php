@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Project\Definition\Source;
+namespace Orchestra\Content;
 
 final readonly class Source
 {

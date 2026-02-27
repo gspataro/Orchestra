@@ -9,6 +9,7 @@ use Orchestra\Content\Reader\TextReader;
 use Orchestra\Content\Reader\MarkdownReader;
 use Orchestra\Application\Component;
 use Orchestra\Content\Factory\ContentFactory;
+use Orchestra\Content\Factory\SourceFactory;
 use Orchestra\Content\Reader\JsonCollectionReader;
 
 final class ContentComponent extends Component
@@ -25,6 +26,10 @@ final class ContentComponent extends Component
 
         $container->add('content.factory', function ($c, $a): object {
             return new ContentFactory();
+        });
+
+        $container->add('content.source.factory', function ($c, $a): object {
+            return new SourceFactory();
         });
     }
 
