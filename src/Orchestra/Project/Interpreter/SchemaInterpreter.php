@@ -62,13 +62,13 @@ final class SchemaInterpreter implements InterpreterInterface
         foreach ($schemas as $tag => $schema) {
             $schema = new Schema(
                 $tag,
-                $this->buildQueries($schema['contents'] ?? []),
+                $this->buildQueries($schema['contents']),
                 $schema['template'],
                 $schema['generate'],
-                $schema['source'] ?? '',
-                $schema['builder'] ?? 'twig',
+                $schema['source'],
+                $schema['builder'],
                 $this->sanitizeSlug($schema['slug']),
-                $schema['options'] ?? []
+                $schema['options']
             );
 
             $context->schemas->add($schema);

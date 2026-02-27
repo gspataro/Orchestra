@@ -23,7 +23,8 @@ final class SchemaSpecification implements SpecificationInterface
                     'template' => ['type' => 'string', 'required' => true],
                     'slug' => ['type' => 'string', 'required' => true],
                     'generate' => ['type' => 'string', 'default' => 'once'],
-                    'source' => ['type' => 'string'],
+                    'builder' => ['type' => 'string', 'default' => 'twig'],
+                    'source' => ['type' => 'string', 'default' => ''],
                     'options' => ['type' => 'array', 'default' => []]
                 ]
             ]

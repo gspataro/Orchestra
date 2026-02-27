@@ -28,16 +28,18 @@ final class BlueprintCompiler
         return $rules;
     }
 
-    private function validateRepeater(string $field, array $rules, array $data): array
+    private function validateRepeater(string $field, array $structure, array $data): array
     {
         $result = [];
 
         foreach ($data as $key => $value) {
-            $result[$key] = $this->validateField(
-                $field,
-                $rules,
-                $value ?? $rules['default']
-            );
+            foreach ($structure as $subField => $rules) {
+                $result[$key][$subField] = $this->validateField(
+                    $field . '.' . $key . '.' . $subField,
+                    $this->normalizeRules($rules),
+                    $value[$subField] ?? null
+                );
+            }
         }
 
         return $result;
@@ -66,7 +68,7 @@ final class BlueprintCompiler
         if ($rules['type'] === 'repeater') {
             return $this->validateRepeater(
                 $field,
-                $this->normalizeRules($rules['structure']),
+                $rules['structure'],
                 $value
             );
         }
