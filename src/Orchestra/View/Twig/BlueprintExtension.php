@@ -17,7 +17,7 @@ final class BlueprintExtension extends AbstractExtension implements GlobalsInter
     {
         $globals = [];
 
-        $globals['website'] = $this->context->blueprint->get('website');
+        $globals['website'] = $this->context->prototype->configs('website');
 
         return $globals;
     }

@@ -16,7 +16,7 @@ final class SitemapExtension extends AbstractExtension
     public function url($tag)
     {
         $url = getenv('WEBSITE_URL') ?: '';
-        $friendlyUrls = $this->context->blueprint->get('website.friendly_urls');
+        $friendlyUrls = $this->context->prototype->configs()->get('website.friendly_urls');
         $path = $this->context->sitemap->get($tag);
         $separator = null;
         $suffix = $friendlyUrls ? null : '.html';

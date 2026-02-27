@@ -9,7 +9,6 @@ use Orchestra\Project\Sitemap;
 final class BuildContext
 {
     public readonly Paths $paths;
-    public readonly Blueprint $blueprint;
     public readonly Prototype $prototype;
     public readonly Sitemap $sitemap;
 
@@ -24,9 +23,8 @@ final class BuildContext
         $this->paths->setDefaults();
     }
 
-    public function setContext(Blueprint $blueprint, Prototype $prototype, Sitemap $sitemap): void
+    public function setContext(Prototype $prototype, Sitemap $sitemap): void
     {
-        $this->blueprint = $blueprint;
         $this->prototype = $prototype;
         $this->sitemap = $sitemap;
     }

@@ -44,7 +44,6 @@ final class CreateContextRuntime extends Runtime
         $prototype = $this->prototypeCompiler->compile($namespaces);
 
         $this->context->setContext(
-            $this->blueprint,
             $prototype,
             $this->sitemap
         );
