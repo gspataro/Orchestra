@@ -28,7 +28,8 @@
         ]
     },
     "require-dev": {
-        "pestphp/pest": "^2.36"
+        "pestphp/pest": "^2.36",
+        "phpstan/phpstan": "^2.1"
     },
     "config": {
         "allow-plugins": {
@@ -36,6 +37,7 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/pest"
+        "test": "./vendor/bin/pest",
+        "phpstan": "./vendor/bin/phpstan"
     }
 }
