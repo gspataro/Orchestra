@@ -2,7 +2,7 @@
 
 namespace Orchestra\Project\Definition\Schema;
 
-final readonly class Schema
+final readonly class SchemaDefinition
 {
     public array $contents;
 

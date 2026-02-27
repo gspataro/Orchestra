@@ -5,7 +5,7 @@ namespace Orchestra\Project\Interpreter;
 use Orchestra\Blueprint\NamespaceInterface;
 use Orchestra\Project\CompilerContext;
 use Orchestra\Project\Definition\Query\QueryDefinition;
-use Orchestra\Project\Definition\Schema\Schema;
+use Orchestra\Project\Definition\Schema\SchemaDefinition;
 use Orchestra\Project\InterpreterInterface;
 
 final class SchemaInterpreter implements InterpreterInterface
@@ -60,7 +60,7 @@ final class SchemaInterpreter implements InterpreterInterface
         }
 
         foreach ($schemas as $tag => $schema) {
-            $schema = new Schema(
+            $schema = new SchemaDefinition(
                 $tag,
                 $this->buildQueries($schema['contents']),
                 $schema['template'],

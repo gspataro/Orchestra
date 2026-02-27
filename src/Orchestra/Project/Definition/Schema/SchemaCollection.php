@@ -9,22 +9,22 @@ use Traversable;
 final class SchemaCollection implements IteratorAggregate
 {
     /**
-     * @param Schema[] $items
+     * @param SchemaDefinition[] $items
      */
     private array $items = [];
 
-    public function add(Schema $schema): void
+    public function add(SchemaDefinition $schema): void
     {
         $this->items[] = $schema;
     }
 
-    public function get(string $group): ?Schema
+    public function get(string $group): ?SchemaDefinition
     {
         return $this->items[$group] ?? null;
     }
 
     /**
-     * @return Schema[]
+     * @return SchemaDefinition[]
      */
     public function getIterator(): Traversable
     {
