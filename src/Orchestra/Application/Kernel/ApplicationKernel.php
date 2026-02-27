@@ -28,7 +28,6 @@ final class ApplicationKernel extends Kernel
     /** @var Component[] */
     private array $components = [
         ExceptionHandlerComponent::class,
-        DotenvComponent::class,
         CompilerComponent::class,
         BlueprintComponent::class,
         ProjectComponent::class,
