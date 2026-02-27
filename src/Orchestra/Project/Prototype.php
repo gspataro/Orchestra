@@ -2,14 +2,14 @@
 
 namespace Orchestra\Project;
 
-use Orchestra\Project\Definition\Source\SourceCollection;
+use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
 use Orchestra\Project\Definition\Schema\SchemaCollection;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
 
 final class Prototype
 {
     public function __construct(
-        private readonly SourceCollection $sources,
+        private readonly SourceDefinitionCollection $sources,
         private readonly SchemaCollection $schemas,
         private readonly MediaVariantCollection $mediaVariants,
         private readonly Config $configs
@@ -21,7 +21,7 @@ final class Prototype
         return $this->configs;
     }
 
-    public function sources(): SourceCollection
+    public function sources(): SourceDefinitionCollection
     {
         return $this->sources;
     }

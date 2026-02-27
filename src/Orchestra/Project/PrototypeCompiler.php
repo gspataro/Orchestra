@@ -5,7 +5,7 @@ namespace Orchestra\Project;
 use Orchestra\Blueprint\NamespaceCollection;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
 use Orchestra\Project\Definition\Schema\SchemaCollection;
-use Orchestra\Project\Definition\Source\SourceCollection;
+use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
 use Orchestra\Project\Factory\PrototypeFactory;
 use Orchestra\Project\Interpreter\ConfigInterpreter;
 use Orchestra\Project\Interpreter\MediaInterpreter;
@@ -30,7 +30,7 @@ final class PrototypeCompiler
     public function compile(NamespaceCollection $namespaces): Prototype
     {
         $context = new CompilerContext(
-            new SourceCollection(),
+            new SourceDefinitionCollection(),
             new SchemaCollection(),
             new MediaVariantCollection(),
             new Config()

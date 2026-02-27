@@ -7,7 +7,7 @@ use Orchestra\Project\Definition\Source\Source;
 interface ReaderInterface
 {
     /**
-     * @param ResolvedSource $source
+     * @param Source $source
      * @return iterable<ContentPayload>
      */
     public function compile(Source $source): iterable;

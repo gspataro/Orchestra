@@ -6,7 +6,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
-final class SourceCollection implements IteratorAggregate
+final class SourceDefinitionCollection implements IteratorAggregate
 {
     /**
      * @param SourceDefinition[] $items
