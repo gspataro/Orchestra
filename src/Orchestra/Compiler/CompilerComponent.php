@@ -19,18 +19,16 @@ final class CompilerComponent extends Component
         });
 
         $container->add('compiler.pipeline', function ($c, $a): object {
-            /*return new Pipeline(
-                $c,
-                $c->get('compiler.context'),
-                $a['output.adapter']
-            );*/
             return new PipelineCollection();
         });
 
         $container->add('compiler.options', function ($c, $a): object {
-            return new BuildOptions(
-                $a['skipMedia'] ?? false,
-                $a['cleanupOnly'] ?? false
+            return new BuildOptions(...$a);
+        });
+
+        $container->add('compiler.url', function ($c, $a): object {
+            return new UrlGenerator(
+                $c->get('compiler.context')
             );
         });
     }

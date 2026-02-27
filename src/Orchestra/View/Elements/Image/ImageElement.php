@@ -13,18 +13,17 @@ final class ImageElement extends ViewElement
         $relativePath = $data['relativePath'] ?? '';
         $variant = $data['variant'] ?? null;
 
-        $url = getenv('WEBSITE_URL') ?: '';
         $image = $this->media->request($relativePath, $variant);
         $attributes = [];
 
-        $attributes['src'] = "{$url}/media{$image->getTransformation($variant)->relativePath}";
+        $attributes['src'] = "{$this->url->to('media' . $image->getTransformation($variant)->relativePath)}";
         $attributes['srcset'] = [];
 
         foreach ($image->getTransformations() as $transformation) {
             $width = $transformation->variant->option('width');
 
             if ($width) {
-                $attributes['srcset'][] = "{$url}/media{$transformation->relativePath} {$width}w";
+                $attributes['srcset'][] = "{$this->url->to('media' . $transformation->relativePath)} {$width}w";
             }
         }
 

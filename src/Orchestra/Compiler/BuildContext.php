@@ -2,7 +2,6 @@
 
 namespace Orchestra\Compiler;
 
-use Orchestra\Blueprint\Blueprint;
 use Orchestra\Project\Prototype;
 use Orchestra\Project\Sitemap;
 
@@ -11,6 +10,7 @@ final class BuildContext
     public readonly Paths $paths;
     public readonly Prototype $prototype;
     public readonly Sitemap $sitemap;
+    public readonly BuildOptions $options;
 
     public function __construct(?Paths $paths = null)
     {
@@ -23,9 +23,10 @@ final class BuildContext
         $this->paths->setDefaults();
     }
 
-    public function setContext(Prototype $prototype, Sitemap $sitemap): void
+    public function setContext(Prototype $prototype, Sitemap $sitemap, BuildOptions $options): void
     {
         $this->prototype = $prototype;
         $this->sitemap = $sitemap;
+        $this->options = $options;
     }
 }

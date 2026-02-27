@@ -2,6 +2,7 @@
 
 namespace Orchestra\View;
 
+use Orchestra\Compiler\UrlGenerator;
 use Orchestra\Content\ContentRepository;
 use Orchestra\Media\MediaResolver;
 use Twig\Environment;
@@ -13,7 +14,8 @@ abstract class ViewElement
     public function __construct(
         protected readonly Environment $twig,
         protected readonly ContentRepository $contents,
-        protected readonly MediaResolver $media
+        protected readonly MediaResolver $media,
+        protected readonly UrlGenerator $url
     ) {
     }
 

@@ -24,6 +24,10 @@ final class BuildCommand extends BaseCommand
             'type' => 'toggle'
         ];
 
+        $options['base-url'] = [
+            'type' => 'optional'
+        ];
+
         return $options;
     }
 
@@ -41,7 +45,8 @@ final class BuildCommand extends BaseCommand
         /** @var \Orchestra\Compiler\BuildOptions */
         $buildOptions = $this->container->get('compiler.options', [
             'skipMedia' => $this->argument('skip-media') !== null,
-            'cleanupOnly' => $this->argument('cleanup-only') !== null
+            'cleanupOnly' => $this->argument('cleanup-only') !== null,
+            'baseUrl' => $this->argument('base-url')
         ]);
 
         if (

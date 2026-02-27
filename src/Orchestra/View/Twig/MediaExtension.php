@@ -4,6 +4,7 @@ namespace Orchestra\View\Twig;
 
 use Orchestra\Media\MediaResolver;
 use Orchestra\Compiler\BuildContext;
+use Orchestra\Compiler\UrlGenerator;
 use Orchestra\View\ElementCollection;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
@@ -12,16 +13,15 @@ final class MediaExtension extends AbstractExtension
 {
     public function __construct(
         private readonly MediaResolver $resolver,
-        private readonly ElementCollection $elements
+        private readonly ElementCollection $elements,
+        private readonly UrlGenerator $url
     ) {
     }
 
     public function media(string $relativePath, ?string $variant = null): string
     {
-        $url = getenv('WEBSITE_URL') ?: '';
         $relativePath = $this->resolver->resolve($relativePath, $variant);
-
-        return $url . '/media' . $relativePath;
+        return $this->url->to('/media' . $relativePath);
     }
 
     public function image(

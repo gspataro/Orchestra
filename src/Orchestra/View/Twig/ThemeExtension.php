@@ -2,6 +2,7 @@
 
 namespace Orchestra\View\Twig;
 
+use Orchestra\Compiler\UrlGenerator;
 use Orchestra\Theme\Assets\AssetRepository;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
@@ -9,7 +10,8 @@ use Twig\Extension\AbstractExtension;
 final class ThemeExtension extends AbstractExtension
 {
     public function __construct(
-        private readonly AssetRepository $assets
+        private readonly AssetRepository $assets,
+        private readonly UrlGenerator $url
     ) {
     }
 
@@ -19,8 +21,7 @@ final class ThemeExtension extends AbstractExtension
         $links = '';
 
         foreach ($css as $entry) {
-            $entry = pathJoin(getenv('WEBSITE_URL'), $entry);
-            $links .= "<link rel=\"stylesheet\" href=\"{$entry}\">\n";
+            $links .= "<link rel=\"stylesheet\" href=\"{$this->url->to($entry)}\">\n";
         }
 
         return $links;
@@ -32,8 +33,7 @@ final class ThemeExtension extends AbstractExtension
         $scripts = '';
 
         foreach ($js as $entry) {
-            $entry = pathJoin(getenv('WEBSITE_URL'), $entry);
-            $scripts .= "<script type=\"text/javascript\" src=\"{$entry}\"></script>\n";
+            $scripts .= "<script type=\"text/javascript\" src=\"{$this->url->to($entry)}\"></script>\n";
         }
 
         return $scripts;
