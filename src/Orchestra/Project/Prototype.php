@@ -3,14 +3,14 @@
 namespace Orchestra\Project;
 
 use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
-use Orchestra\Project\Definition\Schema\SchemaCollection;
+use Orchestra\Project\Definition\Schema\SchemaDefinitionCollection;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
 
 final class Prototype
 {
     public function __construct(
         private readonly SourceDefinitionCollection $sources,
-        private readonly SchemaCollection $schemas,
+        private readonly SchemaDefinitionCollection $schemas,
         private readonly MediaVariantCollection $mediaVariants,
         private readonly Config $configs
     ) {
@@ -26,7 +26,7 @@ final class Prototype
         return $this->sources;
     }
 
-    public function schemas(): SchemaCollection
+    public function schemas(): SchemaDefinitionCollection
     {
         return $this->schemas;
     }

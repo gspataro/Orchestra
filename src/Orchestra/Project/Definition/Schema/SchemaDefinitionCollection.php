@@ -6,7 +6,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
-final class SchemaCollection implements IteratorAggregate
+final class SchemaDefinitionCollection implements IteratorAggregate
 {
     /**
      * @param SchemaDefinition[] $items
