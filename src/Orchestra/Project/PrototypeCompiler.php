@@ -3,7 +3,7 @@
 namespace Orchestra\Project;
 
 use Orchestra\Blueprint\NamespaceCollection;
-use Orchestra\Project\Definition\MediaVariant\MediaVariantCollection;
+use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinitionCollection;
 use Orchestra\Project\Definition\Schema\SchemaDefinitionCollection;
 use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
 use Orchestra\Project\Factory\PrototypeFactory;
@@ -32,7 +32,7 @@ final class PrototypeCompiler
         $context = new CompilerContext(
             new SourceDefinitionCollection(),
             new SchemaDefinitionCollection(),
-            new MediaVariantCollection(),
+            new MediaVariantDefinitionCollection(),
             new Config()
         );
 

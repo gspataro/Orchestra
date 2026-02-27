@@ -4,7 +4,7 @@ namespace Orchestra\Project\Definition\MediaVariant;
 
 use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 
-final class MediaVariantCollection
+final class MediaVariantDefinitionCollection
 {
     /** @var array<string,MediaVariantDefinition[]> */
     private array $items = [];
@@ -16,7 +16,7 @@ final class MediaVariantCollection
 
     public function get(string $type, string $tag): ?MediaVariantDefinition
     {
-        return $this->generic[$type][$tag] ?? null;
+        return $this->items[$type][$tag] ?? null;
     }
 
     public function image(string $tag): ?MediaVariantDefinition
