@@ -3,7 +3,7 @@
 namespace Orchestra\Media\Adapter;
 
 use Orchestra\Media\Media;
-use Orchestra\Project\Definition\MediaVariant\MediaTransformation;
+use Orchestra\Media\MediaTransformation;
 
 final class CopyAdapter extends BaseAdapter
 {

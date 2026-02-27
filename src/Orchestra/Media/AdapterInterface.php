@@ -2,7 +2,7 @@
 
 namespace Orchestra\Media;
 
-use Orchestra\Project\Definition\MediaVariant\MediaTransformation;
+use Orchestra\Media\MediaTransformation;
 
 interface AdapterInterface
 {

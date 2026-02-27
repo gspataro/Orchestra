@@ -1,6 +1,8 @@
 <?php
 
-namespace Orchestra\Project\Definition\MediaVariant;
+namespace Orchestra\Media;
+
+use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 
 readonly class MediaTransformation
 {

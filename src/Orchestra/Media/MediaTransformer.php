@@ -3,12 +3,14 @@
 namespace Orchestra\Media;
 
 use Orchestra\Compiler\BuildContext;
+use Orchestra\Media\Factory\MediaTransformationFactory;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 
 final class MediaTransformer
 {
     public function __construct(
-        private readonly BuildContext $context
+        private readonly BuildContext $context,
+        private readonly MediaTransformationFactory $transformationFactory
     ) {
     }
 
@@ -31,11 +33,12 @@ final class MediaTransformer
         }
 
         $variantRelativePath = $this->variantRelativePath($media, $mediaVariant);
+        $transformation = $this->transformationFactory->fromDefinition(
+            $mediaVariant,
+            $this->context->paths->output(pathJoin('media', $variantRelativePath)),
+            $variantRelativePath
+        );
 
-        $media->addTransformation($mediaVariant->toTransformation(
-            $mediaVariant->name,
-            $variantRelativePath,
-            $this->context->paths->output(pathJoin('media', $variantRelativePath))
-        ));
+        $media->addTransformation($transformation);
     }
 }

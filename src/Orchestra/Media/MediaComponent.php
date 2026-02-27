@@ -7,6 +7,7 @@ use Orchestra\Application\Component;
 use Orchestra\Media\Adapter\CopyAdapter;
 use Orchestra\Media\Adapter\ImageAdapter;
 use Orchestra\Media\AdapterCollection;
+use Orchestra\Media\Factory\MediaTransformationFactory;
 use Orchestra\Media\MediaRepository;
 use Orchestra\Media\MediaResolver;
 use Orchestra\Media\Policy\ImagePolicy;
@@ -27,9 +28,14 @@ final class MediaComponent extends Component
             return new PolicyCollection();
         });
 
+        $container->add('media.transformation.factory', function ($c, $a): object {
+            return new MediaTransformationFactory();
+        });
+
         $container->add('media.transformer', function ($c, $a): object {
             return new MediaTransformer(
-                $c->get('compiler.context')
+                $c->get('compiler.context'),
+                $c->get('media.transformation.factory')
             );
         });
 
