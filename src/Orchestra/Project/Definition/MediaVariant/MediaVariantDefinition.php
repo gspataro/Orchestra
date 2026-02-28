@@ -20,14 +20,4 @@ final readonly class MediaVariantDefinition
     {
         return $this->options[$option] ?? null;
     }
-
-    public function toTransformation(string $name, string $relativePath, string $publicPath): MediaTransformation
-    {
-        return new MediaTransformation(
-            $name,
-            $relativePath,
-            $publicPath,
-            $this
-        );
-    }
 }
