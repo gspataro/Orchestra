@@ -4,8 +4,6 @@ namespace Orchestra\Project\Definition\Schema;
 
 final readonly class SchemaDefinition
 {
-    public array $contents;
-
     public function __construct(
         public string $tag,
         public array $contentsReferences,
