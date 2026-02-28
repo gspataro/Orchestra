@@ -21,7 +21,7 @@ final class SchemasRuntime extends Runtime
     /**
      * Process schema contents
      *
-     * @param array $contents
+     * @param \Orchestra\Project\Definition\Query\QueryDefinition[] $contents
      * @return ContentCollection[]
      */
 
