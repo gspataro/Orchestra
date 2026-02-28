@@ -37,7 +37,7 @@ final class MediaInterpreter implements InterpreterInterface
             $context->mediaVariants->add('image', $size, $mediaVariant);
         }
 
-        $context->configs->set('media.image.responsive', $images['responsive']);
+        $context->configs->set('media.images.responsive', $images['responsive']);
     }
 
     public function compile(NamespaceInterface $media, CompilerContext $context): void

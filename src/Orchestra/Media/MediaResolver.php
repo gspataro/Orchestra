@@ -40,7 +40,7 @@ final class MediaResolver
             $this->transformer->transform($media, $variant);
         }
 
-        $policy = $this->policies->getFor(strtok($media->mimeType, '/'));
+        $policy = $this->policies->getFor($media->mimeType);
 
         if ($policy) {
             $policy->apply($media, $this->transformer, $this->context);

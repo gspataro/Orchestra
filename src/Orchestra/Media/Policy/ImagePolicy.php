@@ -22,7 +22,7 @@ final class ImagePolicy implements PolicyInterface
 
     public function apply(Media $media, MediaTransformer $transformer, BuildContext $context): void
     {
-        $responsiveVariants = $context->blueprint->get('media.images.responsive');
+        $responsiveVariants = $context->prototype->configs()->get('media.images.responsive');
 
         if (empty($responsiveVariants ?? [])) {
             return;
