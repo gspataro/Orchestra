@@ -29,7 +29,7 @@ final class ImageAdapter extends BaseAdapter
 
         if (
             $imageGeometry['width'] <= $width && $imageGeometry['height'] <= $height
-            || $width ?? 0 === 0 && $height ?? 0 === 0
+            || ($width ?? 0) === 0 && ($height ?? 0) === 0
         ) {
             if ($width && $height) {
                 if ($crop) {
@@ -60,7 +60,8 @@ final class ImageAdapter extends BaseAdapter
 
         $image = match ($imageType) {
             IMAGETYPE_JPEG => imagecreatefromjpeg($media->path),
-            IMAGETYPE_PNG => imagecreatefrompng($media->path)
+            IMAGETYPE_PNG => imagecreatefrompng($media->path),
+            default => null
         };
 
         /** @var \Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition */
@@ -119,7 +120,8 @@ final class ImageAdapter extends BaseAdapter
         match ($format) {
             'jpg', 'jpeg' => imagejpeg($publicImage, $transformation->publicPath, $quality),
             'png' => imagepng($publicImage, $transformation->publicPath),
-            'webp' => imagewebp($publicImage, $transformation->publicPath, $quality)
+            'webp' => imagewebp($publicImage, $transformation->publicPath, $quality),
+            default => null
         };
     }
 
