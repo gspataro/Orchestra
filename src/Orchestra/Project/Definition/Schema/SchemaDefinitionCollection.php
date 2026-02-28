@@ -24,7 +24,7 @@ final class SchemaDefinitionCollection implements IteratorAggregate
     }
 
     /**
-     * @return SchemaDefinition[]
+     * @return Traversable<SchemaDefinition>
      */
     public function getIterator(): Traversable
     {
