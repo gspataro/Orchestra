@@ -4,12 +4,12 @@ namespace Orchestra\Compiler;
 
 class Paths
 {
-    public readonly string $output;
-    public readonly string $data;
-    public readonly string $media;
-    public readonly string $views;
-    public readonly string $assets;
-    public readonly string $themes;
+    private string $output;
+    private string $data;
+    private string $media;
+    private string $views;
+    private string $assets;
+    private string $themes;
 
     public function __construct(
         public readonly string $root
