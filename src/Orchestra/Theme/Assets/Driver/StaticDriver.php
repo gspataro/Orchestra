@@ -27,11 +27,14 @@ final class StaticDriver implements DriverInterface
 
         copy($entry, $output);
 
-        match ($extension) {
-            'css' => $this->css[] = $outputFilename,
-            'js' => $this->js[] = $outputFilename,
-            'default' => null
-        };
+        switch ($extension) {
+            case 'css':
+                $this->css[] = $outputFilename;
+                break;
+            case 'js':
+                $this->js[] = $outputFilename;
+                break;
+        }
     }
 
     public function build(Theme $theme, BuildContext $context): void

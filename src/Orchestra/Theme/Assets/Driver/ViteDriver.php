@@ -36,10 +36,14 @@ final class ViteDriver implements DriverInterface
 
             copy($entry, $output);
 
-            match ($extension) {
-                'css' => $this->css[] = pathJoin('assets', $chunk['file']),
-                'js' => $this->js[] = pathJoin('assets', $chunk['file'])
-            };
+            switch ($extension) {
+                case 'css':
+                    $this->css[] = pathJoin('assets', $chunk['file']);
+                    break;
+                case 'js':
+                    $this->js[] = pathJoin('assets', $chunk['file']);
+                    break;
+            }
         }
     }
 
