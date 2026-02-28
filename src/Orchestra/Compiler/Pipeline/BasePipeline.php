@@ -10,7 +10,7 @@ use Orchestra\Compiler\PipelineInterface;
 
 abstract class BasePipeline implements PipelineInterface
 {
-    /** @var array<class-string<PipelineInterface>> */
+    /** @var array<class-string<\Orchestra\Compiler\RuntimeInterface>> */
     protected array $runtimes = [];
 
     public function __construct(
