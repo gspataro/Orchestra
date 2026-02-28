@@ -17,9 +17,9 @@ final class PipelineFactory
     }
 
     /**
-     * @param class-string<BasePipeline> $pipeline
+     * @param class-string<PipelineInterface> $pipeline
      * @param BuildOutputInterface $output
-     * @return BasePipeline
+     * @return PipelineInterface
      */
     public function make(string $pipeline, BuildOutputInterface $output): PipelineInterface
     {
