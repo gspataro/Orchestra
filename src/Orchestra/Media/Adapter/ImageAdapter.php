@@ -18,7 +18,7 @@ final class ImageAdapter extends BaseAdapter
         $image = new Imagick($media->path);
         $imageGeometry = $image->getImageGeometry();
 
-        /** @var \Orchestra\Project\Definition\MediaVariant\MediaVariant */
+        /** @var \Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition */
         $variant = $transformation->variant;
 
         $width = $variant->option('width');
@@ -63,7 +63,7 @@ final class ImageAdapter extends BaseAdapter
             IMAGETYPE_PNG => imagecreatefrompng($media->path)
         };
 
-        /** @var \Orchestra\Project\Definition\MediaVariant\ImageMediaVariant */
+        /** @var \Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition */
         $variant = $transformation->variant;
 
         $width = $variant->option('width');
