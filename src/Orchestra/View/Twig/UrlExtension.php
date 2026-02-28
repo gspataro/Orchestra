@@ -14,7 +14,7 @@ final class UrlExtension extends AbstractExtension
     ) {
     }
 
-    public function url($where): string
+    public function url(string $where): string
     {
         return $this->url->to($where);
     }

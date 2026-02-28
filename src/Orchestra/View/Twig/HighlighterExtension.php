@@ -13,7 +13,7 @@ final class HighlighterExtension extends AbstractExtension
     ) {
     }
 
-    public function highlight($code, $language)
+    public function highlight(string $code, string $language): string
     {
         return $this->highlighter->parse($code, $language);
     }

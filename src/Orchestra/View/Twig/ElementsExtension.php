@@ -13,6 +13,11 @@ final class ElementsExtension extends AbstractExtension
     ) {
     }
 
+    /**
+     * @param string $name
+     * @param array<string|int,mixed> $data
+     * @return string
+     */
     public function element(string $name, array $data = []): string
     {
         $element = $this->elements->get($name);

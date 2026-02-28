@@ -24,8 +24,16 @@ abstract class ViewElement
         return $this->name;
     }
 
+    /**
+     * @param array<string|int,mixed> $data
+     * @return array<string|int,mixed>
+     */
     abstract protected function data(array $data = []): array;
 
+    /**
+     * @param array<string|int,mixed> $data
+     * @return string
+     */
     public function render(array $data = []): string
     {
         $template = $this->twig->resolveTemplate([
