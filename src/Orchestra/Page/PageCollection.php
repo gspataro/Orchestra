@@ -17,7 +17,7 @@ final class PageCollection implements IteratorAggregate
     }
 
     /**
-     * @return Page[]
+     * @return Traversable<Page>
      */
     public function getIterator(): Traversable
     {
