@@ -7,7 +7,7 @@ final class PolicyCollection
     /** @var string[] */
     private array $map = [];
 
-    /** @var PolicyInterface */
+    /** @var PolicyInterface[] */
     private array $policies = [];
 
     public function has(string $tag): bool
