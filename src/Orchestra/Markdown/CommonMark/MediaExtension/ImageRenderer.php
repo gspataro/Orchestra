@@ -46,7 +46,7 @@ final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInter
 
     /**
      * @param Image $node
-     * @return array
+     * @return array<string,string>
      */
     public function getXmlAttributes(Node $node): array
     {
