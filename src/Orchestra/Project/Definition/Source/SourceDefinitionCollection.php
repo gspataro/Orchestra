@@ -24,7 +24,7 @@ final class SourceDefinitionCollection implements IteratorAggregate
     }
 
     /**
-     * @return SourceDefinition[]
+     * @return Traversable<SourceDefinition>
      */
     public function getIterator(): Traversable
     {
