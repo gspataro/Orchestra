@@ -7,7 +7,7 @@ final class AdapterCollection
     /** @var string[] */
     private array $map = [];
 
-    /** @var AdapterInterface */
+    /** @var AdapterInterface[] */
     private array $adapters = [];
 
     public function has(string $tag): bool
