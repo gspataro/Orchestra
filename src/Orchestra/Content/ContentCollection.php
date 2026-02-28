@@ -25,7 +25,7 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
     }
 
     /**
-     * @return Content[]
+     * @return Traversable<Content>
      */
 
     public function getIterator(): Traversable
