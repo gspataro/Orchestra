@@ -6,11 +6,12 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
+/**
+ * @implements IteratorAggregate<int,SourceDefinition>
+ */
 final class SourceDefinitionCollection implements IteratorAggregate
 {
-    /**
-     * @param SourceDefinition[] $items
-     */
+    /** @var SourceDefinition[] $items */
     private array $items = [];
 
     public function add(SourceDefinition $source): void

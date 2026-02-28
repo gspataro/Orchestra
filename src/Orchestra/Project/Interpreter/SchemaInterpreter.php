@@ -15,6 +15,10 @@ final class SchemaInterpreter implements InterpreterInterface
         return 'schemas';
     }
 
+    /**
+     * @param array<string|array<string,mixed>> $queries
+     * @return QueryDefinition[]
+     */
     private function buildQueries(array $queries): array
     {
         $contentQueries = [];

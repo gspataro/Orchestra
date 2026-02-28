@@ -6,11 +6,12 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
+/**
+ * @implements IteratorAggregate<int,SchemaDefinition>
+ */
 final class SchemaDefinitionCollection implements IteratorAggregate
 {
-    /**
-     * @param SchemaDefinition[] $items
-     */
+    /** @var SchemaDefinition[] $items */
     private array $items = [];
 
     public function add(SchemaDefinition $schema): void

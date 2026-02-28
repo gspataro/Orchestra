@@ -14,6 +14,11 @@ final class MediaInterpreter implements InterpreterInterface
         return 'media';
     }
 
+    /**
+     * @param array<string,mixed> $images
+     * @param CompilerContext $context
+     * @return void
+     */
     private function readMediaImages(array $images, CompilerContext $context): void
     {
         if (empty($images['sizes'])) {

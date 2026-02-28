@@ -45,6 +45,9 @@ final class Sitemap
         return $this->sitemap[$tag] ?? null;
     }
 
+    /**
+     * @return array<string,string>
+     */
     public function getAll(): array
     {
         return $this->sitemap;
