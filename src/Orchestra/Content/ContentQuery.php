@@ -6,6 +6,7 @@ use Orchestra\Project\Definition\Query\QueryDefinition;
 
 final class ContentQuery
 {
+    /** @var array<string,callable> */
     private array $filters = [];
 
     private int $skip = 0;
@@ -85,6 +86,11 @@ final class ContentQuery
         return $this;
     }
 
+    /**
+     * @param string $field
+     * @param array<mixed> $values
+     * @return self
+     */
     public function whereIn(string $field, array $values): self
     {
         $this->where($field, 'in', $values);
@@ -126,7 +132,7 @@ final class ContentQuery
 
     public function first(): ?Content
     {
-        return $this->apply()[0] ?? null;
+        return array_first($this->apply()->toArray()) ?? null;
     }
 
     public function count(): int
