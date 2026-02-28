@@ -18,6 +18,10 @@ final class BlueprintCompiler
         MediaSpecification::class
     ];
 
+    /**
+     * @param array<string,string|int|bool|array<string|int,mixed>> $rules
+     * @return array<string,string|int|bool|array<string|int,mixed>>
+     */
     private function normalizeRules(array $rules): array
     {
         $rules['type'] ??= 'mixed';
@@ -28,6 +32,12 @@ final class BlueprintCompiler
         return $rules;
     }
 
+    /**
+     * @param string $field
+     * @param array<string,array<string|int,mixed>> $structure
+     * @param array<string|int,mixed> $data
+     * @return array<string|int,mixed>
+     */
     private function validateRepeater(string $field, array $structure, array $data): array
     {
         $result = [];
@@ -45,6 +55,12 @@ final class BlueprintCompiler
         return $result;
     }
 
+    /**
+     * @param string $field
+     * @param array<string,string|int|bool|array<string|int,mixed>> $rules
+     * @param array<string|int,mixed> $data
+     * @return array<string|int,mixed>
+     */
     private function validateObject(string $field, array $rules, array $data): array
     {
         $subFields = array_slice($rules, 1, null, true);
@@ -61,6 +77,12 @@ final class BlueprintCompiler
         return $value;
     }
 
+    /**
+     * @param string $field
+     * @param array<string,string|int|bool|array<string|int,mixed>> $rules
+     * @param mixed $value
+     * @return mixed
+     */
     private function validateField(string $field, array $rules, mixed $value): mixed
     {
         $value ??= $rules['default'] ?? null;
@@ -104,6 +126,11 @@ final class BlueprintCompiler
         return $value;
     }
 
+    /**
+     * @param SpecificationInterface $schema
+     * @param array<string|int,mixed> $data
+     * @return NamespaceInterface
+     */
     private function validator(SpecificationInterface $schema, array $data): NamespaceInterface
     {
         $validated = [];
