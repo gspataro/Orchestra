@@ -14,7 +14,7 @@ use Orchestra\Project\Interpreter\SourceInterpreter;
 
 final class PrototypeCompiler
 {
-    /** @var InterpreterInterface[] */
+    /** @var array<class-string<InterpreterInterface>> */
     private array $interpreters = [
         ConfigInterpreter::class,
         SourceInterpreter::class,
