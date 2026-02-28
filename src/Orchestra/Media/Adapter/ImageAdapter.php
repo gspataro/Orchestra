@@ -73,14 +73,14 @@ final class ImageAdapter extends BaseAdapter
         $format = $variant->format ?? image_type_to_extension($imageType);
         $quality = $variant->option('quality') ?? 100;
 
-        if (!$width && !$height) {
+        if (is_null($width) && is_null($height)) {
             $newWidth = $imageWidth;
             $newHeight = $imageHeight;
-        } elseif ($width && !$height) {
+        } elseif ($width && is_null($height)) {
             $ratio = $width / $imageWidth;
             $newWidth = $width;
             $newHeight = (int) round($imageHeight * $ratio);
-        } elseif (!$width && $height) {
+        } elseif (is_null($width) && $height) {
             $ratio = $height / $imageHeight;
             $newWidth = (int) round($imageWidth * $ratio);
             $newHeight = $height;
