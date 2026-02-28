@@ -12,6 +12,9 @@ final class BuildCommand extends BaseCommand
 
     private Stopwatch $stopwatch;
 
+    /**
+     * @return array<string,array<string,mixed>>
+     */
     public function options(): array
     {
         $options = [];
