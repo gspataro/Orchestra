@@ -8,6 +8,14 @@ final class Content extends DotNavigator
 {
     protected bool $readOnly = true;
 
+    /**
+     * @param string $id
+     * @param string $tag
+     * @param string $group
+     * @param string $path
+     * @param mixed $body
+     * @param array<string|int,mixed> $metadata
+     */
     public function __construct(
         public readonly string $id,
         public readonly string $tag,
