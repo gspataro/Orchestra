@@ -9,7 +9,7 @@ final class SchemaFactory
 {
     /**
      * @param SchemaDefinition $definition
-     * @param ContentCollection[] $contents
+     * @param \Orchestra\Content\ContentCollection[] $contents
      * @return Schema
      */
     public function fromDefinition(SchemaDefinition $definition, array $contents): Schema
