@@ -8,7 +8,11 @@ final class Blueprint extends DotNavigator
 {
     protected bool $readOnly = true;
 
-    public function init(array $data)
+    /**
+     * @param array<mixed,mixed> $data
+     * @return void
+     */
+    public function init(array $data): void
     {
         $this->fill($data);
     }
