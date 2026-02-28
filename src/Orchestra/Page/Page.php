@@ -9,7 +9,7 @@ final readonly class Page
     /**
      * @param string $tag
      * @param string $permalink
-     * @param array $contents
+     * @param array<string|int,mixed> $contents
      * @param Schema $schema
      */
     public function __construct(

@@ -14,7 +14,7 @@ final class Schema
      * @param string $source
      * @param string $builder
      * @param string $slug
-     * @param array $options
+     * @param array<string,mixed> $options
      */
     public function __construct(
         public string $tag,

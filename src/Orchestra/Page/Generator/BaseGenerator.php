@@ -11,7 +11,7 @@ abstract class BaseGenerator implements GeneratorInterface
     /**
      * @param string $tag
      * @param string $permalink
-     * @param array $contents
+     * @param array<string|int,mixed> $contents
      * @param Schema $schema
      * @return PagePayload
      */

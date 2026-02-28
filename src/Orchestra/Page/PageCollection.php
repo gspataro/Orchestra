@@ -6,6 +6,9 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
+/**
+ * @implements IteratorAggregate<int,Page>
+ */
 final class PageCollection implements IteratorAggregate
 {
     /** @var Page[] */
