@@ -10,7 +10,7 @@ use Orchestra\Project\Exception\InvalidBlueprintException;
 
 final class BlueprintCompiler
 {
-    /** @var SpecificationInterface[] */
+    /** @var array<class-string<SpecificationInterface>> */
     private array $schemas = [
         WebsiteSpecification::class,
         ContentSpecification::class,
