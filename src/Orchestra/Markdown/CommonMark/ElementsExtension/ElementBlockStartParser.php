@@ -32,6 +32,10 @@ class ElementBlockStartParser implements BlockStartParserInterface
         return BlockStart::of($block)->at($cursor);
     }
 
+    /**
+     * @param string $rawProps
+     * @return array<string,mixed>
+     */
     private function parseProps(string $rawProps): array
     {
         $props = [];

@@ -12,6 +12,10 @@ final class ElementBlockParser extends AbstractBlockContinueParser
 {
     private ElementBlock $block;
 
+    /**
+     * @param string $name
+     * @param array<string,mixed> $props
+     */
     public function __construct(
         string $name,
         array $props
