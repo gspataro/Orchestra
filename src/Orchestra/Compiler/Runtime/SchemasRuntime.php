@@ -50,7 +50,7 @@ final class SchemasRuntime extends Runtime
 
         $this->output->info('Processing schemas');
 
-        foreach ($this->context->prototype->schemas() as $definition) {
+        foreach ($this->context->prototype()->schemas() as $definition) {
             $this->output->print("Working on schema '{$definition->tag}'");
 
             $schema = $this->schemaFactory->fromDefinition(

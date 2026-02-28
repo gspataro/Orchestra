@@ -26,7 +26,7 @@ final class ContentsRuntime extends Runtime
         $paths = explode(';', $definition->path);
 
         foreach ($paths as $path) {
-            $fullPath = $this->context->paths->data($path);
+            $fullPath = $this->context->paths()->data($path);
 
             if (is_file($fullPath)) {
                 yield $this->sourceFactory->fromDefinition($definition, $fullPath, $path);
@@ -38,7 +38,7 @@ final class ContentsRuntime extends Runtime
 
                 if ($matches !== false) {
                     foreach ($matches as $match) {
-                        $relativePath = substr($match, strlen($this->context->paths->data()));
+                        $relativePath = substr($match, strlen($this->context->paths()->data()));
                         yield $this->sourceFactory->fromDefinition($definition, $match, $relativePath);
                     }
                 }
@@ -55,7 +55,7 @@ final class ContentsRuntime extends Runtime
 
         $this->output->info('Processing contents');
 
-        foreach ($this->context->prototype->sources() as $definition) {
+        foreach ($this->context->prototype()->sources() as $definition) {
             $this->output->print("Working on content group '{$definition->group}'");
 
             foreach ($this->resolveSourcePath($definition) as $source) {

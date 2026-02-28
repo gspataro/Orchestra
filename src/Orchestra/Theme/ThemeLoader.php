@@ -13,8 +13,8 @@ final class ThemeLoader
 
     public function load(): ?Theme
     {
-        $theme = $this->context->prototype->configs()->get('website.theme') ?? 'pianoforte';
-        $themeDirectory = $this->context->paths->themes($theme);
+        $theme = $this->context->prototype()->configs()->get('website.theme') ?? 'pianoforte';
+        $themeDirectory = $this->context->paths()->themes($theme);
 
         if (!is_dir($themeDirectory)) {
             return null;

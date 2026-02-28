@@ -17,13 +17,13 @@ final class MediaResolver
     public function request(string $relativePath, ?string $variant = null): ?Media
     {
         if (!$this->repository->has($relativePath)) {
-            $file = $this->context->paths->media($relativePath);
+            $file = $this->context->paths()->media($relativePath);
 
             if (!is_file($file)) {
                 return null;
             }
 
-            $publicPath = $this->context->paths->output(pathJoin('media', $relativePath));
+            $publicPath = $this->context->paths()->output(pathJoin('media', $relativePath));
             $mimeType = mime_content_type($file);
 
             $this->repository->add(new Media(

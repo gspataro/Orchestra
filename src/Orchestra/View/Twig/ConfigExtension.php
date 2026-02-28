@@ -17,7 +17,7 @@ final class ConfigExtension extends AbstractExtension implements GlobalsInterfac
     {
         $globals = [];
 
-        $globals['website'] = $this->context->prototype->configs()->get('website');
+        $globals['website'] = $this->context->prototype()->configs()->get('website');
 
         return $globals;
     }

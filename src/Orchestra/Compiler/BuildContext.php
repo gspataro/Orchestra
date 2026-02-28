@@ -7,10 +7,10 @@ use Orchestra\Project\Sitemap;
 
 final class BuildContext
 {
-    public readonly Paths $paths;
-    public readonly Prototype $prototype;
-    public readonly Sitemap $sitemap;
-    public readonly BuildOptions $options;
+    private Paths $paths;
+    private Prototype $prototype;
+    private Sitemap $sitemap;
+    private BuildOptions $options;
 
     public function __construct(?Paths $paths = null)
     {
@@ -28,5 +28,25 @@ final class BuildContext
         $this->prototype = $prototype;
         $this->sitemap = $sitemap;
         $this->options = $options;
+    }
+
+    public function paths(): Paths
+    {
+        return $this->paths;
+    }
+
+    public function prototype(): Prototype
+    {
+        return $this->prototype;
+    }
+
+    public function sitemap(): Sitemap
+    {
+        return $this->sitemap;
+    }
+
+    public function options(): BuildOptions
+    {
+        return $this->options;
     }
 }

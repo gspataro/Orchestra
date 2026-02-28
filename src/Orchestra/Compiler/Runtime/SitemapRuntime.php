@@ -16,7 +16,7 @@ final class SitemapRuntime extends Runtime
 
         $excluded = ['/404', '/darkside'];
 
-        foreach ($this->context->sitemap->getAll() as $url) {
+        foreach ($this->context->sitemap()->getAll() as $url) {
             if (str_ends_with($url, '/index')) {
                 $url = substr($url, 0, strlen('index') * -1);
             }
@@ -30,7 +30,7 @@ final class SitemapRuntime extends Runtime
             $urlElement->addChild('lastmod', date('c'));
         }
 
-        $xml->asXml($this->context->paths->output('sitemap.xml'));
+        $xml->asXml($this->context->paths()->output('sitemap.xml'));
 
         return true;
     }

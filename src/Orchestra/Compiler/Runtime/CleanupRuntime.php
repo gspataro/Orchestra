@@ -9,11 +9,11 @@ final class CleanupRuntime extends Runtime
 {
     private function cleanup(string $directory): void
     {
-        if ($directory === $this->context->paths->output()) {
+        if ($directory === $this->context->paths()->output()) {
             $this->output->info('Cleaning up');
         }
 
-        $sitemap = array_values($this->context->sitemap->getAll());
+        $sitemap = array_values($this->context->sitemap()->getAll());
         $outputDirectory = new DirectoryIterator($directory);
         $excluded = ['.vite', 'assets', '.htaccess', 'sitemap.xml', 'favicon.png', 'favicon-dark.png', 'media'];
 
@@ -27,8 +27,8 @@ final class CleanupRuntime extends Runtime
             }
 
             $itemPath = $item->isFile()
-                ? substr($item->getPathname(), strlen($this->context->paths->output()), strlen('.html') * -1)
-                : substr($item->getPathname(), strlen($this->context->paths->output()));
+                ? substr($item->getPathname(), strlen($this->context->paths()->output()), strlen('.html') * -1)
+                : substr($item->getPathname(), strlen($this->context->paths()->output()));
 
             if ($item->isFile() && !in_array($itemPath, $sitemap)) {
                 unlink($item->getPathname());
@@ -43,7 +43,7 @@ final class CleanupRuntime extends Runtime
 
     public function run(BuildOptions $options): bool
     {
-        $this->cleanup($this->context->paths->output());
+        $this->cleanup($this->context->paths()->output());
 
         return true;
     }

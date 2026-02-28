@@ -13,7 +13,7 @@ final class Publisher
 
     public function publish(string $path, mixed $content): void
     {
-        $outputPath = $this->context->paths->output($path . '.html');
+        $outputPath = $this->context->paths()->output($path . '.html');
         $outputDir = pathinfo($outputPath, PATHINFO_DIRNAME);
 
         if (!is_dir($outputDir)) {

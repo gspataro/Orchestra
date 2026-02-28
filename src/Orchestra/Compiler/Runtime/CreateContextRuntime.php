@@ -21,7 +21,7 @@ final class CreateContextRuntime extends Runtime
     public function loadBlueprint(): bool
     {
         $this->blueprint = $this->container->get('blueprint');
-        $blueprintFile = $this->context->paths->root('blueprint.json');
+        $blueprintFile = $this->context->paths()->root('blueprint.json');
 
         if (!is_file($blueprintFile)) {
             $this->output->error('Blueprint file not found in project root.');

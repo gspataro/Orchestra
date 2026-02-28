@@ -42,7 +42,7 @@ final class StaticDriver implements DriverInterface
             return;
         }
 
-        $outputPath = $context->paths->output('assets');
+        $outputPath = $context->paths()->output('assets');
 
         if (!is_dir($outputPath)) {
             mkdir($outputPath, 0777, true);

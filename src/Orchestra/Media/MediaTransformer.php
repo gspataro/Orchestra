@@ -26,7 +26,7 @@ final class MediaTransformer
 
     public function transform(Media $media, string $variant): void
     {
-        $mediaVariant = $this->context->prototype->mediaVariants()->get(strtok($media->mimeType, '/'), $variant);
+        $mediaVariant = $this->context->prototype()->mediaVariants()->get(strtok($media->mimeType, '/'), $variant);
 
         if (!$mediaVariant) {
             return;
@@ -35,7 +35,7 @@ final class MediaTransformer
         $variantRelativePath = $this->variantRelativePath($media, $mediaVariant);
         $transformation = $this->transformationFactory->fromDefinition(
             $mediaVariant,
-            $this->context->paths->output(pathJoin('media', $variantRelativePath)),
+            $this->context->paths()->output(pathJoin('media', $variantRelativePath)),
             $variantRelativePath
         );
 
