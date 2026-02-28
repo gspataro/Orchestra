@@ -35,7 +35,6 @@ final class BuildCommand extends BaseCommand
     {
         $this->output->print('{bold}Running the building process{nl}');
 
-        /** @var Stopwatch */
         $this->stopwatch = $this->container->get('console.stopwatch');
         $this->stopwatch->start();
 
