@@ -8,7 +8,10 @@ use Orchestra\Theme\Theme;
 
 final class ViteDriver implements DriverInterface
 {
+    /** @var string[] */
     private array $css = [];
+
+    /** @var string[] */
     private array $js = [];
 
     public function build(Theme $theme, BuildContext $context): void

@@ -8,7 +8,10 @@ use Orchestra\Theme\Theme;
 
 final class StaticDriver implements DriverInterface
 {
+    /** @var string[] */
     private array $css = [];
+
+    /** @var string[] */
     private array $js = [];
 
     private function compileEntry(string $entry, string $outputPath): void
