@@ -5,7 +5,7 @@
  *
  * @param string $from
  * @param string $to
- * @param array $exclude
+ * @param string[] $exclude
  * @return void
  */
 
