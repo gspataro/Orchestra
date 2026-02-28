@@ -6,33 +6,13 @@ use Orchestra\Publisher\BuilderInterface;
 
 final class BuilderCollection
 {
-    /**
-     * Store builders
-     *
-     * @var array
-     */
-
+    /** @var array<string,BuilderInterface> */
     private array $builders = [];
-
-    /**
-     * Verify if a builder exists in the collection
-     *
-     * @param string $tag
-     * @return bool
-     */
 
     public function has(string $tag): bool
     {
         return isset($this->builders[$tag]);
     }
-
-    /**
-     * Add a builder to the collection
-     *
-     * @param string $tag
-     * @param BuilderInterface $builder
-     * @return void
-     */
 
     public function add(string $tag, BuilderInterface $builder): void
     {
@@ -44,13 +24,6 @@ final class BuilderCollection
 
         $this->builders[$tag] = $builder;
     }
-
-    /**
-     * Get a builder
-     *
-     * @param string $tag
-     * @return BuilderInterface
-     */
 
     public function get(string $tag): BuilderInterface
     {
