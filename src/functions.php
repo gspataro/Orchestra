@@ -4,7 +4,7 @@
  * Recursively copy a file or directory to another location excluding the items in the $exclude array
  *
  * @param string $from
- * @param string $top
+ * @param string $to
  * @param array $exclude
  * @return void
  */
