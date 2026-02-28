@@ -141,7 +141,7 @@ final class ContentQuery
     public function paginate(int $perPage): array
     {
         $all = $this->get();
-        $chunks = array_chunk($all->toArray(), $perPage);
+        $chunks = array_chunk($all->toArray(), $perPage, true);
 
         return array_map(
             fn(array $items) => new ContentCollection($items),
@@ -162,7 +162,7 @@ final class ContentQuery
         }
 
         if ($this->orderField !== null) {
-            usort($contents, function (Content $a, Content $b) {
+            uasort($contents, function (Content $a, Content $b): int {
                 $valueA = $a->get($this->orderField);
                 $valueB = $b->get($this->orderField);
 

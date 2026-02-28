@@ -6,21 +6,21 @@ use Orchestra\Project\Definition\Query\QueryDefinition;
 
 final class ContentRepository
 {
-    /** @var Content[] */
+    /** @var array<string,Content> */
     private array $byId = [];
 
-    /** @var Content[] */
+    /** @var array<string,Content[]> */
     private array $byGroup = [];
 
     public function add(Content $content): void
     {
-        $this->byId[$content->id][] = $content;
-        $this->byGroup[$content->group][] = $content;
+        $this->byId[$content->id] = $content;
+        $this->byGroup[$content->group][$content->id] = $content;
     }
 
     public function group(string $group): ContentCollection
     {
-        /** @var Content[] */
+        /** @var array<string,Content> */
         $contents = $this->byGroup[$group] ?? [];
 
         return new ContentCollection($contents);

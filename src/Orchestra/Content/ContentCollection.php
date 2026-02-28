@@ -12,7 +12,7 @@ use OutOfBoundsException;
 final class ContentCollection implements IteratorAggregate, Countable, ArrayAccess
 {
     /**
-     * @param Content[] $contents
+     * @param array<string,Content> $contents
      */
     public function __construct(
         private array $contents = []
@@ -25,7 +25,7 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
     }
 
     /**
-     * @return Traversable<Content>
+     * @return Traversable<string,Content>
      */
 
     public function getIterator(): Traversable
@@ -34,7 +34,7 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
     }
 
     /**
-     * @return Content[]
+     * @return array<string,Content>
      */
     public function toArray(): array
     {
