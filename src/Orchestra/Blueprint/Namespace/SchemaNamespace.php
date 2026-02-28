@@ -9,6 +9,9 @@ final class SchemaNamespace extends DotNavigator implements NamespaceInterface
 {
     protected bool $readOnly = true;
 
+    /**
+     * @param array<string|int,mixed> $data
+     */
     public function __construct(array $data)
     {
         $this->fill($data);
