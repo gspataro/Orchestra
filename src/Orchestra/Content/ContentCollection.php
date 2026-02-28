@@ -9,6 +9,10 @@ use Traversable;
 use Countable;
 use OutOfBoundsException;
 
+/**
+ * @implements ArrayAccess<string,Content>
+ * @implements IteratorAggregate<string,Content>
+ */
 final class ContentCollection implements IteratorAggregate, Countable, ArrayAccess
 {
     /**
@@ -51,7 +55,7 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
         return array_key_exists($offset, $this->contents);
     }
 
-    public function offsetGet(mixed $offset): mixed
+    public function offsetGet(mixed $offset): Content
     {
         if (!$this->offsetExists($offset)) {
             throw new OutOfBoundsException("Offset '{$offset}' does not exist in ContentCollection.");
