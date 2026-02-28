@@ -12,11 +12,11 @@ use Orchestra\Page\PageCollection;
 
 final class SchemasRuntime extends Runtime
 {
-    private readonly GeneratorCollection $generators;
-    private readonly ContentRepository $contents;
-    private readonly PageCollection $pages;
-    private readonly PageFactory $pageFactory;
-    private readonly SchemaFactory $schemaFactory;
+    private GeneratorCollection $generators;
+    private ContentRepository $contents;
+    private PageCollection $pages;
+    private PageFactory $pageFactory;
+    private SchemaFactory $schemaFactory;
 
     /**
      * Process schema contents

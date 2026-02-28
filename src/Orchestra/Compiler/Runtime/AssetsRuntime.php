@@ -9,9 +9,9 @@ use Orchestra\Theme\ThemeLoader;
 
 final class AssetsRuntime extends Runtime
 {
-    private readonly ThemeLoader $themeLoader;
-    private readonly DriverCollection $drivers;
-    private readonly AssetRepository $assets;
+    private ThemeLoader $themeLoader;
+    private DriverCollection $drivers;
+    private AssetRepository $assets;
 
     public function run(BuildOptions $options): bool
     {

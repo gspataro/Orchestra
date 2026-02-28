@@ -10,7 +10,7 @@ final class BuildCommand extends BaseCommand
     protected string $name = 'build';
     protected ?string $description = 'Run the build process';
 
-    private readonly Stopwatch $stopwatch;
+    private Stopwatch $stopwatch;
 
     public function options(): array
     {

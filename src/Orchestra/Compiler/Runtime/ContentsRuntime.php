@@ -12,10 +12,10 @@ use Orchestra\Project\Definition\Source\SourceDefinition;
 
 final class ContentsRuntime extends Runtime
 {
-    private readonly SourceFactory $sourceFactory;
-    private readonly ReadersCollection $readers;
-    private readonly ContentRepository $contents;
-    private readonly ContentFactory $contentFactory;
+    private SourceFactory $sourceFactory;
+    private ReadersCollection $readers;
+    private ContentRepository $contents;
+    private ContentFactory $contentFactory;
 
     /**
      * @param SourceDefinition $definition

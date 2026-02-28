@@ -9,8 +9,8 @@ use Twig\Loader\FilesystemLoader;
 
 final class ThemeRuntime extends Runtime
 {
-    private readonly ThemeLoader $themeLoader;
-    private readonly ChainLoader $twigLoader;
+    private ThemeLoader $themeLoader;
+    private ChainLoader $twigLoader;
 
     public function run(BuildOptions $options): bool
     {

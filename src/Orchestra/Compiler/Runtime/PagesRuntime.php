@@ -9,9 +9,9 @@ use Orchestra\Publisher\Publisher;
 
 final class PagesRuntime extends Runtime
 {
-    private readonly PageCollection $pages;
-    private readonly BuilderCollection $builders;
-    private readonly Publisher $publisher;
+    private PageCollection $pages;
+    private BuilderCollection $builders;
+    private Publisher $publisher;
 
     public function run(BuildOptions $options): bool
     {

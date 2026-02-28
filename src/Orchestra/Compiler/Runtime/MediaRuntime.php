@@ -8,8 +8,8 @@ use Orchestra\Compiler\BuildOptions;
 
 final class MediaRuntime extends Runtime
 {
-    private readonly MediaRepository $media;
-    private readonly AdapterCollection $adapters;
+    private MediaRepository $media;
+    private AdapterCollection $adapters;
 
     public function run(BuildOptions $options): bool
     {

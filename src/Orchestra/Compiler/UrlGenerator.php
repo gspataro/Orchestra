@@ -4,8 +4,8 @@ namespace Orchestra\Compiler;
 
 final class UrlGenerator
 {
-    private readonly bool $friendlyUrls;
-    private readonly string $baseUrl;
+    private bool $friendlyUrls = true;
+    private string $baseUrl = '';
 
     public function __construct(
         private readonly BuildContext $context
