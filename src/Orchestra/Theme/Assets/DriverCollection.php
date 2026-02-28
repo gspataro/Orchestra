@@ -4,7 +4,7 @@ namespace Orchestra\Theme\Assets;
 
 final class DriverCollection
 {
-    /** @var DriverInterface */
+    /** @var DriverInterface[] */
     private array $drivers = [];
 
     public function add(string $name, DriverInterface $driver): void
