@@ -19,6 +19,12 @@ abstract class BaseReader implements ReaderInterface
         return $source->group . '.' . $fileName;
     }
 
+    /**
+     * @param Source $source
+     * @param mixed $body
+     * @param array<string|int,mixed> $metadata
+     * @return ContentPayload
+     */
     protected function contentFromSource(Source $source, mixed $body, array $metadata = []): ContentPayload
     {
         return new ContentPayload(

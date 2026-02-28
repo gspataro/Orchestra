@@ -4,12 +4,7 @@ namespace Orchestra\Content;
 
 final class ReadersCollection
 {
-    /**
-     * Store readers
-     *
-     * @var array
-     */
-
+    /** @var array<string,ReaderInterface> */
     private array $readers = [];
 
     /**
