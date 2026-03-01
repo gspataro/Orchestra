@@ -21,13 +21,13 @@ final class ViewComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->add('twig.loader', function ($container, $args): object {
+        $container->add('twig.loader', function ($c, $a): object {
             return new ChainLoader($args ?? []);
         });
 
-        $container->add('twig', function ($container, $args): object {
+        $container->add('twig', function ($c, $a): object {
             return new Environment(
-                $container->get('twig.loader')
+                $c->get('twig.loader')
             );
         });
 
