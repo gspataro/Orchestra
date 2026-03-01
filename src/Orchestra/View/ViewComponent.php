@@ -22,7 +22,7 @@ final class ViewComponent extends Component
     public function register(Container $container): void
     {
         $container->add('twig.loader', function ($c, $a): object {
-            return new ChainLoader($args ?? []);
+            return new ChainLoader($a ?? []);
         });
 
         $container->add('twig', function ($c, $a): object {
