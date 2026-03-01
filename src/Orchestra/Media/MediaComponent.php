@@ -7,6 +7,11 @@ use Orchestra\Application\Component;
 use Orchestra\Media\Adapter\CopyAdapter;
 use Orchestra\Media\Adapter\ImageAdapter;
 use Orchestra\Media\AdapterCollection;
+use Orchestra\Media\Cache\MediaCacheRepository;
+use Orchestra\Media\Cache\MediaIndexRepository;
+use Orchestra\Media\Cache\MediaRepositorySerializer;
+use Orchestra\Media\Cache\MediaSerializer;
+use Orchestra\Media\Cache\MediaSignatureGenerator;
 use Orchestra\Media\Factory\MediaTransformationFactory;
 use Orchestra\Media\MediaRepository;
 use Orchestra\Media\MediaResolver;
@@ -45,6 +50,35 @@ final class MediaComponent extends Component
                 $c->get('media.repository'),
                 $c->get('media.transformer'),
                 $c->get('media.policies')
+            );
+        });
+
+        $container->add('media.repository.serializer', function ($c, $a): object {
+            return new MediaRepositorySerializer();
+        });
+
+        $container->add('media.cache.index', function ($c, $a): object {
+            return new MediaIndexRepository(
+                $c->get('cache.storage'),
+                $c->get('media.repository.serializer')
+            );
+        });
+
+        $container->add('media.serializer', function ($c, $a): object {
+            return new MediaSerializer();
+        });
+
+        $container->add('media.signature', function ($c, $a): object {
+            return new MediaSignatureGenerator(
+                $c->get('cache.signature')
+            );
+        });
+
+        $container->add('media.cache', function ($c, $a): object {
+            return new MediaCacheRepository(
+                $c->get('cache.storage'),
+                $c->get('media.serializer'),
+                $c->get('media.signature')
             );
         });
     }

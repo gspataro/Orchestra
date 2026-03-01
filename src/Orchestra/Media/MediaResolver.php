@@ -49,6 +49,20 @@ final class MediaResolver
         return $media;
     }
 
+    public function bulkRequest(array $requests): void
+    {
+        foreach ($requests as $relativePath => $variants) {
+            if (empty($variants)) {
+                $this->request($relativePath, null);
+                continue;
+            }
+
+            foreach ($variants as $variant) {
+                $this->request($relativePath, $variant);
+            }
+        }
+    }
+
     public function resolve(string $relativePath, ?string $variant = null): ?string
     {
         $media = $this->request($relativePath, $variant);
