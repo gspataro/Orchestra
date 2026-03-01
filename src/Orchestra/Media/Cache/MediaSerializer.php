@@ -11,6 +11,10 @@ final class MediaSerializer
         return serialize(array_keys($media->getTransformations()));
     }
 
+    /**
+     * @param string $media
+     * @return string[]
+     */
     public function unserialize(string $media): array
     {
         return unserialize($media);

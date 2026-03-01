@@ -49,6 +49,10 @@ final class MediaResolver
         return $media;
     }
 
+    /**
+     * @param array<string,string[]> $requests
+     * @return void
+     */
     public function bulkRequest(array $requests): void
     {
         foreach ($requests as $relativePath => $variants) {

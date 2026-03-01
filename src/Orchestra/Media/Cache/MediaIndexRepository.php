@@ -13,6 +13,9 @@ final class MediaIndexRepository
     ) {
     }
 
+    /**
+     * @return array<string,string[]>
+     */
     public function load(): array
     {
         if (!$this->storage->has('media', 'index')) {

@@ -17,6 +17,10 @@ final class MediaRepositorySerializer
         return serialize($data);
     }
 
+    /**
+     * @param string $repository
+     * @return array<string,string[]>
+     */
     public function unserialize(string $repository): array
     {
         return unserialize($repository);

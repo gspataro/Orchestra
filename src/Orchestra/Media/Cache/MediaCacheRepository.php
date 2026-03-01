@@ -14,6 +14,10 @@ final class MediaCacheRepository
     ) {
     }
 
+    /**
+     * @param Media $media
+     * @return string[]|null
+     */
     public function load(Media $media): ?array
     {
         $signature = $this->signature->generateFromMedia($media);
