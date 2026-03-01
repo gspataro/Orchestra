@@ -27,10 +27,7 @@ final class ImageAdapter extends BaseAdapter
         $format = $variant->format;
         $quality = $variant->option('quality');
 
-        if (
-            $imageGeometry['width'] <= $width && $imageGeometry['height'] <= $height
-            || ($width ?? 0) === 0 && ($height ?? 0) === 0
-        ) {
+        if ($imageGeometry['width'] >= $width || $imageGeometry['height'] >= $height) {
             if ($width && $height) {
                 if ($crop) {
                     $image->cropThumbnailImage($width, $height);
