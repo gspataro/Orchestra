@@ -2,6 +2,7 @@
 
 namespace Orchestra\Compiler\Runtime;
 
+use Exception;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Blueprint\Blueprint;
 use Orchestra\Blueprint\BlueprintCompiler;
@@ -43,7 +44,13 @@ final class CreateContextRuntime extends Runtime
 
     public function createContext(): bool
     {
-        $namespaces = $this->blueprintCompiler->compile($this->blueprint);
+        try {
+            $namespaces = $this->blueprintCompiler->compile($this->blueprint);
+        } catch (Exception $e) {
+            $this->output->error($e->getMessage());
+            exit(1);
+        }
+
         $prototype = $this->prototypeCompiler->compile($namespaces);
 
         $this->context->setContext(
