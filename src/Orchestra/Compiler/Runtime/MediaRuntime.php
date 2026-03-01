@@ -32,6 +32,7 @@ final class MediaRuntime extends Runtime
 
             if (!$media->hasTransformations()) {
                 $adapter->process($media);
+                continue;
             }
 
             foreach ($media->getTransformations() as $variant) {
