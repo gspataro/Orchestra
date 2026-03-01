@@ -6,6 +6,7 @@ use Exception;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Blueprint\Blueprint;
 use Orchestra\Blueprint\BlueprintCompiler;
+use Orchestra\Blueprint\Exception\InvalidBlueprintException;
 use Orchestra\Compiler\UrlGenerator;
 use Orchestra\Project\PrototypeCompiler;
 use Orchestra\Project\Sitemap;
@@ -46,7 +47,7 @@ final class CreateContextRuntime extends Runtime
     {
         try {
             $namespaces = $this->blueprintCompiler->compile($this->blueprint);
-        } catch (Exception $e) {
+        } catch (InvalidBlueprintException $e) {
             $this->output->error($e->getMessage());
             exit(1);
         }
