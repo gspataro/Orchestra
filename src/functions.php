@@ -76,19 +76,19 @@ function recursiveDelete(string $path, bool $onlyContent = false): void
  * Join two paths together
  *
  * @param string $base
- * @param string $path
+ * @param string $parts
  * @return string
  */
 
-function pathJoin(string $base, string $path): string
+function pathJoin(string $base, string ...$parts): string
 {
-    $separator = null;
+    $path = [$base];
 
-    if ($path && !str_ends_with($base, '/') && !str_starts_with($path, '/')) {
-        $separator = DIRECTORY_SEPARATOR;
+    foreach ($parts as $part) {
+        $path[] = trim($part);
     }
 
-    return $base . $separator . $path;
+    return implode(DIRECTORY_SEPARATOR, $path);
 }
 
 /**

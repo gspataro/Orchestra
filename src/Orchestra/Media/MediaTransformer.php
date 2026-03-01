@@ -35,7 +35,7 @@ final class MediaTransformer
         $variantRelativePath = $this->variantRelativePath($media, $mediaVariant);
         $transformation = $this->transformationFactory->fromDefinition(
             $mediaVariant,
-            $this->context->paths()->output(pathJoin('media', $variantRelativePath)),
+            $this->context->paths()->output('media', $variantRelativePath),
             $variantRelativePath
         );
 

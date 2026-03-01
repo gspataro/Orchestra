@@ -23,7 +23,7 @@ final class MediaResolver
                 return null;
             }
 
-            $publicPath = $this->context->paths()->output(pathJoin('media', $relativePath));
+            $publicPath = $this->context->paths()->output('media', $relativePath);
             $mimeType = mime_content_type($file);
 
             $this->repository->add(new Media(

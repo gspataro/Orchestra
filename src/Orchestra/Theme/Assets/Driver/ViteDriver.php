@@ -35,7 +35,7 @@ final class ViteDriver implements DriverInterface
 
             $entry = pathJoin($theme->assets->dir, $chunk['file']);
             $extension = pathinfo($input, PATHINFO_EXTENSION);
-            $output = pathJoin($context->paths()->output('assets'), $chunk['file']);
+            $output = $context->paths()->output('assets', $chunk['file']);
 
             copy($entry, $output);
 

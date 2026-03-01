@@ -14,24 +14,31 @@ final class MarkdownReader extends BaseReader
     ) {
     }
 
-    public function compile(Source $source): iterable
+    public function compile(Source $source): ContentPayload
     {
+        $defaultMetadata = [
+            'slug' => pathinfo($source->path, PATHINFO_FILENAME)
+        ];
+
         $body = $this->markdown->convert(
             file_get_contents($source->path)
         );
 
         if ($body instanceof RenderedContentWithFrontMatter) {
-            yield $this->contentFromSource(
+            return $this->contentFromSource(
                 $source,
                 $body->getContent(),
-                $body->getFrontMatter()
+                array_merge(
+                    $defaultMetadata,
+                    $body->getFrontMatter()
+                )
             );
-            return;
         }
 
-        yield $this->contentFromSource(
+        return $this->contentFromSource(
             $source,
-            $body->getContent()
+            $body->getContent(),
+            $defaultMetadata
         );
     }
 }

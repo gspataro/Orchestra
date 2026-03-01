@@ -12,6 +12,7 @@ use Orchestra\Application\Component;
 use Orchestra\Application\Exception\InvalidComponentException;
 use Orchestra\Application\Kernel;
 use Orchestra\Blueprint\BlueprintComponent;
+use Orchestra\Cache\CacheComponent;
 use Orchestra\Infrastructure\DotenvComponent;
 use Orchestra\Infrastructure\ExceptionHandlerComponent;
 use Orchestra\Infrastructure\HighlightComponent;
@@ -32,6 +33,7 @@ final class ApplicationKernel extends Kernel
         BlueprintComponent::class,
         ProjectComponent::class,
         HighlightComponent::class,
+        CacheComponent::class,
         ThemeComponent::class,
         ViewComponent::class,
         MarkdownComponent::class,

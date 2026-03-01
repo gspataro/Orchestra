@@ -10,6 +10,7 @@ class Paths
     private string $views;
     private string $assets;
     private string $themes;
+    private string $cache;
 
     public function __construct(
         public readonly string $root
@@ -24,40 +25,46 @@ class Paths
         $this->views = $this->root . '/resources/view';
         $this->assets = $this->root . '/resources/assets';
         $this->themes = $this->root . '/resources/themes';
+        $this->cache = $this->root . '/cache';
     }
 
-    public function root(string $path = ''): string
+    public function root(string ...$path): string
     {
-        return pathJoin($this->root, $path);
+        return pathJoin($this->root, ...$path);
     }
 
-    public function output(string $path = ''): string
+    public function output(string ...$path): string
     {
-        return pathJoin($this->output, $path);
+        return pathJoin($this->output, ...$path);
     }
 
-    public function data(string $path = ''): string
+    public function data(string ...$path): string
     {
-        return pathJoin($this->data, $path);
+        return pathJoin($this->data, ...$path);
     }
 
-    public function media(string $path = ''): string
+    public function media(string ...$path): string
     {
-        return pathJoin($this->media, $path);
+        return pathJoin($this->media, ...$path);
     }
 
-    public function views(string $path = ''): string
+    public function views(string ...$path): string
     {
-        return pathJoin($this->views, $path);
+        return pathJoin($this->views, ...$path);
     }
 
-    public function assets(string $path = ''): string
+    public function assets(string ...$path): string
     {
-        return pathJoin($this->assets, $path);
+        return pathJoin($this->assets, ...$path);
     }
 
-    public function themes(string $path = ''): string
+    public function themes(string ...$path): string
     {
-        return pathJoin($this->themes, $path);
+        return pathJoin($this->themes, ...$path);
+    }
+
+    public function cache(string ...$path): string
+    {
+        return pathJoin($this->cache, ...$path);
     }
 }

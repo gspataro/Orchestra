@@ -5,6 +5,7 @@ namespace Orchestra\Compiler\Runtime;
 use Orchestra\Content\ContentRepository;
 use Orchestra\Content\ReadersCollection;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Content\Cache\ContentCacheRepository;
 use Orchestra\Content\Factory\ContentFactory;
 use Orchestra\Content\Factory\SourceFactory;
 use Orchestra\Content\Source;
@@ -16,6 +17,7 @@ final class ContentsRuntime extends Runtime
     private ReadersCollection $readers;
     private ContentRepository $contents;
     private ContentFactory $contentFactory;
+    private ContentCacheRepository $cache;
 
     /**
      * @param SourceDefinition $definition
@@ -52,6 +54,7 @@ final class ContentsRuntime extends Runtime
         $this->sourceFactory = $this->container->get('content.source.factory');
         $this->contents = $this->container->get('content.repository');
         $this->contentFactory = $this->container->get('content.factory');
+        $this->cache = $this->container->get('content.cache');
 
         $this->output->info('Processing contents');
 
@@ -59,11 +62,16 @@ final class ContentsRuntime extends Runtime
             $this->output->print("Working on content group '{$definition->group}'");
 
             foreach ($this->resolveSourcePath($definition) as $source) {
-                $reader = $this->readers->get($source->reader);
-
-                foreach ($reader->compile($source) as $payload) {
+                if ($payload = $this->cache->load($source)) {
                     $this->contents->add($this->contentFactory->fromPayload($payload));
+                    continue;
                 }
+
+                $reader = $this->readers->get($source->reader);
+                $payload = $reader->compile($source);
+
+                $this->contents->add($this->contentFactory->fromPayload($payload));
+                $this->cache->save($source, $payload);
             }
         }
 

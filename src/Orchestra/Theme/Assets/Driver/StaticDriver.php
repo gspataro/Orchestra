@@ -58,7 +58,7 @@ final class StaticDriver implements DriverInterface
 
         foreach ($entries as $entry) {
             $this->compileEntry(
-                pathJoin($theme->path, pathJoin($theme->assets->dir, $entry)),
+                pathJoin($theme->path, $theme->assets->dir, $entry),
                 $outputPath
             );
         }
