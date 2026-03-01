@@ -43,31 +43,35 @@ function recursiveCopy(string $from, string $to, array $exclude = []): void
  *
  * @param string $path
  * @param bool $onlyContent
+ * @param string[] $exclude
  * @return void
  */
 
-function recursiveDelete(string $path, bool $onlyContent = false): void
+function recursiveDelete(string $path, bool $onlyContent = false, array $exclude = []): void
 {
     if (!is_dir($path)) {
         return;
     }
 
     $directory = new DirectoryIterator($path);
+    $removeDir = !$onlyContent;
 
     foreach ($directory as $item) {
         if ($item->isDot()) {
             continue;
         }
 
-        if ($item->isFile()) {
+        if ($item->isFile() && !in_array($item->getPathname(), $exclude)) {
             unlink($item->getPathname());
             continue;
+        } else {
+            $removeDir = false;
         }
 
-        recursiveDelete($item->getPathname());
+        recursiveDelete($item->getPathname(), false, $exclude);
     }
 
-    if (!$onlyContent) {
+    if ($removeDir) {
         rmdir($path);
     }
 }

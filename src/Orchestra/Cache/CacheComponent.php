@@ -11,9 +11,14 @@ final class CacheComponent extends Component
 {
     public function register(Container $container): void
     {
+        $container->add('cache.session', function ($c, $a): object {
+            return new CacheSession();
+        });
+
         $container->add('cache.storage', function ($c, $a): object {
             return new DriveStorage(
-                $c->get('compiler.context')
+                $c->get('compiler.context'),
+                $c->get('cache.session')
             );
         });
 

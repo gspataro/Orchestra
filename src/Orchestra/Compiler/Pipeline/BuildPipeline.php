@@ -3,6 +3,7 @@
 namespace Orchestra\Compiler\Pipeline;
 
 use Orchestra\Compiler\Runtime\AssetsRuntime;
+use Orchestra\Compiler\Runtime\CacheInvalidationRuntime;
 use Orchestra\Compiler\Runtime\CleanupRuntime;
 use Orchestra\Compiler\Runtime\SitemapRuntime;
 use Orchestra\Compiler\Runtime\ContentsRuntime;
@@ -23,6 +24,7 @@ final class BuildPipeline extends BasePipeline
         PagesRuntime::class,
         MediaRuntime::class,
         SitemapRuntime::class,
-        CleanupRuntime::class
+        CleanupRuntime::class,
+        CacheInvalidationRuntime::class
     ];
 }
