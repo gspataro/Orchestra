@@ -15,6 +15,10 @@ final class Router
     ) {
     }
 
+    /**
+     * @param array<string,mixed> $server
+     * @return void
+     */
     public function handleRequest(array $server): void
     {
         $uri = parse_url($server['REQUEST_URI'], PHP_URL_PATH);
