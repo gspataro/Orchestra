@@ -10,7 +10,7 @@ class ExceptionHandlerComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->add('exception.provider', function ($container, $args): object {
+        $container->add('exception.provider', function ($c, $a): object {
             return new Provider();
         });
     }
