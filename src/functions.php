@@ -86,10 +86,12 @@ function recursiveDelete(string $path, bool $onlyContent = false, array $exclude
 
 function pathJoin(string $base, string ...$parts): string
 {
-    $path = [$base];
+    $path = [
+        rtrim($base, DIRECTORY_SEPARATOR)
+    ];
 
     foreach ($parts as $part) {
-        $path[] = trim($part);
+        $path[] = trim($part, DIRECTORY_SEPARATOR);
     }
 
     return implode(DIRECTORY_SEPARATOR, $path);
