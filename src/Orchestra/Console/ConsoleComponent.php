@@ -8,6 +8,7 @@ use GSpataro\CLI\CommandsCollection;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Console\Command\BuildCommand;
 use Orchestra\Application\Component;
+use Orchestra\Console\Command\RehearsalCommand;
 
 final class ConsoleComponent extends Component
 {
@@ -33,6 +34,10 @@ final class ConsoleComponent extends Component
 
         $commands->register(
             new BuildCommand($container)
+        );
+
+        $commands->register(
+            new RehearsalCommand($container)
         );
 
         $cli->deploy();

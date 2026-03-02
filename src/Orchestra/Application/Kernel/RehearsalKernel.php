@@ -3,7 +3,6 @@
 namespace Orchestra\Application\Kernel;
 
 use GSpataro\DependencyInjection\Container;
-use Orchestra\Console\ConsoleComponent;
 use Orchestra\Publisher\PublisherComponent;
 use Orchestra\Content\ContentComponent;
 use Orchestra\Page\PagesComponent;
@@ -13,7 +12,6 @@ use Orchestra\Application\Exception\InvalidComponentException;
 use Orchestra\Application\Kernel;
 use Orchestra\Blueprint\BlueprintComponent;
 use Orchestra\Cache\CacheComponent;
-use Orchestra\Infrastructure\ExceptionHandlerComponent;
 use Orchestra\Infrastructure\HighlightComponent;
 use Orchestra\Markdown\MarkdownComponent;
 use Orchestra\Media\MediaComponent;
@@ -21,13 +19,12 @@ use Orchestra\Compiler\CompilerComponent;
 use Orchestra\Theme\ThemeComponent;
 use Orchestra\View\ViewComponent;
 
-final class ApplicationKernel extends Kernel
+final class RehearsalKernel extends Kernel
 {
     private Container $container;
 
     /** @var array<class-string<Component>|Component> */
     private array $components = [
-        ExceptionHandlerComponent::class,
         CompilerComponent::class,
         BlueprintComponent::class,
         ProjectComponent::class,
@@ -39,8 +36,7 @@ final class ApplicationKernel extends Kernel
         ContentComponent::class,
         PagesComponent::class,
         PublisherComponent::class,
-        MediaComponent::class,
-        ConsoleComponent::class
+        MediaComponent::class
     ];
 
     private function loadComponents(): void

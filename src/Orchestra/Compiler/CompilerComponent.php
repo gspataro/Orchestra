@@ -6,6 +6,7 @@ use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
 use Orchestra\Compiler\Factory\PipelineFactory;
 use Orchestra\Compiler\Pipeline\BuildPipeline;
+use Orchestra\Compiler\Pipeline\RehearsalPipeline;
 
 final class CompilerComponent extends Component
 {
@@ -49,5 +50,6 @@ final class CompilerComponent extends Component
         $pipeline = $container->get('compiler.pipeline');
 
         $pipeline->add('build', BuildPipeline::class);
+        $pipeline->add('preview', RehearsalPipeline::class);
     }
 }
