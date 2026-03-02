@@ -96,7 +96,7 @@ final class BlueprintCompiler
         }
 
         if ($rules['type'] === 'object') {
-            return $this->validateObject($field, $rules, $value);
+            return $this->validateObject($field, $rules, $value ?? []);
         }
 
         $rules = $this->normalizeRules($rules);
