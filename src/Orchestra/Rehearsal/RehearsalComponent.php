@@ -10,7 +10,9 @@ final class RehearsalComponent extends Component
     public function register(Container $container): void
     {
         $container->add('rehearsal.router', function ($c, $a): object {
-            return new Router();
+            return new Router(
+                $c->get('compiler.context')
+            );
         });
     }
 
