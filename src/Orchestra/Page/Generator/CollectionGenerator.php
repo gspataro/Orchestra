@@ -35,10 +35,11 @@ final class CollectionGenerator extends BaseGenerator
             for ($i = 0; $i < count($pages); $i++) {
                 $currentPage = $i + 1;
                 $currentSlug = $currentPage > 1 ? $currentPage : 'index';
+                $collectionSlug = $collection->metadata['slug'] ?? pathinfo($collection->path, PATHINFO_ALL);
 
                 yield $this->preparePayload(
-                    $schema->tag . '.' . $collection->get($relationshipOptions['value']) . '.page-' . $currentPage,
-                    $schema->slug . '/' . $collection->get($relationshipOptions['value']) . '/' . $currentSlug,
+                    $schema->tag . '.' . $collectionSlug . '.page-' . $currentPage,
+                    $schema->slug . '/' . $collectionSlug . '/' . $currentSlug,
                     [
                         'archive' => [
                             'loop' => $pages[$i],

@@ -16,11 +16,11 @@ final class LoopGenerator extends BaseGenerator
         }
 
         foreach ($source as $content) {
-            $contentTag = pathinfo($content->path, PATHINFO_FILENAME);
+            $slug = $content->metadata['slug'] ??  pathinfo($content->path, PATHINFO_FILENAME);
 
             yield $this->preparePayload(
                 $content->id,
-                $schema->slug . '/' . $contentTag,
+                $schema->slug . '/' . $slug,
                 ['post' => $content],
                 $schema
             );
