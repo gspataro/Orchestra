@@ -67,7 +67,7 @@ final class CreateContextRuntime extends Runtime
 
     public function run(BuildOptions $options): bool
     {
-        $this->buildOptions = $this->container->get('compiler.options');
+        $this->buildOptions = $options;
         $this->blueprint = $this->container->get('blueprint');
         $this->blueprintCompiler = $this->container->get('blueprint.compiler');
         $this->prototypeCompiler = $this->container->get('project.prototype.compiler');
