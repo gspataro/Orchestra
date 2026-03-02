@@ -20,7 +20,7 @@ final class DriveStorage implements CacheStorageInterface
             'orchestra',
             $namespace,
             substr($key, 0, 2),
-            $key . '.json'
+            $key . '.cache'
         );
     }
 
