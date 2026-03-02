@@ -3,11 +3,15 @@
 namespace Orchestra\Rehearsal;
 
 use Orchestra\Compiler\BuildContext;
+use Orchestra\Page\PageCollection;
+use Orchestra\Publisher\BuilderCollection;
 
 final class Router
 {
     public function __construct(
-        private readonly BuildContext $context
+        private readonly BuildContext $context,
+        private readonly PageCollection $pages,
+        private readonly BuilderCollection $builder
     ) {
     }
 
@@ -32,12 +36,15 @@ final class Router
             return;
         }
 
-        if (!is_file($file . '.html')) {
-            $file = pathJoin($file, 'index');
+        $page = $this->pages->get('/' . $uri);
+
+        if (!$page) {
+            $page = $this->pages->get('/' . $uri . '/index');
         }
 
-        if (is_file($file . '.html')) {
-            $this->serveFile($file . '.html');
+        if ($page) {
+            $builder = $this->builder->get($page->schema->builder);
+            echo $builder->compile($page);
             return;
         }
 
@@ -72,11 +79,11 @@ final class Router
     {
         http_response_code(404);
 
-        $file = $this->context->paths()->output('404.html');
+        $page = $this->pages->get('/404');
 
-        if (is_file($file)) {
-            header('Content-Type: text/html');
-            readfile($file);
+        if ($page) {
+            $builder = $this->builder->get($page->schema->builder);
+            echo $builder->compile($page);
             return;
         }
 

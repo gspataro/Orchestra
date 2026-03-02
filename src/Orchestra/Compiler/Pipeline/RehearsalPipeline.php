@@ -9,8 +9,8 @@ use Orchestra\Compiler\Runtime\SitemapRuntime;
 use Orchestra\Compiler\Runtime\ContentsRuntime;
 use Orchestra\Compiler\Runtime\CreateContextRuntime;
 use Orchestra\Compiler\Runtime\MediaRuntime;
-use Orchestra\Compiler\Runtime\PagesRuntime;
 use Orchestra\Compiler\Runtime\SchemasRuntime;
+use Orchestra\Compiler\Runtime\ServeRuntime;
 use Orchestra\Compiler\Runtime\ThemeRuntime;
 
 final class RehearsalPipeline extends BasePipeline
@@ -21,7 +21,7 @@ final class RehearsalPipeline extends BasePipeline
         ContentsRuntime::class,
         SchemasRuntime::class,
         AssetsRuntime::class,
-        PagesRuntime::class,
+        ServeRuntime::class,
         MediaRuntime::class,
         SitemapRuntime::class,
         CleanupRuntime::class,

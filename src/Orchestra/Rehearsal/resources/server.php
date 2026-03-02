@@ -27,6 +27,3 @@ $pipelines->get('preview', new RehearsalOutputAdapter())
         cleanupOnly: false,
         baseUrl: 'http://localhost:8080'
     ));
-
-$router = new Router($container->get('compiler.context'));
-$router->handleRequest($_SERVER);
