@@ -19,6 +19,7 @@ final class SchemaSpecification implements SpecificationInterface
                 'type' => 'repeater',
                 'required' => true,
                 'structure' => [
+                    'draft' => ['type' => 'bool', 'default' => false],
                     'contents' => ['type' => 'array', 'default' => []],
                     'template' => ['type' => 'string', 'required' => true],
                     'slug' => ['type' => 'string', 'required' => true],
