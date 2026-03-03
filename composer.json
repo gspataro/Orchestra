@@ -43,6 +43,7 @@
     },
     "scripts": {
         "test": "./vendor/bin/pest",
+        "test:unit": "./vendor/bin/pest --group=unit",
         "phpstan": "./vendor/bin/phpstan"
     }
 }
