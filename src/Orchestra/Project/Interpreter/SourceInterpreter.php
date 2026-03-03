@@ -2,12 +2,9 @@
 
 namespace Orchestra\Project\Interpreter;
 
-use Orchestra\Blueprint\Blueprint;
-use Orchestra\Blueprint\Namespace\ContentNamespace;
 use Orchestra\Blueprint\NamespaceInterface;
 use Orchestra\Project\CompilerContext;
 use Orchestra\Project\Definition\Source\SourceDefinition;
-use Orchestra\Project\Exception\InvalidBlueprintException;
 use Orchestra\Project\InterpreterInterface;
 
 final class SourceInterpreter implements InterpreterInterface
