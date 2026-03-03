@@ -27,9 +27,15 @@ abstract class BaseReader implements ReaderInterface
      */
     protected function contentFromSource(Source $source, mixed $body, array $metadata = []): ContentPayload
     {
+        $fileName = pathinfo($source->path, PATHINFO_FILENAME);
+        $defaultMetadata = [
+            'slug' => $fileName,
+            'draft' => str_starts_with($fileName, '_')
+        ];
+
         return new ContentPayload(
             $body,
-            $metadata,
+            array_merge($defaultMetadata, $metadata),
             $source
         );
     }
