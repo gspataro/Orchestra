@@ -14,6 +14,9 @@ final class SourceSignatureGenerator
 
     public function generateFromSource(Source $source): string
     {
-        return $this->signature->generateFromFile($source->path);
+        return $this->signature->generateFromSeeds(
+            $source->relativePath,
+            $this->signature->generateFromFile($source->path)
+        );
     }
 }
