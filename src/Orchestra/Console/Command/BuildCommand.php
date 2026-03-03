@@ -27,6 +27,10 @@ final class BuildCommand extends BaseCommand
             'type' => 'toggle'
         ];
 
+        $options['ignore-drafts'] = [
+            'type' => 'toggle'
+        ];
+
         $options['base-url'] = [
             'type' => 'optional'
         ];
@@ -48,6 +52,7 @@ final class BuildCommand extends BaseCommand
         $buildOptions = $this->container->get('compiler.options', [
             'skipMedia' => $this->argument('skip-media') !== null,
             'cleanupOnly' => $this->argument('cleanup-only') !== null,
+            'ignoreDrafts' => $this->argument('ignore-drafts') === null,
             'baseUrl' => $this->argument('base-url')
         ]);
 

@@ -70,7 +70,7 @@ final class ContentsRuntime extends Runtime
                     $fromCache = false;
                 }
 
-                if (!$payload->metadata['draft']) {
+                if (!$this->context->options()->ignoreDrafts || !$payload->metadata['draft']) {
                     $this->contents->add($this->contentFactory->fromPayload($payload));
                 }
 

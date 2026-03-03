@@ -51,7 +51,7 @@ final class SchemasRuntime extends Runtime
         $this->output->info('Processing schemas');
 
         foreach ($this->context->prototype()->schemas() as $definition) {
-            if ($definition->draft) {
+            if ($this->context->options()->ignoreDrafts && $definition->draft) {
                 $this->output->print("Skipping draft '{$definition->tag}'");
                 continue;
             }

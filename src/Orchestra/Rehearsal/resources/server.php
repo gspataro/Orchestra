@@ -25,5 +25,6 @@ $pipelines->get('preview', new RehearsalOutputAdapter())
     ->run(new BuildOptions(
         skipMedia: false,
         cleanupOnly: false,
+        ignoreDrafts: false,
         baseUrl: 'http://localhost:8080'
     ));
