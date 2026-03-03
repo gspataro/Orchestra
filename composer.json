@@ -27,6 +27,11 @@
             "src/functions.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Orchestra\\Test\\": "tests"
+        }
+    },
     "require-dev": {
         "pestphp/pest": "^2.36",
         "phpstan/phpstan": "^2.1"
