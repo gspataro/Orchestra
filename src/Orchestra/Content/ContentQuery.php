@@ -132,7 +132,10 @@ final class ContentQuery
 
     public function first(): ?Content
     {
-        return array_first($this->apply()->toArray()) ?? null;
+        $data = $this->apply()->toArray();
+        $first = array_key_first($data);
+
+        return $data[$first] ?? null;
     }
 
     public function count(): int
