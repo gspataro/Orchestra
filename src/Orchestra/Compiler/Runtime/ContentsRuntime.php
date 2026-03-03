@@ -62,16 +62,21 @@ final class ContentsRuntime extends Runtime
             $this->output->print("Working on content group '{$definition->group}'");
 
             foreach ($this->resolveSourcePath($definition) as $source) {
-                if ($payload = $this->cache->load($source)) {
-                    $this->contents->add($this->contentFactory->fromPayload($payload));
-                    continue;
+                $fromCache = true;
+
+                if (!$payload = $this->cache->load($source)) {
+                    $reader = $this->readers->get($source->reader);
+                    $payload = $reader->compile($source);
+                    $fromCache = false;
                 }
 
-                $reader = $this->readers->get($source->reader);
-                $payload = $reader->compile($source);
+                if (!$payload->metadata['draft']) {
+                    $this->contents->add($this->contentFactory->fromPayload($payload));
+                }
 
-                $this->contents->add($this->contentFactory->fromPayload($payload));
-                $this->cache->save($source, $payload);
+                if (!$fromCache) {
+                    $this->cache->save($source, $payload);
+                }
             }
         }
 

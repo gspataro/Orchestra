@@ -14,9 +14,7 @@ final class TextReader extends BaseReader
         return $this->contentFromSource(
             $source,
             $body,
-            [
-                'slug' => pathinfo($source->path, PATHINFO_FILENAME)
-            ]
+            []
         );
     }
 }

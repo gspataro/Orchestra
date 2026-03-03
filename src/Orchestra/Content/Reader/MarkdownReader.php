@@ -16,10 +16,6 @@ final class MarkdownReader extends BaseReader
 
     public function compile(Source $source): ContentPayload
     {
-        $defaultMetadata = [
-            'slug' => pathinfo($source->path, PATHINFO_FILENAME)
-        ];
-
         $body = $this->markdown->convert(
             file_get_contents($source->path)
         );
@@ -28,17 +24,14 @@ final class MarkdownReader extends BaseReader
             return $this->contentFromSource(
                 $source,
                 $body->getContent(),
-                array_merge(
-                    $defaultMetadata,
-                    $body->getFrontMatter()
-                )
+                $body->getFrontMatter()
             );
         }
 
         return $this->contentFromSource(
             $source,
             $body->getContent(),
-            $defaultMetadata
+            []
         );
     }
 }
