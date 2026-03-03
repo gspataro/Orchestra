@@ -11,7 +11,7 @@
     "require": {
         "gspataro/dependencyinjection": "^1.0.0",
         "gspataro/cli": "^2.0.0",
-        "nunomaduro/collision": "^7.9.0",
+        "nunomaduro/collision": "^8.9",
         "twig/twig": "^3.7.1",
         "twig/string-extra": "^3.7.1",
         "twig/intl-extra": "^3.21.0",
@@ -33,7 +33,7 @@
         }
     },
     "require-dev": {
-        "pestphp/pest": "^2.36",
+        "pestphp/pest": "^4.0",
         "phpstan/phpstan": "^2.1"
     },
     "config": {
