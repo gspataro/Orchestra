@@ -20,19 +20,23 @@ final class BuildCommand extends BaseCommand
         $options = [];
 
         $options['skip-media'] = [
-            'type' => 'toggle'
+            'type' => 'toggle',
+            'description' => 'Skip media generation'
         ];
 
         $options['cleanup-only'] = [
-            'type' => 'toggle'
+            'type' => 'toggle',
+            'description' => 'Skip build and do only public dir cleanup'
         ];
 
         $options['ignore-drafts'] = [
-            'type' => 'toggle'
+            'type' => 'toggle',
+            'description' => 'Ignore files marked as drafts'
         ];
 
         $options['base-url'] = [
-            'type' => 'optional'
+            'type' => 'optional',
+            'description' => 'Override website.url'
         ];
 
         return $options;

@@ -17,11 +17,13 @@ final class RehearsalCommand extends BaseCommand
         $options = [];
 
         $options['host'] = [
-            'type' => 'optional'
+            'type' => 'optional',
+            'description' => 'Web server hostname (default: localhost)'
         ];
 
         $options['port'] = [
-            'type' => 'optional'
+            'type' => 'optional',
+            'description' => 'Web server port (default: 8080)'
         ];
 
         return $options;
