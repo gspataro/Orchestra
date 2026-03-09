@@ -25,10 +25,7 @@ final class CompilerComponent extends Component
         });
 
         $container->add('compiler.pipeline.factory', function ($c, $a): object {
-            return new PipelineFactory(
-                $c,
-                $c->get('compiler.context.provider')
-            );
+            return new PipelineFactory($c);
         });
 
         $container->add('compiler.options', function ($c, $a): object {
