@@ -21,7 +21,10 @@ final class CompilerComponent extends Component
         });
 
         $container->add('compiler.paths', function ($c, $a): object {
-            return new Paths($a['root'] ?? getcwd());
+            return new Paths(
+                $a['root'] ?? getcwd(),
+                $a['output'] ?? null
+            );
         });
 
         $container->add('compiler.pipeline.factory', function ($c, $a): object {

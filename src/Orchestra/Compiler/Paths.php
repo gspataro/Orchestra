@@ -13,13 +13,20 @@ class Paths
     private string $cache;
 
     public function __construct(
-        public readonly string $root
+        public readonly string $root,
+        ?string $output = null
     ) {
+        if (!is_null($output)) {
+            $this->output = $output;
+        }
     }
 
     public function setDefaults(): void
     {
-        $this->output = $this->root . '/public';
+        if (!isset($this->output)) {
+            $this->output = $this->root . '/public';
+        }
+
         $this->data = $this->root . '/contents/data';
         $this->media = $this->root  . '/contents/media';
         $this->views = $this->root . '/resources/view';
