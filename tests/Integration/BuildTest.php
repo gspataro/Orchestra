@@ -1,34 +1,38 @@
 <?php
 
 use GSpataro\CLI\Output;
-use Orchestra\Application\Kernel\ApplicationKernel;
 use Orchestra\Compiler\BuildContext;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Compiler\Paths;
 use Orchestra\Compiler\Pipeline\BuildPipeline;
 use Orchestra\Console\ConsoleOutputAdapter;
+use Orchestra\Test\Fixtures\TestKernel;
+use Orchestra\Test\Fixtures\TestOutputAdapter;
 
 $tempDir = sys_get_temp_dir() . '/orchestra-build-' . uniqid();
 
 beforeAll(function () use ($tempDir) {
     mkdir($tempDir);
 
-    $app =  new ApplicationKernel()->boot();
+    $app =  new TestKernel()->boot();
 
     $paths = new Paths(
         dirname(__DIR__) . '/Fixtures/project',
         $tempDir
     );
+    $paths->setDefaults();
 
     $context = new BuildContext($paths);
-    $output = new ConsoleOutputAdapter(new Output());
+    $output = new TestOutputAdapter();
 
     $pipeline = new BuildPipeline(
         $app,
         $context,
         $output
     );
-    $pipeline->run(new BuildOptions());
+    $pipeline->run(new BuildOptions(
+        skipMedia: true
+    ));
 });
 
 it('builds a single page', function () use ($tempDir) {
@@ -44,9 +48,9 @@ it('builds archives', function () use ($tempDir) {
 });
 
 it('builds collections', function () use ($tempDir) {
-    $this->assertFileExists($tempDir . '/categoria/hello-world/index.html');
+    $this->assertFileExists($tempDir . '/categoria/lorem-ipsum/index.html');
 });
 
 afterAll(function () use ($tempDir) {
-    rmdir($tempDir);
+    recursiveDelete($tempDir);
 });

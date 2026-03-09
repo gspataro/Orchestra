@@ -2,7 +2,7 @@
     "website": {
         "name": "Test Project",
         "description": "Orchestra test project",
-        "theme": "pianoforte",
+        "theme": "test",
         "friendly_urls": true
     },
     "contents": {

@@ -8,21 +8,21 @@ final class UrlGenerator
     private string $baseUrl = '';
 
     public function __construct(
-        private readonly BuildContext $context
+        private readonly BuildContextProvider $context
     ) {
     }
 
     public function load(): void
     {
-        $this->friendlyUrls = $this->context->prototype()->configs()->get('website.friendly_urls');
-        $this->baseUrl = $this->context->options()->baseUrl
-            ?? $this->context->prototype()->configs()->get('website.url');
+        $this->friendlyUrls = $this->context->get()->prototype()->configs()->get('website.friendly_urls');
+        $this->baseUrl = $this->context->get()->options()->baseUrl
+            ?? $this->context->get()->prototype()->configs()->get('website.url');
     }
 
     public function to(string $where): string
     {
         $suffix = $this->friendlyUrls ? '' : '.html';
-        $path = $this->context->sitemap()->get($where) ?? $where;
+        $path = $this->context->get()->sitemap()->get($where) ?? $where;
         $separator = null;
 
         if (!str_ends_with($this->baseUrl, '/') && !str_starts_with($path, '/')) {

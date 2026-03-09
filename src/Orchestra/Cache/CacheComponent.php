@@ -17,7 +17,7 @@ final class CacheComponent extends Component
 
         $container->add('cache.storage', function ($c, $a): object {
             return new DriveStorage(
-                $c->get('compiler.context'),
+                $c->get('compiler.context.provider'),
                 $c->get('cache.session')
             );
         });

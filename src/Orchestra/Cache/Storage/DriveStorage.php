@@ -5,18 +5,19 @@ namespace Orchestra\Cache\Storage;
 use Orchestra\Cache\CacheSession;
 use Orchestra\Cache\CacheStorageInterface;
 use Orchestra\Compiler\BuildContext;
+use Orchestra\Compiler\BuildContextProvider;
 
 final class DriveStorage implements CacheStorageInterface
 {
     public function __construct(
-        private readonly BuildContext $context,
+        private readonly BuildContextProvider $context,
         private readonly CacheSession $session
     ) {
     }
 
     private function getPath(string $namespace, string $key): string
     {
-        return $this->context->paths()->cache(
+        return $this->context->get()->paths()->cache(
             'orchestra',
             $namespace,
             substr($key, 0, 2),

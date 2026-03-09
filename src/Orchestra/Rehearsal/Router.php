@@ -2,14 +2,14 @@
 
 namespace Orchestra\Rehearsal;
 
-use Orchestra\Compiler\BuildContext;
+use Orchestra\Compiler\BuildContextProvider;
 use Orchestra\Page\PageCollection;
 use Orchestra\Publisher\BuilderCollection;
 
 final class Router
 {
     public function __construct(
-        private readonly BuildContext $context,
+        private readonly BuildContextProvider $context,
         private readonly PageCollection $pages,
         private readonly BuilderCollection $builder
     ) {
@@ -33,7 +33,7 @@ final class Router
 
     private function serveResource(string $uri): void
     {
-        $file = $this->context->paths()->output($uri);
+        $file = $this->context->get()->paths()->output($uri);
 
         if (is_file($file)) {
             $this->serveFile($file);

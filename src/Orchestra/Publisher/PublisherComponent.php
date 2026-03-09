@@ -17,7 +17,7 @@ final class PublisherComponent extends Component
 
         $container->add('publisher', function ($c, $a): object {
             return new Publisher(
-                $c->get('compiler.context')
+                $c->get('compiler.context.provider')
             );
         });
     }

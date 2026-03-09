@@ -19,12 +19,13 @@ require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
 $app = new RehearsalKernel();
 $container = $app->boot();
 
-/** @var \Orchestra\Compiler\BuildContext */
-$context = $container->get('compiler.context');
+/** @var \Orchestra\Compiler\Factory\BuildContextFactory */
+$contextFactory = $container->get('compiler.context.factory');
 
 /** @var \Orchestra\Compiler\Factory\PipelineFactory */
 $pipelineFactory = $container->get('compiler.pipeline.factory');
 
+$context = $contextFactory->make();
 $pipeline = $pipelineFactory->make(
     RehearsalPipeline::class,
     $context,
