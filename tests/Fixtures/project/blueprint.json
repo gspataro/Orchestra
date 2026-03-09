@@ -1,0 +1,65 @@
+{
+    "website": {
+        "name": "Test Project",
+        "description": "Orchestra test project",
+        "theme": "pianoforte",
+        "friendly_urls": true
+    },
+    "contents": {
+        "articles": "markdown:articles/*.md",
+        "categories": "json:categories/*.json"
+    },
+    "schemas": {
+        "index": {
+            "template": "page",
+            "slug": "/index",
+            "generate": "once"
+        },
+        "article": {
+            "contents": [
+                "articles"
+            ],
+            "template": "page",
+            "slug": "/articolo",
+            "generate": "loop",
+            "source": "articles"
+        },
+        "blog": {
+            "contents": [
+                {
+                    "group": "articles",
+                    "order": {
+                        "by": "metadata.published_at",
+                        "direction": "asc"
+                    }
+                }
+            ],
+            "template": "page",
+            "slug": "/blog",
+            "generate": "archive",
+            "source": "articles",
+            "options": {
+                "per_page": 12
+            }
+        },
+        "categories": {
+            "contents": [
+                "categories",
+                "articles"
+            ],
+            "template": "page",
+            "slug": "/categoria",
+            "generate": "collection",
+            "source": "categories",
+            "options": {
+                "per_page": "12",
+                "relationship": {
+                    "with": "articles",
+                    "field": "metadata.categories",
+                    "operator": "containsAny",
+                    "value": "metadata.slug"
+                }
+            }
+        }
+    }
+}
