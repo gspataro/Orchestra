@@ -2,7 +2,9 @@
 
 use GSpataro\CLI\Output;
 use Orchestra\Application\Kernel\ApplicationKernel;
+use Orchestra\Compiler\BuildContext;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Compiler\Paths;
 use Orchestra\Compiler\Pipeline\BuildPipeline;
 use Orchestra\Console\ConsoleOutputAdapter;
 
@@ -13,14 +15,12 @@ beforeAll(function () use ($tempDir) {
 
     $app =  new ApplicationKernel()->boot();
 
-    $paths = $app->get('compiler.paths', [
-        'root' => dirname(__DIR__) . '/Fixtures/project/',
-        'output' => $tempDir
-    ]);
-    $context = $app->get('compiler.context', [
-        'paths' => $paths
-    ]);
+    $paths = new Paths(
+        dirname(__DIR__) . '/Fixtures/project',
+        $tempDir
+    );
 
+    $context = new BuildContext($paths);
     $output = new ConsoleOutputAdapter(new Output());
 
     $pipeline = new BuildPipeline(
