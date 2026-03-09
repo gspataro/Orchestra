@@ -2,15 +2,12 @@
 
 namespace Orchestra\Application\Kernel;
 
-use GSpataro\DependencyInjection\Container;
 use Orchestra\Console\ConsoleComponent;
 use Orchestra\Publisher\PublisherComponent;
 use Orchestra\Content\ContentComponent;
 use Orchestra\Page\PagesComponent;
 use Orchestra\Project\ProjectComponent;
 use Orchestra\Application\Component;
-use Orchestra\Application\Exception\InvalidComponentException;
-use Orchestra\Application\Kernel;
 use Orchestra\Blueprint\BlueprintComponent;
 use Orchestra\Cache\CacheComponent;
 use Orchestra\Infrastructure\ExceptionHandlerComponent;
@@ -21,12 +18,10 @@ use Orchestra\Compiler\CompilerComponent;
 use Orchestra\Theme\ThemeComponent;
 use Orchestra\View\ViewComponent;
 
-final class ApplicationKernel extends Kernel
+final class ApplicationKernel extends BaseKernel
 {
-    private Container $container;
-
     /** @var array<class-string<Component>|Component> */
-    private array $components = [
+    protected array $components = [
         ExceptionHandlerComponent::class,
         CompilerComponent::class,
         BlueprintComponent::class,
@@ -42,38 +37,4 @@ final class ApplicationKernel extends Kernel
         MediaComponent::class,
         ConsoleComponent::class
     ];
-
-    private function loadComponents(): void
-    {
-        foreach ($this->components as &$component) {
-            if (get_parent_class($component) !== Component::class) {
-                throw new InvalidComponentException(
-                    "Component '{$component}' must extend the Component::class"
-                );
-            }
-
-            if (!is_object($component)) {
-                $component = new $component();
-            }
-
-            $component->register($this->container);
-        }
-    }
-
-    private function bootComponents(): void
-    {
-        foreach ($this->components as $component) {
-            $component->boot($this->container);
-        }
-    }
-
-    public function boot(): Container
-    {
-        $this->container = new Container();
-
-        $this->loadComponents();
-        $this->bootComponents();
-
-        return $this->container;
-    }
 }

@@ -4,7 +4,7 @@ namespace Orchestra\Application;
 
 use GSpataro\DependencyInjection\Container;
 
-abstract class Kernel
+interface KernelInterface
 {
-    abstract public function boot(): Container;
+    public function boot(): Container;
 }
