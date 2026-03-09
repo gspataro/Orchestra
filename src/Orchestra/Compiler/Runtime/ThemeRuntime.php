@@ -4,18 +4,25 @@ namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Theme\ThemeLoader;
+use Twig\Environment;
 use Twig\Loader\ChainLoader;
 use Twig\Loader\FilesystemLoader;
 
 final class ThemeRuntime extends Runtime
 {
+    private Environment $twig;
     private ThemeLoader $themeLoader;
     private ChainLoader $twigLoader;
 
     public function run(BuildOptions $options): bool
     {
+        $this->twig = $this->container->get('twig');
         $this->themeLoader = $this->container->get('theme.loader');
         $this->twigLoader = $this->container->get('twig.loader');
+
+        $this->twig->setCache(
+            $this->context->paths()->cache('twig')
+        );
 
         $theme = $this->themeLoader->load();
 

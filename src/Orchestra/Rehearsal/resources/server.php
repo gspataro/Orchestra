@@ -10,6 +10,7 @@
 
 use Orchestra\Application\Kernel\RehearsalKernel;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Compiler\Pipeline\RehearsalPipeline;
 use Orchestra\Rehearsal\RehearsalOutputAdapter;
 use Orchestra\Rehearsal\Router;
 
@@ -18,13 +19,21 @@ require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
 $app = new RehearsalKernel();
 $container = $app->boot();
 
-/** @var \Orchestra\Compiler\PipelineCollection */
-$pipelines = $container->get('compiler.pipeline');
+/** @var \Orchestra\Compiler\BuildContext */
+$context = $container->get('compiler.context');
 
-$pipelines->get('preview', new RehearsalOutputAdapter())
-    ->run(new BuildOptions(
-        skipMedia: false,
-        cleanupOnly: false,
-        ignoreDrafts: false,
-        baseUrl: 'http://localhost:8080'
-    ));
+/** @var \Orchestra\Compiler\Factory\PipelineFactory */
+$pipelineFactory = $container->get('compiler.pipeline.factory');
+
+$pipeline = $pipelineFactory->make(
+    RehearsalPipeline::class,
+    $context,
+    new RehearsalOutputAdapter()
+);
+
+$pipeline->run(new BuildOptions(
+    skipMedia: false,
+    cleanupOnly: false,
+    ignoreDrafts: false,
+    baseUrl: 'http://localhost:8080'
+));

@@ -3,11 +3,12 @@
 namespace Orchestra\Media;
 
 use Orchestra\Compiler\BuildContext;
+use Orchestra\Compiler\BuildContextProvider;
 
 final class MediaResolver
 {
     public function __construct(
-        private readonly BuildContext $context,
+        private readonly BuildContextProvider $context,
         private readonly MediaRepository $repository,
         private readonly MediaTransformer $transformer,
         private readonly PolicyCollection $policies
@@ -17,13 +18,13 @@ final class MediaResolver
     public function request(string $relativePath, ?string $variant = null): ?Media
     {
         if (!$this->repository->has($relativePath)) {
-            $file = $this->context->paths()->media($relativePath);
+            $file = $this->context->get()->paths()->media($relativePath);
 
             if (!is_file($file)) {
                 return null;
             }
 
-            $publicPath = $this->context->paths()->output('media', $relativePath);
+            $publicPath = $this->context->get()->paths()->output('media', $relativePath);
             $mimeType = mime_content_type($file);
 
             $this->repository->add(new Media(
@@ -43,7 +44,7 @@ final class MediaResolver
         $policy = $this->policies->getFor($media->mimeType);
 
         if ($policy) {
-            $policy->apply($media, $this->transformer, $this->context);
+            $policy->apply($media, $this->transformer, $this->context->get());
         }
 
         return $media;

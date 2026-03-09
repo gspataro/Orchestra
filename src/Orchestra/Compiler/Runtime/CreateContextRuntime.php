@@ -7,12 +7,14 @@ use Orchestra\Compiler\BuildOptions;
 use Orchestra\Blueprint\Blueprint;
 use Orchestra\Blueprint\BlueprintCompiler;
 use Orchestra\Blueprint\Exception\InvalidBlueprintException;
+use Orchestra\Compiler\BuildContextProvider;
 use Orchestra\Compiler\UrlGenerator;
 use Orchestra\Project\PrototypeCompiler;
 use Orchestra\Project\Sitemap;
 
 final class CreateContextRuntime extends Runtime
 {
+    private BuildContextProvider $contextProvider;
     private Blueprint $blueprint;
     private BlueprintCompiler $blueprintCompiler;
     private PrototypeCompiler $prototypeCompiler;
@@ -59,6 +61,7 @@ final class CreateContextRuntime extends Runtime
             $this->sitemap,
             $this->buildOptions
         );
+        $this->contextProvider->set($this->context);
 
         $this->urlGenerator->load();
 
@@ -68,6 +71,7 @@ final class CreateContextRuntime extends Runtime
     public function run(BuildOptions $options): bool
     {
         $this->buildOptions = $options;
+        $this->contextProvider = $this->container->get('compiler.context.provider');
         $this->blueprint = $this->container->get('blueprint');
         $this->blueprintCompiler = $this->container->get('blueprint.compiler');
         $this->prototypeCompiler = $this->container->get('project.prototype.compiler');

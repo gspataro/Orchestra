@@ -3,13 +3,14 @@
 namespace Orchestra\Media;
 
 use Orchestra\Compiler\BuildContext;
+use Orchestra\Compiler\BuildContextProvider;
 use Orchestra\Media\Factory\MediaTransformationFactory;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 
 final class MediaTransformer
 {
     public function __construct(
-        private readonly BuildContext $context,
+        private readonly BuildContextProvider $context,
         private readonly MediaTransformationFactory $transformationFactory
     ) {
     }
@@ -26,7 +27,7 @@ final class MediaTransformer
 
     public function transform(Media $media, string $variant): void
     {
-        $mediaVariant = $this->context->prototype()->mediaVariants()->get(strtok($media->mimeType, '/'), $variant);
+        $mediaVariant = $this->context->get()->prototype()->mediaVariants()->get(strtok($media->mimeType, '/'), $variant);
 
         if (!$mediaVariant) {
             return;
@@ -35,7 +36,7 @@ final class MediaTransformer
         $variantRelativePath = $this->variantRelativePath($media, $mediaVariant);
         $transformation = $this->transformationFactory->fromDefinition(
             $mediaVariant,
-            $this->context->paths()->output('media', $variantRelativePath),
+            $this->context->get()->paths()->output('media', $variantRelativePath),
             $variantRelativePath
         );
 

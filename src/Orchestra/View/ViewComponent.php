@@ -41,18 +41,11 @@ final class ViewComponent extends Component
         /** @var Environment */
         $twig = $container->get('twig');
 
-        /** @var \Orchestra\Compiler\BuildContext */
-        $context = $container->get('compiler.context');
-
-        $twig->setCache(
-            $context->paths()->cache('twig')
-        );
-
         $twig->addExtension(new StringExtension());
         $twig->addExtension(new IntlExtension());
         $twig->addExtension(new StringLoaderExtension());
         $twig->addExtension(new ConfigExtension(
-            $container->get('compiler.context')
+            $container->get('compiler.context.provider')
         ));
         $twig->addExtension(new UrlExtension(
             $container->get('compiler.url')

@@ -3,6 +3,7 @@
 namespace Orchestra\Console\Command;
 
 use GSpataro\CLI\Helper\Stopwatch;
+use Orchestra\Compiler\Pipeline\BuildPipeline;
 use Orchestra\Console\ConsoleOutputAdapter;
 
 final class BuildCommand extends BaseCommand
@@ -50,7 +51,19 @@ final class BuildCommand extends BaseCommand
         $this->stopwatch->start();
 
         /** @var \Orchestra\Compiler\PipelineCollection */
-        $pipeline = $this->container->get('compiler.pipeline');
+        //$pipeline = $this->container->get('compiler.pipeline');
+
+        /** @var \Orchestra\Compiler\Factory\PipelineFactory */
+        $pipelineFactory = $this->container->get('compiler.pipeline.factory');
+
+        /** @var \Orchestra\Compiler\BuildContext */
+        $context = $this->container->get('compiler.context');
+
+        $pipeline = $pipelineFactory->make(
+            BuildPipeline::class,
+            $context,
+            new ConsoleOutputAdapter($this->output)
+        );
 
         /** @var \Orchestra\Compiler\BuildOptions */
         $buildOptions = $this->container->get('compiler.options', [
@@ -60,10 +73,7 @@ final class BuildCommand extends BaseCommand
             'baseUrl' => $this->argument('base-url')
         ]);
 
-        if (
-            !$pipeline->get('build', new ConsoleOutputAdapter($this->output))
-                ->run($buildOptions)
-        ) {
+        if (!$pipeline->run($buildOptions)) {
             exit(0);
         }
 
