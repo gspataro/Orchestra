@@ -7,6 +7,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 use Countable;
+use Orchestra\Content\Exception\ContentCollectionException;
 use OutOfBoundsException;
 
 /**
@@ -66,12 +67,12 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        return;
+        throw new ContentCollectionException("Cannot set offset '{$offset}' on ContentCollection.");
     }
 
     public function offsetUnset(mixed $offset): void
     {
-        return;
+        throw new ContentCollectionException("Cannot unset offset '{$offset}' on ContentCollection.");
     }
 
     public function query(): ContentQuery
