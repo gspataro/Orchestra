@@ -14,6 +14,11 @@ final class ImageElement extends ViewElement
         $variant = $data['variant'] ?? null;
 
         $image = $this->media->request($relativePath, $variant);
+
+        if (is_null($image)) {
+            return [];
+        }
+
         $attributes = [];
 
         $attributes['src'] = "{$this->url->to('media' . $image->getTransformation($variant)->relativePath)}";
