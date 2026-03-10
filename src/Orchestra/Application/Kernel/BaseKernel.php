@@ -11,29 +11,29 @@ abstract class BaseKernel implements KernelInterface
 {
     private Container $container;
 
-    /** @var array<class-string<Component>|Component> */
+    /** @var class-string<Component>[] */
     protected array $components;
+
+    /** @var Component[] */
+    private array $bootedComponents = [];
 
     private function loadComponents(): void
     {
-        foreach ($this->components as &$component) {
+        foreach ($this->components as $component) {
             if (!is_a($component, Component::class, true)) {
                 throw new InvalidComponentException(
                     "Component '{$component}' must extend the Component::class"
                 );
             }
 
-            if (!is_object($component)) {
-                $component = new $component();
-            }
-
-            $component->register($this->container);
+            $this->bootedComponents[$component] = new $component();
+            $this->bootedComponents[$component]->register($this->container);
         }
     }
 
     private function bootComponents(): void
     {
-        foreach ($this->components as $component) {
+        foreach ($this->bootedComponents as $component) {
             $component->boot($this->container);
         }
     }

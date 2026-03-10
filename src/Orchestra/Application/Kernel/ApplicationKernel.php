@@ -20,7 +20,6 @@ use Orchestra\View\ViewComponent;
 
 final class ApplicationKernel extends BaseKernel
 {
-    /** @var array<class-string<Component>|Component> */
     protected array $components = [
         ExceptionHandlerComponent::class,
         CompilerComponent::class,
