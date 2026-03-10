@@ -21,7 +21,9 @@ final class ImageElement extends ViewElement
 
         $attributes = [];
 
-        $attributes['src'] = "{$this->url->to('media' . $image->getTransformation($variant)->relativePath)}";
+        $mediaVariant = $image->getTransformation($variant) ?? $image;
+
+        $attributes['src'] = "{$this->url->to('media' . $mediaVariant->relativePath)}";
         $attributes['srcset'] = [];
 
         foreach ($image->getTransformations() as $transformation) {
@@ -32,8 +34,12 @@ final class ImageElement extends ViewElement
             }
         }
 
-        $width = $image->getTransformation($variant)->variant->option('width');
-        $attributes['sizes'] = "(max-width: {$width}px) 100vw, {$width}px";
+        $width = $mediaVariant?->variant->option('width') ?? null;
+
+        if (!is_null($width)) {
+            $attributes['sizes'] = "(max-width: {$width}px) 100vw, {$width}px";
+        }
+
         $attributes['altText'] = $data['altText'] ?? '';
         $attributes['title'] = $data['title'] ?? '';
 
