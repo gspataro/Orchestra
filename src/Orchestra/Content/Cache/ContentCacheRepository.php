@@ -15,9 +15,9 @@ final class ContentCacheRepository
     ) {
     }
 
-    public function load(Source $source): ?ContentPayload
+    public function load(Source $source, string $context = ''): ?ContentPayload
     {
-        $signature = $this->signature->generateFromSource($source);
+        $signature = $this->signature->generateFromSource($source, $context);
 
         if (!$this->storage->has('content', $signature)) {
             return null;
@@ -34,14 +34,9 @@ final class ContentCacheRepository
         );
     }
 
-    /**
-     * @param Source $source
-     * @param ContentPayload $payload
-     * @return void
-     */
-    public function save(Source $source, ContentPayload $payload): void
+    public function save(Source $source, ContentPayload $payload, string $context = ''): void
     {
-        $signature = $this->signature->generateFromSource($source);
+        $signature = $this->signature->generateFromSource($source, $context);
 
         $this->storage->save(
             'content',
