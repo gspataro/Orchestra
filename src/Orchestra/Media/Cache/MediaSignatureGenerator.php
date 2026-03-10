@@ -5,7 +5,7 @@ namespace Orchestra\Media\Cache;
 use Orchestra\Cache\SignatureGeneratorInterface;
 use Orchestra\Media\Media;
 
-class MediaSignatureGenerator
+final class MediaSignatureGenerator
 {
     public function __construct(
         private readonly SignatureGeneratorInterface $signature

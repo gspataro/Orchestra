@@ -4,7 +4,7 @@ namespace Orchestra\Media;
 
 use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 
-readonly class MediaTransformation
+final readonly class MediaTransformation
 {
     public function __construct(
         public string $name,
