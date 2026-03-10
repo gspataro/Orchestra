@@ -75,7 +75,7 @@ final class BuildCommand extends BaseCommand
         ]);
 
         if (!$pipeline->run($buildOptions)) {
-            exit(0);
+            exit(1);
         }
 
         $this->output->print('{bold}{fg_green}Build completed in ' . $this->stopwatch->stop() . ' seconds!');
