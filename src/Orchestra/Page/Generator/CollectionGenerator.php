@@ -9,21 +9,14 @@ final class CollectionGenerator extends BaseGenerator
     public function generate(Schema $schema): iterable
     {
         $contents = $schema->contents;
-        $relationshipOptions = $schema->options['relationship'];
+        $fillWith = $schema->options['fillWith'];
 
         /** @var \Orchestra\Content\ContentCollection */
         $source = $contents[$schema->source] ?? [];
 
-        /** @var \Orchestra\Content\ContentCollection */
-        $relationship = $contents[$relationshipOptions['with']] ?? [];
-
         foreach ($source as $collection) {
-            $relationshipContents = $relationship->query()
-                ->where(
-                    $relationshipOptions['field'],
-                    $relationshipOptions['operator'],
-                    [$collection->get($relationshipOptions['value'])]
-                );
+            $relationshipContents = $collection->get("metadata.{$fillWith}")->query();
+
             $perPage = $schema->options['per_page'] ?? 12;
             $totalPages = ceil($relationshipContents->count() / $perPage);
             $pages = $relationshipContents->paginate($perPage);
