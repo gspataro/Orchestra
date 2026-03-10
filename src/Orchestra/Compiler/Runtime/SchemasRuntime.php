@@ -57,7 +57,7 @@ final class SchemasRuntime extends Runtime
                         ->get();
                 }
 
-                $contentsWithRelationships[] = $content->withRelationships($related);
+                $contentsWithRelationships[$content->id] = $content->withRelationships($related);
             }
 
             $output[$queryDefinition->group] = !empty($contentsWithRelationships)
