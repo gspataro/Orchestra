@@ -36,7 +36,7 @@ final class SchemasRuntime extends Runtime
         foreach ($contentsReferences as $queryDefinition) {
             $contents = $this->contents->query($queryDefinition)->get();
 
-            if (empty($queryDefinition->relationships) || empty($contents)) {
+            if (empty($queryDefinition->relationships)) {
                 $output[$queryDefinition->group] = $contents;
                 continue;
             }
@@ -44,10 +44,10 @@ final class SchemasRuntime extends Runtime
             $contentsWithRelationships = [];
 
             foreach ($contents as $content) {
-                $relationships = [];
+                $related = [];
 
                 foreach ($queryDefinition->relationships as $relationship) {
-                    $relationships[$relationship['with']] = $this->contents->group($relationship['with'])
+                    $related[$relationship['with']] = $this->contents->group($relationship['with'])
                         ->query()
                         ->where(
                             $relationship['field'],
@@ -57,9 +57,7 @@ final class SchemasRuntime extends Runtime
                         ->get();
                 }
 
-                $contentsWithRelationships[] = !empty($relationships)
-                    ? $content->withRelationships($relationships)
-                    : $content;
+                $contentsWithRelationships[] = $content->withRelationships($related);
             }
 
             $output[$queryDefinition->group] = !empty($contentsWithRelationships)
