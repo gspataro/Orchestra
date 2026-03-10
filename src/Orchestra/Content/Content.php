@@ -35,10 +35,10 @@ final class Content extends DotNavigator
     }
 
     /**
-     * @param ContentCollection[]
+     * @param ContentCollection[] $related
      * @return self
      */
-    public function withRelationships(array $relationships): self
+    public function withRelationships(array $related): self
     {
         return new self(
             $this->id,
@@ -46,7 +46,7 @@ final class Content extends DotNavigator
             $this->group,
             $this->path,
             $this->body,
-            array_merge($this->metadata, $relationships)
+            array_merge($this->metadata, $related)
         );
     }
 }
