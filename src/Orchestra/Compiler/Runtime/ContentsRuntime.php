@@ -31,7 +31,7 @@ final class ContentsRuntime extends Runtime
             $fullPath = $this->context->paths()->data($path);
 
             if (is_file($fullPath)) {
-                yield $this->sourceFactory->fromDefinition($definition, $fullPath, $path);
+                yield $this->sourceFactory->fromDefinition($definition, $fullPath, $path, count($paths) > 1);
                 continue;
             }
 
@@ -41,7 +41,7 @@ final class ContentsRuntime extends Runtime
                 if ($matches !== false) {
                     foreach ($matches as $match) {
                         $relativePath = substr($match, strlen($this->context->paths()->data()));
-                        yield $this->sourceFactory->fromDefinition($definition, $match, $relativePath);
+                        yield $this->sourceFactory->fromDefinition($definition, $match, $relativePath, true);
                     }
                 }
             }
