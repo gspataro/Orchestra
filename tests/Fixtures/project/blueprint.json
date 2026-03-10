@@ -44,8 +44,17 @@
         },
         "categories": {
             "contents": [
-                "categories",
-                "articles"
+                {
+                    "group": "categories",
+                    "relationships": [
+                        {
+                            "with": "articles",
+                            "field": "metadata.categories",
+                            "operator": "containsAny",
+                            "value": "metadata.slug"
+                        }
+                    ]
+                }
             ],
             "template": "page",
             "slug": "/categoria",
@@ -53,12 +62,7 @@
             "source": "categories",
             "options": {
                 "per_page": "12",
-                "relationship": {
-                    "with": "articles",
-                    "field": "metadata.categories",
-                    "operator": "containsAny",
-                    "value": "metadata.slug"
-                }
+                "fillWith": "articles"
             }
         }
     }
