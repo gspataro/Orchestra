@@ -2,6 +2,8 @@
 
 namespace Orchestra\Compiler;
 
+use Orchestra\Compiler\Exception\BuildContextProviderException;
+
 final class BuildContextProvider
 {
     private BuildContext $context;
@@ -9,7 +11,9 @@ final class BuildContextProvider
     public function set(BuildContext $context): void
     {
         if (isset($this->context)) {
-            return;
+            throw new BuildContextProviderException(
+                "BuildContext already set."
+            );
         }
 
         $this->context = $context;
@@ -17,6 +21,12 @@ final class BuildContextProvider
 
     public function get(): BuildContext
     {
+        if (!isset($this->context)) {
+            throw new BuildContextProviderException(
+                "BuildContext not set yet."
+            );
+        }
+
         return $this->context;
     }
 }
