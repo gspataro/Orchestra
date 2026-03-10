@@ -45,7 +45,7 @@ final class ContentQuery
         return $this;
     }
 
-    private function normalizeForComparison(mixed $a, mixed $b): mixed
+    private function normalizeForComparison(mixed $a, string $operator, mixed $b): mixed
     {
         if (is_int($a) && is_string($b)) {
             $time = strtotime($b);
@@ -55,12 +55,22 @@ final class ContentQuery
             }
         }
 
-        return $b;
+        if (in_array($operator, ['containsAny', 'containsAll'])) {
+            if (!is_array($a)) {
+                $a = [$a];
+            }
+
+            if (!is_array($b)) {
+                $b = [$b];
+            }
+        }
+
+        return [$a, $b];
     }
 
     private function compare(mixed $a, string $operator, mixed $b): bool
     {
-        $b = $this->normalizeForComparison($a, $b);
+        [$a, $b] = $this->normalizeForComparison($a, $operator, $b);
 
         return match ($operator) {
             '=', '==' => $a == $b,
@@ -71,7 +81,7 @@ final class ContentQuery
             '<=' => $a <= $b,
             'in' => in_array($a, (array) $b, true),
             'contains' => is_string($a) && str_contains($a, (string) $b),
-            'containsAny' => is_array($a) && is_array((array) $b) && count(array_intersect($a, (array) $b)) > 0,
+            'containsAny' => is_array($a) && is_array($b) && count(array_intersect($a, $b)) > 0,
             'containsAll' => is_array($a) && is_array($b) && empty(array_diff($a, $b)) === true,
             default => false
         };
