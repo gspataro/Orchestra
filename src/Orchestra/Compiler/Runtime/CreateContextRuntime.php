@@ -51,7 +51,7 @@ final class CreateContextRuntime extends Runtime
             $namespaces = $this->blueprintCompiler->compile($this->blueprint);
         } catch (InvalidBlueprintException $e) {
             $this->output->error($e->getMessage());
-            exit(1);
+            return false;
         }
 
         $prototype = $this->prototypeCompiler->compile($namespaces);
