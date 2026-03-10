@@ -9,15 +9,18 @@ use Orchestra\Console\ConsoleOutputAdapter;
 use Orchestra\Test\Fixtures\TestKernel;
 use Orchestra\Test\Fixtures\TestOutputAdapter;
 
-$tempDir = sys_get_temp_dir() . '/orchestra-build-' . uniqid();
+$tempDir = sys_get_temp_dir() . '/orchestra-' . uniqid();
+$outputDir = $tempDir . '/public';
+$cacheDir = $tempDir . '/cache';
 
-beforeAll(function () use ($tempDir) {
+beforeAll(function () use ($tempDir, $outputDir, $cacheDir) {
     mkdir($tempDir);
 
     $app =  new TestKernel()->boot();
 
     $paths = Paths::builder(dirname(__DIR__) . '/Fixtures/project')
-        ->output($tempDir)
+        ->output($outputDir)
+        ->cache($cacheDir)
         ->build();
 
     $context = new BuildContext($paths);
@@ -33,20 +36,20 @@ beforeAll(function () use ($tempDir) {
     ));
 });
 
-it('builds a single page', function () use ($tempDir) {
-    $this->assertFileExists($tempDir . '/index.html');
+it('builds a single page', function () use ($outputDir) {
+    $this->assertFileExists($outputDir . '/index.html');
 });
 
-it('builds loop pages', function () use ($tempDir) {
-    $this->assertFileExists($tempDir . '/articolo/hello-world.html');
+it('builds loop pages', function () use ($outputDir) {
+    $this->assertFileExists($outputDir . '/articolo/hello-world.html');
 });
 
-it('builds archives', function () use ($tempDir) {
-    $this->assertFileExists($tempDir . '/blog/index.html');
+it('builds archives', function () use ($outputDir) {
+    $this->assertFileExists($outputDir . '/blog/index.html');
 });
 
-it('builds collections', function () use ($tempDir) {
-    $this->assertFileExists($tempDir . '/categoria/lorem-ipsum/index.html');
+it('builds collections', function () use ($outputDir) {
+    $this->assertFileExists($outputDir . '/categoria/lorem-ipsum/index.html');
 });
 
 afterAll(function () use ($tempDir) {
