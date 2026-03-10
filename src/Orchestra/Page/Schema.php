@@ -4,7 +4,7 @@ namespace Orchestra\Page;
 
 use Orchestra\Content\ContentCollection;
 
-final class Schema
+final readonly class Schema
 {
     /**
      * @param string $tag
