@@ -14,7 +14,11 @@ final class ContentFactory
 
     private function generateTag(ContentPayload $payload): string
     {
-        return $payload->source->group . '.' . pathinfo($payload->source->relativePath, PATHINFO_FILENAME);
+        if ($payload->source->many) {
+            return $payload->source->group . '.' . pathinfo($payload->source->relativePath, PATHINFO_FILENAME);
+        } else {
+            return $payload->source->group;
+        }
     }
 
     public function fromPayload(ContentPayload $payload): Content
