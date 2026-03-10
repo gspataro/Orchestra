@@ -9,13 +9,8 @@ use Orchestra\View\ElementCollection;
 
 class MediaExtension implements ExtensionInterface
 {
-    public function __construct(
-        private readonly ElementCollection $elements
-    ) {
-    }
-
     public function register(EnvironmentBuilderInterface $environment): void
     {
-        $environment->addRenderer(Image::class, new ImageRenderer($this->elements), 1);
+        $environment->addRenderer(Image::class, new ImageRenderer(), 1);
     }
 }

@@ -34,6 +34,12 @@ final class ViewComponent extends Component
         $container->add('view.elements', function ($c, $a): object {
             return new ElementCollection();
         });
+
+        $container->add('view.elements.renderer', function ($c, $a): object {
+            return new ElementsRenderer(
+                $c->get('view.elements')
+            );
+        });
     }
 
     public function boot(Container $container): void
@@ -59,7 +65,8 @@ final class ViewComponent extends Component
             $container->get('compiler.url')
         ));
         $twig->addExtension(new ElementsExtension(
-            $container->get('view.elements')
+            $container->get('view.elements'),
+            $container->get('view.elements.renderer')
         ));
         $twig->addExtension(new ThemeExtension(
             $container->get('theme.assets'),

@@ -3,13 +3,16 @@
 namespace Orchestra\View\Twig;
 
 use Orchestra\View\ElementCollection;
+use Orchestra\View\ElementsRenderer;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 final class ElementsExtension extends AbstractExtension
 {
     public function __construct(
-        private readonly ElementCollection $elements
+        private readonly ElementCollection $elements,
+        private readonly ElementsRenderer $renderer
     ) {
     }
 
@@ -29,6 +32,10 @@ final class ElementsExtension extends AbstractExtension
         return $element->render($data);
     }
 
+    public function render(string $html): string
+    {
+        return $this->renderer->render($html);
+    }
 
     public function getFunctions()
     {
@@ -39,5 +46,16 @@ final class ElementsExtension extends AbstractExtension
         ]);
 
         return $functions;
+    }
+
+    public function getFilters()
+    {
+        $filters = [];
+
+        $filters[] = new TwigFilter('orchestra_content', [$this, 'render'], [
+            'is_safe' => ['html']
+        ]);
+
+        return $filters;
     }
 }

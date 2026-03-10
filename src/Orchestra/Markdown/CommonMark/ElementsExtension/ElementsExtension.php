@@ -10,15 +10,10 @@ use Orchestra\View\ElementCollection;
 
 class ElementsExtension implements ExtensionInterface
 {
-    public function __construct(
-        private readonly ElementCollection $elements
-    ) {
-    }
-
     public function register(EnvironmentBuilderInterface $environment): void
     {
         $environment
             ->addBlockStartParser(new ElementBlockStartParser())
-            ->addRenderer(ElementBlock::class, new ElementRenderer($this->elements));
+            ->addRenderer(ElementBlock::class, new ElementRenderer());
     }
 }

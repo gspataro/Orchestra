@@ -9,16 +9,12 @@ use League\CommonMark\Node\NodeIterator;
 use League\CommonMark\Node\StringContainerInterface;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
+use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
 use Orchestra\View\ElementCollection;
 
 final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
-    public function __construct(
-        private readonly ElementCollection $elements
-    ) {
-    }
-
     /**
      * @param Image $node
      * @param ChildNodeRendererInterface $childRenderer
@@ -31,12 +27,17 @@ final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInter
         $relativePath = $urlParts['path'] ?? '';
         $variant = $query['variant'] ?? null;
 
-        return $this->elements->get('image')->render([
-            'relativePath' => $relativePath,
-            'variant' => $variant,
-            'altText' => $this->getAltText($node),
-            'title' => $node->getTitle()
-        ]);
+        return new HtmlElement(
+            tagName: 'orchestra-element',
+            attributes: [
+                'name' => 'image',
+                'relativePath' => $relativePath,
+                'variant' => $variant,
+                'altText' => $this->getAltText($node),
+                'title' => $node->getTitle()
+            ],
+            selfClosing: true
+        );
     }
 
     public function getXmlTagName(Node $node): string
