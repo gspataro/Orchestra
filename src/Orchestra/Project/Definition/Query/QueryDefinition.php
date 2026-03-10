@@ -11,7 +11,7 @@ final readonly class QueryDefinition
      * @param integer|null $limit
      * @param string|null $orderField
      * @param int $sortDirection
-     * @param array $relationships
+     * @param array<string,mixed> $relationships
      */
     public function __construct(
         public string $group,
