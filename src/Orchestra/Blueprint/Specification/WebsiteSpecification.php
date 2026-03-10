@@ -19,7 +19,7 @@ final class WebsiteSpecification implements SpecificationInterface
             'description' => ['type' => 'string', 'default' => 'PHP static website builder'],
             'theme' => ['type' => 'string', 'default' => 'pianoforte'],
             'url' => ['type' => 'string', 'default' => ''],
-            'friendly_urls' => ['type' => 'boolean', 'default' => false]
+            'friendly_urls' => ['type' => 'bool', 'default' => false]
         ];
     }
 
