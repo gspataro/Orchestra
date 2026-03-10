@@ -22,7 +22,7 @@ final class Content extends DotNavigator
         public readonly string $group,
         public readonly string $path,
         public readonly mixed $body,
-        public readonly array $metadata = []
+        public readonly array $metadata = [],
     ) {
         $this->fill([
             'id' => $this->id,
@@ -32,5 +32,21 @@ final class Content extends DotNavigator
             'body' => $this->body,
             'metadata' => $this->metadata
         ]);
+    }
+
+    /**
+     * @param ContentCollection[]
+     * @return self
+     */
+    public function withRelationships(array $relationships): self
+    {
+        return new self(
+            $this->id,
+            $this->tag,
+            $this->group,
+            $this->path,
+            $this->body,
+            array_merge($this->metadata, $relationships)
+        );
     }
 }

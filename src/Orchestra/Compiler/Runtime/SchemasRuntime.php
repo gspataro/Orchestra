@@ -21,20 +21,50 @@ final class SchemasRuntime extends Runtime
     /**
      * Process schema contents
      *
-     * @param \Orchestra\Project\Definition\Query\QueryDefinition[] $contents
+     * @param \Orchestra\Project\Definition\Query\QueryDefinition[] $contentsReferences
      * @return ContentCollection[]
      */
 
-    private function processSchemaContents(array $contents): array
+    private function processSchemaContents(array $contentsReferences): array
     {
         $output = [];
 
-        if (empty($contents)) {
+        if (empty($contentsReferences)) {
             return $output;
         }
 
-        foreach ($contents as $queryDefinition) {
-            $output[$queryDefinition->group] = $this->contents->query($queryDefinition)->get();
+        foreach ($contentsReferences as $queryDefinition) {
+            $contents = $this->contents->query($queryDefinition)->get();
+
+            if (empty($queryDefinition->relationships) || empty($contents)) {
+                $output[$queryDefinition->group] = $contents;
+                continue;
+            }
+
+            $contentsWithRelationships = [];
+
+            foreach ($contents as $content) {
+                $relationships = [];
+
+                foreach ($queryDefinition->relationships as $relationship) {
+                    $relationships[$relationship['with']] = $this->contents->group($relationship['with'])
+                        ->query()
+                        ->where(
+                            $relationship['field'],
+                            $relationship['operator'],
+                            $content->get($relationship['value'])
+                        )
+                        ->get();
+                }
+
+                $contentsWithRelationships[] = !empty($relationships)
+                    ? $content->withRelationships($relationships)
+                    : $content;
+            }
+
+            $output[$queryDefinition->group] = !empty($contentsWithRelationships)
+                ? new ContentCollection($contentsWithRelationships)
+                : $contents;
         }
 
         return $output;

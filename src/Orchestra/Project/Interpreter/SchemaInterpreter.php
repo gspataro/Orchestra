@@ -39,7 +39,8 @@ final class SchemaInterpreter implements InterpreterInterface
                     'asc' => SORT_ASC,
                     'desc' => SORT_DESC,
                     default => SORT_ASC
-                }
+                },
+                $query['relationships'] ?? []
             );
         }
 
