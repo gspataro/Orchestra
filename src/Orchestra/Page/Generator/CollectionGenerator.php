@@ -35,7 +35,7 @@ final class CollectionGenerator extends BaseGenerator
             for ($i = 0; $i < count($pages); $i++) {
                 $currentPage = $i + 1;
                 $currentSlug = $currentPage > 1 ? $currentPage : 'index';
-                $collectionSlug = $collection->metadata['slug'] ?? pathinfo($collection->path, PATHINFO_ALL);
+                $collectionSlug = $collection->metadata['slug'] ?? pathinfo($collection->path, PATHINFO_FILENAME);
 
                 yield $this->preparePayload(
                     $schema->tag . '.' . $collectionSlug . '.page-' . $currentPage,
