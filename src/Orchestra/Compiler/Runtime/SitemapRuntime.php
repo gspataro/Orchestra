@@ -17,7 +17,7 @@ final class SitemapRuntime extends Runtime
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
         $xml->addAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
-        $excluded = ['/404', '/darkside'];
+        $excluded = ['/404'];
 
         foreach ($this->context->sitemap()->getAll() as $url) {
             if (str_ends_with($url, '/index')) {
