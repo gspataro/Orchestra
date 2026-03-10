@@ -2,19 +2,19 @@
 
 namespace Orchestra\Theme;
 
-use Orchestra\Compiler\BuildContext;
+use Orchestra\Compiler\BuildContextProvider;
 
 final class ThemeLoader
 {
     public function __construct(
-        private readonly BuildContext $context
+        private readonly BuildContextProvider $context
     ) {
     }
 
     public function load(): ?Theme
     {
-        $theme = $this->context->prototype()->configs()->get('website.theme') ?? 'pianoforte';
-        $themeDirectory = $this->context->paths()->themes($theme);
+        $theme = $this->context->get()->prototype()->configs()->get('website.theme') ?? 'pianoforte';
+        $themeDirectory = $this->context->get()->paths()->themes($theme);
 
         if (!is_dir($themeDirectory)) {
             return null;

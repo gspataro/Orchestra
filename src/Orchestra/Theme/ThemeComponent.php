@@ -16,7 +16,7 @@ final class ThemeComponent extends Component
     {
         $container->add('theme.loader', function ($c, $a): object {
             return new ThemeLoader(
-                $c->get('compiler.context.provider')->get()
+                $c->get('compiler.context.provider')
             );
         });
 
