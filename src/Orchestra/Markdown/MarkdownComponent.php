@@ -48,7 +48,7 @@ final class MarkdownComponent extends Component
         $environment->addExtension(new FrontMatterExtension());
         $environment->addExtension(new HeadingPermalinkExtension());
         $environment->addExtension(new TableOfContentsExtension());
-        $environment->addExtension(new MediaExtension($container->get('view.elements')));
-        $environment->addExtension(new ElementsExtension($container->get('view.elements')));
+        $environment->addExtension(new MediaExtension());
+        $environment->addExtension(new ElementsExtension());
     }
 }
