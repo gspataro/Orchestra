@@ -7,20 +7,13 @@ use Orchestra\Project\Sitemap;
 
 final class BuildContext
 {
-    private Paths $paths;
     private Prototype $prototype;
     private Sitemap $sitemap;
     private BuildOptions $options;
 
-    public function __construct(?Paths $paths = null)
-    {
-        if ($paths) {
-            $this->paths = $paths;
-            return;
-        }
-
-        $this->paths = new Paths(getcwd());
-        $this->paths->setDefaults();
+    public function __construct(
+        private Paths $paths
+    ) {
     }
 
     public function setContext(Prototype $prototype, Sitemap $sitemap, BuildOptions $options): void

@@ -2,37 +2,18 @@
 
 namespace Orchestra\Compiler;
 
-class Paths
+final readonly class Paths
 {
-    private string $output;
-    private string $data;
-    private string $media;
-    private string $views;
-    private string $assets;
-    private string $themes;
-    private string $cache;
-
     public function __construct(
-        public readonly string $root,
-        ?string $output = null
+        public string $root,
+        public string $output,
+        public string $data,
+        public string $media,
+        public string $views,
+        public string $assets,
+        public string $themes,
+        public string $cache
     ) {
-        if (!is_null($output)) {
-            $this->output = $output;
-        }
-    }
-
-    public function setDefaults(): void
-    {
-        if (!isset($this->output)) {
-            $this->output = $this->root . '/public';
-        }
-
-        $this->data = $this->root . '/contents/data';
-        $this->media = $this->root  . '/contents/media';
-        $this->views = $this->root . '/resources/view';
-        $this->assets = $this->root . '/resources/assets';
-        $this->themes = $this->root . '/resources/themes';
-        $this->cache = $this->root . '/cache';
     }
 
     public function root(string ...$path): string
@@ -73,5 +54,10 @@ class Paths
     public function cache(string ...$path): string
     {
         return pathJoin($this->cache, ...$path);
+    }
+
+    public static function builder(string $root): PathsBuilder
+    {
+        return new PathsBuilder($root);
     }
 }

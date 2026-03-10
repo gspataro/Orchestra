@@ -9,6 +9,10 @@ final class BuildContextFactory
 {
     public function make(?Paths $paths = null): BuildContext
     {
+        if (is_null($paths)) {
+            $paths = Paths::builder(getcwd())->build();
+        }
+
         return new BuildContext($paths);
     }
 }

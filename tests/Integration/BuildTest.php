@@ -16,11 +16,9 @@ beforeAll(function () use ($tempDir) {
 
     $app =  new TestKernel()->boot();
 
-    $paths = new Paths(
-        dirname(__DIR__) . '/Fixtures/project',
-        $tempDir
-    );
-    $paths->setDefaults();
+    $paths = Paths::builder(dirname(__DIR__) . '/Fixtures/project')
+        ->output($tempDir)
+        ->build();
 
     $context = new BuildContext($paths);
     $output = new TestOutputAdapter();
