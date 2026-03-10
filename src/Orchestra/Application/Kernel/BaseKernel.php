@@ -17,7 +17,7 @@ abstract class BaseKernel implements KernelInterface
     private function loadComponents(): void
     {
         foreach ($this->components as &$component) {
-            if (get_parent_class($component) !== Component::class) {
+            if (!is_a($component, Component::class, true)) {
                 throw new InvalidComponentException(
                     "Component '{$component}' must extend the Component::class"
                 );
