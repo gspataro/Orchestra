@@ -56,7 +56,7 @@ final class BuildCommand extends BaseCommand
         /** @var \Orchestra\Compiler\Factory\PipelineFactory */
         $pipelineFactory = $this->container->get('compiler.pipeline.factory');
 
-        /** @var \Orchestra\Compiler\BuildContextFactory */
+        /** @var \Orchestra\Compiler\Factory\BuildContextFactory */
         $contextFactory = $this->container->get('compiler.context.factory');
 
         $context = $contextFactory->make();
