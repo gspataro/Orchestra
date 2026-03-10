@@ -26,7 +26,7 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
 
     public function add(Content $content): void
     {
-        $this->contents[] = $content;
+        $this->contents[$content->id] = $content;
     }
 
     /**
