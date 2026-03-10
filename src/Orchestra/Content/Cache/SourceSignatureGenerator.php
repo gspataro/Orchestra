@@ -12,12 +12,11 @@ final class SourceSignatureGenerator
     ) {
     }
 
-    public function generateFromSource(Source $source, string $context = ''): string
+    public function generateFromSource(Source $source): string
     {
         return $this->signature->generateFromSeeds(
             $source->relativePath,
-            $this->signature->generateFromFile($source->path),
-            $context
+            $this->signature->generateFromFile($source->path)
         );
     }
 }

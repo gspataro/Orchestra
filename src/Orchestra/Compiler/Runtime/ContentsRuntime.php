@@ -64,7 +64,7 @@ final class ContentsRuntime extends Runtime
             foreach ($this->resolveSourcePath($definition) as $source) {
                 $fromCache = true;
 
-                if (!$payload = $this->cache->load($source, $this->context->options()->context)) {
+                if (!$payload = $this->cache->load($source)) {
                     $reader = $this->readers->get($source->reader);
                     $payload = $reader->compile($source);
                     $fromCache = false;
@@ -75,7 +75,7 @@ final class ContentsRuntime extends Runtime
                 }
 
                 if (!$fromCache) {
-                    $this->cache->save($source, $payload, $this->context->options()->context);
+                    $this->cache->save($source, $payload);
                 }
             }
         }
