@@ -11,8 +11,9 @@ final class CacheCleanCommand extends BaseCommand
     {
         $this->output->print('{bold}Cleaning up cache...');
 
-        /** @var \Orchestra\Compiler\BuildContext */
-        $context = $this->container->get('compiler.context');
+        /** @var \Orchestra\Compiler\Factory\BuildContextFactory */
+        $contextFactory = $this->container->get('compiler.context.factory');
+        $context = $contextFactory->make();
 
         recursiveDelete(
             $context->paths()->cache(),
