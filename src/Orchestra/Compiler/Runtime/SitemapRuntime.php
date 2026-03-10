@@ -11,6 +11,9 @@ final class SitemapRuntime extends Runtime
     {
         $this->output->info('Generating sitemap.xml');
 
+        /** @var \Orchestra\Compiler\UrlGenerator */
+        $urlGenerator = $this->container->get('compiler.url');
+
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
         $xml->addAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
@@ -26,7 +29,7 @@ final class SitemapRuntime extends Runtime
             }
 
             $urlElement = $xml->addChild('url');
-            $urlElement->addChild('loc', 'https://giuseppespataro.it' . $url);
+            $urlElement->addChild('loc', $urlGenerator->to($url));
             $urlElement->addChild('lastmod', date('c'));
         }
 
