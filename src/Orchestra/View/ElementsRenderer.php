@@ -33,6 +33,10 @@ final class ElementsRenderer
         );
     }
 
+    /**
+     * @param string $attrString
+     * @return array<string,mixed>
+     */
     private function parseAttributes(string $attrString): array
     {
         $attributes = [];
