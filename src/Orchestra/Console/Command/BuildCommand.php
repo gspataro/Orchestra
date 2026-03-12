@@ -35,6 +35,11 @@ final class BuildCommand extends BaseCommand
             'description' => 'Ignore files marked as drafts'
         ];
 
+        $options['theme-debug'] = [
+            'type' => 'toggle',
+            'description' => 'Enable theme debug mode'
+        ];
+
         $options['base-url'] = [
             'type' => 'optional',
             'description' => 'Override website.url'
@@ -71,6 +76,7 @@ final class BuildCommand extends BaseCommand
             'skipMedia' => $this->argument('skip-media') !== null,
             'cleanupOnly' => $this->argument('cleanup-only') !== null,
             'ignoreDrafts' => $this->argument('ignore-drafts') === null,
+            'themeDebug' => $this->argument('theme-debug') === null,
             'baseUrl' => $this->argument('base-url')
         ]);
 

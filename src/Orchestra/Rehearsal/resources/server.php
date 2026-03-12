@@ -36,6 +36,7 @@ $pipeline->run(new BuildOptions(
     skipMedia: false,
     cleanupOnly: false,
     ignoreDrafts: false,
+    themeDebug: true,
     baseUrl: 'http://localhost:8080',
     context: 'rehearsal'
 ));

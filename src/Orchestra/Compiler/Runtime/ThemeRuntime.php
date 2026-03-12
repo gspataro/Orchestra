@@ -20,9 +20,11 @@ final class ThemeRuntime extends Runtime
         $this->themeLoader = $this->container->get('theme.loader');
         $this->twigLoader = $this->container->get('twig.loader');
 
-        $this->twig->setCache(
-            $this->context->paths()->cache('twig')
-        );
+        if (!$options->themeDebug) {
+            $this->twig->setCache(
+                $this->context->paths()->cache('twig')
+            );
+        }
 
         $theme = $this->themeLoader->load();
 
