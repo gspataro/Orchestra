@@ -16,17 +16,34 @@ use OutOfBoundsException;
  */
 final class ContentCollection implements IteratorAggregate, Countable, ArrayAccess
 {
+    /** @var Content[] */
+    private array $byId = [];
+
+    /** @var Content[] */
+    private array $byTag = [];
+
     /**
-     * @param array<string,Content> $contents
+     * @param Content[] $contents
      */
-    public function __construct(
-        private array $contents = []
-    ) {
+    public function __construct(array $contents = [])
+    {
+        foreach ($contents as $content) {
+            $this->add($content);
+        }
     }
 
     public function add(Content $content): void
     {
-        $this->contents[$content->id] = $content;
+        $this->byId[$content->id] = $content;
+        $this->byTag[$content->tag] = $content;
+    }
+
+    /**
+     * @return Content[]
+     */
+    public function allByTag(): array
+    {
+        return $this->byTag;
     }
 
     /**
@@ -35,7 +52,7 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
 
     public function getIterator(): Traversable
     {
-        return new ArrayIterator($this->contents);
+        return new ArrayIterator($this->byId);
     }
 
     /**
@@ -43,17 +60,17 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
      */
     public function toArray(): array
     {
-        return $this->contents;
+        return $this->byId;
     }
 
     public function count(): int
     {
-        return count($this->contents);
+        return count($this->byId);
     }
 
     public function offsetExists(mixed $offset): bool
     {
-        return array_key_exists($offset, $this->contents);
+        return array_key_exists($offset, $this->byId);
     }
 
     public function offsetGet(mixed $offset): Content
@@ -62,7 +79,7 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
             throw new OutOfBoundsException("Offset '{$offset}' does not exist in ContentCollection.");
         }
 
-        return $this->contents[$offset];
+        return $this->byId[$offset];
     }
 
     public function offsetSet(mixed $offset, mixed $value): void

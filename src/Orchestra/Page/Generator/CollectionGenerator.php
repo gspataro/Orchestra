@@ -8,11 +8,19 @@ final class CollectionGenerator extends BaseGenerator
 {
     public function generate(Schema $schema): iterable
     {
-        $contents = $schema->contents;
         $fillWith = $schema->options['fillWith'];
+        $contents = [];
 
         /** @var \Orchestra\Content\ContentCollection */
-        $source = $contents[$schema->source] ?? [];
+        $source = $schema->contents[$schema->source] ?? [];
+
+        foreach ($schema->contents as $group => $collection) {
+            if ($group === $schema->source) {
+                continue;
+            }
+
+            $contents = array_merge($contents, $collection->allByTag());
+        }
 
         foreach ($source as $collection) {
             $relationshipContents = $collection->get("metadata.{$fillWith}")->query();
@@ -40,7 +48,8 @@ final class CollectionGenerator extends BaseGenerator
                                 'next' => $currentPage < $totalPages ? $currentPage + 1 : null,
                                 'prev' => $currentPage > 1 ? $currentPage - 1 : null
                             ]
-                        ]
+                        ],
+                        'contents' => $contents
                     ],
                     $schema
                 );
