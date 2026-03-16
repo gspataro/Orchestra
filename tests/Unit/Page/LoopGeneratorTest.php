@@ -47,7 +47,7 @@ it('yields nothing when source key is absent', function () {
 
 it('removes the source key and wraps content as "post" in payload', function () {
     $collection = new ContentCollection([makeContent(['slug' => 'my-post'])]);
-    $schema = makeSchema(source: 'posts', contents: ['posts' => $collection, 'sidebar' => 'extra']);
+    $schema = makeSchema(source: 'posts', contents: ['posts' => $collection]);
     $payloads = iterator_to_array((new LoopGenerator())->generate($schema));
 
     expect($payloads[0]->contents)->toHaveKey('post');

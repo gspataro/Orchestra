@@ -19,9 +19,9 @@ test('payload carries the schema tag and slug as permalink', function () {
 });
 
 test('payload contents match schema contents', function () {
-    $col = new ContentCollection([makeContent(['slug' => 'hero'])]);
-    $schema = makeSchema(contents: ['hero' => $col]);
+    $collection = new ContentCollection([makeContent(['slug' => 'hero'])]);
+    $schema = makeSchema(contents: ['hero' => $collection]);
     $payloads = iterator_to_array((new OnceGenerator())->generate($schema));
 
-    expect($payloads[0]->contents)->toHaveKey('hero');
+    expect($payloads[0]->contents['contents'])->toHaveKey('group.post');
 });

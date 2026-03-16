@@ -7,7 +7,7 @@ it('compiles a text file and sets slug from filename', function () {
     $file = sys_get_temp_dir() . '/my-article.txt';
     file_put_contents($file, 'Hello World');
 
-    $source = new Source('blog', 'text', $file, 'my-article.txt');
+    $source = new Source('blog', 'text', $file, 'my-article.txt', false);
     $payload = (new TextReader())->compile($source);
 
     unlink($file);

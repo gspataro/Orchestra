@@ -121,11 +121,11 @@ describe('whereIn() and whereContains()', function () {
 
 describe('date comparison normalization', function () {
     it('compares an int timestamp against a date string', function () {
-        $past = mktime(0, 0, 0, 1, 1, 2020);
-        $query = new ContentQuery(collection([
-            content(['date' => $past]),
+        $collection = collection([
+            content(['date' => mktime(0, 0, 0, 1, 1, 2020)]),
             content(['date' => mktime(0, 0, 0, 1, 1, 2025)]),
-        ]));
+        ]);
+        $query = new ContentQuery($collection);
 
         // Items with date > 2023-01-01
         expect($query->where('metadata.date', '>', '2023-01-01')->count())->toBe(1);

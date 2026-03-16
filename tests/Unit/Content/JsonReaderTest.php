@@ -7,7 +7,7 @@ it('compiles a JSON file into body and sets slug from filename', function () {
     $file = sys_get_temp_dir() . '/settings.json';
     file_put_contents($file, json_encode(['key' => 'value']));
 
-    $source = new Source('data', 'json', $file, 'settings.json');
+    $source = new Source('data', 'json', $file, 'settings.json', false);
     $payload = (new JsonReader())->compile($source);
 
     unlink($file);
@@ -20,7 +20,7 @@ it('extracts _metadata key and merges into metadata', function () {
     $file = sys_get_temp_dir() . '/post.json';
     file_put_contents($file, json_encode(['_metadata' => ['title' => 'My Post'], 'content' => 'text']));
 
-    $source = new Source('blog', 'json', $file, 'post.json');
+    $source = new Source('blog', 'json', $file, 'post.json', false);
     $payload = (new JsonReader())->compile($source);
 
     unlink($file);

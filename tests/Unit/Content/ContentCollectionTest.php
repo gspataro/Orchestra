@@ -27,7 +27,7 @@ it('toArray() returns the underlying array', function () {
     $content = new Content('id1', 't', 'g', '/p', 'b', []);
     $collection = new ContentCollection([$content]);
 
-    expect($collection->toArray())->toBe([$content]);
+    expect($collection->toArray())->toBe([$content->id => $content]);
 });
 
 it('offsetGet() throws OutOfBoundsException for missing offset', function () {
@@ -36,12 +36,10 @@ it('offsetGet() throws OutOfBoundsException for missing offset', function () {
     expect(fn () => $collection[99])->toThrow(OutOfBoundsException::class);
 });
 
-it('offsetSet() is a no-op (immutable from outside)', function () {
+it('offsetSet() is immutable', function () {
     $collection = new ContentCollection();
     $collection[0] = new Content('x', 't', 'g', '/p', 'b', []);
-
-    expect(count($collection))->toBe(0);
-});
+})->throws(\Orchestra\Content\Exception\ContentCollectionException::class);
 
 it('query() returns a ContentQuery instance', function () {
     expect((new ContentCollection())->query())->toBeInstanceOf(\Orchestra\Content\ContentQuery::class);

@@ -1,6 +1,7 @@
 <?php
 
 use Orchestra\Compiler\BuildContext;
+use Orchestra\Compiler\BuildContextProvider;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Compiler\Paths;
 use Orchestra\Compiler\UrlGenerator;
@@ -17,10 +18,8 @@ function makeUrlContext(
     string $configUrl = 'https://example.com',
     ?string $optionsBaseUrl = null,
     array $routes = []
-): BuildContext {
-    $paths = new Paths('/project');
-    $paths->setDefaults();
-
+): BuildContextProvider {
+    $paths = Paths::builder('/project')->build();
     $context = new BuildContext($paths);
 
     $config = new Config();
@@ -43,7 +42,10 @@ function makeUrlContext(
     $options = new BuildOptions(baseUrl: $optionsBaseUrl);
     $context->setContext($prototype, $sitemap, $options);
 
-    return $context;
+    $contextProvider = new BuildContextProvider();
+    $contextProvider->set($context);
+
+    return $contextProvider;
 }
 
 describe('Friendly URLs on', function () {

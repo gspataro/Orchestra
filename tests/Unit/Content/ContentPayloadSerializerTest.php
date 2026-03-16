@@ -5,7 +5,7 @@ use Orchestra\Content\ContentPayload;
 use Orchestra\Content\Source;
 
 it('serializes and unserializes a payload round-trip', function () {
-    $source = new Source('blog', 'text', '/post.txt', 'post.txt');
+    $source = new Source('blog', 'text', '/post.txt', 'post.txt', false);
     $payload = new ContentPayload('<p>body</p>', ['slug' => 'post'], $source);
 
     $serializer = new ContentPayloadSerializer();
