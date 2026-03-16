@@ -20,7 +20,7 @@ final class PageFactory
     public function fromPayload(PagePayload $payload): Page
     {
         $permalink = $this->permalink->generateUnique($payload->permalink);
-        $sitemapResource = $this->sitemapResourceFactory->fromPagePayload($payload);
+        $sitemapResource = $this->sitemapResourceFactory->fromPagePayload($payload, $permalink);
 
         $this->sitemap->add($sitemapResource);
 

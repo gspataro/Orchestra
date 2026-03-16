@@ -7,11 +7,11 @@ use Orchestra\Sitemap\SitemapResource;
 
 final class SitemapResourceFactory
 {
-    public function fromPagePayload(PagePayload $payload): SitemapResource
+    public function fromPagePayload(PagePayload $payload, string $permalink): SitemapResource
     {
         return new SitemapResource(
             $payload->tag,
-            $payload->permalink,
+            $permalink,
             $payload->sourcePath
         );
     }
