@@ -39,6 +39,10 @@ final class Sitemap
 
     public function fromSourcePath(string $sourcePath): ?SitemapResource
     {
+        if (!str_starts_with($sourcePath, '/')) {
+            $sourcePath = '/' . $sourcePath;
+        }
+
         return $this->bySourcePath[$sourcePath] ?? null;
     }
 

@@ -16,7 +16,7 @@ final class ElementsRenderer
         }
 
         return preg_replace_callback(
-            "/<orchestra-element\s+([^>]*?) \/>/s",
+            "/<orchestra-element\s+([^>]*?)\s*\/>/s",
             function (array $matches) {
                 $attributes = $this->parseAttributes($matches[1]);
                 $name = $attributes['name'] ?? null;
@@ -27,7 +27,7 @@ final class ElementsRenderer
 
                 unset($attributes['name']);
 
-                return $this->elements->get($name)->render($attributes);
+                return rtrim($this->elements->get($name)->render($attributes));
             },
             $text
         );

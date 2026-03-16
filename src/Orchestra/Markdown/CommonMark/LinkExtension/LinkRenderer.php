@@ -30,11 +30,12 @@ final class LinkRenderer implements NodeRendererInterface, XmlNodeRendererInterf
 
         $attrs = $node->data->get('attributes');
         $attrs['name'] = 'link';
-        $attrs['label'] = $childRenderer->renderNodes($node->children());
+
+        $internal = str_starts_with($node->getUrl(), 'orchestra://');
 
         $forbidUnsafeLinks = ! $this->config->get('allow_unsafe_links');
         if (! ($forbidUnsafeLinks && RegexHelper::isLinkPotentiallyUnsafe($node->getUrl()))) {
-            $attrs['href'] = $node->getUrl();
+            $attrs['href'] = $internal ? substr($node->getUrl(), strlen('orchestra://')) : $node->getUrl();
         }
 
         if (($title = $node->getTitle()) !== null) {
@@ -45,10 +46,20 @@ final class LinkRenderer implements NodeRendererInterface, XmlNodeRendererInterf
             $attrs['rel'] = 'noopener noreferrer';
         }
 
+        if ($internal) {
+            $attrs['label'] = $childRenderer->renderNodes($node->children());
+
+            return new HtmlElement(
+                tagName: 'orchestra-element',
+                attributes: $attrs,
+                selfClosing: true
+            );
+        }
+
         return new HtmlElement(
-            tagName: 'orchestra-element',
+            tagName: 'a',
             attributes: $attrs,
-            selfClosing: true
+            contents: $childRenderer->renderNodes($node->children())
         );
     }
 

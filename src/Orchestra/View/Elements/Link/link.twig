@@ -1,3 +1,5 @@
-<a href="{{href}}" {%if title%}title="{{title}}"{%endif%} {%if rel%}rel="{{rel}}{%endif%}>
-    {{label ?? href}}
-</a>
+<a
+    href="{{href}}"
+    {%if title%}title="{{title}}"{%endif%}
+    {%if rel%}rel="{{rel}}"{%endif%}
+    {%if target%}target="{{target}}"{%endif%}>{{label ?? href}}</a>
