@@ -22,13 +22,8 @@ final class UrlGenerator
     public function to(string $where): string
     {
         $suffix = $this->friendlyUrls ? '' : '.html';
-        $path = $this->context->get()->sitemap()->get($where);
-
-        if (is_null($path)) {
-            $path = $this->context->get()->sitemap()->get($where . '.page-1');
-        }
-
-        $path ??= $where;
+        $resource = $this->context->get()->sitemap()->get($where);
+        $path = !is_null($resource) ? $resource->permalink : $where;
 
         $separator = null;
 

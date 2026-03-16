@@ -3,7 +3,7 @@
 namespace Orchestra\Compiler;
 
 use Orchestra\Project\Prototype;
-use Orchestra\Project\Sitemap;
+use Orchestra\Sitemap\Sitemap;
 
 final class BuildContext
 {

@@ -27,7 +27,9 @@ final class PagesComponent extends Component
 
         $container->add('pages.factory', function ($c, $a): object {
             return new PageFactory(
-                $c->get('project.sitemap')
+                $c->get('sitemap'),
+                $c->get('sitemap.permalink'),
+                $c->get('sitemap.resource.factory')
             );
         });
 

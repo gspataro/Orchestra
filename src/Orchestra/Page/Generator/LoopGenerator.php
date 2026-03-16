@@ -31,7 +31,8 @@ final class LoopGenerator extends BaseGenerator
                     'post' => $content,
                     'contents' => $contents
                 ],
-                $schema
+                $schema,
+                $content->path
             );
         }
     }
