@@ -76,7 +76,7 @@ final class BuildCommand extends BaseCommand
             'skipMedia' => $this->argument('skip-media') !== null,
             'cleanupOnly' => $this->argument('cleanup-only') !== null,
             'ignoreDrafts' => $this->argument('ignore-drafts') === null,
-            'themeDebug' => $this->argument('theme-debug') === null,
+            'themeDebug' => $this->argument('theme-debug') !== null,
             'baseUrl' => $this->argument('base-url')
         ]);
 
