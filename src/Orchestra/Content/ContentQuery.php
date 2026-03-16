@@ -51,7 +51,7 @@ final class ContentQuery
             $time = strtotime($b);
 
             if ($time !== false) {
-                return $time;
+                return [$a, $time];
             }
         }
 
