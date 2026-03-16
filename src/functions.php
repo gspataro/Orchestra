@@ -65,7 +65,9 @@ function recursiveDelete(string $path, bool $onlyContent = false, array $exclude
             continue;
         }
 
-        recursiveDelete($item->getPathname(), false, $exclude);
+        if ($item->isDir() && !in_array($item->getPathname(), $exclude)) {
+            recursiveDelete($item->getPathname(), false, $exclude);
+        }
     }
 
     $remainingItems = new FilesystemIterator($path, FilesystemIterator::SKIP_DOTS);
