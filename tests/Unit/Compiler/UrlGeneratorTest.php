@@ -11,7 +11,8 @@ use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinitionCollection;
 use Orchestra\Project\Definition\Schema\SchemaDefinitionCollection;
 use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
 use Orchestra\Project\Factory\PrototypeFactory;
-use Orchestra\Project\Sitemap;
+use Orchestra\Sitemap\Sitemap;
+use Orchestra\Sitemap\SitemapResource;
 
 function makeUrlContext(
     bool $friendlyUrls = true,
@@ -36,7 +37,7 @@ function makeUrlContext(
     $sitemap = new Sitemap();
 
     foreach ($routes as $tag => $path) {
-        $sitemap->add($tag, $path);
+        $sitemap->add(new SitemapResource($tag, $path));
     }
 
     $options = new BuildOptions(baseUrl: $optionsBaseUrl);

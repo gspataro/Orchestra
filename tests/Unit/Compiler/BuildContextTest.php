@@ -9,7 +9,7 @@ use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinitionCollection;
 use Orchestra\Project\Definition\Schema\SchemaDefinitionCollection;
 use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
 use Orchestra\Project\Factory\PrototypeFactory;
-use Orchestra\Project\Sitemap;
+use Orchestra\Sitemap\Sitemap;
 
 test('setContext() makes prototype, sitemap and options available', function () {
     $paths = Paths::builder('')->build();

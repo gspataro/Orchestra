@@ -14,6 +14,7 @@ use Orchestra\Infrastructure\HighlightComponent;
 use Orchestra\Markdown\MarkdownComponent;
 use Orchestra\Media\MediaComponent;
 use Orchestra\Compiler\CompilerComponent;
+use Orchestra\Sitemap\SitemapComponent;
 use Orchestra\Theme\ThemeComponent;
 use Orchestra\View\ViewComponent;
 
@@ -21,6 +22,7 @@ class TestKernel extends BaseKernel
 {
     protected array $components = [
         ExceptionHandlerComponent::class,
+        SitemapComponent::class,
         CompilerComponent::class,
         BlueprintComponent::class,
         ProjectComponent::class,
