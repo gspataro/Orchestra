@@ -54,7 +54,6 @@ function recursiveDelete(string $path, bool $onlyContent = false, array $exclude
     }
 
     $directory = new DirectoryIterator($path);
-    $removeDir = !$onlyContent;
 
     foreach ($directory as $item) {
         if ($item->isDot()) {
@@ -64,14 +63,14 @@ function recursiveDelete(string $path, bool $onlyContent = false, array $exclude
         if ($item->isFile() && !in_array($item->getPathname(), $exclude)) {
             unlink($item->getPathname());
             continue;
-        } else {
-            $removeDir = false;
         }
 
         recursiveDelete($item->getPathname(), false, $exclude);
     }
 
-    if ($removeDir) {
+    $remainingItems = new FilesystemIterator($path, FilesystemIterator::SKIP_DOTS);
+
+    if (!$onlyContent && !$remainingItems->valid()) {
         rmdir($path);
     }
 }
