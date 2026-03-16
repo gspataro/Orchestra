@@ -34,7 +34,8 @@
     },
     "require-dev": {
         "pestphp/pest": "^4.0",
-        "phpstan/phpstan": "^2.1"
+        "phpstan/phpstan": "^2.1",
+        "symfony/var-dumper": "^8.0"
     },
     "config": {
         "allow-plugins": {
