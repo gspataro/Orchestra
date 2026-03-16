@@ -7,6 +7,9 @@ final class CacheCleanCommand extends BaseCommand
     protected string $name = 'cache:clean';
     protected ?string $description = 'Delete build cache';
 
+    /**
+     * @return array<string,array<string,mixed>>
+     */
     public function options(): array
     {
         return [

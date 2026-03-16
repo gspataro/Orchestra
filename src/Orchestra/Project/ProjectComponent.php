@@ -20,10 +20,6 @@ final class ProjectComponent extends Component
                 $c->get('project.prototype.factory')
             );
         });
-
-        $container->add('project.sitemap', function ($c, $a): object {
-            return new Sitemap();
-        });
     }
 
     public function boot(Container $container): void

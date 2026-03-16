@@ -20,6 +20,8 @@ final class SitemapRuntime extends Runtime
         $excluded = ['/404'];
 
         foreach ($this->context->sitemap()->all() as $resource) {
+            $url = $resource->permalink;
+
             if (str_ends_with($resource->permalink, '/index')) {
                 $url = substr($resource->permalink, 0, strlen('index') * -1);
             }

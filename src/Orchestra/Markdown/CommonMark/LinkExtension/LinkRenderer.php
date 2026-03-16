@@ -14,7 +14,6 @@ use League\Config\ConfigurationInterface;
 
 final class LinkRenderer implements NodeRendererInterface, XmlNodeRendererInterface, ConfigurationAwareInterface
 {
-    /** @psalm-readonly-allow-private-mutation */
     private ConfigurationInterface $config;
 
     /**
