@@ -40,8 +40,16 @@ it('builds a single page', function () use ($outputDir) {
     $this->assertFileExists($outputDir . '/index.html');
 });
 
+it('skips drafts', function () use ($outputDir) {
+    $this->assertFileDoesNotExist($outputDir . '/future.html');
+});
+
 it('builds loop pages', function () use ($outputDir) {
     $this->assertFileExists($outputDir . '/articolo/hello-world.html');
+});
+
+it('skips drafted content in loops', function () use ($outputDir) {
+    $this->assertFileDoesNotExist($outputDir . '/articolo/future.html');
 });
 
 it('builds archives', function () use ($outputDir) {

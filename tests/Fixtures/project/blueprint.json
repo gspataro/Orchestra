@@ -11,8 +11,15 @@
     },
     "schemas": {
         "index": {
+            "draft": false,
             "template": "page",
             "slug": "/index",
+            "generate": "once"
+        },
+        "future": {
+            "draft": true,
+            "template": "page",
+            "slug": "/future",
             "generate": "once"
         },
         "article": {

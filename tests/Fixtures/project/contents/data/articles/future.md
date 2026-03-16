@@ -1,7 +1,7 @@
 ---
-title: 'Hello world'
-published_at: 2026-01-20
-draft: false
+title: 'Future'
+published_at: 2026-04-10
+draft: true
 categories:
     - lorem-ipsum
 ---
