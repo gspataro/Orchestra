@@ -27,7 +27,7 @@ final class ContentFactory
             $this->generateId($payload),
             $this->generateTag($payload),
             $payload->source->group,
-            $payload->source->path,
+            $payload->source->relativePath,
             $payload->body,
             $payload->metadata
         );
