@@ -12,6 +12,7 @@ use Orchestra\Infrastructure\HighlightComponent;
 use Orchestra\Markdown\MarkdownComponent;
 use Orchestra\Media\MediaComponent;
 use Orchestra\Compiler\CompilerComponent;
+use Orchestra\Infrastructure\ExceptionHandlerComponent;
 use Orchestra\Sitemap\SitemapComponent;
 use Orchestra\Rehearsal\RehearsalComponent;
 use Orchestra\Theme\ThemeComponent;
@@ -20,6 +21,7 @@ use Orchestra\View\ViewComponent;
 final class RehearsalKernel extends BaseKernel
 {
     protected array $components = [
+        ExceptionHandlerComponent::class,
         SitemapComponent::class,
         CompilerComponent::class,
         BlueprintComponent::class,

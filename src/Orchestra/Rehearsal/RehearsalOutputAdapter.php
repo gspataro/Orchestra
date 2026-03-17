@@ -3,6 +3,7 @@
 namespace Orchestra\Rehearsal;
 
 use Orchestra\Compiler\BuildOutputInterface;
+use Orchestra\Rehearsal\Exception\RehearsalException;
 
 final class RehearsalOutputAdapter implements BuildOutputInterface
 {
@@ -12,7 +13,6 @@ final class RehearsalOutputAdapter implements BuildOutputInterface
 
     public function info(string $message): void
     {
-        error_log("{$message}\n");
     }
 
     public function warning(string $message): void
@@ -21,6 +21,7 @@ final class RehearsalOutputAdapter implements BuildOutputInterface
 
     public function error(string $message): void
     {
+        throw new RehearsalException($message);
     }
 
     public function success(string $message): void
