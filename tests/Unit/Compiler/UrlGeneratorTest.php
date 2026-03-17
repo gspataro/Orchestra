@@ -8,6 +8,7 @@ use Orchestra\Compiler\UrlGenerator;
 use Orchestra\Project\CompilerContext;
 use Orchestra\Project\Config;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinitionCollection;
+use Orchestra\Project\Definition\Relationship\RelationshipDefinitionCollection;
 use Orchestra\Project\Definition\Schema\SchemaDefinitionCollection;
 use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
 use Orchestra\Project\Factory\PrototypeFactory;
@@ -30,6 +31,7 @@ function makeUrlContext(
     $prototype = (new PrototypeFactory())->fromContext(new CompilerContext(
         new SourceDefinitionCollection(),
         new SchemaDefinitionCollection(),
+        new RelationshipDefinitionCollection(),
         new MediaVariantDefinitionCollection(),
         $config
     ));

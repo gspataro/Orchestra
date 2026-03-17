@@ -6,6 +6,7 @@ use Orchestra\Project\CompilerContext;
 use Orchestra\Project\Config;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinition;
 use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinitionCollection;
+use Orchestra\Project\Definition\Relationship\RelationshipDefinitionCollection;
 use Orchestra\Project\Definition\Schema\SchemaDefinitionCollection;
 use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
 use Orchestra\Project\Interpreter\ConfigInterpreter;
@@ -18,6 +19,7 @@ function makeContext(): CompilerContext
     return new CompilerContext(
         new SourceDefinitionCollection(),
         new SchemaDefinitionCollection(),
+        new RelationshipDefinitionCollection(),
         new MediaVariantDefinitionCollection(),
         new Config()
     );
@@ -43,7 +45,18 @@ describe('ConfigInterpreter', function () {
 describe('SourceInterpreter', function () {
     it('parses "reader:path" source strings and registers SourceDefinitions', function () {
         $bp = new Blueprint();
-        $bp->init(['contents' => ['blog' => 'markdown:posts/*.md', 'pages' => 'markdown:pages/*.md']]);
+        $bp->init([
+            'contents' => [
+                'blog' => [
+                    'files' => 'posts/*.md',
+                    'reader' => 'markdown'
+                ],
+                'pages' => [
+                    'files' => 'posts/*.md',
+                    'reader' => 'markdown'
+                ]
+            ]
+        ]);
         $namespaces = (new BlueprintCompiler())->compile($bp);
 
         $ctx = makeContext();

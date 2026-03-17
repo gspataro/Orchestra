@@ -10,7 +10,12 @@ it('produces a Prototype from a full blueprint', function () {
     $bp = new Blueprint();
     $bp->init([
         'website' => ['name' => 'Test Site', 'url' => 'https://test.com'],
-        'contents' => ['blog' => 'markdown:posts/*.md'],
+        'contents' => [
+            'blog' => [
+                'files' => 'posts/*.md',
+                'reader' => 'markdown'
+            ]
+        ],
         'schemas' => [
             'home' => [
                 'template' => 'index',
