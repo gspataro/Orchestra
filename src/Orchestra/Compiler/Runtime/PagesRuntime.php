@@ -2,10 +2,12 @@
 
 namespace Orchestra\Compiler\Runtime;
 
+use Exception;
 use Orchestra\Publisher\BuilderCollection;
 use Orchestra\Page\PageCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Publisher\Publisher;
+use Twig\Error\LoaderError;
 
 final class PagesRuntime extends Runtime
 {
@@ -27,8 +29,21 @@ final class PagesRuntime extends Runtime
         $this->publisher = $this->container->get('publisher');
 
         foreach ($this->pages as $page) {
-            $builder = $this->builders->get($page->schema->builder);
-            $output = $builder->compile($page);
+            try {
+                $builder = $this->builders->get($page->schema->builder);
+            } catch (Exception $e) {
+                $this->output->error(
+                    "Builder '{$page->schema->builder}' requested by '{$page->schema->tag}' schema not found."
+                );
+                return false;
+            }
+
+            try {
+                $output = $builder->compile($page);
+            } catch (LoaderError $e) {
+                $this->output->error("Error in '{$page->schema->tag}' schema: " . $e->getMessage());
+                return false;
+            }
 
             $this->publisher->publish($page->permalink, $output);
         }
