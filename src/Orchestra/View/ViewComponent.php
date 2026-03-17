@@ -8,6 +8,7 @@ use Orchestra\View\Elements\Image\ImageElement;
 use Orchestra\View\Elements\Link\LinkElement;
 use Twig\Environment;
 use Orchestra\View\Twig\ConfigExtension;
+use Orchestra\View\Twig\ContentExtension;
 use Orchestra\View\Twig\ElementsExtension;
 use Orchestra\View\Twig\HighlighterExtension;
 use Orchestra\View\Twig\MediaExtension;
@@ -73,6 +74,7 @@ final class ViewComponent extends Component
             $container->get('theme.assets'),
             $container->get('compiler.url')
         ));
+        $twig->addExtension(new ContentExtension());
 
         /** @var ElementCollection */
         $elements = $container->get('view.elements');
