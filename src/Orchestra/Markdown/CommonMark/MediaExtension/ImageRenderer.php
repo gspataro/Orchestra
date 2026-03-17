@@ -24,7 +24,14 @@ final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInter
     {
         $urlParts = parse_url($node->getUrl());
         $relativePath = $urlParts['path'] ?? '';
-        $variant = $urlParts['query']['variant'] ?? null;
+
+        if (isset($urlParts['query'])) {
+            parse_str($urlParts['query'], $query);
+        } else {
+            $query = [];
+        }
+
+        $variant = $query['variant'] ?? null;
 
         return new HtmlElement(
             tagName: 'orchestra-element',
