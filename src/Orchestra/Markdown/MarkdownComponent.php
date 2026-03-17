@@ -40,7 +40,7 @@ final class MarkdownComponent extends Component
                 ],
                 'table_of_contents' => [
                     'position' => 'placeholder',
-                    'placeholder' => '[ARTICLE:TOC]'
+                    'placeholder' => '[TOC]'
                 ]
             ]
         ]);
