@@ -13,9 +13,12 @@ final class CleanupRuntime extends Runtime
             $this->output->info('Cleaning up');
         }
 
-        //$sitemap = array_values($this->context->sitemap()->all());
         $outputDirectory = new DirectoryIterator($directory);
-        $excluded = ['.vite', 'assets', '.htaccess', 'sitemap.xml', 'favicon.png', 'favicon-dark.png', 'media'];
+
+        $excluded = array_merge(
+            $this->context->prototype()->configs()->get('orchestra.cleanup'),
+            ['.htaccess']
+        );
 
         foreach ($outputDirectory as $item) {
             if ($item->isDot()) {
