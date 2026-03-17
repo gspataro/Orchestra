@@ -43,6 +43,9 @@ final class MediaRuntime extends Runtime
             $adapter = $this->adapters->getFor($media->mimeType ?? 'default');
 
             if (!$adapter) {
+                $this->output->warning(
+                    "Cannot process '{$media->mimeType}' files."
+                );
                 continue;
             }
 
