@@ -11,8 +11,8 @@ final readonly class CompilerContext
 {
     public function __construct(
         public SourceDefinitionCollection $sources,
-        public SchemaDefinitionCollection $schemas,
         public RelationshipDefinitionCollection $relationships,
+        public SchemaDefinitionCollection $schemas,
         public MediaVariantDefinitionCollection $mediaVariants,
         public Config $configs
     ) {

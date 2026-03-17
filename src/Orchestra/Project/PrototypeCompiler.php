@@ -34,8 +34,8 @@ final class PrototypeCompiler
     {
         $context = new CompilerContext(
             new SourceDefinitionCollection(),
-            new SchemaDefinitionCollection(),
             new RelationshipDefinitionCollection(),
+            new SchemaDefinitionCollection(),
             new MediaVariantDefinitionCollection(),
             new Config()
         );
