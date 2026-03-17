@@ -13,7 +13,6 @@ use Orchestra\Content\Cache\ContentPayloadSerializer;
 use Orchestra\Content\Cache\SourceSignatureGenerator;
 use Orchestra\Content\Factory\ContentFactory;
 use Orchestra\Content\Factory\SourceFactory;
-use Orchestra\Content\Reader\JsonCollectionReader;
 
 final class ContentComponent extends Component
 {
