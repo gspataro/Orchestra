@@ -15,6 +15,7 @@ final class Content extends DotNavigator
      * @param string $path
      * @param mixed $body
      * @param array<string|int,mixed> $metadata
+     * @param array<string,ContentCollection> $relationships
      */
     public function __construct(
         public readonly string $id,
@@ -23,6 +24,7 @@ final class Content extends DotNavigator
         public readonly string $path,
         public readonly mixed $body,
         public readonly array $metadata = [],
+        public readonly array $relationships = []
     ) {
         $this->fill([
             'id' => $this->id,
@@ -30,7 +32,8 @@ final class Content extends DotNavigator
             'group' => $this->group,
             'path' => $this->path,
             'body' => $this->body,
-            'metadata' => $this->metadata
+            'metadata' => $this->metadata,
+            'relationships' => $this->relationships
         ]);
     }
 
@@ -46,7 +49,8 @@ final class Content extends DotNavigator
             $this->group,
             $this->path,
             $this->body,
-            array_merge($this->metadata, $related)
+            $this->metadata,
+            $related
         );
     }
 }

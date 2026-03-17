@@ -23,7 +23,7 @@ final class CollectionGenerator extends BaseGenerator
         }
 
         foreach ($source as $collection) {
-            $relationshipContents = $collection->get("metadata.{$fillWith}")->query();
+            $relationshipContents = $collection->get("relationships.{$fillWith}")->query();
 
             $perPage = $schema->options['per_page'] ?? 12;
             $totalPages = ceil($relationshipContents->count() / $perPage);
