@@ -29,7 +29,9 @@ final class RelationshipsRuntime extends Runtime
 
                 foreach ($relationships as $relationship) {
                     if ($print) {
-                        $this->output->print("Creating relation between '{$source->group}' and '{$relationship->with}'");
+                        $this->output->print(
+                            "Creating relation between '{$source->group}' and '{$relationship->with}'"
+                        );
                         $print = false;
                     }
 
