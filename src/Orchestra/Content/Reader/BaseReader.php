@@ -18,7 +18,7 @@ abstract class BaseReader implements ReaderInterface
     {
         $fileName = pathinfo($source->path, PATHINFO_FILENAME);
         $defaultMetadata = [
-            'slug' => $fileName,
+            'slug' => str_starts_with($fileName, '_') ? substr($fileName, 1) : $fileName,
             'draft' => str_starts_with($fileName, '_')
         ];
 
