@@ -6,8 +6,30 @@
         "friendly_urls": true
     },
     "contents": {
-        "articles": "markdown:articles/*.md",
-        "categories": "json:categories/*.json"
+        "articles": {
+            "files": "articles/*.md",
+            "reader": "markdown",
+            "relationships": [
+                {
+                    "with": "categories",
+                    "field": "metadata.slug",
+                    "operator": "containsAny",
+                    "value": "metadata.categories"
+                }
+            ]
+        },
+        "categories": {
+            "files": "categories/*.json",
+            "reader": "json",
+            "relationships": [
+                {
+                    "with": "articles",
+                    "field": "metadata.categories",
+                    "operator": "containsAny",
+                    "value": "metadata.slug"
+                }
+            ]
+        }
     },
     "schemas": {
         "index": {
@@ -33,13 +55,7 @@
         },
         "blog": {
             "contents": [
-                {
-                    "group": "articles",
-                    "order": {
-                        "by": "metadata.published_at",
-                        "direction": "asc"
-                    }
-                }
+                "articles"
             ],
             "template": "page",
             "slug": "/blog",
@@ -51,17 +67,7 @@
         },
         "categories": {
             "contents": [
-                {
-                    "group": "categories",
-                    "relationships": [
-                        {
-                            "with": "articles",
-                            "field": "metadata.categories",
-                            "operator": "containsAny",
-                            "value": "metadata.slug"
-                        }
-                    ]
-                }
+                "categories"
             ],
             "template": "page",
             "slug": "/categoria",
