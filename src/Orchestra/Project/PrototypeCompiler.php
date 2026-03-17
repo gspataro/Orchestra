@@ -10,6 +10,7 @@ use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
 use Orchestra\Project\Factory\PrototypeFactory;
 use Orchestra\Project\Interpreter\ConfigInterpreter;
 use Orchestra\Project\Interpreter\MediaInterpreter;
+use Orchestra\Project\Interpreter\OrchestraInterpreter;
 use Orchestra\Project\Interpreter\SchemaInterpreter;
 use Orchestra\Project\Interpreter\SourceInterpreter;
 
@@ -17,6 +18,7 @@ final class PrototypeCompiler
 {
     /** @var array<class-string<InterpreterInterface>> */
     private array $interpreters = [
+        OrchestraInterpreter::class,
         ConfigInterpreter::class,
         SourceInterpreter::class,
         SchemaInterpreter::class,

@@ -7,6 +7,7 @@ use Orchestra\Blueprint\Specification\WebsiteSpecification;
 use Orchestra\Blueprint\Specification\MediaSpecification;
 use Orchestra\Blueprint\Specification\SchemaSpecification;
 use Orchestra\Blueprint\Exception\InvalidBlueprintException;
+use Orchestra\Blueprint\Specification\OrchestraSpecification;
 
 final class BlueprintCompiler
 {
@@ -15,7 +16,8 @@ final class BlueprintCompiler
         WebsiteSpecification::class,
         ContentSpecification::class,
         SchemaSpecification::class,
-        MediaSpecification::class
+        MediaSpecification::class,
+        OrchestraSpecification::class
     ];
 
     /**
