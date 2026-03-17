@@ -25,7 +25,7 @@ final class AssetsRuntime extends Runtime
         $driver = $this->drivers->get($theme->assets->driver);
 
         if (!$driver) {
-            $this->output->warning("Asset driver not found");
+            $this->output->warning("Asset driver '{$theme->assets->driver}' not found");
             return true;
         }
 
