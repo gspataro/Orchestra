@@ -91,7 +91,7 @@ final class BlueprintCompiler
             return $this->validateRepeater(
                 $field,
                 $rules['structure'],
-                $value
+                $value ?? []
             );
         }
 
