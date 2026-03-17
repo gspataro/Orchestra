@@ -22,7 +22,13 @@ abstract class BaseGenerator implements GeneratorInterface
             }
 
             $byTag = $collection->allByTag();
-            $contents[$group] = count($collection) > 1 ? $byTag : $byTag[array_key_first($byTag)];
+
+            if (count($byTag) === 1 && array_key_first($byTag) === $group) {
+                $contents[$group] = $byTag[$group];
+                continue;
+            }
+
+            $contents[$group] = $byTag;
         }
 
         return $contents;
