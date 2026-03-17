@@ -17,7 +17,7 @@ final class CleanupRuntime extends Runtime
 
         $excluded = array_merge(
             $this->context->prototype()->configs()->get('orchestra.cleanup'),
-            ['.htaccess']
+            ['.htaccess', 'media']
         );
 
         foreach ($outputDirectory as $item) {
