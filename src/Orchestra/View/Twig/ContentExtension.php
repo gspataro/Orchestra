@@ -9,6 +9,12 @@ use Twig\Extension\AbstractExtension;
 
 final class ContentExtension extends AbstractExtension
 {
+    /**
+     * @param array<string,mixed> $context
+     * @param string $group
+     * @param Content|null $content
+     * @return ContentCollection
+     */
     public function related(array $context, string $group, ?Content $content = null): ContentCollection
     {
         $content ??= $context['post'] ?? null;
