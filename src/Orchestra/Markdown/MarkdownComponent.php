@@ -13,6 +13,7 @@ use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use Orchestra\Markdown\CommonMark\ElementsExtension\ElementsExtension;
 use Orchestra\Markdown\CommonMark\LinkExtension\LinkExtension;
 use Orchestra\Markdown\CommonMark\MediaExtension\MediaExtension;
+use Tempest\Highlight\CommonMark\HighlightExtension;
 
 final class MarkdownComponent extends Component
 {
@@ -50,6 +51,7 @@ final class MarkdownComponent extends Component
         $environment->addExtension(new HeadingPermalinkExtension());
         $environment->addExtension(new TableOfContentsExtension());
         $environment->addExtension(new MediaExtension());
+        $environment->addExtension(new HighlightExtension());
         $environment->addExtension(new LinkExtension());
         $environment->addExtension(new ElementsExtension());
     }
