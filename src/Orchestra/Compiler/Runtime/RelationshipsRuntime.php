@@ -18,6 +18,7 @@ final class RelationshipsRuntime extends Runtime
         foreach ($this->context->prototype()->sources() as $source) {
             $contents = $this->contents->group($source->group);
             $relationships = $this->context->prototype()->relationships()->group($source->group);
+            $print = true;
 
             if (empty($relationships)) {
                 continue;
@@ -27,7 +28,10 @@ final class RelationshipsRuntime extends Runtime
                 $related = [];
 
                 foreach ($relationships as $relationship) {
-                    $this->output->info("Creating relation between '{$source->group}' and '{$relationship->with}'");
+                    if ($print) {
+                        $this->output->print("Creating relation between '{$source->group}' and '{$relationship->with}'");
+                        $print = false;
+                    }
 
                     $related[$relationship->with] = $this->contents->group($relationship->with)
                         ->query()
