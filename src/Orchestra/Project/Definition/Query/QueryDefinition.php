@@ -11,7 +11,6 @@ final readonly class QueryDefinition
      * @param integer|null $limit
      * @param string|null $orderField
      * @param int $sortDirection
-     * @param array<string,mixed> $relationships
      */
     public function __construct(
         public string $group,
@@ -20,7 +19,6 @@ final readonly class QueryDefinition
         public ?int $limit = null,
         public ?string $orderField = null,
         public int $sortDirection = SORT_ASC,
-        public array $relationships = []
     ) {
     }
 }
