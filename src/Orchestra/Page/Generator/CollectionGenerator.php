@@ -36,8 +36,12 @@ final class CollectionGenerator extends BaseGenerator
                         'archive' => [
                             'loop' => $pages[$i],
                             'pagination' => [
-                                'next' => $currentPage < $totalPages ? $currentPage + 1 : null,
-                                'prev' => $currentPage > 1 ? $currentPage - 1 : null
+                                'next' => $currentPage < $totalPages
+                                    ? $schema->tag . '.' . $collectionSlug . '.page-' . ($currentPage + 1)
+                                    : null,
+                                'prev' => $currentPage > 1
+                                    ? $schema->tag . '.' . $collectionSlug . '.page-' . ($currentPage - 1)
+                                    : null
                             ]
                         ],
                         'contents' => $this->additionalContents($schema)
