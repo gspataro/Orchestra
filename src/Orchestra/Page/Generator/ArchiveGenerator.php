@@ -8,18 +8,8 @@ final class ArchiveGenerator extends BaseGenerator
 {
     public function generate(Schema $schema): iterable
     {
-        $contents = [];
-
         /** @var \Orchestra\Content\ContentCollection */
         $source = $schema->contents[$schema->source] ?? [];
-
-        foreach ($schema->contents as $group => $collection) {
-            if ($group === $schema->source) {
-                continue;
-            }
-
-            $contents = array_merge($contents, $collection->allByTag());
-        }
 
         $perPage = $schema->options['per_page'] ?? 12;
         $totalPages = ceil(count($source) / $perPage);
@@ -44,7 +34,7 @@ final class ArchiveGenerator extends BaseGenerator
                             'prev' => $currentPage > 1 ? $currentPage - 1 : null
                         ]
                     ],
-                    'contents' => $contents
+                    'contents' => $this->additionalContents($schema)
                 ],
                 $schema
             );

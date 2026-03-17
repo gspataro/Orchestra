@@ -8,18 +8,8 @@ final class LoopGenerator extends BaseGenerator
 {
     public function generate(Schema $schema): iterable
     {
-        $contents = [];
-
         /** @var \Orchestra\Content\ContentCollection */
         $source = $schema->contents[$schema->source] ?? [];
-
-        foreach ($schema->contents as $group => $collection) {
-            if ($group === $schema->source) {
-                continue;
-            }
-
-            $contents = array_merge($contents, $collection->allByTag());
-        }
 
         foreach ($source as $content) {
             $slug = $content->metadata['slug'] ??  pathinfo($content->path, PATHINFO_FILENAME);
@@ -29,7 +19,7 @@ final class LoopGenerator extends BaseGenerator
                 $schema->slug . '/' . $slug,
                 [
                     'post' => $content,
-                    'contents' => $contents
+                    'contents' => $this->additionalContents($schema)
                 ],
                 $schema,
                 $content->path

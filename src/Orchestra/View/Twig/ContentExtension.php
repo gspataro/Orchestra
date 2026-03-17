@@ -26,11 +26,20 @@ final class ContentExtension extends AbstractExtension
         return $content->get("relationships.{$group}") ?? new ContentCollection([]);
     }
 
+    public function content(array $context, string $group): mixed
+    {
+        return $context['contents'][$group] ?? [];
+    }
+
     public function getFunctions()
     {
         $functions = [];
 
         $functions[] = new TwigFunction('related', [$this, 'related'], [
+            'needs_context' => true
+        ]);
+
+        $functions[] = new TwigFunction('content', [$this, 'content'], [
             'needs_context' => true
         ]);
 
