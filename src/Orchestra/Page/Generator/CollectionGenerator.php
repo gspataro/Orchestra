@@ -34,6 +34,7 @@ final class CollectionGenerator extends BaseGenerator
                     $schema->slug . '/' . $collectionSlug . '/' . $currentSlug,
                     [
                         'archive' => [
+                            'collection' => $collection,
                             'loop' => $pages[$i],
                             'pagination' => [
                                 'next' => $currentPage < $totalPages
