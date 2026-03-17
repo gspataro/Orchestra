@@ -7,7 +7,7 @@ use IteratorAggregate;
 use Traversable;
 
 /**
- * @implements IteratorAggregate<int,RelationshipDefinition>
+ * @implements IteratorAggregate<string,RelationshipDefinition[]>
  */
 final class RelationshipDefinitionCollection implements IteratorAggregate
 {
@@ -29,7 +29,7 @@ final class RelationshipDefinitionCollection implements IteratorAggregate
     }
 
     /**
-     * @return Traversable<RelationshipDefinition>
+     * @return Traversable<string,RelationshipDefinition[]>
      */
     public function getIterator(): Traversable
     {
