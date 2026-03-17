@@ -2,6 +2,7 @@
 
 namespace Orchestra\Compiler\Runtime;
 
+use Exception;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Theme\ThemeLoader;
 use Twig\Environment;
@@ -26,7 +27,12 @@ final class ThemeRuntime extends Runtime
             );
         }
 
-        $theme = $this->themeLoader->load();
+        try {
+            $theme = $this->themeLoader->load();
+        } catch (Exception $e) {
+            $this->output->error($e->getMessage());
+            return false;
+        }
 
         $themeLoader = new FilesystemLoader();
         $themeLoader->addPath($theme->path);

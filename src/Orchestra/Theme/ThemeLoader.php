@@ -3,6 +3,8 @@
 namespace Orchestra\Theme;
 
 use Orchestra\Compiler\BuildContextProvider;
+use Orchestra\Theme\Exception\ThemeManifestNotFoundException;
+use Orchestra\Theme\Exception\ThemeNotFoundException;
 
 final class ThemeLoader
 {
@@ -11,19 +13,23 @@ final class ThemeLoader
     ) {
     }
 
-    public function load(): ?Theme
+    public function load(): Theme
     {
         $theme = $this->context->get()->prototype()->configs()->get('website.theme') ?? 'pianoforte';
         $themeDirectory = $this->context->get()->paths()->themes($theme);
 
         if (!is_dir($themeDirectory)) {
-            return null;
+            throw new ThemeNotFoundException(
+                "Theme '{$theme}' not found."
+            );
         }
 
         $manifest = pathJoin($themeDirectory, 'theme.json');
 
         if (!is_file($manifest)) {
-            return null;
+            throw new ThemeManifestNotFoundException(
+                "'{$theme}' theme manifest not found."
+            );
         }
 
         $data = json_decode(
