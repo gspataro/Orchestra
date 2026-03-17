@@ -2,6 +2,7 @@
 
 namespace Orchestra\Compiler\Runtime;
 
+use Exception;
 use Orchestra\Content\ContentRepository;
 use Orchestra\Content\ReadersCollection;
 use Orchestra\Compiler\BuildOptions;
@@ -65,7 +66,15 @@ final class ContentsRuntime extends Runtime
                 $fromCache = true;
 
                 if (!$payload = $this->cache->load($source)) {
-                    $reader = $this->readers->get($source->reader);
+                    try {
+                        $reader = $this->readers->get($source->reader);
+                    } catch (Exception $e) {
+                        $this->output->error(
+                            "Reader '{$source->reader}' requested by contents group '{$definition->group}' not found."
+                        );
+                        return false;
+                    }
+
                     $payload = $reader->compile($source);
                     $fromCache = false;
                 }
