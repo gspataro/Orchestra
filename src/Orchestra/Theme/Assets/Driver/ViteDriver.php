@@ -16,7 +16,7 @@ final class ViteDriver implements DriverInterface
 
     public function build(Theme $theme, BuildContext $context): void
     {
-        $manifest = pathJoin($theme->assets->dir, 'manifest.json');
+        $manifest = pathJoin($theme->path, $theme->assets->dir, '.vite', 'manifest.json');
 
         if (!is_file($manifest)) {
             return;
@@ -33,7 +33,7 @@ final class ViteDriver implements DriverInterface
                 continue;
             }
 
-            $entry = pathJoin($theme->assets->dir, $chunk['file']);
+            $entry = pathJoin($theme->path, $theme->assets->dir, $chunk['file']);
             $extension = pathinfo($input, PATHINFO_EXTENSION);
             $output = $context->paths()->output('assets', $chunk['file']);
 
@@ -55,7 +55,7 @@ final class ViteDriver implements DriverInterface
         $css = [];
 
         foreach ($this->css as $entry) {
-            $css[] = pathJoin('assets', $entry);
+            $css[] = $entry;
         }
 
         return $css;
@@ -66,7 +66,7 @@ final class ViteDriver implements DriverInterface
         $js = [];
 
         foreach ($this->js as $entry) {
-            $js[] = pathJoin('assets', $entry);
+            $js[] = $entry;
         }
 
         return $js;
