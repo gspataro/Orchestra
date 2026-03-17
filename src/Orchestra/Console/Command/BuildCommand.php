@@ -55,9 +55,6 @@ final class BuildCommand extends BaseCommand
         $this->stopwatch = $this->container->get('console.stopwatch');
         $this->stopwatch->start();
 
-        /** @var \Orchestra\Compiler\PipelineCollection */
-        //$pipeline = $this->container->get('compiler.pipeline');
-
         /** @var \Orchestra\Compiler\Factory\PipelineFactory */
         $pipelineFactory = $this->container->get('compiler.pipeline.factory');
 

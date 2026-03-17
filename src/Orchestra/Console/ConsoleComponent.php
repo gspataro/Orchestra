@@ -8,6 +8,7 @@ use GSpataro\CLI\CommandsCollection;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Console\Command\BuildCommand;
 use Orchestra\Application\Component;
+use Orchestra\Application\Solista;
 use Orchestra\Console\Command\CacheCleanCommand;
 use Orchestra\Console\Command\RehearsalCommand;
 
@@ -45,6 +46,7 @@ final class ConsoleComponent extends Component
             new CacheCleanCommand($container)
         );
 
+        $cli->setHeader('{bold}{bg_magenta}{fg_white}' . Solista::APP_NAME . ' ' . Solista::APP_VERSION);
         $cli->deploy();
     }
 }
