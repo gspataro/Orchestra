@@ -16,7 +16,21 @@ final class ContentSpecification implements SpecificationInterface
     {
         return [
             '*' => [
-                'type' => 'array',
+                'type' => 'repeater',
+                'structure' => [
+                    'files' => ['type' => 'string', 'required' => true],
+                    'reader' => ['type' => 'string', 'required' => true],
+                    'relationships' => [
+                        'type' => 'repeater',
+                        'structure' => [
+                            'with' => ['type' => 'string', 'required' => true],
+                            'field' => ['type' => 'string', 'required' => true],
+                            'operator' => ['type' => 'string', 'default' => '='],
+                            'value' => ['type' => 'string', 'required' => true]
+                        ],
+                        'default' => []
+                    ]
+                ],
                 'default' => []
             ]
         ];

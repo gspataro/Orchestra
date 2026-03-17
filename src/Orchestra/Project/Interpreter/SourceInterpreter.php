@@ -23,8 +23,12 @@ final class SourceInterpreter implements InterpreterInterface
         }
 
         foreach ($sources as $group => $source) {
-            [$reader, $path] = explode(':', $source, 2);
-            $context->sources->add(new SourceDefinition($group, $reader, $path));
+            $context->sources->add(new SourceDefinition(
+                $group,
+                $source['reader'],
+                $source['files'],
+                $source['relationships']
+            ));
         }
     }
 }
