@@ -10,6 +10,7 @@ use Orchestra\Compiler\Runtime\ContentsRuntime;
 use Orchestra\Compiler\Runtime\CreateContextRuntime;
 use Orchestra\Compiler\Runtime\MediaRuntime;
 use Orchestra\Compiler\Runtime\PagesRuntime;
+use Orchestra\Compiler\Runtime\RelationshipsRuntime;
 use Orchestra\Compiler\Runtime\SchemasRuntime;
 use Orchestra\Compiler\Runtime\ThemeRuntime;
 
@@ -19,6 +20,7 @@ final class BuildPipeline extends BasePipeline
         CreateContextRuntime::class,
         ThemeRuntime::class,
         ContentsRuntime::class,
+        RelationshipsRuntime::class,
         SchemasRuntime::class,
         AssetsRuntime::class,
         PagesRuntime::class,

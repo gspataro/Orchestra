@@ -18,6 +18,12 @@ final class ContentRepository
         $this->byGroup[$content->group][$content->id] = $content;
     }
 
+    public function replace(Content $content): void
+    {
+        $this->byId[$content->id] = $content;
+        $this->byGroup[$content->group][$content->id] = $content;
+    }
+
     public function group(string $group): ContentCollection
     {
         /** @var array<string,Content> */

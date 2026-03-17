@@ -11,6 +11,7 @@ final class PrototypeFactory
     {
         return new Prototype(
             $context->sources,
+            $context->relationships,
             $context->schemas,
             $context->mediaVariants,
             $context->configs

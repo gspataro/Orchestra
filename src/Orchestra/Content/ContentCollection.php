@@ -38,6 +38,12 @@ final class ContentCollection implements IteratorAggregate, Countable, ArrayAcce
         $this->byTag[$content->tag] = $content;
     }
 
+    public function replace(Content $content): void
+    {
+        $this->byId[$content->id] = $content;
+        $this->byTag[$content->tag] = $content;
+    }
+
     /**
      * @return Content[]
      */

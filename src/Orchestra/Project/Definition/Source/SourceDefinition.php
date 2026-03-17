@@ -7,8 +7,7 @@ final readonly class SourceDefinition
     public function __construct(
         public string $group,
         public string $reader,
-        public string $path,
-        public array $relationships
+        public string $path
     ) {
     }
 }
