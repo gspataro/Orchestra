@@ -6,7 +6,7 @@ it('builds default paths relative to the root', function () {
     $paths = Paths::builder('/var/www/project')->build();
 
     expect($paths->output())->toBe('/var/www/project/public');
-    expect($paths->data())->toBe('/var/www/project/contents/data');
+    expect($paths->data())->toBe('/var/www/project/contents');
     expect($paths->media())->toBe('/var/www/project/contents/media');
     expect($paths->cache())->toBe('/var/www/project/cache');
     expect($paths->themes())->toBe('/var/www/project/resources/themes');

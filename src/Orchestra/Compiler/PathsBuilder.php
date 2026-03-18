@@ -16,7 +16,7 @@ final class PathsBuilder
         private readonly string $root
     ) {
         $this->output = $root . '/public';
-        $this->data   = $root . '/contents/data';
+        $this->data   = $root . '/contents';
         $this->media  = $root . '/contents/media';
         $this->views  = $root . '/resources/view';
         $this->assets = $root . '/resources/assets';
