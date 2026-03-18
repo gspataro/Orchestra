@@ -23,5 +23,5 @@ test('payload contents match schema contents', function () {
     $schema = makeSchema(contents: ['hero' => $collection]);
     $payloads = iterator_to_array((new OnceGenerator())->generate($schema));
 
-    expect($payloads[0]->contents['contents'])->toHaveKey('group.post');
+    expect($payloads[0]->contents['contents']['hero'])->toHaveKey('group.post');
 });

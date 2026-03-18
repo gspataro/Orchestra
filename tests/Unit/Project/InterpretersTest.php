@@ -18,8 +18,8 @@ function makeContext(): CompilerContext
 {
     return new CompilerContext(
         new SourceDefinitionCollection(),
-        new SchemaDefinitionCollection(),
         new RelationshipDefinitionCollection(),
+        new SchemaDefinitionCollection(),
         new MediaVariantDefinitionCollection(),
         new Config()
     );

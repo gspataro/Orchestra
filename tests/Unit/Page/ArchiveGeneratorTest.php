@@ -66,11 +66,11 @@ test('pagination contains correct prev/next references', function () {
 
     // Page 1: no prev, next = 2
     expect($payloads[0]->contents['archive']['pagination']['prev'])->toBeNull();
-    expect($payloads[0]->contents['archive']['pagination']['next'])->toBe(2);
+    expect($payloads[0]->contents['archive']['pagination']['next'])->toBe($schema->tag . '.page-2');
 
     // Page 2: prev = 1, next = 3
-    expect($payloads[1]->contents['archive']['pagination']['prev'])->toBe(1);
-    expect($payloads[1]->contents['archive']['pagination']['next'])->toBe(3);
+    expect($payloads[1]->contents['archive']['pagination']['prev'])->toBe($schema->tag . '.page-1');
+    expect($payloads[1]->contents['archive']['pagination']['next'])->toBe($schema->tag . '.page-3');
 
     // Last page: no next
     expect(end($payloads)->contents['archive']['pagination']['next'])->toBeNull();

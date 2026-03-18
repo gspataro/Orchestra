@@ -18,8 +18,8 @@ test('setContext() makes prototype, sitemap and options available', function () 
 
     $prototype = (new PrototypeFactory())->fromContext(new CompilerContext(
         new SourceDefinitionCollection(),
-        new SchemaDefinitionCollection(),
         new RelationshipDefinitionCollection(),
+        new SchemaDefinitionCollection(),
         new MediaVariantDefinitionCollection(),
         new Config()
     ));

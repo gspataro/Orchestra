@@ -30,8 +30,8 @@ function makeUrlContext(
 
     $prototype = (new PrototypeFactory())->fromContext(new CompilerContext(
         new SourceDefinitionCollection(),
-        new SchemaDefinitionCollection(),
         new RelationshipDefinitionCollection(),
+        new SchemaDefinitionCollection(),
         new MediaVariantDefinitionCollection(),
         $config
     ));
