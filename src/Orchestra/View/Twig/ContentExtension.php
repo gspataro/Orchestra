@@ -26,6 +26,11 @@ final class ContentExtension extends AbstractExtension
         return $content->get("relationships.{$group}") ?? new ContentCollection([]);
     }
 
+    /**
+     * @param array<string,mixed> $context
+     * @param string $group
+     * @return mixed
+     */
     public function content(array $context, string $group): mixed
     {
         return $context['contents'][$group] ?? [];
