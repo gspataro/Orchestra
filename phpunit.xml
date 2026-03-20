@@ -11,8 +11,7 @@
     </testsuites>
     <source>
         <include>
-            <directory suffix=".php">./source/application</directory>
-            <directory suffix=".php">./source/components</directory>
+            <directory suffix=".php">./src/Orchestra</directory>
         </include>
     </source>
 </phpunit>

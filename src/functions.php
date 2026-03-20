@@ -4,8 +4,8 @@
  * Recursively copy a file or directory to another location excluding the items in the $exclude array
  *
  * @param string $from
- * @param string $top
- * @param array $exclude
+ * @param string $to
+ * @param string[] $exclude
  * @return void
  */
 
@@ -42,10 +42,12 @@ function recursiveCopy(string $from, string $to, array $exclude = []): void
  * Recursively delete a directory and its content
  *
  * @param string $path
+ * @param bool $onlyContent
+ * @param string[] $exclude
  * @return void
  */
 
-function recursiveDelete(string $path): void
+function recursiveDelete(string $path, bool $onlyContent = false, array $exclude = []): void
 {
     if (!is_dir($path)) {
         return;
@@ -58,57 +60,42 @@ function recursiveDelete(string $path): void
             continue;
         }
 
-        if ($item->isFile()) {
+        if ($item->isFile() && !in_array($item->getPathname(), $exclude)) {
             unlink($item->getPathname());
             continue;
         }
 
-        recursiveDelete($item->getPathname());
+        if ($item->isDir() && !in_array($item->getPathname(), $exclude)) {
+            recursiveDelete($item->getPathname(), false, $exclude);
+        }
     }
 
-    rmdir($path);
-}
+    $remainingItems = new FilesystemIterator($path, FilesystemIterator::SKIP_DOTS);
 
-/**
- * Get string between
- *
- * @param string $string
- * @param string $openTag
- * @param string $closeTag
- * @return string|null
- */
-
-function getStringBetween(string $string, string $openTag, string $closeTag): ?string
-{
-    $start = strpos($string, $openTag);
-
-    if ($start == 0) {
-        return null;
+    if (!$onlyContent && !$remainingItems->valid()) {
+        rmdir($path);
     }
-
-    $start += strlen($openTag);
-    $end = strpos($string, $closeTag, $start) - $start;
-
-    return substr($string, $start, $end);
 }
 
 /**
  * Join two paths together
  *
  * @param string $base
- * @param string $path
+ * @param string $parts
  * @return string
  */
 
-function pathJoin(string $base, string $path): string
+function pathJoin(string $base, string ...$parts): string
 {
-    $separator = null;
+    $path = [
+        rtrim($base, DIRECTORY_SEPARATOR)
+    ];
 
-    if ($path && !str_ends_with($base, '/') && !str_starts_with($path, '/')) {
-        $separator = DIRECTORY_SEPARATOR;
+    foreach ($parts as $part) {
+        $path[] = trim($part, DIRECTORY_SEPARATOR);
     }
 
-    return $base . $separator . $path;
+    return implode(DIRECTORY_SEPARATOR, $path);
 }
 
 /**
@@ -127,28 +114,4 @@ function addSuffixToFilename(string $filename, string $suffix): string
 
     $extensionPosition = strrpos($filename, '.');
     return substr($filename, 0, $extensionPosition) . $suffix . substr($filename, $extensionPosition);
-}
-
-/**
- * Get path to a system directory
- *
- * @param string $label
- * @return string
- */
-
-function getPath(string $label): void
-{
-    /**
-     * @todo This needs to be improved, this hardcoded solution is temporary
-     */
-
-    $directories = [];
-
-    $directories['app.root'] = getcwd();
-
-    $directories['app.output'] = $directories['app.root'] . '/public';
-
-    $directories['app.resources'] = $directories['app.root'] . '/resources';
-    $directories['app.view'] = $directories['app.resources'] . '/view';
-    $directories['app.assets'] = $directories['app.assets'];
 }

@@ -8,33 +8,45 @@ use GSpataro\CLI\CommandsCollection;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Console\Command\BuildCommand;
 use Orchestra\Application\Component;
+use Orchestra\Application\Solista;
+use Orchestra\Console\Command\CacheCleanCommand;
+use Orchestra\Console\Command\RehearsalCommand;
 
 final class ConsoleComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->add('cli.commands', fn(): object => new CommandsCollection());
+        $container->add('console.commands', fn(): object => new CommandsCollection());
 
-        $container->add('cli', function ($container, $args): object {
+        $container->add('console', function ($container, $args): object {
             return new Handler(
-                $container->get('cli.commands')
+                $container->get('console.commands')
             );
         });
 
-        $container->add('cli.stopwatch', function ($container, $args): object {
+        $container->add('console.stopwatch', function ($container, $args): object {
             return new Stopwatch();
         });
     }
 
     public function boot(Container $container): void
     {
-        $cli = $container->get('cli');
-        $commands = $container->get('cli.commands');
+        $cli = $container->get('console');
+        $commands = $container->get('console.commands');
 
         $commands->register(
             new BuildCommand($container)
         );
 
+        $commands->register(
+            new RehearsalCommand($container)
+        );
+
+        $commands->register(
+            new CacheCleanCommand($container)
+        );
+
+        $cli->setHeader('{bold}{bg_magenta}{fg_white}' . Solista::APP_NAME . ' ' . Solista::APP_VERSION);
         $cli->deploy();
     }
 }

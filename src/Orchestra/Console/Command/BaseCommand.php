@@ -12,19 +12,4 @@ class BaseCommand extends Command
         protected Container $container
     ) {
     }
-
-    protected function runProcess(string|Runtime $process): mixed
-    {
-        if (!is_object($process)) {
-            $process = new $process(
-                $this->container,
-                $this->container->get('pipeline.context')
-            );
-        }
-
-        return $process->run(
-            $this->input,
-            $this->output
-        );
-    }
 }

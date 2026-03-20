@@ -6,29 +6,15 @@ use Orchestra\Utilities\Exception\DotNavigatorReadOnlyException;
 
 abstract class DotNavigator
 {
-    /**
-     * Store the data
-     *
-     * @var array
-     */
-
+    /** @var array<string|int,mixed> */
     protected array $data = [];
-
-    /**
-     * Make the navigator readonly
-     *
-     * @var bool
-     */
 
     protected bool $readOnly = false;
 
     /**
-     * Fill the navigator data array
-     *
-     * @param array $data
+     * @param array<string|int,mixed> $data
      * @return void
      */
-
     protected function fill(array $data): void
     {
         if ($this->readOnly && !empty($this->data)) {
@@ -39,13 +25,6 @@ abstract class DotNavigator
 
         $this->data = $data;
     }
-
-    /**
-     * Get a variable
-     *
-     * @param string $query
-     * @return mixed
-     */
 
     public function get(string $query): mixed
     {
@@ -64,25 +43,10 @@ abstract class DotNavigator
         return $current;
     }
 
-    /**
-     * Verify if a variable exists in the data array
-     *
-     * @param string $query
-     * @return bool
-     */
-
     public function has(string $query): bool
     {
         return !is_null($this->get($query));
     }
-
-    /**
-     * Set a variable
-     *
-     * @param string $query
-     * @param mixed $value
-     * @return void
-     */
 
     public function set(string $query, mixed $value): void
     {
@@ -101,13 +65,6 @@ abstract class DotNavigator
 
         $current = $value;
     }
-
-    /**
-     * Delete a variable and return true on success
-     *
-     * @param string $query
-     * @return bool
-     */
 
     public function delete(string $query): bool
     {
@@ -134,5 +91,13 @@ abstract class DotNavigator
         }
 
         return false;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function all(): array
+    {
+        return $this->data;
     }
 }

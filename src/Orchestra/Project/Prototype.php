@@ -2,138 +2,44 @@
 
 namespace Orchestra\Project;
 
-use Orchestra\Project\Exception\InvalidBlueprintException;
-use Orchestra\Utilities\DotNavigator;
+use Orchestra\Project\Definition\Source\SourceDefinitionCollection;
+use Orchestra\Project\Definition\Schema\SchemaDefinitionCollection;
+use Orchestra\Project\Definition\MediaVariant\MediaVariantDefinitionCollection;
+use Orchestra\Project\Definition\Relationship\RelationshipDefinitionCollection;
 
-final class Prototype extends DotNavigator
+final class Prototype
 {
-    /**
-     * Initialize prototype
-     *
-     * @param Blueprint $blueprint
-     */
-
     public function __construct(
-        private readonly Blueprint $blueprint
+        private readonly SourceDefinitionCollection $sources,
+        private readonly RelationshipDefinitionCollection $relationships,
+        private readonly SchemaDefinitionCollection $schemas,
+        private readonly MediaVariantDefinitionCollection $mediaVariants,
+        private readonly Config $configs
     ) {
-        $this->readContents();
-        $this->readSchemas();
     }
 
-    public function getAll()
+    public function configs(): Config
     {
-        return $this->data;
+        return $this->configs;
     }
 
-    /**
-     * Read contents from blueprint
-     *
-     * @return void
-     */
-
-    public function readContents(): void
+    public function sources(): SourceDefinitionCollection
     {
-        $this->set('contents', []);
-
-        if (empty($this->blueprint->get('contents'))) {
-            return;
-        }
-
-        foreach ($this->blueprint->get('contents') as $group => $source) {
-            if (!str_contains($source, ':')) {
-                throw new Exception\InvalidBlueprintException(
-                    "Invalid data source for group '{$group}'. A data source must be in the format of 'reader:path'."
-                );
-            }
-
-            [$reader, $path] = explode(':', $source, 2);
-
-            $this->set('contents.' . $group, [
-                'reader' => $reader,
-                'path' => $path
-            ]);
-        }
+        return $this->sources;
     }
 
-    /**
-     * Read schemas from blueprint
-     *
-     * @return void
-     */
-
-    public function readSchemas(): void
+    public function relationships(): RelationshipDefinitionCollection
     {
-        $this->set('schemas', []);
+        return $this->relationships;
+    }
 
-        if (empty($this->blueprint->get('schemas'))) {
-            return;
-        }
+    public function schemas(): SchemaDefinitionCollection
+    {
+        return $this->schemas;
+    }
 
-        foreach ($this->blueprint->get('schemas') as $tag => $schema) {
-            if (!isset($schema['template'])) {
-                throw new Exception\InvalidBlueprintException(
-                    "You must provide a template for schema '{$tag}'."
-                );
-            }
-
-            if (!isset($schema['builder'])) {
-                throw new Exception\InvalidBlueprintException(
-                    "You must provide a builder for schema '{$tag}'."
-                );
-            }
-
-            if (!isset($schema['generate'])) {
-                throw new Exception\InvalidItemException(
-                    "You must provide a generator for schema '{$tag}'."
-                );
-            }
-
-            if (!isset($schema['slug'])) {
-                throw new Exception\InvalidBlueprintException(
-                    "You must provide a slug for schema '{$tag}'."
-                );
-            }
-
-            if (!str_starts_with($schema['slug'], '/')) {
-                $schema['slug'] = '/' . $schema['slug'];
-            }
-
-            if (str_contains($schema['generate'], ':')) {
-                [$generator, $generateBasedOn] = explode(':', $schema['generate'], 2);
-            }
-
-            $contents = [];
-
-            if (isset($schema['contents'])) {
-                foreach ($schema['contents'] as $query) {
-                    if (!is_array($query)) {
-                        $contents[$query] = [
-                            'group' => $query
-                        ];
-                        continue;
-                    }
-
-                    if (!isset($query['group'])) {
-                        throw new InvalidBlueprintException(
-                            "Invalid content query for schema '{$tag}'. A content group must be provided."
-                        );
-                    }
-
-                    $queryLabel = $query['label'] ?? $query['group'];
-
-                    $contents = array_merge($contents, [
-                        $queryLabel => $query
-                    ]);
-                }
-            }
-
-            $schema['tag'] = $tag;
-            $schema['contents'] = $contents;
-            $schema['generator'] = $generator ?? $schema['generate'];
-            $schema['generate_based_on'] = $generateBasedOn ?? '';
-            $schema['options'] ??= [];
-
-            $this->set('schemas.' . $tag, $schema);
-        }
+    public function mediaVariants(): MediaVariantDefinitionCollection
+    {
+        return $this->mediaVariants;
     }
 }

@@ -1,0 +1,24 @@
+<?php
+
+namespace Orchestra\Page;
+
+use Orchestra\Page\Schema;
+
+final readonly class PagePayload
+{
+    /**
+     * @param string $tag
+     * @param string $permalink
+     * @param array<string|int,mixed> $contents
+     * @param Schema $schema
+     * @param string|null $sourcePath
+     */
+    public function __construct(
+        public string $tag,
+        public string $permalink,
+        public array $contents,
+        public Schema $schema,
+        public ?string $sourcePath = null
+    ) {
+    }
+}
