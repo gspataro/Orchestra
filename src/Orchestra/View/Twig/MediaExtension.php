@@ -26,14 +26,12 @@ final class MediaExtension extends AbstractExtension
     public function image(
         string $src,
         ?string $variant = null,
-        ?string $altText = null,
-        ?string $title = null
+        array $attributes = []
     ): string {
         return $this->elements->get('image')->render([
             'src' => $src,
             'variant' => $variant,
-            'altText' => $altText,
-            'title' => $title
+            'attributes' => $attributes
         ]);
     }
 

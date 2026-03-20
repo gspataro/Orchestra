@@ -16,7 +16,8 @@ final class ImageElement extends ViewElement
             return [
                 'src' => $src,
                 'altText' => $data['altText'] ?? '',
-                'title' => $data['title'] ?? ''
+                'title' => $data['title'] ?? '',
+                'attributes' => $data['attributes'] ?? []
             ];
         }
 
@@ -52,6 +53,7 @@ final class ImageElement extends ViewElement
 
         $attributes['altText'] = $data['altText'] ?? '';
         $attributes['title'] = $data['title'] ?? '';
+        $attributes['attributes'] = $data['attributes'] ?? [];
 
         return $attributes;
     }

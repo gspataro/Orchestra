@@ -1,7 +1,12 @@
 <img
     src="{{src}}"
-    {%if srcset%}srcset="{{srcset|join(', ')}}"{%endif%}
-    {%if sizes%}sizes="{{sizes}}"{%endif%}
-    {%if altText%}alt="{{altText}}"{%endif%}
-    {%if title%}title="{{title}}"{%endif%}
+    {{html_attributes(
+        {
+            'srcset': srcset|join(', '),
+            'sizes': sizes ?? null,
+            'alt': altText ?? null,
+            'title': title ?? null
+        },
+        attributes ?? {}
+    )}}
 >
