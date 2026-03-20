@@ -35,6 +35,14 @@ final class MediaExtension extends AbstractExtension
         ]);
     }
 
+    public function audio(string $src, array $attributes = []): string
+    {
+        return $this->elements->get('audio')->render([
+            'src' => $src,
+            'attributes' => $attributes
+        ]);
+    }
+
     public function svg(string $src, array $attributes = []): string
     {
         return $this->elements->get('svg')->render([

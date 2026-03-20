@@ -1,0 +1,7 @@
+<audio {{html_attributes({
+    "controls": "controls",
+}, attributes ?? {})}}>
+    {%for source in sources%}
+        <source src="{{source.src}}" type="{{source.type}}">
+    {%endfor%}
+</audio>

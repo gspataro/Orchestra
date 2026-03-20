@@ -4,6 +4,7 @@ namespace Orchestra\View;
 
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
+use Orchestra\View\Elements\Audio\AudioElement;
 use Orchestra\View\Elements\Image\ImageElement;
 use Orchestra\View\Elements\Svg\SvgElement;
 use Orchestra\View\Elements\Link\LinkElement;
@@ -96,6 +97,13 @@ final class ViewComponent extends Component
         ));
 
         $elements->add(new SvgElement(
+            $twig,
+            $container->get('content.repository'),
+            $container->get('media.resolver'),
+            $container->get('compiler.url')
+        ));
+
+        $elements->add(new AudioElement(
             $twig,
             $container->get('content.repository'),
             $container->get('media.resolver'),
