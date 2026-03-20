@@ -24,13 +24,13 @@ final class MediaExtension extends AbstractExtension
     }
 
     public function image(
-        string $relativePath,
+        string $src,
         ?string $variant = null,
         ?string $altText = null,
         ?string $title = null
     ): string {
         return $this->elements->get('image')->render([
-            'relativePath' => $relativePath,
+            'src' => $src,
             'variant' => $variant,
             'altText' => $altText,
             'title' => $title
