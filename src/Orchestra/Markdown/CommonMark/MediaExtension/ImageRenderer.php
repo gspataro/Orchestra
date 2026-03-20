@@ -24,7 +24,7 @@ final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInter
     {
         $attributes = [];
         $attributes['name'] = 'image';
-        $attributes['altText'] = $this->getAltText($node) ?? '';
+        $attributes['altText'] = $this->getAltText($node);
         $attributes['title'] = $node->getTitle() ?? '';
 
         if (str_starts_with($node->getUrl(), 'http://') || str_starts_with($node->getUrl(), 'https://')) {
