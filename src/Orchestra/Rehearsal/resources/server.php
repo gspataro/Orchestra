@@ -12,9 +12,8 @@ use Orchestra\Application\Kernel\RehearsalKernel;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Compiler\Pipeline\RehearsalPipeline;
 use Orchestra\Rehearsal\RehearsalOutputAdapter;
-use Orchestra\Rehearsal\Router;
 
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
+getcwd() . '/vendor/autoload.php';
 
 $app = new RehearsalKernel();
 $container = $app->boot();
