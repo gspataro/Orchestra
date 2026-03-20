@@ -5,6 +5,7 @@ namespace Orchestra\View;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
 use Orchestra\View\Elements\Image\ImageElement;
+use Orchestra\View\Elements\Svg\SvgElement;
 use Orchestra\View\Elements\Link\LinkElement;
 use Twig\Environment;
 use Orchestra\View\Twig\ConfigExtension;
@@ -71,6 +72,7 @@ final class ViewComponent extends Component
             $container->get('view.elements.renderer')
         ));
         $twig->addExtension(new ThemeExtension(
+            $container->get('theme.loader'),
             $container->get('theme.assets'),
             $container->get('compiler.url')
         ));
@@ -87,6 +89,13 @@ final class ViewComponent extends Component
         ));
 
         $elements->add(new LinkElement(
+            $twig,
+            $container->get('content.repository'),
+            $container->get('media.resolver'),
+            $container->get('compiler.url')
+        ));
+
+        $elements->add(new SvgElement(
             $twig,
             $container->get('content.repository'),
             $container->get('media.resolver'),

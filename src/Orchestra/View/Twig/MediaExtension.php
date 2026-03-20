@@ -37,12 +37,23 @@ final class MediaExtension extends AbstractExtension
         ]);
     }
 
+    public function svg(string $src, array $attributes = []): string
+    {
+        return $this->elements->get('svg')->render([
+            'src' => $src,
+            'attributes' => $attributes
+        ]);
+    }
+
     public function getFunctions()
     {
         $functions = [];
 
         $functions[] = new TwigFunction('media', [$this, 'media']);
         $functions[] = new TwigFunction('image', [$this, 'image'], [
+            'is_safe' => ['html']
+        ]);
+        $functions[] = new TwigFunction('svg', [$this, 'svg'], [
             'is_safe' => ['html']
         ]);
 

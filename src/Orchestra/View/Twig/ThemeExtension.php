@@ -4,15 +4,45 @@ namespace Orchestra\View\Twig;
 
 use Orchestra\Compiler\UrlGenerator;
 use Orchestra\Theme\Assets\AssetRepository;
+use Orchestra\Theme\ThemeLoader;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
 final class ThemeExtension extends AbstractExtension
 {
     public function __construct(
+        private readonly ThemeLoader $theme,
         private readonly AssetRepository $assets,
         private readonly UrlGenerator $url
     ) {
+    }
+
+    public function path(string $path): string
+    {
+        $theme = $this->theme->load();
+
+        return pathJoin($theme->path, $path);
+    }
+
+    public function attributes(array $default = [], array $custom = []): string
+    {
+        $attributes = array_merge($default, $custom);
+
+        if (isset($default['class']) || isset($custom['class'])) {
+            $attributes['class'] = trim($default['class'] ?? '') . ' ' . trim($custom['class'] ?? '');
+        }
+
+        $html = [];
+
+        foreach ($attributes as $attribute => $value) {
+            if (is_null($value)) {
+                continue;
+            }
+
+            $html[] = sprintf('%s="%s"', $attribute, $value);
+        }
+
+        return implode(' ', $html);
     }
 
     public function css(): string
@@ -47,6 +77,10 @@ final class ThemeExtension extends AbstractExtension
             'is_safe' => ['html']
         ]);
         $functions[] = new TwigFunction('theme_js', [$this, 'js'], [
+            'is_safe' => ['html']
+        ]);
+        $functions[] = new TwigFunction('theme_path', [$this, 'path']);
+        $functions[] = new TwigFUnction('html_attributes', [$this, 'attributes'], [
             'is_safe' => ['html']
         ]);
 
