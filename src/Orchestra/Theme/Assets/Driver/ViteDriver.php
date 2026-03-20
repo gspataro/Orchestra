@@ -34,18 +34,21 @@ final class ViteDriver implements DriverInterface
             }
 
             $entry = pathJoin($theme->path, $theme->assets->dir, $chunk['file']);
-            $extension = pathinfo($input, PATHINFO_EXTENSION);
             $output = $context->paths()->output('assets', $chunk['file']);
 
             copy($entry, $output);
 
-            switch ($extension) {
-                case 'css':
-                    $this->css[] = pathJoin('assets', $chunk['file']);
-                    break;
-                case 'js':
-                    $this->js[] = pathJoin('assets', $chunk['file']);
-                    break;
+            if (isset($chunk['isEntry']) && $chunk['isEntry']) {
+                $extension = pathinfo($input, PATHINFO_EXTENSION);
+
+                switch ($extension) {
+                    case 'css':
+                        $this->css[] = pathJoin('assets', $chunk['file']);
+                        break;
+                    case 'js':
+                        $this->js[] = pathJoin('assets', $chunk['file']);
+                        break;
+                }
             }
         }
     }
