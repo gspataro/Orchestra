@@ -13,7 +13,7 @@ use Orchestra\Compiler\BuildOptions;
 use Orchestra\Compiler\Pipeline\RehearsalPipeline;
 use Orchestra\Rehearsal\RehearsalOutputAdapter;
 
-getcwd() . '/vendor/autoload.php';
+require_once getcwd() . '/vendor/autoload.php';
 
 $app = new RehearsalKernel();
 $container = $app->boot();
