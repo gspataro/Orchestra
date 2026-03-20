@@ -10,10 +10,19 @@ final class ImageElement extends ViewElement
 
     protected function data(array $data = []): array
     {
-        $relativePath = $data['relativePath'] ?? '';
+        $src = $data['src'] ?? '';
+
+        if (strlen(trim($src)) < 1 || str_starts_with($src, 'http://') || str_starts_with($src, 'https://')) {
+            return [
+                'src' => $src,
+                'altText' => $data['altText'] ?? '',
+                'title' => $data['title'] ?? ''
+            ];
+        }
+
         $variant = $data['variant'] ?? null;
 
-        $image = $this->media->request($relativePath, $variant);
+        $image = $this->media->request($src, $variant);
 
         if (is_null($image)) {
             return [];

@@ -22,26 +22,30 @@ final class ImageRenderer implements NodeRendererInterface, XmlNodeRendererInter
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        $urlParts = parse_url($node->getUrl());
-        $relativePath = $urlParts['path'] ?? '';
+        $attributes = [];
+        $attributes['name'] = 'image';
+        $attributes['altText'] = $this->getAltText($node) ?? '';
+        $attributes['title'] = $node->getTitle() ?? '';
 
-        if (isset($urlParts['query'])) {
-            parse_str($urlParts['query'], $query);
+        if (str_starts_with($node->getUrl(), 'http://') || str_starts_with($node->getUrl(), 'https://')) {
+            $attributes['src'] = $node->getUrl();
+            $attributes['variant'] = '';
         } else {
-            $query = [];
-        }
+            $urlParts = parse_url($node->getUrl());
+            $attributes['src'] = $urlParts['path'] ?? '';
 
-        $variant = $query['variant'] ?? null;
+            if (isset($urlParts['query'])) {
+                parse_str($urlParts['query'], $query);
+            } else {
+                $query = [];
+            }
+
+            $attributes['variant'] = $query['variant'] ?? '';
+        }
 
         return new HtmlElement(
             tagName: 'orchestra-element',
-            attributes: [
-                'name' => 'image',
-                'relativePath' => $relativePath,
-                'variant' => $variant ?? '',
-                'altText' => $this->getAltText($node),
-                'title' => $node->getTitle()
-            ],
+            attributes: $attributes,
             selfClosing: true
         );
     }
