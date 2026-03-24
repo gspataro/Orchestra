@@ -29,10 +29,6 @@ final class ViteDriver implements DriverInterface
         }
 
         foreach ($data as $input => $chunk) {
-            if (!isset($chunk['isEntry']) || !$chunk['isEntry']) {
-                continue;
-            }
-
             $entry = pathJoin($theme->path, $theme->assets->dir, $chunk['file']);
             $output = $context->paths()->output('assets', $chunk['file']);
 
