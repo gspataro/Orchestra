@@ -28,9 +28,12 @@ final class ViteDriver implements DriverInterface
             return;
         }
 
+        $currentChunks = [];
+
         foreach ($data as $input => $chunk) {
             $entry = pathJoin($theme->path, $theme->assets->dir, $chunk['file']);
             $output = $context->paths()->output('assets', $chunk['file']);
+            $currentChunks[] = $output;
 
             copy($entry, $output);
 
@@ -47,6 +50,8 @@ final class ViteDriver implements DriverInterface
                 }
             }
         }
+
+        recursiveDelete($context->paths()->output('assets'), true, $currentChunks);
     }
 
     public function css(): array
