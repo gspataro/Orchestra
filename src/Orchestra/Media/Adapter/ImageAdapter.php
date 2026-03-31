@@ -35,7 +35,7 @@ final class ImageAdapter extends BaseAdapter
                     $image->thumbnailImage($width, $height, true);
                 }
             } elseif ($width || $height) {
-                $image->resizeImage($width ?? 0, $height ?? 0, Imagick::FILTER_UNDEFINED, 0);
+                $image->resizeImage($width ?? 0, $height ?? 0, Imagick::FILTER_LANCZOS, 1);
             }
         }
 
