@@ -9,8 +9,6 @@ final readonly class Paths
         public string $output,
         public string $data,
         public string $media,
-        public string $views,
-        public string $assets,
         public string $themes,
         public string $cache
     ) {
@@ -34,16 +32,6 @@ final readonly class Paths
     public function media(string ...$path): string
     {
         return pathJoin($this->media, ...$path);
-    }
-
-    public function views(string ...$path): string
-    {
-        return pathJoin($this->views, ...$path);
-    }
-
-    public function assets(string ...$path): string
-    {
-        return pathJoin($this->assets, ...$path);
     }
 
     public function themes(string ...$path): string

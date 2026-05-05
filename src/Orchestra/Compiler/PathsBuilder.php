@@ -7,8 +7,6 @@ final class PathsBuilder
     private string $output;
     private string $data;
     private string $media;
-    private string $views;
-    private string $assets;
     private string $themes;
     private string $cache;
 
@@ -18,8 +16,6 @@ final class PathsBuilder
         $this->output = $root . '/public';
         $this->data   = $root . '/contents';
         $this->media  = $root . '/contents/media';
-        $this->views  = $root . '/resources/view';
-        $this->assets = $root . '/resources/assets';
         $this->themes = $root . '/resources/themes';
         $this->cache  = $root . '/cache';
     }
@@ -31,8 +27,6 @@ final class PathsBuilder
             output: $this->output,
             data: $this->data,
             media: $this->media,
-            views: $this->views,
-            assets: $this->assets,
             themes: $this->themes,
             cache: $this->cache
         );
@@ -53,18 +47,6 @@ final class PathsBuilder
     public function media(string $path): static
     {
         $this->media = $path;
-        return $this;
-    }
-
-    public function views(string $path): static
-    {
-        $this->views = $path;
-        return $this;
-    }
-
-    public function assets(string $path): static
-    {
-        $this->assets = $path;
         return $this;
     }
 
