@@ -17,6 +17,10 @@ final class MediaResolver
 
     public function request(string $relativePath, ?string $variant = null): ?Media
     {
+        if (!str_starts_with($relativePath, '/')) {
+            $relativePath = '/' . $relativePath;
+        }
+
         if (!$this->repository->has($relativePath)) {
             $file = $this->context->get()->paths()->media($relativePath);
 
