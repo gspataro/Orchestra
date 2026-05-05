@@ -145,6 +145,10 @@ final class ContentQuery
         $data = $this->apply()->toArray();
         $first = array_key_first($data);
 
+        if (is_null($first)) {
+            return null;
+        }
+
         return $data[$first] ?? null;
     }
 
