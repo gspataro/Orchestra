@@ -24,6 +24,11 @@ final class ThemeExtension extends AbstractExtension
         return pathJoin($theme->path, $path);
     }
 
+    /**
+     * @param array<string,string> $default
+     * @param array<string,string> $custom
+     * @return string
+     */
     public function attributes(array $default = [], array $custom = []): string
     {
         $attributes = array_merge($default, $custom);
