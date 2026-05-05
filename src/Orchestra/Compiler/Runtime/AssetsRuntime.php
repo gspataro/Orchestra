@@ -29,15 +29,27 @@ final class AssetsRuntime extends Runtime
             return true;
         }
 
-        $driver->build($theme, $this->context);
+        $driver->discover($theme);
 
-        foreach ($driver->css() as $css) {
-            $this->assets->add('css', $css);
+        $currentEntries = [];
+
+        foreach ($driver->entries() as $entry) {
+            if ($entry->autoload && in_array($entry->type, ['css', 'js'])) {
+                $this->assets->add(
+                    $entry->type,
+                    pathJoin('assets', $entry->publicPath)
+                );
+            }
+
+            $currentEntries[] = $this->context->paths()->output('assets', $entry->publicPath);
+
+            copy(
+                pathJoin($theme->path, $theme->assets->dir, $entry->publicPath),
+                $this->context->paths()->output('assets', $entry->publicPath)
+            );
         }
 
-        foreach ($driver->js() as $js) {
-            $this->assets->add('js', $js);
-        }
+        recursiveDelete($this->context->paths()->output('assets'), true, $currentEntries);
 
         return true;
     }

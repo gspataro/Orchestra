@@ -6,15 +6,9 @@ use Orchestra\Compiler\BuildContext;
 use Orchestra\Theme\Assets\DriverInterface;
 use Orchestra\Theme\Theme;
 
-final class ViteDriver implements DriverInterface
+final class ViteDriver extends BaseDriver
 {
-    /** @var string[] */
-    private array $css = [];
-
-    /** @var string[] */
-    private array $js = [];
-
-    public function build(Theme $theme, BuildContext $context): void
+    public function discover(Theme $theme): void
     {
         $manifest = pathJoin($theme->path, $theme->assets->dir, '.vite', 'manifest.json');
 
@@ -28,51 +22,11 @@ final class ViteDriver implements DriverInterface
             return;
         }
 
-        $currentChunks = [];
-
         foreach ($data as $input => $chunk) {
-            $entry = pathJoin($theme->path, $theme->assets->dir, $chunk['file']);
-            $output = $context->paths()->output('assets', $chunk['file']);
-            $currentChunks[] = $output;
+            $entry = pathJoin($theme->assets->dir, $chunk['file']);
+            $publicPath = $chunk['file'];
 
-            copy($entry, $output);
-
-            if (isset($chunk['isEntry']) && $chunk['isEntry']) {
-                $extension = pathinfo($input, PATHINFO_EXTENSION);
-
-                switch ($extension) {
-                    case 'css':
-                        $this->css[] = pathJoin('assets', $chunk['file']);
-                        break;
-                    case 'js':
-                        $this->js[] = pathJoin('assets', $chunk['file']);
-                        break;
-                }
-            }
+            $this->addEntry($entry, $publicPath, $chunk['isEntry'] ?? false);
         }
-
-        recursiveDelete($context->paths()->output('assets'), true, $currentChunks);
-    }
-
-    public function css(): array
-    {
-        $css = [];
-
-        foreach ($this->css as $entry) {
-            $css[] = $entry;
-        }
-
-        return $css;
-    }
-
-    public function js(): array
-    {
-        $js = [];
-
-        foreach ($this->js as $entry) {
-            $js[] = $entry;
-        }
-
-        return $js;
     }
 }
