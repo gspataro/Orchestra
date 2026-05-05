@@ -23,6 +23,7 @@ final class AssetsRuntime extends Runtime
 
         $theme = $this->themeLoader->load();
         $driver = $this->drivers->get($theme->assets->driver);
+        $publish = $this->context->options()->context !== 'rehearsal';
 
         if (!$driver) {
             $this->output->warning("Asset driver '{$theme->assets->driver}' not found");
@@ -37,19 +38,23 @@ final class AssetsRuntime extends Runtime
             if ($entry->autoload && in_array($entry->type, ['css', 'js'])) {
                 $this->assets->add(
                     $entry->type,
-                    pathJoin('assets', $entry->publicPath)
+                    pathJoin('assets', $entry->publicPath) . ($publish ? '' : '?v=' . time())
                 );
             }
 
             $currentEntries[] = $this->context->paths()->output('assets', $entry->publicPath);
 
-            copy(
-                pathJoin($theme->path, $theme->assets->dir, $entry->publicPath),
-                $this->context->paths()->output('assets', $entry->publicPath)
-            );
+            if ($publish) {
+                copy(
+                    pathJoin($theme->path, $theme->assets->dir, $entry->publicPath),
+                    $this->context->paths()->output('assets', $entry->publicPath)
+                );
+            }
         }
 
-        recursiveDelete($this->context->paths()->output('assets'), true, $currentEntries);
+        if ($publish) {
+            recursiveDelete($this->context->paths()->output('assets'), true, $currentEntries);
+        }
 
         return true;
     }

@@ -5,13 +5,16 @@ namespace Orchestra\Rehearsal;
 use Orchestra\Compiler\BuildContextProvider;
 use Orchestra\Page\PageCollection;
 use Orchestra\Publisher\BuilderCollection;
+use Orchestra\Theme\Theme;
+use Orchestra\Theme\ThemeLoader;
 
 final class Router
 {
     public function __construct(
         private readonly BuildContextProvider $context,
         private readonly PageCollection $pages,
-        private readonly BuilderCollection $builder
+        private readonly BuilderCollection $builder,
+        private readonly ThemeLoader $theme
     ) {
     }
 
@@ -38,6 +41,16 @@ final class Router
         if (is_file($file)) {
             $this->serveFile($file);
             return;
+        }
+
+        if (str_starts_with($uri, 'assets')) {
+            $theme = $this->theme->load();
+            $asset = pathJoin($theme->path, $theme->assets->dir, substr($uri, strlen('assets/')));
+
+            if (is_file($asset)) {
+                $this->serveFile($asset);
+                return;
+            }
         }
 
         $page = $this->pages->get('/' . $uri);
