@@ -73,7 +73,7 @@ final class ViewComponent extends Component
             $container->get('view.elements.renderer')
         ));
         $twig->addExtension(new ThemeExtension(
-            $container->get('theme.loader'),
+            $container->get('theme.provider'),
             $container->get('theme.assets'),
             $container->get('compiler.url')
         ));

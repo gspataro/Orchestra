@@ -7,6 +7,7 @@ use Orchestra\Page\PageCollection;
 use Orchestra\Publisher\BuilderCollection;
 use Orchestra\Theme\Theme;
 use Orchestra\Theme\ThemeLoader;
+use Orchestra\Theme\ThemeProvider;
 
 final class Router
 {
@@ -14,7 +15,7 @@ final class Router
         private readonly BuildContextProvider $context,
         private readonly PageCollection $pages,
         private readonly BuilderCollection $builder,
-        private readonly ThemeLoader $theme
+        private readonly ThemeProvider $themeProvider
     ) {
     }
 
@@ -44,7 +45,7 @@ final class Router
         }
 
         if (str_starts_with($uri, 'assets')) {
-            $theme = $this->theme->load();
+            $theme = $this->themeProvider->get();
             $asset = pathJoin($theme->path, $theme->assets->dir, substr($uri, strlen('assets/')));
 
             if (is_file($asset)) {
