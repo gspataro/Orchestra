@@ -3,6 +3,7 @@
 namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Compiler\CompilerMode;
 use Orchestra\Theme\Assets\AssetRepository;
 use Orchestra\Theme\Assets\DriverCollection;
 use Orchestra\Theme\ThemeLoader;
@@ -23,7 +24,7 @@ final class AssetsRuntime extends Runtime
 
         $theme = $this->themeLoader->load();
         $driver = $this->drivers->get($theme->assets->driver);
-        $publish = $this->context->options()->context !== 'rehearsal';
+        $publish = $this->context->options()->mode !== CompilerMode::REHEARSAL;
 
         if (!$driver) {
             $this->output->warning("Asset driver '{$theme->assets->driver}' not found");

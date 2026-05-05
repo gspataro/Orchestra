@@ -10,7 +10,7 @@ final readonly class BuildOptions
         public bool $ignoreDrafts = true,
         public bool $themeDebug = false,
         public ?string $baseUrl = null,
-        public ?string $context = 'build'
+        public CompilerMode $mode = CompilerMode::BUILD
     ) {
     }
 }

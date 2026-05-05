@@ -10,6 +10,7 @@
 
 use Orchestra\Application\Kernel\RehearsalKernel;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Compiler\CompilerMode;
 use Orchestra\Compiler\Pipeline\RehearsalPipeline;
 use Orchestra\Rehearsal\RehearsalOutputAdapter;
 
@@ -37,5 +38,5 @@ $pipeline->run(new BuildOptions(
     ignoreDrafts: false,
     themeDebug: true,
     baseUrl: 'http://localhost:8080',
-    context: 'rehearsal'
+    mode: CompilerMode::REHEARSAL
 ));
