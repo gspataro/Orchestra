@@ -86,7 +86,7 @@ final class ThemeExtension extends AbstractExtension
             'is_safe' => ['html']
         ]);
         $functions[] = new TwigFunction('theme_path', [$this, 'path']);
-        $functions[] = new TwigFUnction('html_attributes', [$this, 'attributes'], [
+        $functions[] = new TwigFunction('html_attributes', [$this, 'attributes'], [
             'is_safe' => ['html']
         ]);
 
