@@ -18,7 +18,7 @@ final class OrchestraSpecification implements SpecificationInterface
             'cleanup' => ['type' => 'array', 'default' => []],
             'output_strategy' => [
                 'type' => 'enum',
-                'default' => 'html',
+                'default' => 'pretty',
                 'structure' => ['html', 'pretty']
             ],
         ];
