@@ -6,7 +6,9 @@ use Exception;
 use Orchestra\Publisher\BuilderCollection;
 use Orchestra\Page\PageCollection;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Publisher\OutputRegistry;
 use Orchestra\Publisher\Publisher;
+use Orchestra\Publisher\Strategy\HtmlOutputStrategy;
 use Twig\Error\LoaderError;
 
 final class PagesRuntime extends Runtime
@@ -14,6 +16,7 @@ final class PagesRuntime extends Runtime
     private PageCollection $pages;
     private BuilderCollection $builders;
     private Publisher $publisher;
+    private OutputRegistry $outputRegistry;
 
     public function run(BuildOptions $options): bool
     {
@@ -27,6 +30,12 @@ final class PagesRuntime extends Runtime
         $this->pages = $this->container->get('pages.collection');
         $this->builders = $this->container->get('publisher.builders');
         $this->publisher = $this->container->get('publisher');
+        $this->outputRegistry = $this->container->get('publisher.registry');
+
+        /**
+         * @todo Make output strategy configurable. For now, we're using the current strategy.
+         */
+        $strategy = new HtmlOutputStrategy();
 
         foreach ($this->pages as $page) {
             try {
@@ -45,7 +54,9 @@ final class PagesRuntime extends Runtime
                 return false;
             }
 
-            $this->publisher->publish($page->permalink, $output);
+            $path = $strategy->apply($page->permalink);
+            $this->outputRegistry->add($path);
+            $this->publisher->publish($path, $output);
         }
 
         return true;

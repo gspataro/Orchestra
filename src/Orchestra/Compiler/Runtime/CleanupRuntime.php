@@ -4,9 +4,12 @@ namespace Orchestra\Compiler\Runtime;
 
 use DirectoryIterator;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Publisher\OutputRegistry;
 
 final class CleanupRuntime extends Runtime
 {
+    private OutputRegistry $outputRegistry;
+
     private function cleanup(string $directory): void
     {
         if ($directory === $this->context->paths()->output()) {
@@ -29,11 +32,13 @@ final class CleanupRuntime extends Runtime
                 continue;
             }
 
-            $itemPath = $item->isFile()
+            /*$itemPath = $item->isFile()
                 ? substr($item->getPathname(), strlen($this->context->paths()->output()), strlen('.html') * -1)
-                : substr($item->getPathname(), strlen($this->context->paths()->output()));
+                : substr($item->getPathname(), strlen($this->context->paths()->output()));*/
 
-            if ($item->isFile() && !$this->context->sitemap()->fromPermalink($itemPath)) {
+            $itemPath = substr($item->getPathname(), strlen($this->context->paths()->output()));
+
+            if ($item->isFile() && !in_array($itemPath, $this->outputRegistry->all())) {
                 unlink($item->getPathname());
                 continue;
             }
@@ -46,6 +51,8 @@ final class CleanupRuntime extends Runtime
 
     public function run(BuildOptions $options): bool
     {
+        $this->outputRegistry = $this->container->get('publisher.registry');
+
         $this->cleanup($this->context->paths()->output());
 
         return true;

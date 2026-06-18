@@ -2,7 +2,6 @@
 
 namespace Orchestra\Publisher;
 
-use Orchestra\Compiler\BuildContext;
 use Orchestra\Compiler\BuildContextProvider;
 
 final class Publisher
@@ -14,7 +13,7 @@ final class Publisher
 
     public function publish(string $path, mixed $content): void
     {
-        $outputPath = $this->context->get()->paths()->output($path . '.html');
+        $outputPath = $this->context->get()->paths()->output($path);
         $outputDir = pathinfo($outputPath, PATHINFO_DIRNAME);
 
         if (!is_dir($outputDir)) {

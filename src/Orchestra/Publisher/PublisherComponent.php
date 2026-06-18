@@ -20,6 +20,10 @@ final class PublisherComponent extends Component
                 $c->get('compiler.context.provider')
             );
         });
+
+        $container->add('publisher.registry', function ($c, $a): object {
+            return new OutputRegistry();
+        });
     }
 
     public function boot(Container $container): void
