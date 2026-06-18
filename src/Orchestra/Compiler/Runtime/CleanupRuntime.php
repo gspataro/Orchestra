@@ -32,10 +32,6 @@ final class CleanupRuntime extends Runtime
                 continue;
             }
 
-            /*$itemPath = $item->isFile()
-                ? substr($item->getPathname(), strlen($this->context->paths()->output()), strlen('.html') * -1)
-                : substr($item->getPathname(), strlen($this->context->paths()->output()));*/
-
             $itemPath = substr($item->getPathname(), strlen($this->context->paths()->output()));
 
             if ($item->isFile() && !in_array($itemPath, $this->outputRegistry->all())) {
