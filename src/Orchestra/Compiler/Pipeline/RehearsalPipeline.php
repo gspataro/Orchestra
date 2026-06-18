@@ -4,7 +4,6 @@ namespace Orchestra\Compiler\Pipeline;
 
 use Orchestra\Compiler\Runtime\AssetsRuntime;
 use Orchestra\Compiler\Runtime\CacheInvalidationRuntime;
-use Orchestra\Compiler\Runtime\CleanupRuntime;
 use Orchestra\Compiler\Runtime\SitemapRuntime;
 use Orchestra\Compiler\Runtime\ContentsRuntime;
 use Orchestra\Compiler\Runtime\CreateContextRuntime;
@@ -26,7 +25,6 @@ final class RehearsalPipeline extends BasePipeline
         ServeRuntime::class,
         MediaRuntime::class,
         SitemapRuntime::class,
-        CleanupRuntime::class,
         CacheInvalidationRuntime::class
     ];
 }
