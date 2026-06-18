@@ -15,7 +15,12 @@ final class OrchestraSpecification implements SpecificationInterface
     public function definition(): array
     {
         return [
-            'cleanup' => ['type' => 'array', 'default' => []]
+            'cleanup' => ['type' => 'array', 'default' => []],
+            'output_strategy' => [
+                'type' => 'enum',
+                'default' => 'html',
+                'structure' => ['html', 'pretty']
+            ],
         ];
     }
 
