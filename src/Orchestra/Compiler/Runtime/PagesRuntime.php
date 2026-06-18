@@ -35,10 +35,9 @@ final class PagesRuntime extends Runtime
         $this->outputStrategies = $this->container->get('publisher.strategies');
         $this->outputRegistry = $this->container->get('publisher.registry');
 
-        /**
-         * @todo Make output strategy configurable. For now, we're using the current strategy.
-         */
-        $strategy = $this->outputStrategies->get('html');
+        $outputStrategy = $this->outputStrategies->get(
+            $this->context->prototype()->configs()->get('orchestra.output_strategy')
+        );
 
         foreach ($this->pages as $page) {
             try {
@@ -57,7 +56,7 @@ final class PagesRuntime extends Runtime
                 return false;
             }
 
-            $path = $strategy->apply($page->permalink);
+            $path = $outputStrategy->apply($page->permalink);
             $this->outputRegistry->add($path);
             $this->publisher->publish($path, $output);
         }
