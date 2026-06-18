@@ -6,6 +6,8 @@ use Orchestra\Publisher\BuilderCollection;
 use Orchestra\Publisher\Builder\TwigBuilder;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
+use Orchestra\Publisher\Strategy\HtmlOutputStrategy;
+use Orchestra\Publisher\Strategy\PrettyOutputStrategy;
 
 final class PublisherComponent extends Component
 {
@@ -24,6 +26,10 @@ final class PublisherComponent extends Component
         $container->add('publisher.registry', function ($c, $a): object {
             return new OutputRegistry();
         });
+
+        $container->add('publisher.strategies', function ($c, $a): object {
+            return new OutputStrategyCollection();
+        });
     }
 
     public function boot(Container $container): void
@@ -34,5 +40,11 @@ final class PublisherComponent extends Component
         $buildersCollection->add('twig', new TwigBuilder(
             $container->get('twig')
         ));
+
+        /** @var OutputStrategyCollection */
+        $strategiesCollection = $container->get('publisher.strategies');
+
+        $strategiesCollection->add('html', new HtmlOutputStrategy());
+        $strategiesCollection->add('pretty', new PrettyOutputStrategy());
     }
 }
