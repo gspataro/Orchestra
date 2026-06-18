@@ -115,6 +115,7 @@ final class BlueprintCompiler
                 'bool' => is_bool($value),
                 'int' => is_int($value),
                 'array' => is_array($value),
+                'enum' => in_array($value, $rules['structure'], true),
                 default => true
             };
 
