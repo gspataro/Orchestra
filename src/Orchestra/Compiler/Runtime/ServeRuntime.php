@@ -3,10 +3,9 @@
 namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Page\Page;
-use Orchestra\Page\PageCollection;
 use Orchestra\Compiler\BuildOptions;
 use Orchestra\Publisher\BuilderInterface;
-use Orchestra\Rehearsal\Response;
+use Orchestra\Publisher\Publisher;
 use Orchestra\Rehearsal\ResponseType;
 use Orchestra\Rehearsal\Router;
 use Orchestra\Theme\ThemeProvider;
@@ -16,6 +15,7 @@ final class ServeRuntime extends Runtime
     private Router $router;
     private BuilderInterface $builder;
     private ThemeProvider $theme;
+    private Publisher $publisher;
 
     private function serveFile(string $path): void
     {
@@ -39,7 +39,10 @@ final class ServeRuntime extends Runtime
             return;
         }
 
-        echo $this->builder->compile($page);
+        $this->publisher->publish(
+            '',
+            $this->builder->compile($page)
+        );
     }
 
     public function run(BuildOptions $options): bool
@@ -48,6 +51,7 @@ final class ServeRuntime extends Runtime
 
         $this->theme = $this->container->get('theme.provider');
         $this->builder = $this->container->get('publisher.builder');
+        $this->publisher = $this->container->get('publisher');
         $this->router = $this->container->get('rehearsal.router');
 
         $response = $this->router->handleRequest($_SERVER['REQUEST_URI'] ?? '');
