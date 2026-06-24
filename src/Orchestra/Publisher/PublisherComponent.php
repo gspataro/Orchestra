@@ -4,7 +4,6 @@ namespace Orchestra\Publisher;
 
 use Orchestra\Publisher\Adapter\FilesystemAdapter;
 use Orchestra\Publisher\Adapter\HttpAdapter;
-use Orchestra\Publisher\Builder\TwigBuilder;
 use GSpataro\DependencyInjection\Container;
 use Orchestra\Application\Component;
 use Orchestra\Publisher\Strategy\HtmlOutputStrategy;
@@ -25,14 +24,8 @@ final class PublisherComponent extends Component
         });
 
         $container->add('publisher.builder', function ($c, $a): object {
-            return new TwigBuilder(
-                $c->get('twig')
-            );
-        });
-
-        $container->add('publisher', function ($c, $a): object {
-            return new Publisher(
-                $c->get('publisher.adapter')
+            return new Builder(
+                $c->get('view.renderer')
             );
         });
 
@@ -42,6 +35,14 @@ final class PublisherComponent extends Component
 
         $container->add('publisher.strategies', function ($c, $a): object {
             return new OutputStrategyCollection();
+        });
+
+        $container->add('publisher', function ($c, $a): object {
+            return new Publisher(
+                $c->get('publisher.builder'),
+                $c->get('publisher.adapter'),
+                $c->get('publisher.registry')
+            );
         });
     }
 

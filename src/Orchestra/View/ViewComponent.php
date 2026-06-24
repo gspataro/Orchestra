@@ -8,6 +8,7 @@ use Orchestra\View\Elements\Audio\AudioElement;
 use Orchestra\View\Elements\Image\ImageElement;
 use Orchestra\View\Elements\Svg\SvgElement;
 use Orchestra\View\Elements\Link\LinkElement;
+use Orchestra\View\Renderer\TwigRenderer;
 use Twig\Environment;
 use Orchestra\View\Twig\ConfigExtension;
 use Orchestra\View\Twig\ContentExtension;
@@ -32,6 +33,12 @@ final class ViewComponent extends Component
         $container->add('twig', function ($c, $a): object {
             return new Environment(
                 $c->get('twig.loader')
+            );
+        });
+
+        $container->add('view.renderer', function ($c, $a): object {
+            return new TwigRenderer(
+                $c->get('twig')
             );
         });
 

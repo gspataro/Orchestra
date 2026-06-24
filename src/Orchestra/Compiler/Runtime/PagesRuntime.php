@@ -5,18 +5,14 @@ namespace Orchestra\Compiler\Runtime;
 use Exception;
 use Orchestra\Page\PageCollection;
 use Orchestra\Compiler\BuildOptions;
-use Orchestra\Publisher\BuilderInterface;
-use Orchestra\Publisher\OutputRegistry;
 use Orchestra\Publisher\OutputStrategyCollection;
 use Orchestra\Publisher\Publisher;
 
 final class PagesRuntime extends Runtime
 {
     private PageCollection $pages;
-    private BuilderInterface $builder;
     private Publisher $publisher;
     private OutputStrategyCollection $outputStrategies;
-    private OutputRegistry $outputRegistry;
 
     public function run(BuildOptions $options): bool
     {
@@ -28,26 +24,22 @@ final class PagesRuntime extends Runtime
         $this->output->info('Building pages');
 
         $this->pages = $this->container->get('pages.collection');
-        $this->builder = $this->container->get('publisher.builder');
         $this->publisher = $this->container->get('publisher');
         $this->outputStrategies = $this->container->get('publisher.strategies');
-        $this->outputRegistry = $this->container->get('publisher.registry');
 
         $outputStrategy = $this->outputStrategies->get(
             $this->context->prototype()->configs()->get('orchestra.output_strategy')
         );
 
+        $this->publisher->setOutputStrategy($outputStrategy);
+
         foreach ($this->pages as $page) {
             try {
-                $output = $this->builder->compile($page);
+                $this->publisher->publish($page);
             } catch (Exception $e) {
                 $this->output->error("Error in '{$page->schema->tag}' schema: " . $e->getMessage());
                 return false;
             }
-
-            $path = $outputStrategy->apply($page->permalink);
-            $this->outputRegistry->add($path);
-            $this->publisher->publish($path, $output);
         }
 
         return true;

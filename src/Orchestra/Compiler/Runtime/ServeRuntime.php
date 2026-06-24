@@ -4,7 +4,6 @@ namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Page\Page;
 use Orchestra\Compiler\BuildOptions;
-use Orchestra\Publisher\BuilderInterface;
 use Orchestra\Publisher\Publisher;
 use Orchestra\Rehearsal\ResponseType;
 use Orchestra\Rehearsal\Router;
@@ -13,7 +12,6 @@ use Orchestra\Theme\ThemeProvider;
 final class ServeRuntime extends Runtime
 {
     private Router $router;
-    private BuilderInterface $builder;
     private ThemeProvider $theme;
     private Publisher $publisher;
 
@@ -39,10 +37,7 @@ final class ServeRuntime extends Runtime
             return;
         }
 
-        $this->publisher->publish(
-            '',
-            $this->builder->compile($page)
-        );
+        $this->publisher->publish($page);
     }
 
     public function run(BuildOptions $options): bool
@@ -50,7 +45,6 @@ final class ServeRuntime extends Runtime
         $this->output->info('Serving pages');
 
         $this->theme = $this->container->get('theme.provider');
-        $this->builder = $this->container->get('publisher.builder');
         $this->publisher = $this->container->get('publisher');
         $this->router = $this->container->get('rehearsal.router');
 
