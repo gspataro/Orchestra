@@ -33,6 +33,10 @@ final class AssetsRuntime extends Runtime
 
         $driver->discover($theme);
 
+        if (!is_dir($this->context->paths()->output('assets'))) {
+            mkdir($this->context->paths()->output('assets'), 0777, true);
+        }
+
         $currentEntries = [];
 
         foreach ($driver->entries() as $entry) {
