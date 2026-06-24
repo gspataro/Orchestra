@@ -3,6 +3,9 @@
 namespace Orchestra\Media;
 
 use GSpataro\DependencyInjection\Container;
+use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Intervention\Image\ImageManager;
 use Orchestra\Application\Component;
 use Orchestra\Media\Adapter\CopyAdapter;
 use Orchestra\Media\Adapter\ImageAdapter;
@@ -81,6 +84,11 @@ final class MediaComponent extends Component
                 $c->get('media.signature')
             );
         });
+
+        $container->add('media.image.manager', function ($c, $a): object {
+            $driver = class_exists(\Imagick::class) ? ImagickDriver::class : GdDriver::class;
+            return new ImageManager($driver);
+        });
     }
 
     public function boot(Container $container): void
@@ -88,7 +96,12 @@ final class MediaComponent extends Component
         /** @var AdapterCollection */
         $adapters = $container->get('media.adapters');
 
-        $adapters->add(new ImageAdapter());
+        /** @var ImageManager */
+        $imageManager = $container->get('media.image.manager');
+
+        $adapters->add(new ImageAdapter(
+            $imageManager
+        ));
         $adapters->add(new CopyAdapter());
 
         /** @var PolicyCollection */
