@@ -31,7 +31,7 @@ final class CollectionGenerator extends BaseGenerator
 
                 yield $this->preparePayload(
                     $schema->tag . '.' . $collectionSlug . '.page-' . $currentPage,
-                    $schema->slug . '/' . $collectionSlug . '/' . $currentSlug,
+                    pathJoin($schema->slug, $collectionSlug, $currentSlug),
                     [
                         'archive' => [
                             'collection' => $collection,

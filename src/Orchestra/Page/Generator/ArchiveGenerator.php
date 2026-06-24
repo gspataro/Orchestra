@@ -25,7 +25,7 @@ final class ArchiveGenerator extends BaseGenerator
 
             yield $this->preparePayload(
                 $schema->tag . '.page-' . $currentPage,
-                $schema->slug . '/' . $currentSlug,
+                pathJoin($schema->slug, $currentSlug),
                 [
                     'archive' => [
                         'loop' => $pages[$i],
