@@ -7,19 +7,12 @@ use Orchestra\Compiler\BuildContextProvider;
 final class Publisher
 {
     public function __construct(
-        private readonly BuildContextProvider $context
+        private readonly AdapterInterface $adapter
     ) {
     }
 
     public function publish(string $path, mixed $content): void
     {
-        $outputPath = $this->context->get()->paths()->output($path);
-        $outputDir = pathinfo($outputPath, PATHINFO_DIRNAME);
-
-        if (!is_dir($outputDir)) {
-            mkdir($outputDir, 0777, true);
-        }
-
-        file_put_contents($outputPath, $content);
+        $this->adapter->handle($path, $content);
     }
 }

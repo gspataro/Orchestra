@@ -2,6 +2,7 @@
 
 namespace Orchestra\Publisher;
 
+use Orchestra\Publisher\Adapter\FilesystemAdapter;
 use Orchestra\Publisher\BuilderCollection;
 use Orchestra\Publisher\Builder\TwigBuilder;
 use GSpataro\DependencyInjection\Container;
@@ -17,9 +18,15 @@ final class PublisherComponent extends Component
             return new BuilderCollection();
         });
 
+        $container->add('publisher.adapter', function ($c, $a): object {
+            return new FilesystemAdapter(
+                $c->get('compiler.context.provider')
+            );
+        });
+
         $container->add('publisher', function ($c, $a): object {
             return new Publisher(
-                $c->get('compiler.context.provider')
+                $c->get('publisher.adapter')
             );
         });
 
