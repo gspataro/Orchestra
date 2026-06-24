@@ -17,20 +17,12 @@ final class Router
     ) {
     }
 
-    /**
-     * @param array<string,mixed> $server
-     * @return void
-     */
-    public function handleRequest(array $server): void
+    public function handleRequest(string $uri): void
     {
-        $uri = parse_url($server['REQUEST_URI'], PHP_URL_PATH);
-        $uri = trim($uri, '/');
+        $path = parse_url($uri, PHP_URL_PATH);
+        $request = trim($path, '/') ?: 'index';
 
-        if ($uri === '') {
-            $uri = 'index';
-        }
-
-        $this->serveResource($uri);
+        $this->serveResource($request);
     }
 
     private function serveResource(string $uri): void

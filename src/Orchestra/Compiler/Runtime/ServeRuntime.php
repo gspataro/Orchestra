@@ -15,7 +15,7 @@ final class ServeRuntime extends Runtime
         $this->output->info('Serving pages');
 
         $this->router = $this->container->get('rehearsal.router');
-        $this->router->handleRequest($_SERVER);
+        $this->router->handleRequest($_SERVER['REQUEST_URI'] ?? '');
 
         return true;
     }
