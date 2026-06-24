@@ -3,6 +3,7 @@
 namespace Orchestra\Rehearsal;
 
 use Orchestra\Compiler\BuildContextProvider;
+use Orchestra\Page\Page;
 use Orchestra\Page\PageCollection;
 use Orchestra\Publisher\BuilderInterface;
 use Orchestra\Theme\ThemeProvider;
@@ -11,56 +12,27 @@ final class Router
 {
     public function __construct(
         private readonly BuildContextProvider $context,
-        private readonly PageCollection $pages,
-        private readonly BuilderInterface $builder,
-        private readonly ThemeProvider $themeProvider
+        private readonly PageCollection $pages
     ) {
     }
 
-    public function handleRequest(string $uri): void
+    public function handleRequest(string $uri): Response
     {
         $path = parse_url($uri, PHP_URL_PATH);
         $request = trim($path, '/') ?: 'index';
 
-        $this->serveResource($request);
-    }
-
-    private function serveResource(string $uri): void
-    {
-        $file = $this->context->get()->paths()->output($uri);
+        $file = $this->context->get()->paths()->output($request);
 
         if (is_file($file)) {
-            $this->serveFile($file);
-            return;
+            return $this->handleFile($file);
         }
 
-        if (str_starts_with($uri, 'assets')) {
-            $theme = $this->themeProvider->get();
-            $asset = pathJoin($theme->path, $theme->assets->dir, substr($uri, strlen('assets/')));
-
-            if (is_file($asset)) {
-                $this->serveFile($asset);
-                return;
-            }
-        }
-
-        $page = $this->pages->get('/' . $uri);
-
-        if (!$page) {
-            $page = $this->pages->get('/' . $uri . '/index');
-        }
-
-        if ($page) {
-            echo $this->builder->compile($page);
-            return;
-        }
-
-        $this->serve404();
+        return $this->handlePage($request);
     }
 
-    private function serveFile(string $filePath): void
+    public function handleFile(string $file): Response
     {
-        $contentType = match (pathinfo($filePath, PATHINFO_EXTENSION)) {
+        $contentType = match (pathinfo($file, PATHINFO_EXTENSION)) {
             'html' => 'text/html',
             'css'  => 'text/css',
             'js'   => 'application/javascript',
@@ -73,26 +45,49 @@ final class Router
             'woff' => 'font/woff',
             'woff2'=> 'font/woff2',
             'ttf'  => 'font/ttf',
-            default => mime_content_type($filePath) ?: 'application/octet-stream'
+            default => function_exists('mime_content_type')
+                ? (mime_content_type($file) ?: 'application/octet-stream')
+                : 'application/octet-stream'
         };
 
-        header('Content-Type: ' . $contentType);
-        header('Content-Length: ' . filesize($filePath));
-
-        readfile($filePath);
+        return $this->prepareResponse(
+            ResponseType::FILE,
+            [
+                'Content-Length' => filesize($file),
+                'Content-Type' => $contentType
+            ],
+            $file
+        );
     }
 
-    private function serve404(): void
+    private function handlePage(string $request): Response
     {
-        http_response_code(404);
+        $page = $this->pages->get('/' . $request);
 
-        $page = $this->pages->get('/404');
-
-        if ($page) {
-            echo $this->builder->compile($page);
-            return;
+        if (!$page) {
+            $page = $this->pages->get('/' . $request . '/index');
         }
 
-        echo "404 Not Found";
+        return $this->prepareResponse(
+            ResponseType::PAGE,
+            [
+                'Status' => $page ? '200 OK' : '404 Not Found'
+            ],
+            $page ?? $this->pages->get('/404') ?? null
+        );
+    }
+
+    /**
+     * @param ResponseType $type
+     * @param array<string, mixed> $headers
+     * @param Page|string|null $payload
+     * @return Response
+     */
+    private function prepareResponse(
+        ResponseType $type,
+        array $headers,
+        Page|string|null $payload
+    ): Response {
+        return new Response($type, $headers, $payload);
     }
 }
