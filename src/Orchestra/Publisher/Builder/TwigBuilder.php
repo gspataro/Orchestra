@@ -15,6 +15,6 @@ final class TwigBuilder implements BuilderInterface
 
     public function compile(Page $page): string
     {
-        return $this->twig->render($page->schema->template . '.twig', (array) $page->contents);
+        return $this->twig->render($page->schema->template . '.twig', $page->contents);
     }
 }
