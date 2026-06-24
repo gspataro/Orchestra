@@ -12,7 +12,7 @@ function makeSchema(
     string $source = 'posts',
     array $options = []
 ): Schema {
-    return new Schema($tag, $contents, 'template.twig', 'once', $source, 'twig', $slug, $options);
+    return new Schema($tag, $contents, 'template.twig', 'once', $source, $slug, $options);
 }
 
 function makeContent(array $meta = [], string $path = '/posts/post.md', string $id = 'post-id'): Content

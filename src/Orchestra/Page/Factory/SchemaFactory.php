@@ -20,7 +20,6 @@ final class SchemaFactory
             $definition->template,
             $definition->generator,
             $definition->source,
-            $definition->builder,
             $definition->slug,
             $definition->options
         );

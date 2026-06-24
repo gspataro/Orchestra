@@ -2,15 +2,16 @@
 
 namespace Orchestra\Project\Definition\Schema;
 
+use Orchestra\Project\Definition\Query\QueryDefinition;
+
 final readonly class SchemaDefinition
 {
     /**
      * @param string $tag
-     * @param \Orchestra\Project\Definition\Query\QueryDefinition[] $contentsReferences
+     * @param QueryDefinition[] $contentsReferences
      * @param string $template
      * @param string $generator
      * @param string $source
-     * @param string $builder
      * @param string $slug
      * @param bool $draft
      * @param array<string|int,mixed> $options
@@ -21,7 +22,6 @@ final readonly class SchemaDefinition
         public string $template,
         public string $generator,
         public string $source,
-        public string $builder,
         public string $slug,
         public bool $draft,
         public array $options

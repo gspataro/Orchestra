@@ -4,9 +4,7 @@ namespace Orchestra\Rehearsal;
 
 use Orchestra\Compiler\BuildContextProvider;
 use Orchestra\Page\PageCollection;
-use Orchestra\Publisher\BuilderCollection;
-use Orchestra\Theme\Theme;
-use Orchestra\Theme\ThemeLoader;
+use Orchestra\Publisher\BuilderInterface;
 use Orchestra\Theme\ThemeProvider;
 
 final class Router
@@ -14,7 +12,7 @@ final class Router
     public function __construct(
         private readonly BuildContextProvider $context,
         private readonly PageCollection $pages,
-        private readonly BuilderCollection $builder,
+        private readonly BuilderInterface $builder,
         private readonly ThemeProvider $themeProvider
     ) {
     }
@@ -61,8 +59,7 @@ final class Router
         }
 
         if ($page) {
-            $builder = $this->builder->get($page->schema->builder);
-            echo $builder->compile($page);
+            echo $this->builder->compile($page);
             return;
         }
 
@@ -100,8 +97,7 @@ final class Router
         $page = $this->pages->get('/404');
 
         if ($page) {
-            $builder = $this->builder->get($page->schema->builder);
-            echo $builder->compile($page);
+            echo $this->builder->compile($page);
             return;
         }
 

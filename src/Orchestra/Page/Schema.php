@@ -12,7 +12,6 @@ final readonly class Schema
      * @param string $template
      * @param string $generator
      * @param string $source
-     * @param string $builder
      * @param string $slug
      * @param array<string,mixed> $options
      */
@@ -22,7 +21,6 @@ final readonly class Schema
         public string $template,
         public string $generator,
         public string $source,
-        public string $builder,
         public string $slug,
         public array $options
     ) {

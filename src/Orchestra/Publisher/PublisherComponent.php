@@ -14,13 +14,19 @@ final class PublisherComponent extends Component
 {
     public function register(Container $container): void
     {
-        $container->add('publisher.builders', function ($c, $a): object {
+        /*$container->add('publisher.builders', function ($c, $a): object {
             return new BuilderCollection();
-        });
+        });*/
 
         $container->add('publisher.adapter', function ($c, $a): object {
             return new FilesystemAdapter(
                 $c->get('compiler.context.provider')
+            );
+        });
+
+        $container->add('publisher.builder', function ($c, $a): object {
+            return new TwigBuilder(
+                $c->get('twig')
             );
         });
 
@@ -42,11 +48,11 @@ final class PublisherComponent extends Component
     public function boot(Container $container): void
     {
         /** @var BuilderCollection */
-        $buildersCollection = $container->get('publisher.builders');
+        /*$buildersCollection = $container->get('publisher.builders');
 
         $buildersCollection->add('twig', new TwigBuilder(
             $container->get('twig')
-        ));
+        ));*/
 
         /** @var OutputStrategyCollection */
         $strategiesCollection = $container->get('publisher.strategies');

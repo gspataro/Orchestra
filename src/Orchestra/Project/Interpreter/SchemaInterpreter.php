@@ -70,7 +70,6 @@ final class SchemaInterpreter implements InterpreterInterface
                 $schema['template'],
                 $schema['generate'],
                 $schema['source'],
-                $schema['builder'],
                 $this->sanitizeSlug($schema['slug']),
                 $schema['draft'],
                 $schema['options']

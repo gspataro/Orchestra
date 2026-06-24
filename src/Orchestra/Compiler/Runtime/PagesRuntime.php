@@ -3,19 +3,17 @@
 namespace Orchestra\Compiler\Runtime;
 
 use Exception;
-use Orchestra\Publisher\BuilderCollection;
 use Orchestra\Page\PageCollection;
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Publisher\BuilderInterface;
 use Orchestra\Publisher\OutputRegistry;
 use Orchestra\Publisher\OutputStrategyCollection;
 use Orchestra\Publisher\Publisher;
-use Orchestra\Publisher\Strategy\HtmlOutputStrategy;
-use Twig\Error\LoaderError;
 
 final class PagesRuntime extends Runtime
 {
     private PageCollection $pages;
-    private BuilderCollection $builders;
+    private BuilderInterface $builder;
     private Publisher $publisher;
     private OutputStrategyCollection $outputStrategies;
     private OutputRegistry $outputRegistry;
@@ -30,7 +28,7 @@ final class PagesRuntime extends Runtime
         $this->output->info('Building pages');
 
         $this->pages = $this->container->get('pages.collection');
-        $this->builders = $this->container->get('publisher.builders');
+        $this->builder = $this->container->get('publisher.builder');
         $this->publisher = $this->container->get('publisher');
         $this->outputStrategies = $this->container->get('publisher.strategies');
         $this->outputRegistry = $this->container->get('publisher.registry');
@@ -41,17 +39,8 @@ final class PagesRuntime extends Runtime
 
         foreach ($this->pages as $page) {
             try {
-                $builder = $this->builders->get($page->schema->builder);
+                $output = $this->builder->compile($page);
             } catch (Exception $e) {
-                $this->output->error(
-                    "Builder '{$page->schema->builder}' requested by '{$page->schema->tag}' schema not found."
-                );
-                return false;
-            }
-
-            try {
-                $output = $builder->compile($page);
-            } catch (LoaderError $e) {
                 $this->output->error("Error in '{$page->schema->tag}' schema: " . $e->getMessage());
                 return false;
             }
