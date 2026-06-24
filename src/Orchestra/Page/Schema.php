@@ -9,7 +9,7 @@ final readonly class Schema
     /**
      * @param string $tag
      * @param ContentCollection[] $contents
-     * @param string $template
+     * @param string|null $template
      * @param string $generator
      * @param string $source
      * @param string $slug
@@ -18,7 +18,7 @@ final readonly class Schema
     public function __construct(
         public string $tag,
         public array $contents,
-        public string $template,
+        public ?string $template,
         public string $generator,
         public string $source,
         public string $slug,

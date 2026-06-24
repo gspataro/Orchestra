@@ -21,7 +21,7 @@ final class SchemaSpecification implements SpecificationInterface
                 'structure' => [
                     'draft' => ['type' => 'bool', 'default' => false],
                     'contents' => ['type' => 'array', 'default' => []],
-                    'template' => ['type' => 'string', 'required' => true],
+                    'template' => ['type' => 'string', 'default' => null],
                     'slug' => ['type' => 'string', 'required' => true],
                     'generate' => ['type' => 'string', 'default' => 'once'],
                     'source' => ['type' => 'string', 'default' => ''],

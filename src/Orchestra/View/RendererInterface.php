@@ -4,6 +4,8 @@ namespace Orchestra\View;
 
 interface RendererInterface
 {
+    public function templateExists(string $template): bool;
+
     /**
      * @param string $template
      * @param array<array-key, mixed> $data

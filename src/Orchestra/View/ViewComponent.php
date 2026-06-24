@@ -42,6 +42,12 @@ final class ViewComponent extends Component
             );
         });
 
+        $container->add('view.template.resolver', function ($c, $a): object {
+            return new TemplateResolver(
+                $c->get('view.renderer')
+            );
+        });
+
         $container->add('view.elements', function ($c, $a): object {
             return new ElementCollection();
         });

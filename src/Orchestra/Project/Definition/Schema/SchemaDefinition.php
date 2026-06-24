@@ -9,7 +9,7 @@ final readonly class SchemaDefinition
     /**
      * @param string $tag
      * @param QueryDefinition[] $contentsReferences
-     * @param string $template
+     * @param string|null $template
      * @param string $generator
      * @param string $source
      * @param string $slug
@@ -19,7 +19,7 @@ final readonly class SchemaDefinition
     public function __construct(
         public string $tag,
         public array $contentsReferences,
-        public string $template,
+        public ?string $template,
         public string $generator,
         public string $source,
         public string $slug,

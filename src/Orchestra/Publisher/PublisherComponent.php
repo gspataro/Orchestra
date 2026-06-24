@@ -25,6 +25,7 @@ final class PublisherComponent extends Component
 
         $container->add('publisher.builder', function ($c, $a): object {
             return new Builder(
+                $c->get('view.template.resolver'),
                 $c->get('view.renderer')
             );
         });

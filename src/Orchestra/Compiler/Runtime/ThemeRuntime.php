@@ -48,6 +48,7 @@ final class ThemeRuntime extends Runtime
 
         $coreLoader = new FilesystemLoader();
         $coreLoader->addPath(dirname(__DIR__, 2) . '/View/Elements', 'orchestra-elements');
+        $coreLoader->addPath(dirname(__DIR__, 2) . '/View/Layouts');
 
         $this->twigLoader->addLoader($coreLoader);
         $this->twigLoader->addLoader($themeLoader);
