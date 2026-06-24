@@ -12,7 +12,8 @@ final class RehearsalComponent extends Component
         $container->add('rehearsal.router', function ($c, $a): object {
             return new Router(
                 $c->get('compiler.context.provider'),
-                $c->get('pages.collection')
+                $c->get('pages.collection'),
+                $c->get('theme.provider')
             );
         });
     }

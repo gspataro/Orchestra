@@ -7,26 +7,14 @@ use Orchestra\Compiler\BuildOptions;
 use Orchestra\Publisher\Publisher;
 use Orchestra\Rehearsal\ResponseType;
 use Orchestra\Rehearsal\Router;
-use Orchestra\Theme\ThemeProvider;
 
 final class ServeRuntime extends Runtime
 {
     private Router $router;
-    private ThemeProvider $theme;
     private Publisher $publisher;
 
     private function serveFile(string $path): void
     {
-        if (str_starts_with($path, 'assets')) {
-            $theme = $this->theme->get();
-            $asset = pathJoin($theme->path, $theme->assets->dir, substr($path, strlen('assets/')));
-
-            if (is_file($asset)) {
-                readfile($asset);
-                return;
-            }
-        }
-
         readfile($path);
     }
 
@@ -44,7 +32,6 @@ final class ServeRuntime extends Runtime
     {
         $this->output->info('Serving pages');
 
-        $this->theme = $this->container->get('theme.provider');
         $this->publisher = $this->container->get('publisher');
         $this->router = $this->container->get('rehearsal.router');
 
