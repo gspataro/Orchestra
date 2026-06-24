@@ -2,6 +2,7 @@
 
 namespace Orchestra\View\Elements\Image;
 
+use Orchestra\Media\Image\ImageDescriptor;
 use Orchestra\View\ViewElement;
 
 final class ImageElement extends ViewElement
@@ -51,8 +52,13 @@ final class ImageElement extends ViewElement
             }
         }
 
+        $imageDescriptor = new ImageDescriptor($image->path);
+        $imageDimensions = $imageDescriptor->predict($mediaTransformation->variant);
+
         $attributes['altText'] = $data['altText'] ?? '';
         $attributes['title'] = $data['title'] ?? '';
+        $attributes['width'] = $imageDimensions->width;
+        $attributes['height'] = $imageDimensions->height;
         $attributes['attributes'] = $data['attributes'] ?? [];
 
         return $attributes;
