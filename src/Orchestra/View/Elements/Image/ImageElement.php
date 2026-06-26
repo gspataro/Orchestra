@@ -33,13 +33,18 @@ final class ImageElement extends ViewElement
         $attributes = [];
 
         $mediaTransformation = $image->getTransformation($variant);
+        $imageDescriptor = new ImageDescriptor($image->path);
 
         if (!is_null($mediaTransformation)) {
             $attributes['src'] = "{$this->url->to('media' . $mediaTransformation->relativePath)}";
             $width = $mediaTransformation->variant->option('width');
             $attributes['sizes'] = "(max-width: {$width}px) 100vw, {$width}px";
+
+            $imageDimensions = $imageDescriptor->predict($mediaTransformation->variant);
         } else {
             $attributes['src'] = "{$this->url->to('media' . $image->relativePath)}";
+
+            $imageDimensions = $imageDescriptor->calculateDimensions();
         }
 
         $attributes['srcset'] = [];
@@ -51,9 +56,6 @@ final class ImageElement extends ViewElement
                 $attributes['srcset'][] = "{$this->url->to('media' . $transformation->relativePath)} {$width}w";
             }
         }
-
-        $imageDescriptor = new ImageDescriptor($image->path);
-        $imageDimensions = $imageDescriptor->predict($mediaTransformation->variant);
 
         $attributes['altText'] = $data['altText'] ?? '';
         $attributes['title'] = $data['title'] ?? '';
