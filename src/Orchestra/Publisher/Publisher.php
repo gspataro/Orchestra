@@ -2,25 +2,31 @@
 
 namespace Orchestra\Publisher;
 
-use Orchestra\Compiler\BuildContext;
-use Orchestra\Compiler\BuildContextProvider;
+use Orchestra\Page\Page;
 
 final class Publisher
 {
+    private ?OutputStrategyInterface $outputStrategy = null;
+
     public function __construct(
-        private readonly BuildContextProvider $context
+        private readonly Builder $builder,
+        private readonly AdapterInterface $adapter,
+        private readonly OutputRegistry $registry
     ) {
     }
 
-    public function publish(string $path, mixed $content): void
+    public function setOutputStrategy(OutputStrategyInterface $strategy): void
     {
-        $outputPath = $this->context->get()->paths()->output($path . '.html');
-        $outputDir = pathinfo($outputPath, PATHINFO_DIRNAME);
+        $this->outputStrategy = $strategy;
+    }
 
-        if (!is_dir($outputDir)) {
-            mkdir($outputDir, 0777, true);
-        }
+    public function publish(Page $page): void
+    {
+        $path = $this->outputStrategy ? $this->outputStrategy->apply($page->permalink) : $page->permalink;
+        $content = $this->builder->build($page);
 
-        file_put_contents($outputPath, $content);
+        $this->registry->add($path);
+
+        $this->adapter->handle($path, $content);
     }
 }

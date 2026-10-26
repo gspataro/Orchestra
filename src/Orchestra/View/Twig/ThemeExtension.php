@@ -5,13 +5,14 @@ namespace Orchestra\View\Twig;
 use Orchestra\Compiler\UrlGenerator;
 use Orchestra\Theme\Assets\AssetRepository;
 use Orchestra\Theme\ThemeLoader;
+use Orchestra\Theme\ThemeProvider;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
 final class ThemeExtension extends AbstractExtension
 {
     public function __construct(
-        private readonly ThemeLoader $theme,
+        private readonly ThemeProvider $themeProvider,
         private readonly AssetRepository $assets,
         private readonly UrlGenerator $url
     ) {
@@ -19,11 +20,16 @@ final class ThemeExtension extends AbstractExtension
 
     public function path(string $path): string
     {
-        $theme = $this->theme->load();
+        $theme = $this->themeProvider->get();
 
         return pathJoin($theme->path, $path);
     }
 
+    /**
+     * @param array<string,string> $default
+     * @param array<string,string> $custom
+     * @return string
+     */
     public function attributes(array $default = [], array $custom = []): string
     {
         $attributes = array_merge($default, $custom);
@@ -80,7 +86,7 @@ final class ThemeExtension extends AbstractExtension
             'is_safe' => ['html']
         ]);
         $functions[] = new TwigFunction('theme_path', [$this, 'path']);
-        $functions[] = new TwigFUnction('html_attributes', [$this, 'attributes'], [
+        $functions[] = new TwigFunction('html_attributes', [$this, 'attributes'], [
             'is_safe' => ['html']
         ]);
 

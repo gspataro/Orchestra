@@ -45,7 +45,7 @@ it('skips drafts', function () use ($outputDir) {
 });
 
 it('builds loop pages', function () use ($outputDir) {
-    $this->assertFileExists($outputDir . '/articolo/hello-world.html');
+    $this->assertFileExists($outputDir . '/articolo/hello-world/index.html');
 });
 
 it('skips drafted content in loops', function () use ($outputDir) {

@@ -27,6 +27,10 @@ final class ThemeComponent extends Component
         $container->add('theme.assets', function ($c, $a): object {
             return new AssetRepository();
         });
+
+        $container->add('theme.provider', function ($c, $a): object {
+            return new ThemeProvider();
+        });
     }
 
     public function boot(Container $container): void

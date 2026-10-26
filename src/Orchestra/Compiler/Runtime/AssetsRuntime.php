@@ -3,6 +3,7 @@
 namespace Orchestra\Compiler\Runtime;
 
 use Orchestra\Compiler\BuildOptions;
+use Orchestra\Compiler\CompilerMode;
 use Orchestra\Theme\Assets\AssetRepository;
 use Orchestra\Theme\Assets\DriverCollection;
 use Orchestra\Theme\ThemeLoader;
@@ -23,20 +24,41 @@ final class AssetsRuntime extends Runtime
 
         $theme = $this->themeLoader->load();
         $driver = $this->drivers->get($theme->assets->driver);
+        $publish = $this->context->options()->mode !== CompilerMode::REHEARSAL;
 
         if (!$driver) {
             $this->output->warning("Asset driver '{$theme->assets->driver}' not found");
             return true;
         }
 
-        $driver->build($theme, $this->context);
+        $driver->discover($theme);
 
-        foreach ($driver->css() as $css) {
-            $this->assets->add('css', $css);
+        if (!is_dir($this->context->paths()->output('assets'))) {
+            mkdir($this->context->paths()->output('assets'), 0777, true);
         }
 
-        foreach ($driver->js() as $js) {
-            $this->assets->add('js', $js);
+        $currentEntries = [];
+
+        foreach ($driver->entries() as $entry) {
+            if ($entry->autoload && in_array($entry->type, ['css', 'js'])) {
+                $this->assets->add(
+                    $entry->type,
+                    pathJoin('assets', $entry->publicPath) . ($publish ? '' : '?v=' . time())
+                );
+            }
+
+            $currentEntries[] = $this->context->paths()->output('assets', $entry->publicPath);
+
+            if ($publish) {
+                copy(
+                    pathJoin($theme->path, $theme->assets->dir, $entry->publicPath),
+                    $this->context->paths()->output('assets', $entry->publicPath)
+                );
+            }
+        }
+
+        if ($publish) {
+            recursiveDelete($this->context->paths()->output('assets'), true, $currentEntries);
         }
 
         return true;

@@ -13,7 +13,7 @@ final class RehearsalComponent extends Component
             return new Router(
                 $c->get('compiler.context.provider'),
                 $c->get('pages.collection'),
-                $c->get('publisher.builders')
+                $c->get('theme.provider')
             );
         });
     }

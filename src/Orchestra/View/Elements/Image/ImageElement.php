@@ -2,6 +2,7 @@
 
 namespace Orchestra\View\Elements\Image;
 
+use Orchestra\Media\Image\ImageDescriptor;
 use Orchestra\View\ViewElement;
 
 final class ImageElement extends ViewElement
@@ -32,13 +33,18 @@ final class ImageElement extends ViewElement
         $attributes = [];
 
         $mediaTransformation = $image->getTransformation($variant);
+        $imageDescriptor = new ImageDescriptor($image->path);
 
         if (!is_null($mediaTransformation)) {
             $attributes['src'] = "{$this->url->to('media' . $mediaTransformation->relativePath)}";
             $width = $mediaTransformation->variant->option('width');
             $attributes['sizes'] = "(max-width: {$width}px) 100vw, {$width}px";
+
+            $imageDimensions = $imageDescriptor->predict($mediaTransformation->variant);
         } else {
             $attributes['src'] = "{$this->url->to('media' . $image->relativePath)}";
+
+            $imageDimensions = $imageDescriptor->calculateDimensions();
         }
 
         $attributes['srcset'] = [];
@@ -53,6 +59,8 @@ final class ImageElement extends ViewElement
 
         $attributes['altText'] = $data['altText'] ?? '';
         $attributes['title'] = $data['title'] ?? '';
+        $attributes['width'] = $imageDimensions->width;
+        $attributes['height'] = $imageDimensions->height;
         $attributes['attributes'] = $data['attributes'] ?? [];
 
         return $attributes;

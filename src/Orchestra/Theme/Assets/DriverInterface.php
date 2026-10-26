@@ -7,15 +7,10 @@ use Orchestra\Theme\Theme;
 
 interface DriverInterface
 {
-    public function build(Theme $theme, BuildContext $context): void;
+    public function discover(Theme $theme): void;
 
     /**
-     * @return string[]
+     * @return AssetEntry[]
      */
-    public function css(): array;
-
-    /**
-     * @return string[]
-     */
-    public function js(): array;
+    public function entries(): array;
 }

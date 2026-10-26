@@ -19,11 +19,11 @@ final class SvgElement extends ViewElement
         $raw = file_get_contents($src);
 
         if (preg_match("/viewBox=\"(.*?)\"/", $raw, $viewBox)) {
-            $data['viewBox'] = $viewBox[1] ?? '';
+            $data['viewBox'] = $viewBox[1];
         }
 
         if (preg_match("/<svg[^>]*>(.*?)<\/svg>/s", $raw, $innerSvg)) {
-            $data['innerSvg'] = $innerSvg[1] ?? '';
+            $data['innerSvg'] = $innerSvg[1];
         }
 
         return $data;

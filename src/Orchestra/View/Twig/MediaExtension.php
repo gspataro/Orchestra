@@ -23,6 +23,12 @@ final class MediaExtension extends AbstractExtension
         return $this->url->to('/media' . $relativePath);
     }
 
+    /**
+     * @param string $src
+     * @param string|null $variant
+     * @param array<string,mixed> $attributes
+     * @return string
+     */
     public function image(
         string $src,
         ?string $variant = null,
@@ -35,6 +41,11 @@ final class MediaExtension extends AbstractExtension
         ]);
     }
 
+    /**
+     * @param string $src
+     * @param array<string,mixed> $attributes
+     * @return string
+     */
     public function audio(string $src, array $attributes = []): string
     {
         return $this->elements->get('audio')->render([
@@ -43,6 +54,11 @@ final class MediaExtension extends AbstractExtension
         ]);
     }
 
+    /**
+     * @param string $src
+     * @param array<string,mixed> $attributes
+     * @return string
+     */
     public function svg(string $src, array $attributes = []): string
     {
         return $this->elements->get('svg')->render([

@@ -40,7 +40,7 @@ final class MediaRuntime extends Runtime
             $cached = $this->cache->load($media) ?? [];
             $this->cache->save($media);
 
-            $adapter = $this->adapters->getFor($media->mimeType ?? 'default');
+            $adapter = $this->adapters->getFor($media->mimeType ?: 'default');
 
             if (!$adapter) {
                 $this->output->warning(

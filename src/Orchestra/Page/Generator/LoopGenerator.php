@@ -16,7 +16,7 @@ final class LoopGenerator extends BaseGenerator
 
             yield $this->preparePayload(
                 $content->id,
-                $schema->slug . '/' . $slug,
+                pathJoin($schema->slug, $slug),
                 [
                     'post' => $content,
                     'contents' => $this->additionalContents($schema)
